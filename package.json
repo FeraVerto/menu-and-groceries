@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "homepage": "http://FeroVerto.github.io/menu-and-groceries",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,9 +10,16 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react-router-dom": "^5.3.3",
+    "css-modules-require-hook": "^4.2.3",
+    "mobx": "^6.9.0",
+    "mobx-react": "^7.6.0",
+    "mobx-react-lite": "^3.4.3",
+    "mobx-state-tree": "^5.1.8",
     "react": "^18.2.0",
+    "react-css-modules": "^4.7.11",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
@@ -20,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +49,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/css-modules": "^1.0.2",
+    "@types/react-dom": "^18.0.11",
+    "gh-pages": "^5.0.0"
   }
 }
