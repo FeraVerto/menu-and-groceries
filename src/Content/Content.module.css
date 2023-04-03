@@ -1,10 +1,16 @@
 .content {
     height: 100vh;
-    display: grid;
+    display: flex;
+    /* display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-row-gap: 0px; */
 
     background-color: lightseagreen;
+}
+
+.categoriesNav {
+    width: 30%;
+    background-color: yellow;
 }

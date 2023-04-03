@@ -1,14 +1,14 @@
 import stl from './Category.module.css';
 
 type category = {
+  name: string;
   dishes: [];
 };
 
-export const Category = ({ dishes }: category) => {
-  console.log('route');
+export const Category = ({ name, dishes }: category) => {
   return (
     <div className={stl.categories}>
-      <div></div>
+      <div>{name}</div>
     </div>
   );
 };

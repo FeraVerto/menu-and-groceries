@@ -1,6 +1,8 @@
 import stl from './Content.module.css';
 import { Route, Routes } from 'react-router-dom';
 import { Category } from './Categories/Category/Category';
+
+//временно
 import { categories } from '../temp';
 import { NavLink } from 'react-router-dom';
 
@@ -15,13 +17,13 @@ export const Content = () => {
     <Route
       key={n.name}
       path={`/${n.name}`}
-      element={<Category dishes={n.dishes} />}
+      element={<Category name={n.name} dishes={n.dishes} />}
     />
   ));
 
   return (
     <div className={stl.content}>
-      <nav>
+      <nav className={stl.categoriesNav}>
         <ul>{menuLinks}</ul>
       </nav>
       <Routes>
