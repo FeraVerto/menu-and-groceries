@@ -5,6 +5,7 @@ type category = {
 };
 
 export const Category = ({ dishes }: category) => {
+  console.log('route');
   return (
     <div className={stl.categories}>
       <div></div>

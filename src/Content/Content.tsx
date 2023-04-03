@@ -1,22 +1,35 @@
 import stl from './Content.module.css';
 import { Route, Routes } from 'react-router-dom';
 import { Category } from './Categories/Category/Category';
-//import { uuid } from 'uuidv4';
-
-//временно
 import { categories } from '../temp';
-import { log } from 'console';
+import { NavLink } from 'react-router-dom';
 
 export const Content = () => {
-  console.log(categories);
+  const menuLinks = categories.map((m) => (
+    <li key={m.name}>
+      <NavLink to={`/${m.name}`}>{m.name}</NavLink>
+    </li>
+  ));
+
+  const routes = categories.map((n) => (
+    <Route
+      key={n.name}
+      path={`/${n.name}`}
+      element={<Category dishes={n.dishes} />}
+    />
+  ));
+
   return (
     <div className={stl.content}>
+      <nav>
+        <ul>{menuLinks}</ul>
+      </nav>
       <Routes>
-        {categories.map((m) => (
-          <Route path={`/${m.name}`} element={<Category dishes={m.dishes} />}>
-            {m.name}
-          </Route>
-        ))}
+        {routes}
+        <Route
+          path="/menu-and-groceries"
+          element={<div>Menu and groceries</div>}
+        />
       </Routes>
     </div>
   );
