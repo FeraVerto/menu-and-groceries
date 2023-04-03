@@ -361,21 +361,48 @@ export const tags: { name: string; dishes: [] }[] = [
   },
 ];
 
-export const categories: { name: string; dishes: [] }[] = [
+export const categories: {
+  name: string;
+  dishes: { image: string; dishName: string; ingredients: string[] }[];
+}[] = [
   {
     name: 'Супы',
-    dishes: [],
+    dishes: [
+      {
+        image: '',
+        dishName: 'Лазанья',
+        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+      },
+    ],
   },
   {
     name: 'Салаты',
-    dishes: [],
+    dishes: [
+      {
+        image: '',
+        dishName: 'Лазанья',
+        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+      },
+    ],
   },
   {
     name: 'Птица',
-    dishes: [],
+    dishes: [
+      {
+        image: '',
+        dishName: 'Лазанья',
+        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+      },
+    ],
   },
   {
     name: 'Мясо',
-    dishes: [],
+    dishes: [
+      {
+        image: '',
+        dishName: 'Лазанья',
+        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+      },
+    ],
   },
 ];

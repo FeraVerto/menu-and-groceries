@@ -2,7 +2,7 @@ import stl from './Category.module.css';
 
 type category = {
   name: string;
-  dishes: [];
+  dishes: { image: string; dishName: string; ingredients: string[] }[];
 };
 
 export const Category = ({ name, dishes }: category) => {
