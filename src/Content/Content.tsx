@@ -5,6 +5,7 @@ import { Category } from './Categories/Category/Category';
 //временно
 import { categories } from '../temp';
 import { NavLink } from 'react-router-dom';
+import { ingredients as igd } from '../temp';
 
 export const Content = () => {
   const menuLinks = categories.map((m) => (
@@ -17,7 +18,7 @@ export const Content = () => {
     <Route
       key={n.name}
       path={`/${n.name}`}
-      element={<Category name={n.name} dishes={n.dishes} />}
+      element={<Category name={n.name} dishes={n.dishes} igd={igd} />}
     />
   ));
 

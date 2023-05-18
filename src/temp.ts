@@ -1,3 +1,7 @@
+import { categoriesType, ingredientsType } from './types';
+import lazania from './images/лазанья.jpg';
+import kartoshka from './images/жареная картошка.jpg';
+
 export const tags: { name: string; dishes: [] }[] = [
   {
     name: 'курица',
@@ -361,17 +365,23 @@ export const tags: { name: string; dishes: [] }[] = [
   },
 ];
 
-export const categories: {
-  name: string;
-  dishes: { image: string; dishName: string; ingredients: string[] }[];
-}[] = [
+export const categories: categoriesType = [
   {
     name: 'Супы',
     dishes: [
       {
-        image: '',
+        id: 1,
+        image: lazania,
         dishName: 'Лазанья',
-        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+        ingredients: [9, 11, 12, 1, 2],
+        tags: ['1', '2', '3'],
+      },
+      {
+        id: 2,
+        image: kartoshka,
+        dishName: 'Жареная картошка',
+        ingredients: [9, 11, 12, 1, 2],
+        tags: ['1', '2', '3'],
       },
     ],
   },
@@ -379,9 +389,11 @@ export const categories: {
     name: 'Салаты',
     dishes: [
       {
+        id: 3,
         image: '',
-        dishName: 'Лазанья',
-        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+        dishName: 'Салат',
+        ingredients: [9, 11, 12, 1, 2],
+        tags: ['1', '2', '3'],
       },
     ],
   },
@@ -389,9 +401,11 @@ export const categories: {
     name: 'Птица',
     dishes: [
       {
+        id: 4,
         image: '',
         dishName: 'Лазанья',
-        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+        ingredients: [9, 11, 12, 1, 2],
+        tags: ['1', '2', '3'],
       },
     ],
   },
@@ -399,10 +413,83 @@ export const categories: {
     name: 'Мясо',
     dishes: [
       {
+        id: 5,
         image: '',
         dishName: 'Лазанья',
-        ingredients: ['листы лазаньи', 'фарш', 'помидоры', 'молоко', 'мука'],
+        ingredients: [9, 11, 12, 1, 2],
+        tags: ['1', '2', '3'],
       },
     ],
   },
 ];
+
+export let ingredients: ingredientsType = {
+  1: {
+    name: 'сметана',
+    category: 'молочка',
+  },
+  2: {
+    name: 'сливки',
+    category: 'молочка',
+  },
+  3: {
+    name: 'масло',
+    category: 'молочка',
+  },
+  4: {
+    name: 'молоко',
+    category: 'молочка',
+  },
+  5: {
+    name: 'оливковое масло',
+    category: 'бакалея',
+  },
+  6: {
+    name: 'греча',
+    category: 'бакалея',
+  },
+  7: {
+    name: 'рис',
+    category: 'бакалея',
+  },
+  8: {
+    name: 'овсянка',
+    category: 'бакалея',
+  },
+  9: {
+    name: 'листы лазаньи',
+    category: 'бакалея',
+  },
+  10: {
+    name: 'мука',
+    category: 'бакалея',
+  },
+  11: {
+    name: 'фарш куриный',
+    category: 'мясо',
+  },
+  12: {
+    name: 'помидоры',
+    category: 'овощи',
+  },
+};
+
+// let typeOfFood = {
+//   Молочка: ['сметана', 'сливки', 'масло', 'молоко'],
+//   Бакалея: [
+//     'оливковое масло',
+//     'растительное масло',
+//     'гречка',
+//     'овсянка',
+//     'листы лазаньи',
+//     'мука',
+//   ],
+//   Мясо: [
+//     'фарш куриный',
+//     'курица грудка',
+//     'курица бедро',
+//     'говядина',
+//     'свинина',
+//   ],
+//   Овощи: ['помидоры', 'огурцы', 'картофель'],
+// };
