@@ -1,8 +1,8 @@
 import stl from './Header.module.css';
+import { Basket } from './Basket/Basket';
 
 //временно
 import { tags } from '../temp';
-import { Basket } from './Basket/Basket';
 
 export const Header = () => {
   return (
@@ -13,7 +13,7 @@ export const Header = () => {
       </div>
       <div className={stl.tags}>
         {tags.map((m) => (
-          <div key={m.name}>m.name</div>
+          <div key={m.id}>m.name</div>
         ))}
       </div>
     </div>
