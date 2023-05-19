@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addToCart } = Store;
 
-  const addProductsToBasket = (ingredients: number[]) => {
+  const addProductsToBasket = (ingredients: string[]) => {
     addToCart(ingredients);
   };
 

@@ -1,13 +1,12 @@
 import stl from './Content.module.css';
 import { Route, Routes } from 'react-router-dom';
 import { Category } from './Categories/Category/Category';
-
-//временно
-import { categories } from '../temp';
+import Store from '../store/store';
 import { NavLink } from 'react-router-dom';
-import { ingredients as igd } from '../temp';
 
 export const Content = () => {
+  const { ingredients, categories } = Store;
+
   const menuLinks = categories.map((m) => (
     <li key={m.name}>
       <NavLink to={`/${m.name}`}>{m.name}</NavLink>
@@ -18,7 +17,7 @@ export const Content = () => {
     <Route
       key={n.name}
       path={`/${n.name}`}
-      element={<Category name={n.name} dishes={n.dishes} igd={igd} />}
+      element={<Category name={n.name} dishes={n.dishes} igd={ingredients} />}
     />
   ));
 

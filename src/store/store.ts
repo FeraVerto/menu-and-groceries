@@ -12,14 +12,14 @@ class StoreApp {
           id: 1,
           image: lazania,
           dishName: 'Лазанья',
-          ingredients: [9, 11, 12, 1, 2],
+          ingredients: ['9', '11', '12', '1', '2'],
           tags: ['1', '2', '3'],
         },
         {
           id: 2,
           image: kartoshka,
           dishName: 'Жареная картошка',
-          ingredients: [9, 11, 12, 1, 2],
+          ingredients: ['9', '11', '12', '1', '2'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -31,7 +31,7 @@ class StoreApp {
           id: 3,
           image: '',
           dishName: 'Салат',
-          ingredients: [9, 11, 12, 1, 2],
+          ingredients: ['9', '11', '12', '1', '2'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -43,7 +43,7 @@ class StoreApp {
           id: 4,
           image: '',
           dishName: 'Лазанья',
-          ingredients: [9, 11, 12, 1, 2],
+          ingredients: ['9', '11', '12', '1', '2'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -55,7 +55,7 @@ class StoreApp {
           id: 5,
           image: '',
           dishName: 'Лазанья',
-          ingredients: [9, 11, 12, 1, 2],
+          ingredients: ['9', '11', '12', '1', '2'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -113,11 +113,15 @@ class StoreApp {
     },
   };
 
-  cartContents: number[] = [];
+  cartContents: string[] = [];
 
-  addToCart = (list: number[]) => {
-    this.cartContents = [...this.cartContents, ...list];
-    console.log('log');
+  addToCart = (list: string[]) => {
+    let listOfProducts: string[] = [];
+    list.map((item) => {
+      //listOfProducts.push(this.ingredients[item].name);
+    });
+    console.log('log', this.ingredients);
+    return (this.cartContents = [...this.cartContents, ...list]);
   };
 
   constructor() {

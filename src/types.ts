@@ -2,7 +2,7 @@ export type dishesType = {
   id: number;
   image: string;
   dishName: string;
-  ingredients: number[];
+  ingredients: string[];
   tags: string[];
 }[];
 
