@@ -1,11 +1,14 @@
 import { categoryType } from '../../../types';
 import stl from './Category.module.css';
+import Store from '../../../store/store';
+import { observer } from 'mobx-react-lite';
 
 //временно
-export const Category = ({ name, dishes, igd }: categoryType) => {
+export const Category = observer(({ name, dishes, igd }: categoryType) => {
+  const { addToCart } = Store;
+
   const addProductsToBasket = (ingredients: number[]) => {
-    console.log('ing', ingredients);
-    return;
+    addToCart(ingredients);
   };
 
   let dishesList = dishes.map((m) => (
@@ -36,4 +39,4 @@ export const Category = ({ name, dishes, igd }: categoryType) => {
       <div className={stl.dishes_list}>{dishesList}</div>
     </div>
   );
-};
+});
