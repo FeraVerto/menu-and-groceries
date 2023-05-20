@@ -19,7 +19,7 @@ class StoreApp {
           id: 2,
           image: kartoshka,
           dishName: 'Жареная картошка',
-          ingredients: ['9', '11', '12', '1', '2'],
+          ingredients: ['6', '3', '8', '4', '5'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -62,7 +62,7 @@ class StoreApp {
     },
   ];
 
-  ingredients = {
+  ingredients: { [key: string]: { name: string; category: string } } = {
     1: {
       name: 'сметана',
       category: 'молочка',
@@ -115,13 +115,40 @@ class StoreApp {
 
   cartContents: string[] = [];
 
+  productsCategorized: { [key: string]: string[] } = {};
+
   addToCart = (list: string[]) => {
-    let listOfProducts: string[] = [];
-    list.map((item) => {
-      //listOfProducts.push(this.ingredients[item].name);
+    this.cartContents = [...this.cartContents, ...list];
+    let listOfProducts: { [key: string]: string[] } = {};
+
+    this.cartContents.map((item) => {
+      const category = this.ingredients[item].category;
+      const name = this.ingredients[item].name;
+
+      if (!listOfProducts[category]) {
+        listOfProducts[category] = [name];
+      } else {
+        listOfProducts[category].push(name);
+      }
     });
-    console.log('log', this.ingredients);
-    return (this.cartContents = [...this.cartContents, ...list]);
+
+    // let listOfProducts = this.cartContents.reduce((acc, item) => {
+    //   const category = this.ingredients[item].category;
+    //   const name = this.ingredients[item].name;
+
+    //   if (acc[category]) {
+    //     acc[category] = [];
+    //   } else {
+    //     acc[category]?.push(name);
+    //   }
+
+    //   return acc;
+    // }, {} as { [key: string]: string[] });
+
+    return (this.productsCategorized = {
+      ...this.productsCategorized,
+      ...listOfProducts,
+    });
   };
 
   constructor() {

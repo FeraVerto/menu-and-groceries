@@ -3,7 +3,6 @@ import stl from './Category.module.css';
 import Store from '../../../store/store';
 import { observer } from 'mobx-react-lite';
 
-//временно
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addToCart } = Store;
 
