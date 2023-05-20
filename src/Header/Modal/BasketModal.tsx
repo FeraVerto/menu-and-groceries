@@ -1,4 +1,5 @@
 import Modal from 'react-modal';
+import uuid from 'react-uuid';
 
 type BasketModal = {
   isOpen: boolean;
@@ -26,11 +27,13 @@ export const BasketModal = ({
       <ul>
         {Object.keys(productsCategorized).map((item) => {
           return (
-            <li>
+            <li key={uuid()}>
               {item}{' '}
-              {productsCategorized[item].map((n) => {
-                return <li>{n}</li>;
-              })}
+              <ul>
+                {productsCategorized[item].map((n) => {
+                  return <li key={uuid()}>{n}</li>;
+                })}
+              </ul>
             </li>
           );
         })}
