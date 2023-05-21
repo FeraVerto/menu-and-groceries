@@ -3,20 +3,25 @@ import lazania from './../images/лазанья.jpg';
 import kartoshka from './../images/жареная картошка.jpg';
 import { log } from 'console';
 
+// const getUniqeElements = (array: string[]) => {
+//   const newSet = new Set(array);
+//   return Array.from(newSet);
+// };
+
 class StoreApp {
   categories = [
     {
       name: 'Супы',
       dishes: [
         {
-          id: 1,
+          id: '1',
           image: lazania,
           dishName: 'Лазанья',
           ingredients: ['9', '11', '12', '1', '2'],
           tags: ['1', '2', '3'],
         },
         {
-          id: 2,
+          id: '2',
           image: kartoshka,
           dishName: 'Жареная картошка',
           ingredients: ['6', '3', '8', '4', '5'],
@@ -28,7 +33,7 @@ class StoreApp {
       name: 'Салаты',
       dishes: [
         {
-          id: 3,
+          id: '3',
           image: '',
           dishName: 'Салат',
           ingredients: ['9', '11', '12', '1', '2'],
@@ -40,7 +45,7 @@ class StoreApp {
       name: 'Птица',
       dishes: [
         {
-          id: 4,
+          id: '4',
           image: '',
           dishName: 'Лазанья',
           ingredients: ['9', '11', '12', '1', '2'],
@@ -52,7 +57,7 @@ class StoreApp {
       name: 'Мясо',
       dishes: [
         {
-          id: 5,
+          id: '5',
           image: '',
           dishName: 'Лазанья',
           ingredients: ['9', '11', '12', '1', '2'],
@@ -117,8 +122,17 @@ class StoreApp {
 
   productsCategorized: { [key: string]: { name: string; id: string }[] } = {};
 
-  addToCart = (list: string[]) => {
+  dishesList: string[] = [];
+
+  addToCart = (list: string[], id: string) => {
     this.cartContents = [...this.cartContents, ...list];
+
+    if (this.dishesList.indexOf(id) === -1) {
+      this.dishesList.push(id);
+    } else {
+      //this.dishesList = this.dishesList.filter((item) => item !== id);
+      return this.productsCategorized;
+    }
 
     let listOfProducts = this.cartContents.reduce((acc, item) => {
       const category = this.ingredients[item].category;

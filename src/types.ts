@@ -1,5 +1,5 @@
 export type dishesType = {
-  id: number;
+  id: string;
   image: string;
   dishName: string;
   ingredients: string[];

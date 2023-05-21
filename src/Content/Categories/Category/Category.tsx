@@ -6,15 +6,15 @@ import { observer } from 'mobx-react-lite';
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addToCart } = Store;
 
-  const addProductsToBasket = (ingredients: string[]) => {
-    addToCart(ingredients);
+  const addProductsToBasket = (ingredients: string[], id: string) => {
+    addToCart(ingredients, id);
   };
 
   let dishesList = dishes.map((m) => (
     <div className={stl.dishes_item} key={m.id}>
       <div
         className={stl.button_add}
-        onClick={() => addProductsToBasket(m.ingredients)}
+        onClick={() => addProductsToBasket(m.ingredients, m.id)}
       >
         Добавить в корзину
       </div>
