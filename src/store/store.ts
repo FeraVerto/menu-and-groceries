@@ -119,31 +119,19 @@ class StoreApp {
 
   addToCart = (list: string[]) => {
     this.cartContents = [...this.cartContents, ...list];
-    let listOfProducts: { [key: string]: [{ name: string; id: string }] } = {};
 
-    this.cartContents.map((item) => {
+    let listOfProducts = this.cartContents.reduce((acc, item) => {
       const category = this.ingredients[item].category;
       const name = this.ingredients[item].name;
 
-      if (!listOfProducts[category]) {
-        listOfProducts[category] = [{ name: name, id: item }];
+      if (!acc[category]) {
+        acc[category] = [{ name: name, id: item }];
       } else {
-        listOfProducts[category].push({ name: name, id: item });
+        acc[category]?.push({ name: name, id: item });
       }
-    });
 
-    // let listOfProducts = this.cartContents.reduce((acc, item) => {
-    //   const category = this.ingredients[item].category;
-    //   const name = this.ingredients[item].name;
-
-    //   if (acc[category]) {
-    //     acc[category] = [];
-    //   } else {
-    //     acc[category]?.push(name);
-    //   }
-
-    //   return acc;
-    // }, {} as { [key: string]: string[] });
+      return acc;
+    }, {} as { [key: string]: { name: string; id: string }[] });
 
     return (this.productsCategorized = {
       ...this.productsCategorized,
