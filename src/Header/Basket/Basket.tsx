@@ -7,7 +7,7 @@ import { BasketModal } from '../Modal/BasketModal';
 Modal.setAppElement('#root');
 
 export const Basket = observer(() => {
-  const { cartContents, productsCategorized } = Store;
+  const { cartContents, productsCategorized, deleteProductFromList } = Store;
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   function openModal() {
@@ -22,10 +22,11 @@ export const Basket = observer(() => {
     <div className={stl.basket} onClick={openModal}>
       Корзина {cartContents.length}
       <BasketModal
+        deleteProductFromList={deleteProductFromList}
+        cartContents={cartContents}
         productsCategorized={productsCategorized}
         isOpen={modalIsOpen}
         closeModal={closeModal}
-        cartContents={cartContents}
       />
     </div>
   );

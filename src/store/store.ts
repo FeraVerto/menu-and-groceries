@@ -115,20 +115,20 @@ class StoreApp {
 
   cartContents: string[] = [];
 
-  productsCategorized: { [key: string]: string[] } = {};
+  productsCategorized: { [key: string]: { name: string; id: string }[] } = {};
 
   addToCart = (list: string[]) => {
     this.cartContents = [...this.cartContents, ...list];
-    let listOfProducts: { [key: string]: string[] } = {};
+    let listOfProducts: { [key: string]: [{ name: string; id: string }] } = {};
 
     this.cartContents.map((item) => {
       const category = this.ingredients[item].category;
       const name = this.ingredients[item].name;
 
       if (!listOfProducts[category]) {
-        listOfProducts[category] = [name];
+        listOfProducts[category] = [{ name: name, id: item }];
       } else {
-        listOfProducts[category].push(name);
+        listOfProducts[category].push({ name: name, id: item });
       }
     });
 
@@ -149,6 +149,15 @@ class StoreApp {
       ...this.productsCategorized,
       ...listOfProducts,
     });
+  };
+
+  deleteProductFromList = (id: string, category: string) => {
+    this.productsCategorized[category] = this.productsCategorized[
+      category
+    ].filter((item) => item.id !== id);
+    if (this.productsCategorized[category].length === 0) {
+      delete this.productsCategorized[category];
+    }
   };
 
   constructor() {
