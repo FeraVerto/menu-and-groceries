@@ -23,3 +23,5 @@ export type ingredientsType = {
     category: string;
   };
 };
+
+export type optionsType = { value: string; label: string };

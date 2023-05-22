@@ -1,12 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import lazania from './../images/лазанья.jpg';
 import kartoshka from './../images/жареная картошка.jpg';
-import { log } from 'console';
-
-// const getUniqeElements = (array: string[]) => {
-//   const newSet = new Set(array);
-//   return Array.from(newSet);
-// };
+import { getUniqeElements } from '../utils/getUniqeElements';
 
 class StoreApp {
   categories = [
@@ -67,7 +62,12 @@ class StoreApp {
     },
   ];
 
-  ingredients: { [key: string]: { name: string; category: string } } = {
+  ingredients: {
+    [key: string]: {
+      name: string;
+      category: string;
+    };
+  } = {
     1: {
       name: 'сметана',
       category: 'молочка',
@@ -127,12 +127,15 @@ class StoreApp {
   addToCart = (list: string[], id: string) => {
     this.cartContents = [...this.cartContents, ...list];
 
+    //если два раза нажали на одно и тоже блюдо, ингредиенты не добавляются заново
     if (this.dishesList.indexOf(id) === -1) {
       this.dishesList.push(id);
     } else {
-      //this.dishesList = this.dishesList.filter((item) => item !== id);
       return this.productsCategorized;
     }
+
+    //убираем дублирующиеся элементы, если они присутствуют в двух разных блюдах
+    this.cartContents = getUniqeElements(this.cartContents);
 
     let listOfProducts = this.cartContents.reduce((acc, item) => {
       const category = this.ingredients[item].category;
