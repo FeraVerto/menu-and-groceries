@@ -7,7 +7,7 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addToCart } = Store;
 
   const addProductsToBasket = (ingredients: string[], id: string) => {
-    addToCart(ingredients, id);
+    addToCart(ingredients);
   };
 
   let dishesList = dishes.map((m) => (

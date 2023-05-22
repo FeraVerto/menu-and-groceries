@@ -122,17 +122,8 @@ class StoreApp {
 
   productsCategorized: { [key: string]: { name: string; id: string }[] } = {};
 
-  dishesList: string[] = [];
-
-  addToCart = (list: string[], id?: string) => {
+  addToCart = (list: string[]) => {
     this.cartContents = [...this.cartContents, ...list];
-
-    //если два раза нажали на одно и тоже блюдо, ингредиенты не добавляются заново
-    if (id && this.dishesList.indexOf(id) === -1) {
-      this.dishesList.push(id);
-    } else {
-      return this.productsCategorized;
-    }
 
     //убираем дублирующиеся элементы, если они присутствуют в двух разных блюдах
     this.cartContents = getUniqeElements(this.cartContents);
