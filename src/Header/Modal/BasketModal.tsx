@@ -24,7 +24,7 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
       return [...acc, item.value];
     }, [] as string[]);
 
-    ingredientsArrayId && addToCart(ingredientsArrayId);
+    addToCart(ingredientsArrayId);
   };
 
   const removeProductFromList = (id: string, category: string) => {
