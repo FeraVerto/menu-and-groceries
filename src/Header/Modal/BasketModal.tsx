@@ -1,11 +1,10 @@
 import Modal from 'react-modal';
 import uuid4 from 'uuid4';
 import { Checkbox } from '../../Components/Checkbox';
-import { useState } from 'react';
 import Store from '../../store/store';
 import { observer } from 'mobx-react-lite';
-import Select from 'react-select';
-import { convertObjectToArray } from '../../utils/convertObjectToArray';
+
+import { SelectProduct } from '../SelectProduct/SelectProduct';
 
 type BasketModal = {
   isOpen: boolean;
@@ -13,14 +12,22 @@ type BasketModal = {
 };
 
 export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
-  let { productsCategorized, ingredients, deleteProductFromList } = Store;
-  const [selectedOption, setSelectedOption] = useState(null);
+  let { productsCategorized, deleteProductFromList, addToCart } = Store;
 
-  // const getIngredient = () => {
-  //   return;
-  // };
+  const addIngredientToList = (
+    ing: { value: string; label: string }[] | null
+  ) => {
+    if (ing === null) {
+      return null;
+    }
+    const ingredientsArrayId = ing?.reduce((acc, item) => {
+      return [...acc, item.value];
+    }, [] as string[]);
 
-  const checkedProduct = (id: string, category: string) => {
+    ingredientsArrayId && addToCart(ingredientsArrayId);
+  };
+
+  const removeProductFromList = (id: string, category: string) => {
     deleteProductFromList(id, category);
   };
 
@@ -34,7 +41,7 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
               <li key={uuid4()}>
                 <Checkbox
                   category={item}
-                  checkedProduct={checkedProduct}
+                  removeProductFromList={removeProductFromList}
                   id={n.id}
                 />
                 {n.name}
@@ -46,16 +53,9 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
     );
   });
 
-  const options = convertObjectToArray(ingredients);
-
   return (
     <Modal isOpen={isOpen} contentLabel="Корзина">
-      <Select
-        defaultValue={selectedOption}
-        //@ts-ignore
-        onChange={setSelectedOption}
-        options={options}
-      />
+      <SelectProduct addIngredientToList={addIngredientToList} />
       <button
         onClick={(e) => {
           e.stopPropagation();

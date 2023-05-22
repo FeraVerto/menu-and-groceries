@@ -1,14 +1,18 @@
 import { ChangeEvent } from 'react';
 
 type checkboxType = {
-  checkedProduct: (id: string, category: string) => void;
+  removeProductFromList: (id: string, category: string) => void;
   id: string;
   category: string;
 };
 
-export const Checkbox = ({ checkedProduct, id, category }: checkboxType) => {
+export const Checkbox = ({
+  removeProductFromList,
+  id,
+  category,
+}: checkboxType) => {
   const pressCheckbox = (id: string, category: string) => {
-    checkedProduct(id, category);
+    removeProductFromList(id, category);
   };
   return (
     <div>

@@ -124,11 +124,11 @@ class StoreApp {
 
   dishesList: string[] = [];
 
-  addToCart = (list: string[], id: string) => {
+  addToCart = (list: string[], id?: string) => {
     this.cartContents = [...this.cartContents, ...list];
 
     //если два раза нажали на одно и тоже блюдо, ингредиенты не добавляются заново
-    if (this.dishesList.indexOf(id) === -1) {
+    if (id && this.dishesList.indexOf(id) === -1) {
       this.dishesList.push(id);
     } else {
       return this.productsCategorized;
