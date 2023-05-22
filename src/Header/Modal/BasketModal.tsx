@@ -53,6 +53,7 @@ export const BasketModal = observer(
 
     return (
       <Modal isOpen={isOpen} contentLabel="Корзина">
+        {/* здесь будет селект */}
         <button
           onClick={(e) => {
             e.stopPropagation();

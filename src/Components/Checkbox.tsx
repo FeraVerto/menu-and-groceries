@@ -7,7 +7,7 @@ type checkboxType = {
 };
 
 export const Checkbox = ({ checkedProduct, id, category }: checkboxType) => {
-  const a = (id: string, category: string) => {
+  const pressCheckbox = (id: string, category: string) => {
     checkedProduct(id, category);
   };
   return (
@@ -17,7 +17,9 @@ export const Checkbox = ({ checkedProduct, id, category }: checkboxType) => {
         checked
         type="checkbox"
         name="item"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => a(id, category)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          pressCheckbox(id, category)
+        }
       />
     </div>
   );
