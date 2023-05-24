@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/menu-and-groceries/static/css/main.5c144aa8.css",
-    "main.js": "/menu-and-groceries/static/js/main.0f378c5f.js",
+    "main.js": "/menu-and-groceries/static/js/main.ce207f54.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
     "static/media/лазанья.jpg": "/menu-and-groceries/static/media/лазанья.533c044a8164248d0749.jpg",
     "index.html": "/menu-and-groceries/index.html",
     "main.5c144aa8.css.map": "/menu-and-groceries/static/css/main.5c144aa8.css.map",
-    "main.0f378c5f.js.map": "/menu-and-groceries/static/js/main.0f378c5f.js.map",
+    "main.ce207f54.js.map": "/menu-and-groceries/static/js/main.ce207f54.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5c144aa8.css",
-    "static/js/main.0f378c5f.js"
+    "static/js/main.ce207f54.js"
   ]
 }
