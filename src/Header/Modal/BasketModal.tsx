@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 import Store from '../../store/store';
 import { observer } from 'mobx-react-lite';
 import { SelectProduct } from '../SelectProduct/SelectProduct';
-import { sendMessage } from '../../api/api';
+import { sendMessage } from '../../model/Products.model';
 import { ProductsList } from './ProductsList/ProductsList';
 
 type BasketModal = {
@@ -34,6 +34,11 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
     sendMessage(user.botToken, user.chatId, productsCategorized);
   };
 
+  const onClickCloseButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    closeModal();
+  };
+
   return (
     <Modal isOpen={isOpen} contentLabel="Корзина">
       <h1>Список продуктов</h1>
@@ -42,14 +47,7 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
         productsCategorized={productsCategorized}
         removeProductFromList={removeProductFromList}
       />
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          closeModal();
-        }}
-      >
-        Close Window
-      </button>
+      <button onClick={(e) => onClickCloseButton(e)}>Close Window</button>
       <button onClick={onClickSendButton}>Send</button>
     </Modal>
   );

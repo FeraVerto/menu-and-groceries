@@ -7,7 +7,7 @@ import { userType } from '../types';
 class StoreApp {
   user: userType = {
     id: '1',
-    botToken: 'k',
+    botToken: '0',
     chatId: 1,
   };
 

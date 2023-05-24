@@ -49,3 +49,9 @@ export type ResultType = {
 };
 
 export type userType = { id: string; botToken: string; chatId: number };
+
+export type ErrorType = {
+  ok: boolean;
+  error_code: number;
+  description: string;
+};

@@ -1,3 +1,5 @@
+//формирует текстовое сообщение из объекта для отправки в телеграм
+
 export const getFormattedList = (data: {
   [key: string]: { name: string; id: string }[];
 }) => {
