@@ -17,6 +17,7 @@
     "@types/uuid": "^9.0.1",
     "@types/uuid4": "^2.0.0",
     "@types/uuidv4": "^5.0.0",
+    "axios": "^1.4.0",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.8",

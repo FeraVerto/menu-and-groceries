@@ -2,8 +2,15 @@ import { makeAutoObservable } from 'mobx';
 import lazania from './../images/лазанья.jpg';
 import kartoshka from './../images/жареная картошка.jpg';
 import { getUniqeElements } from '../utils/getUniqeElements';
+import { userType } from '../types';
 
 class StoreApp {
+  user: userType = {
+    id: '1',
+    botToken: '6002031381:AAHS_7A3rUa1ahyNZL2VFd3mgaJRfmqkGLs',
+    chatId: 153016172,
+  };
+
   categories = [
     {
       name: 'Супы',

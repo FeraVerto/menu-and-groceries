@@ -1,10 +1,9 @@
 import Modal from 'react-modal';
-import uuid4 from 'uuid4';
-import { Checkbox } from '../../Components/Checkbox';
 import Store from '../../store/store';
 import { observer } from 'mobx-react-lite';
-
 import { SelectProduct } from '../SelectProduct/SelectProduct';
+import { sendMessage } from '../../api/api';
+import { ProductsList } from './ProductsList/ProductsList';
 
 type BasketModal = {
   isOpen: boolean;
@@ -12,7 +11,7 @@ type BasketModal = {
 };
 
 export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
-  let { productsCategorized, deleteProductFromList, addToCart } = Store;
+  let { productsCategorized, deleteProductFromList, addToCart, user } = Store;
 
   const addIngredientToList = (
     ing: { value: string; label: string }[] | null
@@ -20,7 +19,7 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
     if (ing === null) {
       return null;
     }
-    const ingredientsArrayId = ing?.reduce((acc, item) => {
+    const ingredientsArrayId = ing.reduce((acc, item) => {
       return [...acc, item.value];
     }, [] as string[]);
 
@@ -31,40 +30,27 @@ export const BasketModal = observer(({ isOpen, closeModal }: BasketModal) => {
     deleteProductFromList(id, category);
   };
 
-  const productsList = Object.keys(productsCategorized).map((item) => {
-    return (
-      <li key={uuid4()}>
-        {item}
-        <ul>
-          {productsCategorized[item].map((n) => {
-            return (
-              <li key={uuid4()}>
-                <Checkbox
-                  category={item}
-                  removeProductFromList={removeProductFromList}
-                  id={n.id}
-                />
-                {n.name}
-              </li>
-            );
-          })}
-        </ul>
-      </li>
-    );
-  });
+  const onClickSendButton = () => {
+    sendMessage(user.botToken, user.chatId, productsCategorized);
+  };
 
   return (
     <Modal isOpen={isOpen} contentLabel="Корзина">
+      <h1>Список продуктов</h1>
       <SelectProduct addIngredientToList={addIngredientToList} />
+      <ProductsList
+        productsCategorized={productsCategorized}
+        removeProductFromList={removeProductFromList}
+      />
       <button
         onClick={(e) => {
           e.stopPropagation();
           closeModal();
         }}
       >
-        Close
+        Close Window
       </button>
-      <ul>{productsList}</ul>
+      <button onClick={onClickSendButton}>Send</button>
     </Modal>
   );
 });
