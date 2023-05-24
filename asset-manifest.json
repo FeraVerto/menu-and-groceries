@@ -1,17 +1,28 @@
 {
   "files": {
     "main.css": "/menu-and-groceries/static/css/main.5c144aa8.css",
-    "main.js": "/menu-and-groceries/static/js/main.ce207f54.js",
+    "main.js": "/menu-and-groceries/static/js/main.24d660f2.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
+    "static/media/kurva.jpg": "/menu-and-groceries/static/media/kurva.11aaf1bc87d6d293d6c2.jpg",
+    "static/media/плов.jpg": "/menu-and-groceries/static/media/плов.8938c69b541dcebd0b89.jpg",
+    "static/media/olivie.jpg": "/menu-and-groceries/static/media/olivie.e3f6881c14c4f1fa6ecd.jpg",
+    "static/media/jul.jpg": "/menu-and-groceries/static/media/jul.cdd797d838e8a05bcbcc.jpg",
+    "static/media/solanka.jpg": "/menu-and-groceries/static/media/solanka.d01053ec83712c9d3f53.jpg",
     "static/media/лазанья.jpg": "/menu-and-groceries/static/media/лазанья.533c044a8164248d0749.jpg",
+    "static/media/kurva_sir.jpg": "/menu-and-groceries/static/media/kurva_sir.1ffee1fc0a9b0480170f.jpg",
+    "static/media/борщ.jpg": "/menu-and-groceries/static/media/борщ.16f9e517a0149d4bd857.jpg",
+    "static/media/чечевичный суп с беконом.jpg": "/menu-and-groceries/static/media/чечевичный суп с беконом.ad30b0357a50ba80c6d6.jpg",
+    "static/media/овощное рагу.jpg": "/menu-and-groceries/static/media/овощное рагу.2c964aebb0016aa78806.jpg",
+    "static/media/zero.jpg": "/menu-and-groceries/static/media/zero.e6db9422b63171a27bb8.jpg",
+    "static/media/крошка картошка.jpg": "/menu-and-groceries/static/media/крошка картошка.711744ee3e9c47c93465.jpg",
     "index.html": "/menu-and-groceries/index.html",
     "main.5c144aa8.css.map": "/menu-and-groceries/static/css/main.5c144aa8.css.map",
-    "main.ce207f54.js.map": "/menu-and-groceries/static/js/main.ce207f54.js.map",
+    "main.24d660f2.js.map": "/menu-and-groceries/static/js/main.24d660f2.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5c144aa8.css",
-    "static/js/main.ce207f54.js"
+    "static/js/main.24d660f2.js"
   ]
 }
