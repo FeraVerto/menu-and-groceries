@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "homepage": "http://FeroVerto.github.io/menu-and-groceries",
+  "homepage": "http://FeroVerto.github.io/menu-and-groceries/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
