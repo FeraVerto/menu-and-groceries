@@ -1,1 +1,1 @@
-http://FeroVerto.github.io/menu-and-groceries
+http://FeraVerto.github.io/menu-and-groceries
