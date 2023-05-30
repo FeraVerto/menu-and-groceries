@@ -5,17 +5,23 @@
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px; */
-
 }
 
 .categories_nav {
     width: 350px;
     background-color: #7EA27A;
+
+    position: relative;
 }
 
 .categories_nav_list {
+    width: 350px;
+    height: 100vh;
+
     margin: 100px 0 0 40px;
     padding: 0;
+
+    position: fixed;
 
     list-style: none;
 }
@@ -30,4 +36,5 @@
     text-transform: uppercase;
     color: white;
     font-weight: bold;
+    white-space: nowrap;
 }

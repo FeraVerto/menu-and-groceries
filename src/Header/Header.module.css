@@ -3,8 +3,9 @@
     justify-content: start;
 }
 
-.headerLeftPart {
-    width: 30%;
+.header_left_part {
+    width: 350px;
+    
     display: flex;
     justify-content: space-around;
 
@@ -19,12 +20,14 @@
     padding-top: 10px;
 
     width: 100%;
-    background-color: aquamarine;
+
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+
+    background-color: aquamarine;
 }
 
 .tag {
