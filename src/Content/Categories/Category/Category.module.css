@@ -17,7 +17,7 @@
 
 .dishes_info_name {
     margin: 5px 0;
-    
+
     font-size: 30px;
 }
 
@@ -78,6 +78,7 @@
 
     font-size: 17px;
     text-align: justify;
+    font-style: italic;
 }
 
 .image_wrapper {

@@ -10,6 +10,24 @@
 
 .categoriesNav {
     width: 350px;
-    
     background-color: #7EA27A;
+}
+
+.categoriesNav_list {
+    margin: 100px 0 0 40px;
+    padding: 0;
+
+    list-style: none;
+}
+
+.categoriesNav__item {
+    text-align: left;
+    font-size: 30px;
+}
+
+.categoriesNav__item a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
 }
