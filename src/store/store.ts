@@ -83,6 +83,20 @@ class StoreApp {
           ],
           tags: ['1', '2', '3'],
         },
+        {
+          id: '1-5',
+          image: solanka,
+          dishName: 'Суп-гуляш',
+          ingredients: [],
+          tags: ['1', '2', '3'],
+        },
+        // {
+        //   id: '1-6',
+        //   image: solanka,
+        //   dishName: 'Окрошка',
+        //   ingredients: [],
+        //   tags: ['1', '2', '3'],
+        // },
       ],
     },
     {

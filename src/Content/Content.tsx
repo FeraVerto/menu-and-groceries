@@ -22,7 +22,7 @@ export const Content = () => {
   ));
 
   return (
-    <div className={stl.content}>
+    <main className={stl.content}>
       <nav className={stl.categoriesNav}>
         <ul>{menuLinks}</ul>
       </nav>
@@ -33,6 +33,6 @@ export const Content = () => {
           element={<div>Menu and groceries</div>}
         />
       </Routes>
-    </div>
+    </main>
   );
 };

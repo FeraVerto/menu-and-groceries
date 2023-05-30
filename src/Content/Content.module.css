@@ -1,5 +1,4 @@
 .content {
-    height: 100vh;
     display: flex;
     /* display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -7,10 +6,10 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px; */
 
-    background-color: lightseagreen;
 }
 
 .categoriesNav {
-    width: 30%;
-    background-color: yellow;
+    width: 350px;
+    
+    background-color: #7EA27A;
 }
