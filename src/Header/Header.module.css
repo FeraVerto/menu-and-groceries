@@ -4,8 +4,6 @@
 }
 
 .header_left_part {
-    width: 350px;
-    
     display: flex;
     justify-content: space-around;
 
