@@ -7,7 +7,7 @@ import { tags } from '../temp';
 export const Header = () => {
   return (
     <div className={stl.header}>
-      <div className={stl.headerLeft}>
+      <div className={stl.header_left_part}>
         <div className={stl.logo}>Menu</div>
         <Basket />
       </div>

@@ -8,24 +8,24 @@
 
 }
 
-.categoriesNav {
+.categories_nav {
     width: 350px;
     background-color: #7EA27A;
 }
 
-.categoriesNav_list {
+.categories_nav_list {
     margin: 100px 0 0 40px;
     padding: 0;
 
     list-style: none;
 }
 
-.categoriesNav__item {
+.categories_nav_item {
     text-align: left;
     font-size: 30px;
 }
 
-.categoriesNav__item a {
+.categories_nav_item a {
     text-decoration: none;
     text-transform: uppercase;
     color: white;

@@ -8,7 +8,7 @@ export const Content = () => {
   const { ingredients, categories } = Store;
 
   const menuLinks = categories.map((m) => (
-    <li className={stl.categoriesNav__item} key={m.name}>
+    <li className={stl.categories_nav_item} key={m.name}>
       <NavLink to={`/${m.name}`}>{m.name}</NavLink>
     </li>
   ));
@@ -23,8 +23,8 @@ export const Content = () => {
 
   return (
     <main className={stl.content}>
-      <nav className={stl.categoriesNav}>
-        <ul className={stl.categoriesNav_list}>{menuLinks}</ul>
+      <nav className={stl.categories_nav}>
+        <ul className={stl.categories_nav_list}>{menuLinks}</ul>
       </nav>
       <Routes>
         {routes}

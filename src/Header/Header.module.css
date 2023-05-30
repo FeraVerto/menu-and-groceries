@@ -3,7 +3,7 @@
     justify-content: start;
 }
 
-.headerLeft {
+.headerLeftPart {
     width: 30%;
     display: flex;
     justify-content: space-around;
