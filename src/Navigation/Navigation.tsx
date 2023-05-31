@@ -11,11 +11,10 @@ export const Navigation = () => {
       <NavLink to={`/${m.name}`}>{m.name}</NavLink>
     </li>
   ));
+
   return (
-    <nav className={`${stl.categories_nav}`}>
-      <div className={stl.header_left_part}>
-        <Cart />
-      </div>
+    <nav className={stl.categories_nav}>
+      <Cart />
       <ul className={stl.categories_nav_list}>{menuLinks}</ul>
     </nav>
   );

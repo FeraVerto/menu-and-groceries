@@ -1,3 +1,8 @@
+.cart {
+    margin-left: 40px;
+    position: fixed;
+}
+
 .cart_img {
     margin-top: 27px;
 }
