@@ -1,10 +1,10 @@
-import stl from './Basket.module.css';
+import stl from './Cart.module.css';
 import { useState } from 'react';
 import Store from '../store/store';
 import { observer } from 'mobx-react-lite';
 import Modal from 'react-modal';
 import { BasketModal } from './Modal/BasketModal';
-import cart from '../../images/shoppingcart_80945.svg';
+import cart from '../images/shoppingcart_80945.svg';
 Modal.setAppElement('#root');
 
 export const Cart = observer(() => {
