@@ -49,6 +49,7 @@
 
 .button_add {
     padding: 25px 0;
+    width: 100%;
 
     text-align: center;
     text-transform: uppercase;

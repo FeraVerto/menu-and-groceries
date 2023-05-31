@@ -26,12 +26,12 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
         </div>
       </div>
       <div>
-        <div
+        <button
           className={stl.button_add}
           onClick={() => addProductsToBasket(m.ingredients, m.id)}
         >
           Добавить в корзину
-        </div>
+        </button>
       </div>
     </li>
   ));

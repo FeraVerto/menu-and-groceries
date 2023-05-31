@@ -319,6 +319,7 @@ class StoreApp {
     this.productsCategorized[category] = this.productsCategorized[
       category
     ].filter((item) => item.id !== id);
+    this.cartContents = this.cartContents.filter((item) => item !== id);
     if (this.productsCategorized[category].length === 0) {
       delete this.productsCategorized[category];
     }

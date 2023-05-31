@@ -14,6 +14,7 @@ export const Checkbox = ({
   const pressCheckbox = (id: string, category: string) => {
     removeProductFromList(id, category);
   };
+
   return (
     <div>
       <label htmlFor="item"></label>

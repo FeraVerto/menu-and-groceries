@@ -1,0 +1,26 @@
+.modal_select_block {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.modal_select {
+    width: 100%;
+}
+
+.modal_select_button {
+    padding: 15px 0;
+
+    width: 300px;
+    height: 60px;
+
+    text-align: center;
+    text-transform: uppercase;
+    color: #495312;
+    font-weight: bold;
+    font-size: 17px;
+
+    border: 2px solid #7EA27A;
+    border-radius: 15px;
+
+    background-color: #fff;
+}
