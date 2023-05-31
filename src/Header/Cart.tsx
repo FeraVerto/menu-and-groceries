@@ -7,7 +7,7 @@ import { BasketModal } from './Modal/BasketModal';
 import cart from '../../images/shoppingcart_80945.svg';
 Modal.setAppElement('#root');
 
-export const Basket = observer(() => {
+export const Cart = observer(() => {
   const { cartContents } = Store;
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
