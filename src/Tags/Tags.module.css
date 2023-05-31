@@ -1,0 +1,10 @@
+.tags {
+    width: 350px;
+
+    background-color: #7EA27A;
+}
+
+.tags_list {
+    position: fixed;
+    right: 0;
+}

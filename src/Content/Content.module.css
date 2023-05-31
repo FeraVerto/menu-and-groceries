@@ -1,5 +1,15 @@
 .content {
-    /* display: flex; */
+    max-height: calc(100vh - 2px);
+    
+    display: flex;
+    flex-basis: 100%;
+    flex: 1 1 auto;
+    overflow-y: scroll;
 
-    grid-area: content;
+    scrollbar-width: none; /* Скрыть полосу прокрутки для браузеров Firefox */
+    -ms-overflow-style: none; 
+}
+
+.content::-webkit-scrollbar {
+    display: none; /* Скрыть скроллер в Chrome */
 }

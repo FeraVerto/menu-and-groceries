@@ -1,6 +1,7 @@
 .categories {
     margin: 0 auto;
-    width: 1400px;
+    
+    width: 100%;
 }
 
 .category_name {

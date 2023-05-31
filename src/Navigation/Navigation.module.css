@@ -4,18 +4,27 @@
 }
 
 .categories_nav {
-    width: 350px;
-    height: 100%;
+    min-width: 350px;
+    height: 100vh;
+    
+    position: sticky;
+    top: 0;
+
     background-color: #7EA27A;
-    grid-area: nav;
+}
+
+.header_left_part {
+    position: fixed;
 }
 
 .categories_nav_list {
-    margin: 100px 0 0 40px;
     padding: 0;
 
-    list-style: none;
     position: fixed;
+    left: 40px;
+    top: 30%;
+
+    list-style: none;
 }
 
 .categories_nav_item a {
@@ -25,3 +34,4 @@
     font-weight: bold;
     white-space: nowrap;
 }
+

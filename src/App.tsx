@@ -1,17 +1,15 @@
 import React from 'react';
 import stl from './App.module.css';
-import { Header } from './Header/Header';
 import { Content } from './Content/Content';
-import { Footer } from './Footer/Footer';
 import { Navigation } from './Navigation/Navigation';
+import { Tags } from './Tags/Tags';
 
 function App() {
   return (
     <div className={stl.App}>
-      <Header />
-      <Content />
       <Navigation />
-      {/* <Footer /> */}
+      <Content />
+      <Tags />
     </div>
   );
 }

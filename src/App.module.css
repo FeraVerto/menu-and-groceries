@@ -1,15 +1,11 @@
 .App {
+  height: 100vh;
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  
   text-align: center;
-
-  display: grid; 
-  grid-template-columns: 0fr 1.4fr; 
-  grid-template-rows: 0.3fr 1.7fr; 
-  gap: 0px 0px; 
-  grid-template-areas: 
-    "nav header"
-    "nav content"; 
-
-  position: relative;
 }
 
 .App-logo {
