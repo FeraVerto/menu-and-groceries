@@ -1,40 +1,5 @@
 .content {
-    display: flex;
-    /* display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px; */
-}
+    /* display: flex; */
 
-.categories_nav {
-    width: 350px;
-    background-color: #7EA27A;
-
-    position: relative;
-}
-
-.categories_nav_list {
-    width: 350px;
-    height: 100vh;
-
-    margin: 100px 0 0 40px;
-    padding: 0;
-
-    position: fixed;
-
-    list-style: none;
-}
-
-.categories_nav_item {
-    text-align: left;
-    font-size: 30px;
-}
-
-.categories_nav_item a {
-    text-decoration: none;
-    text-transform: uppercase;
-    color: white;
-    font-weight: bold;
-    white-space: nowrap;
+    grid-area: content;
 }

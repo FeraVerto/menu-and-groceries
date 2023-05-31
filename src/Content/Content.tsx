@@ -7,11 +7,11 @@ import { NavLink } from 'react-router-dom';
 export const Content = () => {
   const { ingredients, categories } = Store;
 
-  const menuLinks = categories.map((m) => (
-    <li className={stl.categories_nav_item} key={m.name}>
-      <NavLink to={`/${m.name}`}>{m.name}</NavLink>
-    </li>
-  ));
+  // const menuLinks = categories.map((m) => (
+  //   <li className={stl.categories_nav_item} key={m.name}>
+  //     <NavLink to={`/${m.name}`}>{m.name}</NavLink>
+  //   </li>
+  // ));
 
   const routes = categories.map((n) => (
     <Route
@@ -23,9 +23,9 @@ export const Content = () => {
 
   return (
     <main className={stl.content}>
-      <nav className={stl.categories_nav}>
+      {/* <nav className={stl.categories_nav}>
         <ul className={stl.categories_nav_list}>{menuLinks}</ul>
-      </nav>
+      </nav> */}
       <Routes>
         {routes}
         <Route
