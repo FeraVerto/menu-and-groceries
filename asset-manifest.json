@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/menu-and-groceries/static/css/main.a0bced87.css",
-    "main.js": "/menu-and-groceries/static/js/main.c7ea2454.js",
+    "main.css": "/menu-and-groceries/static/css/main.62e8b473.css",
+    "main.js": "/menu-and-groceries/static/js/main.90e2440d.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
     "static/media/kurva.jpg": "/menu-and-groceries/static/media/kurva.11aaf1bc87d6d293d6c2.jpg",
@@ -17,14 +17,15 @@
     "static/media/овощное рагу.jpg": "/menu-and-groceries/static/media/овощное рагу.2c964aebb0016aa78806.jpg",
     "static/media/zero.jpg": "/menu-and-groceries/static/media/zero.e6db9422b63171a27bb8.jpg",
     "static/media/крошка картошка.jpg": "/menu-and-groceries/static/media/крошка картошка.711744ee3e9c47c93465.jpg",
+    "static/media/remove_91021.svg": "/menu-and-groceries/static/media/remove_91021.37cc094f2e265b4f1eba5d0194f946a3.svg",
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
-    "main.a0bced87.css.map": "/menu-and-groceries/static/css/main.a0bced87.css.map",
-    "main.c7ea2454.js.map": "/menu-and-groceries/static/js/main.c7ea2454.js.map",
+    "main.62e8b473.css.map": "/menu-and-groceries/static/css/main.62e8b473.css.map",
+    "main.90e2440d.js.map": "/menu-and-groceries/static/js/main.90e2440d.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a0bced87.css",
-    "static/js/main.c7ea2454.js"
+    "static/css/main.62e8b473.css",
+    "static/js/main.90e2440d.js"
   ]
 }
