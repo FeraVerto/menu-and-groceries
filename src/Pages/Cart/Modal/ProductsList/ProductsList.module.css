@@ -1,3 +1,14 @@
-.products_list {
+.category_list {
+    margin: 0;
+    margin-left: 25px;
+    padding: 0;
+
+    font-size: 30px;
+    list-style: none;
     flex-basis: 50%;
+}
+
+.products_list {
+    font-size: 20px;
+    list-style: none;
 }

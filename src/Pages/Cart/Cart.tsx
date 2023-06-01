@@ -1,4 +1,4 @@
-import cart from '../../assets/images/shoppingcart_80945.svg';
+import cart from '../../assets/icon/shoppingcart_80945.svg';
 //libraries
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';

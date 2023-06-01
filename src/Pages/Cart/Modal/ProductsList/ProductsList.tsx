@@ -19,16 +19,16 @@ export const ProductsList = observer(
       return (
         <li key={uuid4()}>
           {item}
-          <ul>
+          <ul className={stl.products_list}>
             {productsCategorized[item].map((n) => {
               return (
-                <li key={uuid4()}>
+                <li className={stl.products_item} key={uuid4()}>
                   <Checkbox
+                    label={n.name}
                     category={item}
                     removeProductFromList={removeProductFromList}
                     id={n.id}
                   />
-                  {n.name}
                 </li>
               );
             })}
@@ -36,6 +36,6 @@ export const ProductsList = observer(
         </li>
       );
     });
-    return <ul className={stl.products_list}>{productsList}</ul>;
+    return <ul className={stl.category_list}>{productsList}</ul>;
   }
 );

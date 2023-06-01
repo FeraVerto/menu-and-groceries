@@ -1,4 +1,6 @@
+//libraries
 import { makeAutoObservable } from 'mobx';
+//временно
 import lazania from './../assets/images/лазанья.jpg';
 import kartoshka from './../assets/images/жареная картошка.jpg';
 import borsh from './../assets/images/борщ.jpg';
@@ -12,7 +14,9 @@ import jul from './../assets/images/jul.jpg';
 import ovoch from './../assets/images/овощное рагу.jpg';
 import kurva from './../assets/images/kurva.jpg';
 import kurva_sir from './../assets/images/kurva_sir.jpg';
+//utils
 import { getUniqeElements } from '../utils/getUniqeElements';
+//types
 import { userType } from '../types';
 
 class StoreApp {

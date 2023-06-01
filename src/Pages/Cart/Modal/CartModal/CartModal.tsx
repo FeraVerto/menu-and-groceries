@@ -13,7 +13,7 @@ import Store from './../../../../store/store';
 //models
 import { sendMessage } from './../../../../model/Products.model';
 
-import remove from './../../../../assets/images/remove_91021.svg';
+import remove from '../../../../assets/icon/remove_91021.svg';
 
 type CartModal = {
   isOpen: boolean;
@@ -53,7 +53,7 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
     <Modal
       style={{
         content: {
-          minWidth: '1000px',
+          width: '1000px',
           height: '800px',
           top: '50%',
           left: '50%',
