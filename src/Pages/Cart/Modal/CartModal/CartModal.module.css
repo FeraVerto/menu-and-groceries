@@ -1,0 +1,17 @@
+.modal_header_block {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal_visual_list_block {
+    margin-bottom: 20px;
+    display: flex;
+    max-height: calc(100vh - 2px);
+
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    
+    border: 2px solid #7EA27A;
+    border-radius: 15px;
+}

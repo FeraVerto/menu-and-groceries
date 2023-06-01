@@ -1,7 +1,11 @@
-import stl from './Content.module.css';
+//libraries
 import { Route, Routes } from 'react-router-dom';
+//styles
+import stl from './Content.module.css';
+//components
 import { Category } from './Categories/Category/Category';
-import Store from '../store/store';
+//store
+import Store from '../../store/store';
 
 export const Content = () => {
   const { ingredients, categories } = Store;

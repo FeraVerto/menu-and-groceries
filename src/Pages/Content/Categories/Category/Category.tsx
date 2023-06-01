@@ -1,7 +1,13 @@
-import { categoryType } from '../../../types';
-import stl from './Category.module.css';
-import Store from '../../../store/store';
+//libraries
 import { observer } from 'mobx-react-lite';
+//styles
+import stl from './Category.module.css';
+//components
+import { Button } from '../../../../Components/Button/Button';
+//types
+import { categoryType } from '../../../../types';
+//store
+import Store from '../../../../store/store';
 
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addToCart } = Store;
@@ -14,7 +20,7 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
     <li className={stl.dishes_item} key={m.id}>
       <div>
         <div className={stl.image_wrapper}>
-          <img src={m.image} />
+          <img src={m.image} alt="add to cart button" />
         </div>
         <div className={stl.dishes_info}>
           <div className={stl.dishes_info_name}>{m.dishName}</div>
@@ -25,13 +31,14 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
           </div>
         </div>
       </div>
+
       <div>
-        <button
-          className={stl.button_add}
+        <Button
+          width={'100%'}
+          height={'60px'}
+          text={'Добавить в корзину'}
           onClick={() => addProductsToBasket(m.ingredients, m.id)}
-        >
-          Добавить в корзину
-        </button>
+        />
       </div>
     </li>
   ));

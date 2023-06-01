@@ -1,10 +1,15 @@
-import stl from './Cart.module.css';
+import cart from '../../assets/images/shoppingcart_80945.svg';
+//libraries
 import { useState } from 'react';
-import Store from '../store/store';
 import { observer } from 'mobx-react-lite';
 import Modal from 'react-modal';
+//store
+import Store from '../../store/store';
+//components
 import { CartModal } from './Modal/CartModal/CartModal';
-import cart from '../images/shoppingcart_80945.svg';
+//styles
+import stl from './Cart.module.css';
+
 Modal.setAppElement('#root');
 
 export const Cart = observer(() => {

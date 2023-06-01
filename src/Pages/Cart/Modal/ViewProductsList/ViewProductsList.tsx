@@ -1,7 +1,11 @@
+//libraries
 import { observer } from 'mobx-react-lite';
-import { getFormattedList } from '../../../utils/getFormattedList';
+//styles
 import stl from './ViewProductsList.module.css';
-import Store from '../../../store/store';
+//store
+import Store from '../../../../store/store';
+//utils
+import { getFormattedList } from '../../../../utils/getFormattedList';
 
 export const ViewProductsList = observer(() => {
   const { productsCategorized } = Store;

@@ -1,12 +1,19 @@
+//libraries
 import Modal from 'react-modal';
-import Store from '../../../store/store';
 import { observer } from 'mobx-react-lite';
-import { SelectProduct } from '../../SelectProduct/SelectProduct';
-import { sendMessage } from '../../../model/Products.model';
-import { ProductsList } from '../ProductsList/ProductsList';
+//styles
 import stl from './CartModal.module.css';
-import remove from './../../../images/remove_91021.svg';
+//components
+import { SelectProduct } from '../../SelectProduct/SelectProduct';
+import { ProductsList } from '../ProductsList/ProductsList';
 import { ViewProductsList } from '../ViewProductsList/ViewProductsList';
+import { Button } from '../../../../Components/Button/Button';
+//store
+import Store from './../../../../store/store';
+//models
+import { sendMessage } from './../../../../model/Products.model';
+
+import remove from './../../../../assets/images/remove_91021.svg';
 
 type CartModal = {
   isOpen: boolean;
@@ -63,12 +70,13 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
     >
       <div className={stl.modal_header_block}>
         <h1>Список продуктов</h1>
-        <button
-          className={stl.modal_button_close}
-          onClick={(e) => onClickCloseButton(e)}
-        >
-          <img src={remove} width="50px" height="50px" alt="close" />
-        </button>
+        <Button
+          type="close"
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+            onClickCloseButton(e)
+          }
+          img={remove}
+        />
       </div>
 
       <SelectProduct addIngredientToList={addIngredientToList} />
@@ -78,12 +86,12 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
         <ViewProductsList />
       </div>
 
-      <button
-        className={`${stl.modal_button} ${stl.modal_button_send}`}
+      <Button
+        width={'300px'}
+        height={'60px'}
+        text={'send'}
         onClick={onClickSendButton}
-      >
-        Send
-      </button>
+      />
     </Modal>
   );
 });

@@ -1,0 +1,8 @@
+.modal_select_block {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.modal_select {
+    width: 700px;
+}

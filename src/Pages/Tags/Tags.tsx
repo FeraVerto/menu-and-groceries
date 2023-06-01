@@ -1,6 +1,7 @@
+//style
 import stl from './Tags.module.css';
 //временно
-import { tags } from '../temp';
+import { tags } from '../../temp';
 
 export const Tags = () => {
   return (

@@ -1,9 +1,15 @@
-import { convertObjectToArray } from '../../utils/convertObjectToArray';
-import Store from '../../store/store';
+//libraries
 import { useState } from 'react';
 import Select, { StylesConfig } from 'react-select';
 import { observer } from 'mobx-react-lite';
+//components
+import { Button } from '../../../Components/Button/Button';
+//styles
 import stl from './SelectProduct.module.css';
+//store
+import Store from '../../../store/store';
+//utils
+import { convertObjectToArray } from '../../../utils/convertObjectToArray';
 
 type SelectProduct = {
   addIngredientToList: (ing: { value: string; label: string }[] | null) => void;
@@ -42,12 +48,13 @@ export const SelectProduct = observer(
             options={options}
           />
         </div>
-        <button
-          className={stl.modal_select_button}
+
+        <Button
+          width={'300px'}
+          height={'60px'}
+          text={'Добавить'}
           onClick={() => addIngredientToList(selectedOption)}
-        >
-          Добавить в список
-        </button>
+        />
       </div>
     );
   }

@@ -1,7 +1,11 @@
-import stl from './Navigation.module.css';
+//libraries
 import { NavLink } from 'react-router-dom';
-import Store from '../store/store';
+//styles
+import stl from './Navigation.module.css';
+//components
 import { Cart } from '../Cart/Cart';
+//store
+import Store from '../../store/store';
 
 export const Navigation = () => {
   const { categories } = Store;

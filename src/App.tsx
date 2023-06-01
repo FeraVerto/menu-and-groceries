@@ -1,8 +1,9 @@
-import React from 'react';
+//styles
 import stl from './App.module.css';
-import { Content } from './Content/Content';
-import { Navigation } from './Navigation/Navigation';
-import { Tags } from './Tags/Tags';
+//components
+import { Content } from './Pages/Content/Content';
+import { Navigation } from './Pages/Navigation/Navigation';
+import { Tags } from './Pages/Tags/Tags';
 
 function App() {
   return (
