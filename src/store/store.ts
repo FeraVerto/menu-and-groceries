@@ -14,6 +14,7 @@ import jul from './../assets/images/jul.jpg';
 import ovoch from './../assets/images/овощное рагу.jpg';
 import kurva from './../assets/images/kurva.jpg';
 import kurva_sir from './../assets/images/kurva_sir.jpg';
+import sup_guliash from './../assets/images/sup_guliash.jpg';
 //utils
 import { getUniqeElements } from '../utils/getUniqeElements';
 //types
@@ -89,9 +90,26 @@ class StoreApp {
         },
         {
           id: '1-5',
-          image: solanka,
+          image: sup_guliash,
           dishName: 'Суп-гуляш',
-          ingredients: [],
+          ingredients: [
+            '18',
+            '17',
+            '19',
+            '13',
+            '29',
+            '69',
+            '21',
+            '14',
+            '70',
+            '23',
+            '24',
+            '22',
+            '71',
+            '5',
+            '39',
+            '72',
+          ],
           tags: ['1', '2', '3'],
         },
         // {
@@ -288,6 +306,10 @@ class StoreApp {
     66: { name: 'терияки', category: 'бакалея' },
     67: { name: 'чай', category: 'бакалея' },
     68: { name: 'творог', category: 'молочка' },
+    69: { name: 'перец болгарский', category: 'овощи' },
+    70: { name: 'консервированная фасоль', category: 'бакалея' },
+    71: { name: 'паприка', category: 'бакалея' },
+    72: { name: 'кинза', category: 'овощи' },
   };
 
   cartContents: string[] = [];
