@@ -4,28 +4,22 @@ import { ChangeEvent } from 'react';
 import stl from './Checkbox.module.css';
 
 type checkboxType = {
-  removeProductFromList?: (id: string, category: string) => void;
-  addedProductFromList?: (id: string, category: string) => void;
   id: string;
   category: string;
   label: string;
   checked: boolean;
+  productFromList?: (id: string) => void;
 };
 
 export const Checkbox = ({
-  removeProductFromList,
-  addedProductFromList,
+  productFromList,
   id,
   category,
   label,
   checked,
 }: checkboxType) => {
-  const pressCheckbox = (id: string, category: string) => {
-    if (checked) {
-      removeProductFromList && removeProductFromList(id, category);
-    } else {
-      addedProductFromList && addedProductFromList(id, category);
-    }
+  const pressCheckbox = (id: string) => {
+    productFromList && productFromList(id);
   };
 
   return (
@@ -37,9 +31,7 @@ export const Checkbox = ({
           type="checkbox"
           name="item"
           className={stl.check__input}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            pressCheckbox(id, category)
-          }
+          onChange={(e: ChangeEvent<HTMLInputElement>) => pressCheckbox(id)}
         />
         {label}
       </label>
