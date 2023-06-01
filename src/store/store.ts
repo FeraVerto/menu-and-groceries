@@ -312,28 +312,43 @@ class StoreApp {
     72: { name: 'кинза', category: 'овощи' },
   };
 
-  cartContents: string[] = [];
+  deletedProductsId: string[] = [];
+  deletedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
+  addedProductsId: string[] = [];
   productsCategorized: { [key: string]: { name: string; id: string }[] } = {};
 
-  addToCart = (list: string[]) => {
-    this.cartContents = [...this.cartContents, ...list];
+  addProductsToCartList = (data: string[]) => {
+    this.addedProductsId = [...this.addedProductsId, ...data];
 
     //убираем дублирующиеся элементы, если они присутствуют в двух разных блюдах
-    this.cartContents = getUniqeElements(this.cartContents);
+    this.addedProductsId = getUniqeElements(this.addedProductsId);
 
-    let listOfProducts = this.cartContents.reduce((acc, item) => {
-      const category = this.ingredients[item].category;
-      const name = this.ingredients[item].name;
+    let listOfProducts = generateListOfProducts(
+      this.addedProductsId,
+      this.ingredients
+    );
 
-      if (!acc[category]) {
-        acc[category] = [{ name: name, id: item }];
-      } else {
-        acc[category]?.push({ name: name, id: item });
+    data.forEach((id) => {
+      const category = this.ingredients[id].category;
+
+      //удаляем продукты из основного списка
+      if (this.deletedProductsList[category]?.length > 0) {
+        this.deletedProductsList[category] = this.deletedProductsList[
+          category
+        ]?.filter((item) => item.id !== id);
       }
 
-      return acc;
-    }, {} as { [key: string]: { name: string; id: string }[] });
+      //удаляем id из основного списка айдишников
+      this.deletedProductsId = this.deletedProductsId?.filter(
+        (item) => item !== id
+      );
+
+      //если в категории нет продуктов, удаляем категорию
+      if (this.deletedProductsList[category]?.length === 0) {
+        delete this.deletedProductsList[category];
+      }
+    });
 
     return (this.productsCategorized = {
       ...this.productsCategorized,
@@ -341,11 +356,26 @@ class StoreApp {
     });
   };
 
-  deleteProductFromList = (id: string, category: string) => {
+  deleteProductFromList = (id: string) => {
+    //перемещаем удаленные из списка продукты в другой список,
+    //который поместим внизу, относительно основного списка в модальном окне
+    this.deletedProductsId = [...this.deletedProductsId, id];
+    let data = generateListOfProducts(this.deletedProductsId, this.ingredients);
+    this.deletedProductsList = {
+      ...this.deletedProductsList,
+      ...data,
+    };
+
+    //удаляем продукты из основного списка
+    const category = this.ingredients[id].category;
     this.productsCategorized[category] = this.productsCategorized[
       category
     ].filter((item) => item.id !== id);
-    this.cartContents = this.cartContents.filter((item) => item !== id);
+
+    //удаляем id из основного списка айдишников
+    this.addedProductsId = this.addedProductsId.filter((item) => item !== id);
+
+    //если в категории нет продуктов, удаляем категорию
     if (this.productsCategorized[category].length === 0) {
       delete this.productsCategorized[category];
     }
@@ -355,5 +385,30 @@ class StoreApp {
     makeAutoObservable(this);
   }
 }
+
+//формируем из массива айдишников string[]
+//объект вида { [key: string]: { name: string; id: string }[] }
+const generateListOfProducts = (
+  data: string[],
+  ingredientsData: {
+    [key: string]: {
+      name: string;
+      category: string;
+    };
+  }
+) => {
+  return data.reduce((acc, item) => {
+    const category = ingredientsData[item].category;
+    const name = ingredientsData[item].name;
+
+    if (!acc[category]) {
+      acc[category] = [{ name: name, id: item }];
+    } else {
+      acc[category]?.push({ name: name, id: item });
+    }
+
+    return acc;
+  }, {} as { [key: string]: { name: string; id: string }[] });
+};
 
 export default new StoreApp();

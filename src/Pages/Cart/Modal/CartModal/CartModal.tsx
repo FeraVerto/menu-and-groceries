@@ -21,7 +21,12 @@ type CartModal = {
 };
 
 export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
-  let { productsCategorized, deleteProductFromList, addToCart, user } = Store;
+  let {
+    productsCategorized,
+    deleteProductFromList,
+    addProductsToCartList,
+    user,
+  } = Store;
 
   const addIngredientToList = (
     ing: { value: string; label: string }[] | null
@@ -33,11 +38,15 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
       return [...acc, item.value];
     }, [] as string[]);
 
-    addToCart(ingredientsArrayId);
+    addProductsToCartList(ingredientsArrayId);
   };
 
-  const removeProductFromList = (id: string, category: string) => {
-    deleteProductFromList(id, category);
+  const removeProductFromList = (id: string) => {
+    deleteProductFromList(id);
+  };
+
+  const addedProductFromList = (id: string) => {
+    addProductsToCartList([id]);
   };
 
   const onClickSendButton = () => {
@@ -82,8 +91,11 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
       <SelectProduct addIngredientToList={addIngredientToList} />
 
       <div className={stl.modal_visual_list_block}>
-        <ProductsList removeProductFromList={removeProductFromList} />
-        <ViewProductsList />
+        <ProductsList
+          removeProductFromList={removeProductFromList}
+          addedProductFromList={addedProductFromList}
+        />
+        {/* <ViewProductsList /> */}
       </div>
 
       <Button

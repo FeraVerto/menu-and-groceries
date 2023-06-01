@@ -10,10 +10,10 @@ import { categoryType } from '../../../../types';
 import Store from '../../../../store/store';
 
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
-  const { addToCart } = Store;
+  const { addProductsToCartList } = Store;
 
   const addProductsToBasket = (ingredients: string[], id: string) => {
-    addToCart(ingredients);
+    addProductsToCartList(ingredients);
   };
 
   let dishesList = dishes.map((m) => (

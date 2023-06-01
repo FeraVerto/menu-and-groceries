@@ -13,7 +13,7 @@ import stl from './Cart.module.css';
 Modal.setAppElement('#root');
 
 export const Cart = observer(() => {
-  const { cartContents } = Store;
+  const { addedProductsId } = Store;
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
   function openModal() {
@@ -27,7 +27,7 @@ export const Cart = observer(() => {
   return (
     <div className={stl.cart} onClick={openModal}>
       <img className={stl.cart_img} src={cart} alt="cart" width="60px" />
-      {cartContents.length}
+      {addedProductsId.length}
       <CartModal isOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );

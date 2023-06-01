@@ -10,20 +10,44 @@ import Store from '../../../../store/store';
 
 type productsListType = {
   removeProductFromList: (id: string, category: string) => void;
+  addedProductFromList: (id: string, category: string) => void;
 };
 
 export const ProductsList = observer(
-  ({ removeProductFromList }: productsListType) => {
-    const { productsCategorized } = Store;
-    const productsList = Object.keys(productsCategorized).map((item) => {
+  ({ removeProductFromList, addedProductFromList }: productsListType) => {
+    const { productsCategorized, deletedProductsList } = Store;
+    const deletedProducts = Object.keys(deletedProductsList)?.map((item) => {
       return (
         <li key={uuid4()}>
           {item}
           <ul className={stl.products_list}>
-            {productsCategorized[item].map((n) => {
+            {deletedProductsList[item]?.map((n) => {
               return (
                 <li className={stl.products_item} key={uuid4()}>
                   <Checkbox
+                    checked={false}
+                    label={n.name}
+                    category={item}
+                    addedProductFromList={addedProductFromList}
+                    id={n.id}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </li>
+      );
+    });
+    const productsList = Object.keys(productsCategorized)?.map((item) => {
+      return (
+        <li key={uuid4()}>
+          {item}
+          <ul className={stl.products_list}>
+            {productsCategorized[item]?.map((n) => {
+              return (
+                <li className={stl.products_item} key={uuid4()}>
+                  <Checkbox
+                    checked={true}
                     label={n.name}
                     category={item}
                     removeProductFromList={removeProductFromList}
@@ -36,6 +60,11 @@ export const ProductsList = observer(
         </li>
       );
     });
-    return <ul className={stl.category_list}>{productsList}</ul>;
+    return (
+      <div className={stl.category_lists_block}>
+        <ul className={stl.category_list}>{productsList}</ul>;
+        <ul className={stl.category_list}>{deletedProducts}</ul>;
+      </div>
+    );
   }
 );
