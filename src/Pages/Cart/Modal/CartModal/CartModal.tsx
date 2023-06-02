@@ -6,7 +6,7 @@ import stl from './CartModal.module.css';
 //components
 import { SelectProduct } from '../../SelectProduct/SelectProduct';
 import { ProductsList } from '../ProductsList/ProductsList';
-import { ViewProductsList } from '../ViewProductsList/ViewProductsList';
+import { ViewDishesList } from '../ViewProductsList/ViewDishesList';
 import { Button } from '../../../../Components/Button/Button';
 //store
 import Store from './../../../../store/store';
@@ -22,9 +22,10 @@ type CartModal = {
 
 export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
   let {
-    productsCategorized,
+    addedProductsList,
     deleteProductFromList,
     addProductsToCartList,
+    dishesListForSend,
     user,
   } = Store;
 
@@ -50,7 +51,12 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
   };
 
   const onClickSendButton = () => {
-    sendMessage(user.botToken, user.chatId, productsCategorized);
+    sendMessage(
+      user.botToken,
+      user.chatId,
+      addedProductsList,
+      dishesListForSend
+    );
   };
 
   const onClickCloseButton = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -95,7 +101,7 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
           removeProductFromList={removeProductFromList}
           addedProductFromList={addedProductFromList}
         />
-        {/* <ViewProductsList /> */}
+        <ViewDishesList />
       </div>
 
       <Button

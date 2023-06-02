@@ -1,4 +1,4 @@
-import { getFormattedList } from '../utils/getFormattedList';
+import { getFormattedListProducts } from '../utils/getFormattedList';
 import { ResultType, ErrorType } from '../types';
 import { sendMessageToTelegramBot } from '../api/api';
 
@@ -10,10 +10,12 @@ export interface Result<T> {
 export const sendMessage = async (
   token: string,
   botId: number,
-  products: { [key: string]: { name: string; id: string }[] }
+  products: { [key: string]: { name: string; id: string }[] },
+  dishesListForSend: string[]
 ): Promise<Result<ResultType | ErrorType>> => {
   let responseData = {} as { success: ResultType; error: Error };
-  const text = getFormattedList(products);
+  const text = getFormattedListProducts(products, dishesListForSend);
+
   const response = await sendMessageToTelegramBot({ token, botId, text });
   try {
     responseData.success = response;

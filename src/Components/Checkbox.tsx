@@ -1,3 +1,4 @@
+//libraries
 import { ChangeEvent } from 'react';
 
 //styles
@@ -14,7 +15,6 @@ type checkboxType = {
 export const Checkbox = ({
   productFromList,
   id,
-  category,
   label,
   checked,
 }: checkboxType) => {
@@ -31,7 +31,7 @@ export const Checkbox = ({
           type="checkbox"
           name="item"
           className={stl.check__input}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => pressCheckbox(id)}
+          onChange={() => pressCheckbox(id)}
         />
         {label}
       </label>

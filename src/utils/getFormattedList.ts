@@ -1,15 +1,21 @@
 //формирует текстовое сообщение из объекта для отправки в телеграм
 
-export const getFormattedList = (data: {
-  [key: string]: { name: string; id: string }[];
-}) => {
-  const result = Object.entries(data)
-    .map(([category, products]) => {
-      const productList = products
-        .map((product) => `- ${product.name}`)
-        .join('\n');
-      return `${category}\n${productList}`;
-    })
-    .join('\n\n');
-  return result;
+export const getFormattedListProducts = (
+  data: { [key: string]: { name: string; id: string }[] },
+  order: string[]
+): string => {
+  let formattedText = 'Заказанные блюда:\n';
+  order.forEach((dish, index) => {
+    formattedText += `    ${index + 1}. ${dish}\n`;
+  });
+
+  formattedText += '\nСписок продуктов:\n';
+  Object.entries(data).forEach(([category, products]) => {
+    formattedText += `    ${category}\n`;
+    products.forEach((product) => {
+      formattedText += `      - ${product.name}\n`;
+    });
+  });
+
+  return formattedText;
 };

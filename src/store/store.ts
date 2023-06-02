@@ -1,6 +1,7 @@
 //libraries
 import { makeAutoObservable } from 'mobx';
 //временно
+//всё это будет на бэке
 import lazania from './../assets/images/лазанья.jpg';
 import kartoshka from './../assets/images/жареная картошка.jpg';
 import borsh from './../assets/images/борщ.jpg';
@@ -316,9 +317,16 @@ class StoreApp {
   deletedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
   addedProductsId: string[] = [];
-  productsCategorized: { [key: string]: { name: string; id: string }[] } = {};
+  addedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
-  addProductsToCartList = (data: string[]) => {
+  dishesListForSend: string[] = [];
+
+  addProductsToCartList = (data: string[], dishName?: string) => {
+    //Список выбранных блюд
+    if (dishName) {
+      this.dishesListForSend = [...this.dishesListForSend, dishName];
+      this.dishesListForSend = getUniqeElements(this.dishesListForSend);
+    }
     this.addedProductsId = [...this.addedProductsId, ...data];
 
     //убираем дублирующиеся элементы, если они присутствуют в двух разных блюдах
@@ -350,8 +358,8 @@ class StoreApp {
       }
     });
 
-    return (this.productsCategorized = {
-      ...this.productsCategorized,
+    return (this.addedProductsList = {
+      ...this.addedProductsList,
       ...listOfProducts,
     });
   };
@@ -368,16 +376,16 @@ class StoreApp {
 
     //удаляем продукты из основного списка
     const category = this.ingredients[id].category;
-    this.productsCategorized[category] = this.productsCategorized[
-      category
-    ].filter((item) => item.id !== id);
+    this.addedProductsList[category] = this.addedProductsList[category].filter(
+      (item) => item.id !== id
+    );
 
     //удаляем id из основного списка айдишников
     this.addedProductsId = this.addedProductsId.filter((item) => item !== id);
 
     //если в категории нет продуктов, удаляем категорию
-    if (this.productsCategorized[category].length === 0) {
-      delete this.productsCategorized[category];
+    if (this.addedProductsList[category].length === 0) {
+      delete this.addedProductsList[category];
     }
   };
 

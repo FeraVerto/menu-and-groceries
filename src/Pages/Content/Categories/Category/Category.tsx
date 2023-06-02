@@ -12,8 +12,12 @@ import Store from '../../../../store/store';
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addProductsToCartList } = Store;
 
-  const addProductsToBasket = (ingredients: string[], id: string) => {
-    addProductsToCartList(ingredients);
+  const addProductsToCart = (
+    ingredients: string[],
+    id: string,
+    dishName: string
+  ) => {
+    addProductsToCartList(ingredients, dishName);
   };
 
   let dishesList = dishes.map((m) => (
@@ -37,7 +41,7 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
           width={'100%'}
           height={'60px'}
           text={'Добавить в корзину'}
-          onClick={() => addProductsToBasket(m.ingredients, m.id)}
+          onClick={() => addProductsToCart(m.ingredients, m.id, m.dishName)}
         />
       </div>
     </li>

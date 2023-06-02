@@ -15,14 +15,17 @@ type productsListType = {
 
 export const ProductsList = observer(
   ({ removeProductFromList, addedProductFromList }: productsListType) => {
-    const { productsCategorized, deletedProductsList } = Store;
+    const { addedProductsList, deletedProductsList } = Store;
     const renderProducts = (
+      filteredProducts: 'add' | 'delete',
       list: { [key: string]: { name: string; id: string }[] },
       checked: boolean
     ) => {
       return Object.keys(list)?.map((item) => (
         <li key={uuid4()}>
-          {item}
+          {filteredProducts === 'add' && (
+            <p className={stl.category_name}>{item}</p>
+          )}
           <ul className={stl.products_list}>
             {list[item]?.map((n) => (
               <li className={stl.products_item} key={uuid4()}>
@@ -42,12 +45,25 @@ export const ProductsList = observer(
       ));
     };
 
-    const productsList = renderProducts(productsCategorized, true);
-    const deletedProducts = renderProducts(deletedProductsList, false);
+    const productsList = renderProducts('add', addedProductsList, true);
+    const deletedProducts = renderProducts(
+      'delete',
+      deletedProductsList,
+      false
+    );
     return (
       <div className={stl.category_lists_block}>
-        <ul className={stl.category_list}>{productsList}</ul>;
-        <ul className={stl.category_list}>{deletedProducts}</ul>;
+        <h2>Добавленные продукты</h2>
+        <p>Нажмите на продукт, чтобы убрать его из списка</p>
+        <ul className={stl.category_list}>{productsList}</ul>
+        {Object.keys(deletedProductsList).length !== 0 && (
+          <div className={stl.deleted_products_block}>
+            <hr />
+            <h2>Удалённые продукты</h2>
+            <p>Нажмите на продукт, чтобы вернуть его в корзину</p>
+            <ul className={stl.category_list}>{deletedProducts}</ul>
+          </div>
+        )}
       </div>
     );
   }
