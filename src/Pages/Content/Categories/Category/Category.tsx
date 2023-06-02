@@ -14,7 +14,7 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
 
   const addProductsToCart = (
     ingredients: string[],
-    id: string,
+    dishId: string,
     dishName: string
   ) => {
     addProductsToCartList(ingredients, dishName);

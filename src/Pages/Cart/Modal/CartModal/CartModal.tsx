@@ -6,7 +6,7 @@ import stl from './CartModal.module.css';
 //components
 import { SelectProduct } from '../../SelectProduct/SelectProduct';
 import { ProductsList } from '../ProductsList/ProductsList';
-import { ViewDishesList } from '../ViewProductsList/ViewDishesList';
+import { DishesList } from '../DishesList/DishesList';
 import { Button } from '../../../../Components/Button/Button';
 //store
 import Store from './../../../../store/store';
@@ -25,7 +25,7 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
     addedProductsList,
     deleteProductFromList,
     addProductsToCartList,
-    dishesListForSend,
+    dishesListNameForSend,
     user,
   } = Store;
 
@@ -55,7 +55,7 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
       user.botToken,
       user.chatId,
       addedProductsList,
-      dishesListForSend
+      dishesListNameForSend
     );
   };
 
@@ -101,7 +101,7 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
           removeProductFromList={removeProductFromList}
           addedProductFromList={addedProductFromList}
         />
-        <ViewDishesList />
+        <DishesList />
       </div>
 
       <Button

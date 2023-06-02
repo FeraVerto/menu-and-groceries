@@ -319,13 +319,13 @@ class StoreApp {
   addedProductsId: string[] = [];
   addedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
-  dishesListForSend: string[] = [];
+  dishesListNameForSend: string[] = [];
 
   addProductsToCartList = (data: string[], dishName?: string) => {
     //Список выбранных блюд
     if (dishName) {
-      this.dishesListForSend = [...this.dishesListForSend, dishName];
-      this.dishesListForSend = getUniqeElements(this.dishesListForSend);
+      this.dishesListNameForSend = [...this.dishesListNameForSend, dishName];
+      this.dishesListNameForSend = getUniqeElements(this.dishesListNameForSend);
     }
     this.addedProductsId = [...this.addedProductsId, ...data];
 

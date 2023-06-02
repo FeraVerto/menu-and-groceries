@@ -11,10 +11,10 @@ export const sendMessage = async (
   token: string,
   botId: number,
   products: { [key: string]: { name: string; id: string }[] },
-  dishesListForSend: string[]
+  dishesListNameForSend: string[]
 ): Promise<Result<ResultType | ErrorType>> => {
   let responseData = {} as { success: ResultType; error: Error };
-  const text = getFormattedListProducts(products, dishesListForSend);
+  const text = getFormattedListProducts(products, dishesListNameForSend);
 
   const response = await sendMessageToTelegramBot({ token, botId, text });
   try {

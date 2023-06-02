@@ -1,0 +1,19 @@
+.dishes_list {
+    padding-left: 30px;
+    flex-basis: 50%;
+}
+
+.dishes_list h2 {
+    padding: 5px 15px;
+    margin-bottom: 0;
+
+    font-size: 20px;
+    background-color: #7EA27A;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.dishes_list p {
+    font-style: italic;
+    margin-top: 0;
+}
