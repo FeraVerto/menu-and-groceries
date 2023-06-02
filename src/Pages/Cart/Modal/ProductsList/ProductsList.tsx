@@ -32,7 +32,6 @@ export const ProductsList = observer(
                 <Checkbox
                   checked={checked}
                   label={n.name}
-                  category={item}
                   productFromList={
                     checked ? removeProductFromList : addedProductFromList
                   }

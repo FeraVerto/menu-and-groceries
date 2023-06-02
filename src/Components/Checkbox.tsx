@@ -6,7 +6,7 @@ import stl from './Checkbox.module.css';
 
 type checkboxType = {
   id: string;
-  category: string;
+  // category: string;
   label: string;
   checked: boolean;
   productFromList?: (id: string) => void;

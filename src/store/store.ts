@@ -319,13 +319,18 @@ class StoreApp {
   addedProductsId: string[] = [];
   addedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
-  dishesListNameForSend: string[] = [];
+  dishesListNameForSend: { dishName: string; id: string }[] = [];
+  ingredientsDishes: { [key: string]: string[] } = {};
 
-  addProductsToCartList = (data: string[], dishName?: string) => {
+  addProductsToCartList = (data: string[], dishName?: string, id?: string) => {
     //Список выбранных блюд
-    if (dishName) {
-      this.dishesListNameForSend = [...this.dishesListNameForSend, dishName];
-      this.dishesListNameForSend = getUniqeElements(this.dishesListNameForSend);
+    if (dishName && id) {
+      const newObj = createStringArrayObject(data, id);
+      this.ingredientsDishes = { ...this.ingredientsDishes, ...newObj };
+      this.dishesListNameForSend = [
+        ...this.dishesListNameForSend,
+        { dishName, id },
+      ];
     }
     this.addedProductsId = [...this.addedProductsId, ...data];
 
@@ -376,17 +381,26 @@ class StoreApp {
 
     //удаляем продукты из основного списка
     const category = this.ingredients[id].category;
-    this.addedProductsList[category] = this.addedProductsList[category].filter(
+    this.addedProductsList[category] = this.addedProductsList[category]?.filter(
       (item) => item.id !== id
     );
 
     //удаляем id из основного списка айдишников
-    this.addedProductsId = this.addedProductsId.filter((item) => item !== id);
+    this.addedProductsId = this.addedProductsId?.filter((item) => item !== id);
 
     //если в категории нет продуктов, удаляем категорию
-    if (this.addedProductsList[category].length === 0) {
+    if (this.addedProductsList[category]?.length === 0) {
       delete this.addedProductsList[category];
     }
+  };
+
+  deleteDishesFromList = (id: string) => {
+    this.ingredientsDishes[id]?.forEach((item) => {
+      this.deleteProductFromList(item);
+    });
+    this.dishesListNameForSend = this.dishesListNameForSend.filter(
+      (item) => item.id !== id
+    );
   };
 
   constructor() {
@@ -417,6 +431,18 @@ const generateListOfProducts = (
 
     return acc;
   }, {} as { [key: string]: { name: string; id: string }[] });
+};
+
+//params: data: string[],
+//params: id: string
+//return { [key: string]: string[] }
+const createStringArrayObject = (
+  data: string[],
+  id: string
+): { [key: string]: string[] } => {
+  const result: { [key: string]: string[] } = {};
+  result[id] = data;
+  return result;
 };
 
 export default new StoreApp();

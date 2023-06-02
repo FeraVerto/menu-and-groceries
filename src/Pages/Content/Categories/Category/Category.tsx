@@ -17,7 +17,7 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
     dishId: string,
     dishName: string
   ) => {
-    addProductsToCartList(ingredients, dishName);
+    addProductsToCartList(ingredients, dishName, dishId);
   };
 
   let dishesList = dishes.map((m) => (

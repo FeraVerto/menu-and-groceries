@@ -8,14 +8,22 @@ import { Checkbox } from '../../../../Components/Checkbox';
 import Store from '../../../../store/store';
 
 export const DishesList = observer(() => {
-  const { dishesListNameForSend } = Store;
+  const { dishesListNameForSend, deleteDishesFromList, ingredientsDishes } =
+    Store;
+
+  const removeDishedFromList = (id: string) => {
+    deleteDishesFromList(id);
+  };
 
   const dishesListForPreview = dishesListNameForSend.map((item) => {
-    console.log('item', item);
     return (
-      <div>
-        {/* <Checkbox id={item} /> */}
-        {item}
+      <div key={item.id}>
+        <Checkbox
+          checked={true}
+          id={item.id}
+          label={item.dishName}
+          productFromList={() => removeDishedFromList(item.id)}
+        />
       </div>
     );
   });
