@@ -47,7 +47,7 @@ export const SelectProduct = observer(
             isMulti
             styles={customStyles}
             className={stl.select}
-            defaultValue={selectedOption}
+            value={selectedOption}
             //@ts-ignore
             onChange={setSelectedOption}
             options={options}
