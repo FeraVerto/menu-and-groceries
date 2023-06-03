@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/menu-and-groceries/static/css/main.8b55cafd.css",
+    "main.css": "/menu-and-groceries/static/css/main.b96b3978.css",
     "main.js": "/menu-and-groceries/static/js/main.c0e5d489.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
@@ -21,12 +21,12 @@
     "static/media/remove_91021.svg": "/menu-and-groceries/static/media/remove_91021.37cc094f2e265b4f1eba5d0194f946a3.svg",
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
-    "main.8b55cafd.css.map": "/menu-and-groceries/static/css/main.8b55cafd.css.map",
+    "main.b96b3978.css.map": "/menu-and-groceries/static/css/main.b96b3978.css.map",
     "main.c0e5d489.js.map": "/menu-and-groceries/static/js/main.c0e5d489.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8b55cafd.css",
+    "static/css/main.b96b3978.css",
     "static/js/main.c0e5d489.js"
   ]
 }
