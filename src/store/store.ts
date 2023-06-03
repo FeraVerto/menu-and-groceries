@@ -313,13 +313,17 @@ class StoreApp {
     72: { name: 'кинза', category: 'овощи' },
   };
 
+  //список удалённых продуктов
   deletedProductsId: string[] = [];
   deletedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
+  //список актуальных продуктов
   addedProductsId: string[] = [];
   addedProductsList: { [key: string]: { name: string; id: string }[] } = {};
 
+  //список блюд
   dishesListNameForSend: { dishName: string; id: string }[] = [];
+  //список блюд и их ингридиенты
   ingredientsDishes: { [key: string]: string[] } = {};
 
   addProductsToCartList = (data: string[], dishName?: string, id?: string) => {
@@ -332,6 +336,7 @@ class StoreApp {
         { dishName, id },
       ];
     }
+
     this.addedProductsId = [...this.addedProductsId, ...data];
 
     //убираем дублирующиеся элементы, если они присутствуют в двух разных блюдах
@@ -345,14 +350,14 @@ class StoreApp {
     data.forEach((id) => {
       const category = this.ingredients[id].category;
 
-      //удаляем продукты из основного списка
+      //удаляем продукты из списка удаленных продуктов
       if (this.deletedProductsList[category]?.length > 0) {
         this.deletedProductsList[category] = this.deletedProductsList[
           category
         ]?.filter((item) => item.id !== id);
       }
 
-      //удаляем id из основного списка айдишников
+      //удаляем id из списка айдишников удалённых продуктов
       this.deletedProductsId = this.deletedProductsId?.filter(
         (item) => item !== id
       );
@@ -370,9 +375,12 @@ class StoreApp {
   };
 
   deleteProductFromList = (id: string) => {
-    //перемещаем удаленные из списка продукты в другой список,
+    //перемещаем удаленные из списка продукты в другой список (удалённых продуктов),
     //который поместим внизу, относительно основного списка в модальном окне
     this.deletedProductsId = [...this.deletedProductsId, id];
+
+    //удаляем повторяющиеся элементы
+    this.deletedProductsId = getUniqeElements(this.deletedProductsId);
     let data = generateListOfProducts(this.deletedProductsId, this.ingredients);
     this.deletedProductsList = {
       ...this.deletedProductsList,
@@ -389,15 +397,21 @@ class StoreApp {
     this.addedProductsId = this.addedProductsId?.filter((item) => item !== id);
 
     //если в категории нет продуктов, удаляем категорию
-    if (this.addedProductsList[category]?.length === 0) {
+    if (
+      this.addedProductsList[category]?.length === 0 ||
+      !this.addedProductsList[category]
+    ) {
       delete this.addedProductsList[category];
     }
   };
 
   deleteDishesFromList = (id: string) => {
+    //находим по id список продуктов, входящих в блюдо
+    //удаляем их из основного актуального списка
     this.ingredientsDishes[id]?.forEach((item) => {
       this.deleteProductFromList(item);
     });
+
     this.dishesListNameForSend = this.dishesListNameForSend.filter(
       (item) => item.id !== id
     );
