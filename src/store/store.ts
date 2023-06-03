@@ -323,7 +323,7 @@ class StoreApp {
 
   //список блюд
   dishesListNameForSend: { dishName: string; id: string }[] = [];
-  //список блюд и их ингридиенты
+  //список id блюд и их ингредиенты
   ingredientsDishes: { [key: string]: string[] } = {};
 
   addProductsToCartList = (data: string[], dishName?: string, id?: string) => {
@@ -415,6 +415,23 @@ class StoreApp {
     this.dishesListNameForSend = this.dishesListNameForSend.filter(
       (item) => item.id !== id
     );
+
+    delete this.ingredientsDishes[id];
+
+    //для того, чтобы, когда мы удаляем  блюдо и его ингредиенты, не
+    //удалялись ингредиенты, которые так же входят в другое блюдо
+    const ingredientsFromActyallyDish = Object.values(
+      this.ingredientsDishes
+    ).reduce((acc, curr) => acc.concat(curr), []);
+
+    const newArray = [
+      ...this.addedProductsId,
+      ...ingredientsFromActyallyDish.filter(
+        (item) => !this.addedProductsId.includes(item)
+      ),
+    ];
+
+    this.addProductsToCartList(newArray);
   };
 
   constructor() {
