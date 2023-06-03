@@ -50,13 +50,14 @@ export const CartModal = observer(({ isOpen, closeModal }: CartModal) => {
     addProductsToCartList([id]);
   };
 
-  const onClickSendButton = () => {
-    sendMessage(
+  const onClickSendButton = async () => {
+    await sendMessage(
       user.botToken,
       user.chatId,
       addedProductsList,
       dishesListNameForSend
     );
+    closeModal();
   };
 
   const onClickCloseButton = (e: React.MouseEvent<HTMLButtonElement>) => {
