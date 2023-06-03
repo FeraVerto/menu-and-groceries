@@ -35,6 +35,11 @@ export const SelectProduct = observer(
     const [selectedOption, setSelectedOption] = useState(null);
     const options = convertObjectToArray(ingredients);
 
+    const handleButtonClick = () => {
+      addIngredientToList(selectedOption);
+      setSelectedOption(null);
+    };
+
     return (
       <div className={stl.modal_select_block}>
         <div className={stl.modal_select}>
@@ -53,7 +58,7 @@ export const SelectProduct = observer(
           width={'300px'}
           height={'60px'}
           text={'Добавить'}
-          onClick={() => addIngredientToList(selectedOption)}
+          onClick={handleButtonClick}
         />
       </div>
     );

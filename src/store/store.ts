@@ -16,10 +16,27 @@ import ovoch from './../assets/images/овощное рагу.jpg';
 import kurva from './../assets/images/kurva.jpg';
 import kurva_sir from './../assets/images/kurva_sir.jpg';
 import sup_guliash from './../assets/images/sup_guliash.jpg';
+import okroshka from './../assets/images/Okroshka_05.jpg';
+import vkusnosup from './../assets/images/vkusnosup.jpg';
+import ogur_pomid from './../assets/images/ogur_pomid.jpg';
+import seld_pod_shubij from './../assets/images/seld_pod_shubij.jpg';
+import grecha from './../assets/images/grecha.jpg';
+import rice from './../assets/images/rice.jpg';
+import bulgur from './../assets/images/bulgur.jpg';
+import spagetti from './../assets/images/spagetti.jpg';
+import pure from './../assets/images/pure.jpg';
+import guliash from './../assets/images/guliash.jpg';
+import kur_grud from './../assets/images/kur_grud.jpg';
+import losos from './../assets/images/losos.jpg';
+import wok from './../assets/images/wok.jpg';
+import chihirtma from './../assets/images/chihirtma.jpg';
 //utils
 import { getUniqeElements } from '../utils/getUniqeElements';
 //types
 import { userType } from '../types';
+//link
+//https://1000.menu/cooking/33240-gulyash-iz-govyadiny-s-podlivkoi-klassicheskii
+//https://eda.ru/recepty/supy/klassicheskaya-gruzinskaya-chihirtma-29994
 
 class StoreApp {
   user: userType = {
@@ -63,7 +80,7 @@ class StoreApp {
         },
         {
           id: '1-3',
-          image: zero,
+          image: vkusnosup,
           dishName: 'Вкусносуп с копченой колбасой',
           ingredients: ['14', '17', '18', '36', '37', '23'],
           tags: ['1', '2', '3'],
@@ -113,13 +130,20 @@ class StoreApp {
           ],
           tags: ['1', '2', '3'],
         },
-        // {
-        //   id: '1-6',
-        //   image: solanka,
-        //   dishName: 'Окрошка',
-        //   ingredients: [],
-        //   tags: ['1', '2', '3'],
-        // },
+        {
+          id: '1-6',
+          image: okroshka,
+          dishName: 'Окрошка',
+          ingredients: ['14', '34', '30', '74', '1', '73', '26'],
+          tags: [],
+        },
+        {
+          id: '1-7',
+          image: chihirtma,
+          dishName: 'Чихиртма (пока без ингредиентов, рецепт в разработке)',
+          ingredients: [],
+          tags: [],
+        },
       ],
     },
     {
@@ -130,6 +154,20 @@ class StoreApp {
           image: olivie,
           dishName: 'Оливье',
           ingredients: ['14', '30', '33', '34', '35', '32', '23'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '2-2',
+          image: ogur_pomid,
+          dishName: 'Салат с огурцами и помидорами',
+          ingredients: ['74', '12', '26'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '2-3',
+          image: seld_pod_shubij,
+          dishName: 'Сельдь под шубой',
+          ingredients: ['75', '14', '17', '16', '76', '18', '32', '30'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -210,6 +248,53 @@ class StoreApp {
           ingredients: ['14', '29', '48', '23', '24'],
           tags: ['1', '2', '3'],
         },
+        {
+          id: '3-8',
+          image: wok,
+          dishName: 'Wok  с курицей',
+          ingredients: ['44', '66', '23', '17', '18', '81', '82'],
+          tags: ['1', '2', '3'],
+        },
+      ],
+    },
+    {
+      name: 'Гарнир',
+      dishes: [
+        {
+          id: '5-1',
+          image: grecha,
+          dishName: 'Греча с морковью и луком (или без лука)',
+          ingredients: ['6', '17', '18', '23'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '5-2',
+          image: rice,
+          dishName: 'Рис без никто',
+          ingredients: ['7', '23'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '5-3',
+          image: bulgur,
+          dishName: 'Булгур с морковью',
+          ingredients: ['77', '17', '23'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '5-4',
+          image: spagetti,
+          dishName: 'Макароны (ассорти)',
+          ingredients: ['78', '23'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '5-5',
+          image: pure,
+          dishName: 'Картофельное пюре',
+          ingredients: ['14', '17', '3', '4', '18', '23'],
+          tags: ['1', '2', '3'],
+        },
       ],
     },
     {
@@ -227,6 +312,27 @@ class StoreApp {
           image: kurva_sir,
           dishName: 'куриное филе в сырной корочке',
           ingredients: ['44', '30', '45', '46'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '4-3',
+          image: guliash,
+          dishName: 'Гуляш из говядины',
+          ingredients: ['13', '18', '12', '10', '58', '5', '23', '24'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '4-4',
+          image: kur_grud,
+          dishName: 'Куриная грудка жаренная',
+          ingredients: ['44', '25', '71', '23', '24', '79'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '4-5',
+          image: losos,
+          dishName: 'Стейк из лосося жареный',
+          ingredients: ['80', '23'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -311,6 +417,16 @@ class StoreApp {
     70: { name: 'консервированная фасоль', category: 'бакалея' },
     71: { name: 'паприка', category: 'бакалея' },
     72: { name: 'кинза', category: 'овощи' },
+    73: { name: 'квас', category: 'напитки' },
+    74: { name: 'огурцы свежие', category: 'овощи' },
+    75: { name: 'филе сельди', category: 'рыба' },
+    76: { name: 'яблоки', category: 'овощи' },
+    77: { name: 'булгур', category: 'бакалея' },
+    78: { name: 'макароны', category: 'бакалея' },
+    79: { name: 'чесночный порошок', category: 'бакалея' },
+    80: { name: 'лосось', category: 'рыба' },
+    81: { name: 'лапша для вока', category: 'бакалея' },
+    82: { name: 'имбирь', category: 'овощи' },
   };
 
   //список удалённых продуктов
