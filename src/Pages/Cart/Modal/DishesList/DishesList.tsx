@@ -8,8 +8,7 @@ import { Checkbox } from '../../../../Components/Checkbox';
 import Store from '../../../../store/store';
 
 export const DishesList = observer(() => {
-  const { dishesListNameForSend, deleteDishesFromList, ingredientsDishes } =
-    Store;
+  const { dishesListNameForSend, deleteDishesFromList } = Store;
 
   const removeDishedFromList = (id: string) => {
     deleteDishesFromList(id);
@@ -17,24 +16,24 @@ export const DishesList = observer(() => {
 
   const dishesListForPreview = dishesListNameForSend.map((item) => {
     return (
-      <div key={item.id}>
+      <li className={stl.dishes_item} key={item.id}>
         <Checkbox
           checked={true}
           id={item.id}
           label={item.dishName}
           productFromList={() => removeDishedFromList(item.id)}
         />
-      </div>
+      </li>
     );
   });
   return (
-    <div className={stl.dishes_list}>
+    <div className={stl.dishes_modal_block}>
       <h2>Заказанные блюда</h2>
       <p>
         Нажмите на блюдо, чтобы убрать его и все его ингредиенты из списка (в
         разработке)
       </p>
-      {dishesListForPreview}
+      <ul className={stl.dishes_list}>{dishesListForPreview}</ul>
     </div>
   );
 });

@@ -1,9 +1,9 @@
-.dishes_list {
+.dishes_modal_block {
     padding-left: 30px;
     flex-basis: 50%;
 }
 
-.dishes_list h2 {
+.dishes_modal_block h2 {
     padding: 5px 15px;
     margin-bottom: 0;
 
@@ -13,7 +13,18 @@
     border-radius: 10px;
 }
 
-.dishes_list p {
+.dishes_modal_block p {
     font-style: italic;
     margin-top: 0;
+}
+
+.dishes_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dishes_item {
+    font-size: 20px;
+    margin-bottom: 5px;
 }
