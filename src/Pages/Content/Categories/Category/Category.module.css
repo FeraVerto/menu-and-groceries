@@ -101,3 +101,8 @@
 
     flex-shrink: 0;
 }
+
+.ct_toast_product_added {
+    width: 400px;
+    font-size: 25px;
+}

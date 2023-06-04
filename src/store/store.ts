@@ -30,13 +30,18 @@ import kur_grud from './../assets/images/kur_grud.jpg';
 import losos from './../assets/images/losos.jpg';
 import wok from './../assets/images/wok.jpg';
 import chihirtma from './../assets/images/chihirtma.jpg';
+import cezar from './../assets/images/cezar.jpg';
+import pirog from './../assets/images/pirog.jpg';
+import bliny from './../assets/images/bliny.jpg';
+import vinegret from './../assets/images/vinegret.jpg';
+import sup_s_lap from './../assets/images/sup_s_lap.jpg';
+import burgund from './../assets/images/burgund.jpg';
+import pizza from './../assets/images/pizza.jpg';
+import syrniki from './../assets/images/syrniki.jpg';
 //utils
 import { getUniqeElements } from '../utils/getUniqeElements';
 //types
 import { userType } from '../types';
-//link
-//https://1000.menu/cooking/33240-gulyash-iz-govyadiny-s-podlivkoi-klassicheskii
-//https://eda.ru/recepty/supy/klassicheskaya-gruzinskaya-chihirtma-29994
 
 class StoreApp {
   user: userType = {
@@ -144,6 +149,13 @@ class StoreApp {
           ingredients: [],
           tags: [],
         },
+        {
+          id: '1-8',
+          image: sup_s_lap,
+          dishName: 'Куриный суп с лапшой',
+          ingredients: ['44', '78', '17', '18', '23', '25', '14', '89'],
+          tags: [],
+        },
       ],
     },
     {
@@ -168,6 +180,20 @@ class StoreApp {
           image: seld_pod_shubij,
           dishName: 'Сельдь под шубой',
           ingredients: ['75', '14', '17', '16', '76', '18', '32', '30'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '2-4',
+          image: cezar,
+          dishName: 'Цезарь с курицей',
+          ingredients: ['83', '85', '32', '46', '44', '84'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '2-5',
+          image: vinegret,
+          dishName: 'Винегрет',
+          ingredients: ['16', '17', '14', '15', '18', '23', '25'],
           tags: ['1', '2', '3'],
         },
       ],
@@ -335,6 +361,62 @@ class StoreApp {
           ingredients: ['80', '23'],
           tags: ['1', '2', '3'],
         },
+        {
+          id: '4-6',
+          image: burgund,
+          dishName: 'Говядина по-бургундски',
+          ingredients: [
+            '5',
+            '29',
+            '13',
+            '17',
+            '18',
+            '21',
+            '23',
+            '24',
+            '10',
+            '19',
+            '22',
+            '47',
+            '90',
+            '92',
+            '3',
+          ],
+          tags: ['1', '2', '3'],
+        },
+      ],
+    },
+    {
+      name: 'Выпечка',
+      dishes: [
+        {
+          id: '6-1',
+          image: pirog,
+          dishName: 'Пирог с картошкой',
+          ingredients: ['57', '14', '28', '18', '25', '23', '86'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '6-2',
+          image: bliny,
+          dishName: 'Блины',
+          ingredients: ['4', '30', '25', '10', '23', '87', '88', '62'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '6-3',
+          image: pizza,
+          dishName: 'Пицца по-клевакиевски',
+          ingredients: ['57', '58', '32', '29', '47', '12', '56'],
+          tags: ['1', '2', '3'],
+        },
+        {
+          id: '6-4',
+          image: syrniki,
+          dishName: 'Сырники',
+          ingredients: ['68', '30', '10', '23', '88', '93'],
+          tags: ['1', '2', '3'],
+        },
       ],
     },
   ];
@@ -427,6 +509,17 @@ class StoreApp {
     80: { name: 'лосось', category: 'рыба' },
     81: { name: 'лапша для вока', category: 'бакалея' },
     82: { name: 'имбирь', category: 'овощи' },
+    83: { name: 'салат айсберг', category: 'овощи' },
+    84: { name: 'сухарики', category: 'бакалея' },
+    85: { name: 'помидоры черри', category: 'овощи' },
+    86: { name: 'ветчина', category: 'колбасы' },
+    87: { name: 'разрыхлитель', category: 'бакалея' },
+    88: { name: 'сахар', category: 'бакалея' },
+    89: { name: 'бульонный кубик', category: 'бакалея' },
+    90: { name: 'красное вино', category: 'алкоголь' },
+    91: { name: 'белое вино', category: 'алкоголь' },
+    92: { name: 'тимьян', category: 'овощи' },
+    93: { name: 'манка', category: 'бакалея' },
   };
 
   //список удалённых продуктов

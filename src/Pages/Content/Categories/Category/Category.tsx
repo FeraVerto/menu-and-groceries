@@ -1,5 +1,6 @@
 //libraries
 import { observer } from 'mobx-react-lite';
+import cogoToast from 'cogo-toast';
 //styles
 import stl from './Category.module.css';
 //components
@@ -12,12 +13,25 @@ import Store from '../../../../store/store';
 export const Category = observer(({ name, dishes, igd }: categoryType) => {
   const { addProductsToCartList } = Store;
 
-  const addProductsToCart = (
+  const onClickAddButtonHandler = (
     ingredients: string[],
-    dishId: string,
+    id: string,
     dishName: string
   ) => {
-    addProductsToCartList(ingredients, dishName, dishId);
+    addProductsToCartList(ingredients, dishName, id);
+    // cogoToast.success('Блюдо успешно добавлено в корзину', {
+    //   position: 'bottom-left',
+    // });
+
+    cogoToast.success(
+      <div className={stl.ct_toast_product_added}>
+        <b>Успех!</b>
+        <div>Блюдо добавлено в корзину</div>
+      </div>,
+      {
+        position: 'bottom-left',
+      }
+    );
   };
 
   let dishesList = dishes.map((m) => (
@@ -41,7 +55,9 @@ export const Category = observer(({ name, dishes, igd }: categoryType) => {
           width={'100%'}
           height={'60px'}
           text={'Добавить в корзину'}
-          onClick={() => addProductsToCart(m.ingredients, m.id, m.dishName)}
+          onClick={() =>
+            onClickAddButtonHandler(m.ingredients, m.id, m.dishName)
+          }
         />
       </div>
     </li>
