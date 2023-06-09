@@ -34,7 +34,6 @@
     list-style: none;
 }
 
-
 .dishes_item {
     padding: 25px;
     
@@ -45,30 +44,6 @@
     box-sizing: border-box;
     border: 2px solid #7EA27A;
     border-radius: 15px;
-}
-
-.button_add {
-    padding: 25px 0;
-    width: 100%;
-
-    text-align: center;
-    text-transform: uppercase;
-    color: #495312;
-    font-weight: bold;
-    font-size: 20px;
-
-    border: 2px solid #7EA27A;
-    border-radius: 15px;
-}
-
-.button_add:hover {
-    background-color: #7EA27A;
-    color: white;
-}
-
-
-.dishes_item:hover {
-    opacity: 0.8;
 }
 
 .ingredients {
@@ -104,5 +79,12 @@
 
 .ct_toast_product_added {
     width: 400px;
+    
     font-size: 25px;
+}
+
+.dishes_add_button > button:hover {
+    border: 2px solid #89ca81;
+    background-color: #89ca81;
+    color: white;
 }

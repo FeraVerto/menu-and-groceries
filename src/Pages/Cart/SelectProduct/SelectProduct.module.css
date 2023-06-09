@@ -1,6 +1,13 @@
 .modal_select_block {
     margin-bottom: 20px;
+    
     display: flex;
+}
+
+.modal_select_block > button:hover {
+    border: 2px solid #89ca81;
+    background-color: #89ca81;
+    color: white;
 }
 
 .modal_select {

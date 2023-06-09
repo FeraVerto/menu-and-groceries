@@ -1,6 +1,7 @@
 //libraries
 import Modal from 'react-modal';
 import { observer } from 'mobx-react-lite';
+import { ReactElement } from 'react';
 //styles
 import stl from './CartModal.module.css';
 //components
@@ -14,7 +15,6 @@ import Store from './../../../../store/store';
 import { sendMessage } from './../../../../model/Products.model';
 
 import remove from '../../../../assets/icon/remove_91021.svg';
-import { ReactElement } from 'react';
 
 type CartModal = {
   isOpen: boolean;
@@ -64,6 +64,10 @@ export const CartModal = observer(
       clearState();
     };
 
+    const onClickClearButton = () => {
+      clearState();
+    };
+
     const onClickCloseButton = (
       e: React.MouseEvent<HTMLButtonElement>
     ): void => {
@@ -110,13 +114,21 @@ export const CartModal = observer(
           />
           <DishesList />
         </div>
+        <div className={stl.modal_bottom_buttons_block}>
+          <Button
+            width={'300px'}
+            height={'60px'}
+            text={'Отправить'}
+            onClick={onClickSendButton}
+          />
 
-        <Button
-          width={'300px'}
-          height={'60px'}
-          text={'send'}
-          onClick={onClickSendButton}
-        />
+          <Button
+            width={'300px'}
+            height={'60px'}
+            text={'Очистить'}
+            onClick={onClickClearButton}
+          />
+        </div>
       </Modal>
     );
   }

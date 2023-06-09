@@ -55,7 +55,7 @@ export const Category = observer(
           </div>
         </div>
 
-        <div>
+        <div className={stl.dishes_add_button}>
           <Button
             width={'100%'}
             height={'60px'}

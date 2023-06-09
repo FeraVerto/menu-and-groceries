@@ -1,5 +1,6 @@
 .modal_header_block {
     margin-bottom: 20px;
+    
     display: flex;
     justify-content: space-between;
 }
@@ -14,4 +15,30 @@
     
     border: 2px solid #7EA27A;
     border-radius: 15px;
+}
+
+.modal_bottom_buttons_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal_bottom_buttons_block > button:nth-child(1) {
+    border: 2px solid #7EA27A;
+    background-color: #7EA27A;
+}
+
+.modal_bottom_buttons_block > button:nth-child(1):hover {
+    border: 2px solid #89ca81;
+    background-color: #89ca81;
+}
+
+.modal_bottom_buttons_block > button:nth-child(2) {
+    border: 2px solid #f28e8e;
+    background-color: #ebadad;
+    color: white;
+}
+
+.modal_bottom_buttons_block > button:nth-child(2):hover {
+    border: 2px solid #fb8989;
+    background-color: #fb8989;
 }
