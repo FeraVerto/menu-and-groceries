@@ -1,5 +1,6 @@
 //libraries
 import { Route, Routes } from 'react-router-dom';
+import { ReactElement } from 'react';
 //styles
 import stl from './Content.module.css';
 //components
@@ -7,7 +8,7 @@ import { Category } from './Categories/Category/Category';
 //store
 import Store from '../../store/store';
 
-export const Content = () => {
+export const Content = (): ReactElement => {
   const { ingredients, categories } = Store;
 
   const routes = categories.map((n) => (

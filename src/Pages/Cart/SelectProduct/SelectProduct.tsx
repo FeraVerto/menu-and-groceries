@@ -35,7 +35,7 @@ export const SelectProduct = observer(
     const [selectedOption, setSelectedOption] = useState(null);
     const options = convertObjectToArray(ingredients);
 
-    const handleButtonClick = () => {
+    const handleButtonClick = (): void => {
       addIngredientToList(selectedOption);
       setSelectedOption(null);
     };

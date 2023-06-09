@@ -1,5 +1,6 @@
 //libraries
 import { NavLink } from 'react-router-dom';
+import { ReactElement } from 'react';
 //styles
 import stl from './Navigation.module.css';
 //components
@@ -7,7 +8,7 @@ import { Cart } from '../Cart/Cart';
 //store
 import Store from '../../store/store';
 
-export const Navigation = () => {
+export const Navigation = (): ReactElement => {
   const { categories } = Store;
 
   const menuLinks = categories.map((m) => (

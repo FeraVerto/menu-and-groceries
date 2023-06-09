@@ -1,5 +1,5 @@
 import { instance } from '../api/axios';
-import { ResultType } from '../types';
+import { ResultType } from '../model/modelTypes';
 
 export const sendMessageToTelegramBot = (params: {
   token: string;

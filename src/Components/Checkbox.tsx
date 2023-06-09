@@ -1,5 +1,5 @@
 //libraries
-import { ChangeEvent } from 'react';
+import { ReactElement } from 'react';
 
 //styles
 import stl from './Checkbox.module.css';
@@ -16,7 +16,7 @@ export const Checkbox = ({
   id,
   label,
   checked,
-}: checkboxType) => {
+}: checkboxType): ReactElement => {
   const pressCheckbox = (id: string) => {
     productFromList && productFromList(id);
   };

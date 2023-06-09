@@ -1,5 +1,5 @@
 import { getFormattedListProducts } from '../utils/getFormattedList';
-import { ResultType, ErrorType } from '../types';
+import { ResultType, ErrorType } from './modelTypes';
 import { sendMessageToTelegramBot } from '../api/api';
 
 export interface Result<T> {

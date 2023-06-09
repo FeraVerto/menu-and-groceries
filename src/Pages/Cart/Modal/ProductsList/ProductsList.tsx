@@ -7,6 +7,7 @@ import { Checkbox } from '../../../../Components/Checkbox';
 import stl from './ProductsList.module.css';
 //store
 import Store from '../../../../store/store';
+import { ReactElement } from 'react';
 
 type productsListType = {
   removeProductFromList: (id: string) => void;
@@ -14,13 +15,16 @@ type productsListType = {
 };
 
 export const ProductsList = observer(
-  ({ removeProductFromList, addedProductFromList }: productsListType) => {
+  ({
+    removeProductFromList,
+    addedProductFromList,
+  }: productsListType): ReactElement => {
     const { addedProductsList, deletedProductsList } = Store;
     const renderProducts = (
       filteredProducts: 'add' | 'delete',
       list: { [key: string]: { name: string; id: string }[] },
       checked: boolean
-    ) => {
+    ): ReactElement[] => {
       return Object.keys(list)?.map((item) => (
         <li key={uuid4()}>
           {filteredProducts === 'add' && (

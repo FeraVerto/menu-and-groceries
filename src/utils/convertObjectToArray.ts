@@ -1,4 +1,4 @@
-import { optionsType } from '../types';
+export type optionsType = { value: string; label: string };
 
 export const convertObjectToArray = (obj: {
   [key: string]: {

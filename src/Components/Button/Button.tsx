@@ -1,6 +1,9 @@
+//libraries
+import { ReactElement } from 'react';
+//styles
 import stl from './Button.module.css';
 
-export const Button = ({ ...props }) => {
+export const Button = ({ ...props }): ReactElement => {
   const styles = {
     width: props.width,
     height: props.height,
