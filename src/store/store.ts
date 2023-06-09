@@ -16,8 +16,8 @@ import {
 class StoreApp {
   user: userType = {
     id: '1',
-    botToken: '6',
-    chatId: 2,
+    botToken: '6002031381:AAHS_7A3rUa1ahyNZL2VFd3mgaJRfmqkGLs',
+    chatId: 153016172,
   };
 
   categories: categoriesType[] = categoriesData;
@@ -147,6 +147,15 @@ class StoreApp {
     ];
 
     this.addProductsToCartList(newArray);
+  };
+
+  clearState = () => {
+    this.deletedProductsId = [];
+    this.deletedProductsList = {};
+    this.addedProductsId = [];
+    this.addedProductsList = {};
+    this.dishesListNameForSend = [];
+    this.ingredientsDishes = {};
   };
 
   constructor() {

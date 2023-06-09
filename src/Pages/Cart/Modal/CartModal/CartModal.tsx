@@ -29,6 +29,7 @@ export const CartModal = observer(
       addProductsToCartList,
       dishesListNameForSend,
       user,
+      clearState,
     } = Store;
 
     const addIngredientToList = (
@@ -60,6 +61,7 @@ export const CartModal = observer(
         dishesListNameForSend
       );
       closeModal();
+      clearState();
     };
 
     const onClickCloseButton = (
