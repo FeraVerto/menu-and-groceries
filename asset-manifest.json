@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/menu-and-groceries/static/css/main.09f1ed1d.css",
-    "main.js": "/menu-and-groceries/static/js/main.8a9247bb.js",
+    "main.css": "/menu-and-groceries/static/css/main.7c9b8a15.css",
+    "main.js": "/menu-and-groceries/static/js/main.45eead81.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/pngegg (1).png": "/menu-and-groceries/static/media/pngegg (1).e884c8e76b366e0f7f69.png",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
@@ -44,12 +44,12 @@
     "static/media/remove_91021.svg": "/menu-and-groceries/static/media/remove_91021.37cc094f2e265b4f1eba5d0194f946a3.svg",
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
-    "main.09f1ed1d.css.map": "/menu-and-groceries/static/css/main.09f1ed1d.css.map",
-    "main.8a9247bb.js.map": "/menu-and-groceries/static/js/main.8a9247bb.js.map",
+    "main.7c9b8a15.css.map": "/menu-and-groceries/static/css/main.7c9b8a15.css.map",
+    "main.45eead81.js.map": "/menu-and-groceries/static/js/main.45eead81.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.09f1ed1d.css",
-    "static/js/main.8a9247bb.js"
+    "static/css/main.7c9b8a15.css",
+    "static/js/main.45eead81.js"
   ]
 }
