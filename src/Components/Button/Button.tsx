@@ -11,8 +11,9 @@ export const Button = ({ ...props }): ReactElement => {
 
   return (
     <button
+      disabled={props.disabled}
       style={styles}
-      className={`${
+      className={`${props.disabled ? stl.disabled_button : ''} ${
         props.type === 'close' ? stl.modal_button_close : stl.modal_button
       }`}
       onClick={props.onClick}

@@ -129,6 +129,7 @@ export const CartModal = observer(
           </div>
           <div className={stl.modal_bottom_buttons_block}>
             <Button
+              disabled={Object.keys(addedProductsList).length === 0}
               width={'300px'}
               height={'60px'}
               text={'Отправить'}
