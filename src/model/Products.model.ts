@@ -17,12 +17,12 @@ export const sendMessage = async (
   const dishNamesArray = getDishNames(dishesListNameForSend);
   const text = getFormattedListProducts(products, dishNamesArray);
 
-  const response = await sendMessageToTelegramBot({ token, botId, text });
   try {
+    const response = await sendMessageToTelegramBot({ token, botId, text });
     responseData.success = response;
   } catch (error: any) {
-    if (error?.error_code === '404') {
-      responseData.error = new Error('Ошибка 404, ебать ты лох');
+    if (error?.response.status === 404) {
+      responseData.error = new Error('Ошибка 404, неверный адрес');
     } else {
       responseData.error = new Error('Я хуй знает что за ошибка');
     }

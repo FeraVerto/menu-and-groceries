@@ -2,6 +2,7 @@
 import Modal from 'react-modal';
 import { observer } from 'mobx-react-lite';
 import { ReactElement, useState } from 'react';
+import cogoToast from 'cogo-toast';
 //styles
 import stl from './CartModal.module.css';
 //components
@@ -57,21 +58,34 @@ export const CartModal = observer(
     };
 
     const onClickSendButton = async (): Promise<void> => {
-      await sendMessage(
+      const result = await sendMessage(
         user.botToken,
         user.chatId,
         addedProductsList,
         dishesListNameForSend
-      )
-        .then(() => {
-          closeModal();
-          clearState();
-          setPopupOpen(true);
-        })
-        .catch();
+      );
+
+      if (result.success) {
+        closeModal();
+        clearState();
+        setPopupOpen(true);
+      } else {
+        cogoToast.error(
+          <div className={stl.ct_toast_product_added}>
+            <div>
+              <h2> Список не отправлен </h2>
+              <p>{result.error?.message}</p>
+            </div>
+          </div>,
+          {
+            position: 'bottom-left',
+            hideAfter: 5,
+          }
+        );
+      }
     };
 
-    const onClickClearButton = () => {
+    const onClickClearButton = (): void => {
       clearState();
     };
 

@@ -16,8 +16,8 @@ import {
 class StoreApp {
   user: userType = {
     id: '1',
-    botToken: '6002031381:AAHS_7A3rUa1ahyNZL2VFd3mgaJRfmqkGLs',
-    chatId: 153016172,
+    botToken: '2',
+    chatId: 3,
   };
 
   categories: categoriesType[] = categoriesData;
