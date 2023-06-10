@@ -71,11 +71,9 @@ export const CartModal = observer(
         setPopupOpen(true);
       } else {
         cogoToast.error(
-          <div className={stl.ct_toast_product_added}>
-            <div>
-              <h2> Список не отправлен </h2>
-              <p>{result.error?.message}</p>
-            </div>
+          <div className={stl.ct_toast_error}>
+            <h3> Список не отправлен </h3>
+            <p>{result.error?.message}</p>
           </div>,
           {
             position: 'bottom-left',

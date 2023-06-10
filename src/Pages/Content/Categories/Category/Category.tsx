@@ -1,6 +1,7 @@
 //libraries
 import { observer } from 'mobx-react-lite';
 import cogoToast from 'cogo-toast';
+import { ReactElement } from 'react';
 //styles
 import stl from './Category.module.css';
 //components
@@ -9,7 +10,6 @@ import { Button } from '../../../../Components/Button/Button';
 import Store from '../../../../store/store';
 //types
 import { dishType, ingredientsType } from '../../../../store/storeTypes';
-import { ReactElement } from 'react';
 
 type categoriyType = {
   name: string;
@@ -30,7 +30,7 @@ export const Category = observer(
 
       cogoToast.success(
         <div className={stl.ct_toast_product_added}>
-          <b>Успех!</b>
+          <h3>Успех!</h3>
           <div>Блюдо "{dishName}" добавлено в корзину</div>
         </div>,
         {
@@ -47,7 +47,7 @@ export const Category = observer(
             <img src={m.image} alt="add to cart button" />
           </div>
           <div className={stl.dishes_info}>
-            <div className={stl.dishes_info_name}>{m.dishName}</div>
+            <h3 className={stl.dishes_info_name}>{m.dishName}</h3>
             <div className={stl.ingredients}>
               {m.ingredients.map((n) => (
                 <div key={n}>{igd[n].name},&nbsp;</div>
@@ -71,7 +71,7 @@ export const Category = observer(
 
     return (
       <div className={stl.categories}>
-        <div className={stl.category_name}>{name}</div>
+        <h2 className={stl.category_name}>{name}</h2>
         <ul className={stl.category_dishes_list}>{dishesList}</ul>
       </div>
     );
