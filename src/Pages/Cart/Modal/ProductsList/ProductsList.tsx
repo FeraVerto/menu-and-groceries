@@ -1,13 +1,13 @@
 //libraries
 import uuid4 from 'uuid4';
 import { observer } from 'mobx-react-lite';
+import { ReactElement } from 'react';
 //components
 import { Checkbox } from '../../../../Components/Checkbox';
 //styles
 import stl from './ProductsList.module.css';
 //store
 import Store from '../../../../store/store';
-import { ReactElement } from 'react';
 
 type productsListType = {
   removeProductFromList: (id: string) => void;
