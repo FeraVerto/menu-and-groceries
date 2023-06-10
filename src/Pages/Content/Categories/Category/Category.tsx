@@ -35,6 +35,7 @@ export const Category = observer(
         </div>,
         {
           position: 'bottom-left',
+          hideAfter: 5,
         }
       );
     };

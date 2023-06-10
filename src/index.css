@@ -16,3 +16,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --light-green-main: #7EA27A;
+  --light-green-second: #89ca81;
+  --light-green-active-button: #63815f;
+  --white: white;
+  --light-pink-main: #e59292;
+  --light-pink-second: #f17676;
+  --error: #f43b3b;
+  --transparent: transparent;
+}

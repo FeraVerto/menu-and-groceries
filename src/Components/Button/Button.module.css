@@ -3,67 +3,17 @@
     
     text-align: center;
     text-transform: uppercase;
-    color: #495312;
+    color: var(--light-green-active-button);
     font-weight: bold;
     font-size: 17px;
 
-    border: 2px solid #7EA27A;
+    border: 2px solid var(--light-green-main);
     border-radius: 15px;
 
-    background-color: #fff;
+    background-color: var(--white);
 }
 
 .modal_button_close {
     border: none;
-    background-color: transparent;
-}
-
-.button:hover {
-    border: 2px solid #89ca81;
-    background-color: #89ca81;
-    color: white;
-}
-
-button {
-    padding: 20px;
-    width: 200px;
-
-    position: relative;
-
-    background-color: white;
-    border: none;
-    color: #7EA27A;
-    border: 2px solid #7EA27A;
-    
-    text-align: center;
-    text-decoration: none;
-
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-button:after {
-    content: "";
-
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px !important;
-    margin-top: -120%;
-    
-    background: #f1f1f1;
-    display: block;
-    position: absolute;
-    
-    opacity: 0;
-    transition: all 0.8s
-}
-
-button:active:after {
-    padding: 0;
-    margin: 0;
-    
-    opacity: 1;
-    transition: 0s
+    background-color: var(--transparent);
 }

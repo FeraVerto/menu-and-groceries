@@ -34,8 +34,10 @@ import sup_s_lap from './../assets/images/sup_s_lap.jpg';
 import burgund from './../assets/images/burgund.jpg';
 import pizza from './../assets/images/pizza.jpg';
 import syrniki from './../assets/images/syrniki.jpg';
+import veg from './../assets/images/pngegg (1).png';
 
 export {
+  veg,
   solanka,
   okroshka,
   vkusnosup,

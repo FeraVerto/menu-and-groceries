@@ -8,8 +8,8 @@
     margin-bottom: 0;
 
     font-size: 20px;
-    background-color: #7EA27A;
-    color: #fff;
+    background-color: var(--light-green-main);
+    color: var(--white);
     border-radius: 10px;
 }
 

@@ -1,7 +1,7 @@
 .tags {
     width: 200px;
 
-    background-color: #7EA27A;
+    background-color: var(--light-green-main);
 }
 
 .tags_list {

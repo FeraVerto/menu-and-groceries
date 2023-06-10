@@ -5,7 +5,7 @@
     position: sticky;
     top: 0;
 
-    background-color: #7EA27A;
+    background-color: var(--light-green-main);
 }
 
 .categories_nav_list {
@@ -26,7 +26,7 @@
 .categories_nav_item a {
     text-decoration: none;
     text-transform: uppercase;
-    color: white;
+    color: var(--white);
     font-weight: bold;
     white-space: nowrap;
 }

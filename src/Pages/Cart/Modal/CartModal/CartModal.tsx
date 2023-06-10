@@ -1,7 +1,7 @@
 //libraries
 import Modal from 'react-modal';
 import { observer } from 'mobx-react-lite';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 //styles
 import stl from './CartModal.module.css';
 //components
@@ -9,6 +9,7 @@ import { SelectProduct } from '../../SelectProduct/SelectProduct';
 import { ProductsList } from '../ProductsList/ProductsList';
 import { DishesList } from '../DishesList/DishesList';
 import { Button } from '../../../../Components/Button/Button';
+import Popup from '../../../../Components/Popup/Popup';
 //store
 import Store from './../../../../store/store';
 //models
@@ -31,6 +32,8 @@ export const CartModal = observer(
       user,
       clearState,
     } = Store;
+
+    const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
 
     const addIngredientToList = (
       ing: { value: string; label: string }[] | null
@@ -59,9 +62,13 @@ export const CartModal = observer(
         user.chatId,
         addedProductsList,
         dishesListNameForSend
-      );
-      closeModal();
-      clearState();
+      )
+        .then(() => {
+          closeModal();
+          clearState();
+          setPopupOpen(true);
+        })
+        .catch();
     };
 
     const onClickClearButton = () => {
@@ -75,61 +82,69 @@ export const CartModal = observer(
       closeModal();
     };
 
+    const handleClosePopup = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      setPopupOpen(false);
+    };
+
     return (
-      <Modal
-        style={{
-          content: {
-            width: '1000px',
-            height: '800px',
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            display: 'flex',
-            flexDirection: 'column',
-          },
-        }}
-        isOpen={isOpen}
-        contentLabel="Корзина"
-      >
-        <div className={stl.modal_header_block}>
-          <h1>Список продуктов</h1>
-          <Button
-            type="close"
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-              onClickCloseButton(e)
-            }
-            img={remove}
-          />
-        </div>
+      <div>
+        <Modal
+          style={{
+            content: {
+              width: '1000px',
+              height: '800px',
+              top: '50%',
+              left: '50%',
+              right: 'auto',
+              bottom: 'auto',
+              marginRight: '-50%',
+              transform: 'translate(-50%, -50%)',
+              display: 'flex',
+              flexDirection: 'column',
+            },
+          }}
+          isOpen={isOpen}
+          contentLabel="Корзина"
+        >
+          <div className={stl.modal_header_block}>
+            <h1>Список продуктов</h1>
+            <Button
+              type="close"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
+                onClickCloseButton(e)
+              }
+              img={remove}
+            />
+          </div>
 
-        <SelectProduct addIngredientToList={addIngredientToList} />
+          <SelectProduct addIngredientToList={addIngredientToList} />
 
-        <div className={stl.modal_visual_list_block}>
-          <ProductsList
-            removeProductFromList={removeProductFromList}
-            addedProductFromList={addedProductFromList}
-          />
-          <DishesList />
-        </div>
-        <div className={stl.modal_bottom_buttons_block}>
-          <Button
-            width={'300px'}
-            height={'60px'}
-            text={'Отправить'}
-            onClick={onClickSendButton}
-          />
+          <div className={stl.modal_visual_list_block}>
+            <ProductsList
+              removeProductFromList={removeProductFromList}
+              addedProductFromList={addedProductFromList}
+            />
+            <DishesList />
+          </div>
+          <div className={stl.modal_bottom_buttons_block}>
+            <Button
+              width={'300px'}
+              height={'60px'}
+              text={'Отправить'}
+              onClick={onClickSendButton}
+            />
 
-          <Button
-            width={'300px'}
-            height={'60px'}
-            text={'Очистить'}
-            onClick={onClickClearButton}
-          />
-        </div>
-      </Modal>
+            <Button
+              width={'300px'}
+              height={'60px'}
+              text={'Очистить'}
+              onClick={onClickClearButton}
+            />
+          </div>
+        </Modal>
+        <Popup isOpen={isPopupOpen} onClose={handleClosePopup} />
+      </div>
     );
   }
 );
