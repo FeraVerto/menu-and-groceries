@@ -9,6 +9,7 @@ import { Category } from './Categories/Category/Category';
 import Store from '../../store/store';
 
 export const Content = (): ReactElement => {
+  //здесь
   const { ingredients, categories } = Store;
 
   const routes = categories.map((n) => (

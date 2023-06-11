@@ -18,8 +18,11 @@ type categoriyType = {
 };
 
 export const Category = observer(
+  //здесь
   ({ name, dishes, igd }: categoriyType): ReactElement => {
     const { addProductsToCartList } = Store;
+    //dishes отправить в стор и там получить список ингредиентов(временно, пока нет сервера )
+    //а не прокидывать весь список ингредиентов в компонент, это дичь!
 
     const onClickAddButtonHandler = (
       ingredients: string[],
