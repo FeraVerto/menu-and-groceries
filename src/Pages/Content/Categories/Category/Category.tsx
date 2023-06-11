@@ -52,8 +52,11 @@ export const Category = observer(
           <div className={stl.dishes_info}>
             <h3 className={stl.dishes_info_name}>{m.dishName}</h3>
             <div className={stl.ingredients}>
-              {m.ingredients.map((n) => (
-                <div key={n}>{igd[n].name},&nbsp;</div>
+              {m.ingredients.map((n, i) => (
+                <div key={n}>
+                  {igd[n].name}
+                  {i !== m.ingredients.length - 1 && ','}&nbsp;
+                </div>
               ))}
             </div>
           </div>
