@@ -2,8 +2,6 @@
 import { makeAutoObservable } from 'mobx';
 //utils
 import { getUniqeElements } from '../utils/getUniqeElements';
-//data
-import { categoriesData, ingredientsData } from './data';
 //types
 import {
   categoriesType,
@@ -12,17 +10,24 @@ import {
   productsList,
   userType,
 } from './storeTypes';
+import { fetchDishes, fetchIngredients } from './service';
 
 class StoreApp {
+  constructor() {
+    makeAutoObservable(this);
+  }
+
   user: userType = {
     id: '1',
     botToken: '2',
     chatId: 3,
   };
 
-  categories: categoriesType[] = categoriesData;
+  error: string = '';
 
-  ingredients: ingredientsType = ingredientsData;
+  categories: categoriesType[] = [];
+
+  ingredients: ingredientsType = {};
 
   //список удалённых продуктов
   deletedProductsId: string[] = [];
@@ -36,6 +41,18 @@ class StoreApp {
   dishesListNameForSend: { dishName: string; id: string }[] = [];
   //список id блюд и их ингредиенты
   ingredientsDishes: ingredientsDishes = {};
+
+  setDishes = (data: categoriesType[]) => {
+    this.categories = data;
+  };
+
+  setIngredients = (data: ingredientsType) => {
+    this.ingredients = data;
+  };
+
+  setError = (error: string) => {
+    this.error = error;
+  };
 
   addProductsToCartList = (
     data: string[],
@@ -63,7 +80,7 @@ class StoreApp {
     );
 
     data.forEach((id) => {
-      const category: string = this.ingredients[id].category;
+      const category: string = this.ingredients[id]?.category;
 
       //удаляем продукты из списка удаленных продуктов
       if (this.deletedProductsList[category]?.length > 0) {
@@ -103,7 +120,7 @@ class StoreApp {
     };
 
     //удаляем продукты из основного списка
-    const category: string = this.ingredients[id].category;
+    const category: string = this.ingredients[id]?.category;
     this.addedProductsList[category] = this.addedProductsList[category]?.filter(
       (item) => item.id !== id
     );
@@ -158,9 +175,13 @@ class StoreApp {
     this.ingredientsDishes = {};
   };
 
-  constructor() {
-    makeAutoObservable(this);
-  }
+  loadDishes = () => {
+    fetchDishes(this.setDishes.bind(this));
+  };
+
+  loadIngredients = () => {
+    fetchIngredients(this.setIngredients.bind(this));
+  };
 }
 
 //формируем из массива айдишников string[]
@@ -170,8 +191,8 @@ const generateListOfProducts = (
   ingredientsData: ingredientsType
 ): productsList => {
   return data.reduce((acc, item) => {
-    const category = ingredientsData[item].category;
-    const name = ingredientsData[item].name;
+    const category = ingredientsData[item]?.category;
+    const name = ingredientsData[item]?.name;
 
     if (!acc[category]) {
       acc[category] = [{ name: name, id: item }];

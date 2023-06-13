@@ -9,20 +9,16 @@ import { Button } from '../../../../Components/Button/Button';
 //store
 import Store from '../../../../store/store';
 //types
-import { dishType, ingredientsType } from '../../../../store/storeTypes';
+import { dishType } from '../../../../store/storeTypes';
 
 type categoriyType = {
   name: string;
   dishes: dishType[];
-  igd: ingredientsType;
 };
 
 export const Category = observer(
-  //здесь
-  ({ name, dishes, igd }: categoriyType): ReactElement => {
+  ({ name, dishes }: categoriyType): ReactElement => {
     const { addProductsToCartList } = Store;
-    //dishes отправить в стор и там получить список ингредиентов(временно, пока нет сервера )
-    //а не прокидывать весь список ингредиентов в компонент, это дичь!
 
     const onClickAddButtonHandler = (
       ingredients: string[],
@@ -54,7 +50,7 @@ export const Category = observer(
             <div className={stl.ingredients}>
               {m.ingredients.map((n, i) => (
                 <div key={n}>
-                  {igd[n].name}
+                  {n}
                   {i !== m.ingredients.length - 1 && ','}&nbsp;
                 </div>
               ))}
