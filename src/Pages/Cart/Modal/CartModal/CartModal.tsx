@@ -29,8 +29,11 @@ export const CartModal = observer(
     let {
       _ingredients,
       addIngredientsToCartList,
+      dishesSearchForId,
+      dishesWithIngredients,
       deleteIngredients,
       addIngredientFromSelection,
+      dataToShowAddedIngredients,
       user,
       clearState,
     } = Store;
@@ -62,7 +65,13 @@ export const CartModal = observer(
     };
 
     const onClickSendButton = async (): Promise<void> => {
-      const result = await sendMessage(user.botToken, user.chatId, {}, []);
+      const arrayDishesName = Object.values(dishesSearchForId);
+      const result = await sendMessage(
+        user.botToken,
+        user.chatId,
+        dataToShowAddedIngredients,
+        arrayDishesName
+      );
 
       if (result.success) {
         closeModal();
