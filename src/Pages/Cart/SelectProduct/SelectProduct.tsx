@@ -9,7 +9,8 @@ import stl from './SelectProduct.module.css';
 //store
 import Store from '../../../store/store';
 //utils
-import { convertObjectToArray } from '../../../utils/convertObjectToArray';
+import { convertObjectToArrayForSelect } from '../../../utils/convertObjectToArray';
+import { helper } from '../../../utils/helper';
 
 type SelectProduct = {
   addIngredientToList: (ing: { value: string; label: string }[] | null) => void;
@@ -31,9 +32,9 @@ const customStyles: StylesConfig<SelectOption> = {
 
 export const SelectProduct = observer(
   ({ addIngredientToList }: SelectProduct) => {
-    let { ingredients } = Store;
+    let { _ingredients } = Store;
     const [selectedOption, setSelectedOption] = useState(null);
-    const options = convertObjectToArray(ingredients);
+    const options = convertObjectToArrayForSelect(_ingredients);
 
     const handleButtonClick = (): void => {
       addIngredientToList(selectedOption);

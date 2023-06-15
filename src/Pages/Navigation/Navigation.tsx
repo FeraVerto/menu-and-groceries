@@ -9,9 +9,9 @@ import { Cart } from '../Cart/Cart';
 import Store from '../../store/store';
 
 export const Navigation = (): ReactElement => {
-  const { categories } = Store;
+  const { _menu } = Store;
 
-  const menuLinks = categories.map((m) => (
+  const menuLinks = _menu.map((m) => (
     <li className={stl.categories_nav_item} key={m.name}>
       <NavLink to={`/${m.name}`}>{m.name}</NavLink>
     </li>

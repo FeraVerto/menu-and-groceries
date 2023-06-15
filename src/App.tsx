@@ -10,13 +10,8 @@ import { Tags } from './Pages/Tags/Tags';
 //store
 import Store from './store/store';
 
-//дебаг
-//const data = toJS(ingredients);
-//temp/don't delete
-//import { toJS } from 'mobx';
-
 const App = observer(() => {
-  const { categories, ingredients } = Store;
+  const { _menu: categories, _ingredients: ingredients } = Store;
 
   useEffect(() => {
     if (categories.length === 0 || Object.keys(ingredients).length === 0) {

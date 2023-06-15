@@ -1,6 +1,6 @@
 export type optionsType = { value: string; label: string };
 
-export const convertObjectToArray = (obj: {
+export const convertObjectToArrayForSelect = (obj: {
   [key: string]: {
     name: string;
     category: string;

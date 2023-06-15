@@ -1,15 +1,7 @@
 //libraries
 import { makeAutoObservable } from 'mobx';
-//utils
-import { getUniqeElements } from '../utils/getUniqeElements';
 //types
-import {
-  categoriesType,
-  ingredientsDishes,
-  ingredientsType,
-  productsList,
-  userType,
-} from './storeTypes';
+import { categoriesType, ingredientsType, userType } from './storeTypes';
 import { fetchDishes, fetchIngredients } from './service';
 
 class StoreApp {
@@ -24,196 +16,215 @@ class StoreApp {
   };
 
   error: string = '';
+  //всё меню
+  _menu: categoriesType[] = [];
+  //список ингредиентов для select в модальном окне(пока загружаем всё, что есть)
+  //нужно придумать как лениво подгружать с сервера
+  _ingredients: ingredientsType = {};
+  //быстрый поиск по id ингредиентов (ингредиенты из dataDishes)
+  _ingredientsListForSearchId: {
+    [key: string]: { name: string; category: string };
+  } = {};
 
-  categories: categoriesType[] = [];
+  //[id блюда]: name блюда
+  dishesSearchForId: { [key: string]: string } = {};
+  //список блюд с ингредиентами, которые в него входят
+  //{[id блюда]: [id ингредиентов]
+  dishesWithIngredients: { [key: string]: string[] } = {};
 
-  ingredients: ingredientsType = {};
+  //список id актуальных ингредиентов
+  addedIngredientsId: string[] = [];
+  //данные для отображения добавленных ингредиентов в модальном окне
+  //в разбитом на категории виде. (key это category категория ингредиента: мясо, овощи)
+  dataToShowAddedIngredients: {
+    [key: string]: { name: string; id: string }[];
+  } = {};
 
-  //список удалённых продуктов
-  deletedProductsId: string[] = [];
-  deletedProductsList: productsList = {};
+  //список id удалённых ингредиентов
+  deletedIngredientsId: string[] = [];
+  //данные для отображения удалённых ингредиентов в модальном окне, без категории
+  dataToShowDeletedIngredients: { name: string; id: string }[] = [];
 
-  //список актуальных продуктов
-  addedProductsId: string[] = [];
-  addedProductsList: productsList = {};
+  addIngredientsToCartList = (
+    data: { name: string; category: string; id: string }[],
+    dishName?: string,
+    dishID?: string
+  ) => {
+    //добавили название блюда и его айдишник в актуальное
+    if (dishID && dishName) {
+      this.dishesSearchForId[dishID] = dishName;
+      this.dishesWithIngredients[dishID] = data.map((item) => {
+        return item.id;
+      });
+    }
 
-  //список блюд
-  dishesListNameForSend: { dishName: string; id: string }[] = [];
-  //список id блюд и их ингредиенты
-  ingredientsDishes: ingredientsDishes = {};
+    //формируем данные для отрисовки в модальном окне
+    const result = data.reduce((acc, item) => {
+      if (dishName) {
+        this.dishesWithIngredients[dishName]?.push(item.id);
+      }
+      //заполняем массив актуальных id
+      if (!this.addedIngredientsId.includes(item.id)) {
+        this.addedIngredientsId.push(item.id);
+
+        if (!acc[item.category]) {
+          acc[item.category] = [{ name: item.name, id: item.id }];
+        } else {
+          acc[item.category]?.push({ name: item.name, id: item.id });
+        }
+
+        //удаляем id из массива удаленных ингредиентов
+        this.deletedIngredientsId = this.deletedIngredientsId.filter(
+          (id) => id !== item.id
+        );
+        //удаляем ингредиент из массива для отображения
+        this.dataToShowDeletedIngredients =
+          this.dataToShowDeletedIngredients.filter((ing) => ing.id !== item.id);
+
+        return acc;
+      } else {
+        return acc;
+      }
+    }, {} as { [key: string]: [{ name: string; id: string }] });
+
+    //если _dataToShowAddedIngredients уже есть такая категория, то
+    //добавляем ингридиент к существующей категории, иначе создаем новую категорию
+    //c новым ингредиентом
+    for (let category in result) {
+      if (this.dataToShowAddedIngredients.hasOwnProperty(category)) {
+        this.dataToShowAddedIngredients[category].push(...result[category]);
+      } else {
+        this.dataToShowAddedIngredients[category] = result[category];
+      }
+    }
+
+    return;
+  };
+
+  deleteIngredients = (arrayId: string[], type?: 'dish', dishID?: string) => {
+    if (type && dishID) {
+      delete this.dishesSearchForId[dishID];
+
+      //если добавлено несколько блюд, а затем мы удаляем одно из них,
+      //то проверяем, чтобы не удалились ингредиенты, которые входят в другие блюда
+      for (let key in this.dishesWithIngredients) {
+        if (key !== dishID) {
+          arrayId = arrayId.filter(
+            (id) => !this.dishesWithIngredients[key].includes(id)
+          );
+        }
+      }
+
+      delete this.dishesWithIngredients[dishID];
+    }
+
+    //добавляем id в массив удалённых ингредиентов
+    this.deletedIngredientsId = [...this.deletedIngredientsId, ...arrayId];
+
+    arrayId.forEach((id) => {
+      //условие для продуктов, которые не входят в блюда (селект)
+      const ingredient = this._ingredientsListForSearchId[id]; //{name: 'говядина', category: 'мясо'}
+      const categoryIngredient = ingredient?.category;
+
+      //удаляем элементы из списка добавленных продуктов
+      const filteredData = this.dataToShowAddedIngredients[
+        categoryIngredient
+      ]?.filter((ingredient) => {
+        return ingredient.id !== id;
+      });
+      this.dataToShowAddedIngredients[categoryIngredient] = filteredData;
+
+      //если в категории нет продуктов, удаляем категорию
+      if (
+        this.dataToShowAddedIngredients[categoryIngredient]?.length === 0 ||
+        !this.dataToShowAddedIngredients[categoryIngredient]
+      ) {
+        delete this.dataToShowAddedIngredients[categoryIngredient];
+      }
+
+      //удаляем id из добавленных продуктов
+      this.addedIngredientsId = this.addedIngredientsId.filter(
+        (item) => item !== id
+      );
+
+      //добавляем продукт в массив удаленных продуктов
+      this.dataToShowDeletedIngredients.push({
+        name: ingredient?.name,
+        id,
+      });
+    });
+    return;
+  };
+
+  //добавление отдельных продуктов(!) из селекта в модальном окне
+  //в актуальный список ингредиентов
+  addIngredientFromSelection = (data: string[]) => {
+    data.forEach((item) => {
+      //проверяем есть ли уже ингредиент с таким id
+      if (!this.addedIngredientsId.includes(item.toString())) {
+        //можно добавить предупреждение, что такой продукт уже есть
+        const id = item.toString();
+        const category = this._ingredients[id]?.category;
+        const name = this._ingredients[id]?.name;
+
+        if (!this.dataToShowAddedIngredients[category]) {
+          this.dataToShowAddedIngredients[category] = [{ name, id }];
+        } else {
+          this.dataToShowAddedIngredients[category]?.push({ name, id });
+        }
+        this.addedIngredientsId = [...this.addedIngredientsId, item];
+        //добавим в список для поиска, чтобы в дальнейшем не обращаться к _ingredients
+        this._ingredientsListForSearchId[id] = { name, category };
+
+        //пока дублирование
+        //удаляем id из массива удаленных ингредиентов
+        this.deletedIngredientsId = this.deletedIngredientsId.filter(
+          (id) => id !== item
+        );
+        //удаляем ингредиент из массива для отображения
+        this.dataToShowDeletedIngredients =
+          this.dataToShowDeletedIngredients.filter((ing) => ing.id !== item);
+      }
+    });
+  };
+
+  setIngredientsForRead = (data: {
+    [key: string]: { name: string; category: string };
+  }) => {
+    this._ingredientsListForSearchId = data;
+  };
 
   setDishes = (data: categoriesType[]) => {
-    this.categories = data;
+    this._menu = data;
   };
 
   setIngredients = (data: ingredientsType) => {
-    this.ingredients = data;
+    this._ingredients = data;
   };
 
   setError = (error: string) => {
     this.error = error;
   };
 
-  addProductsToCartList = (
-    data: string[],
-    dishName?: string,
-    id?: string
-  ): productsList => {
-    //Список выбранных блюд
-    if (dishName && id) {
-      const newObj: ingredientsDishes = createStringArrayObject(data, id);
-      this.ingredientsDishes = { ...this.ingredientsDishes, ...newObj };
-      this.dishesListNameForSend = [
-        ...this.dishesListNameForSend,
-        { dishName, id },
-      ];
-    }
-
-    this.addedProductsId = [...this.addedProductsId, ...data];
-
-    //убираем дублирующиеся элементы, если они присутствуют в двух разных блюдах
-    this.addedProductsId = getUniqeElements(this.addedProductsId);
-
-    let listOfProducts: productsList = generateListOfProducts(
-      this.addedProductsId,
-      this.ingredients
-    );
-
-    data.forEach((id) => {
-      const category: string = this.ingredients[id]?.category;
-
-      //удаляем продукты из списка удаленных продуктов
-      if (this.deletedProductsList[category]?.length > 0) {
-        this.deletedProductsList[category] = this.deletedProductsList[
-          category
-        ]?.filter((item) => item.id !== id);
-      }
-
-      //удаляем id из списка айдишников удалённых продуктов
-      this.deletedProductsId = this.deletedProductsId?.filter(
-        (item) => item !== id
-      );
-
-      //если в категории нет продуктов, удаляем категорию
-      if (this.deletedProductsList[category]?.length === 0) {
-        delete this.deletedProductsList[category];
-      }
-    });
-
-    return (this.addedProductsList = {
-      ...this.addedProductsList,
-      ...listOfProducts,
-    });
-  };
-
-  deleteProductFromList = (id: string): void => {
-    //перемещаем удаленные из списка продукты в другой список (удалённых продуктов),
-    //который поместим внизу, относительно основного списка в модальном окне
-    this.deletedProductsId = [...this.deletedProductsId, id];
-
-    //удаляем повторяющиеся элементы
-    this.deletedProductsId = getUniqeElements(this.deletedProductsId);
-    let data = generateListOfProducts(this.deletedProductsId, this.ingredients);
-    this.deletedProductsList = {
-      ...this.deletedProductsList,
-      ...data,
-    };
-
-    //удаляем продукты из основного списка
-    const category: string = this.ingredients[id]?.category;
-    this.addedProductsList[category] = this.addedProductsList[category]?.filter(
-      (item) => item.id !== id
-    );
-
-    //удаляем id из основного списка айдишников
-    this.addedProductsId = this.addedProductsId?.filter((item) => item !== id);
-
-    //если в категории нет продуктов, удаляем категорию
-    if (
-      this.addedProductsList[category]?.length === 0 ||
-      !this.addedProductsList[category]
-    ) {
-      delete this.addedProductsList[category];
-    }
-  };
-
-  deleteDishesFromList = (id: string): void => {
-    //находим по id список продуктов, входящих в блюдо
-    //удаляем их из основного актуального списка
-    this.ingredientsDishes[id]?.forEach((item) => {
-      this.deleteProductFromList(item);
-    });
-
-    this.dishesListNameForSend = this.dishesListNameForSend.filter(
-      (item) => item.id !== id
-    );
-
-    delete this.ingredientsDishes[id];
-
-    //для того, чтобы, когда мы удаляем  блюдо и его ингредиенты, не
-    //удалялись ингредиенты, которые так же входят в другое блюдо
-    const ingredientsFromActyallyDish = Object.values(
-      this.ingredientsDishes
-    ).reduce((acc, curr) => acc.concat(curr), []);
-
-    const newArray: string[] = [
-      ...this.addedProductsId,
-      ...ingredientsFromActyallyDish.filter(
-        (item) => !this.addedProductsId.includes(item)
-      ),
-    ];
-
-    this.addProductsToCartList(newArray);
-  };
-
-  clearState = () => {
-    this.deletedProductsId = [];
-    this.deletedProductsList = {};
-    this.addedProductsId = [];
-    this.addedProductsList = {};
-    this.dishesListNameForSend = [];
-    this.ingredientsDishes = {};
-  };
-
   loadDishes = () => {
-    fetchDishes(this.setDishes.bind(this));
+    fetchDishes(
+      this.setDishes.bind(this),
+      this.setIngredientsForRead.bind(this)
+    );
   };
 
   loadIngredients = () => {
     fetchIngredients(this.setIngredients.bind(this));
   };
+
+  clearState = () => {
+    this.dishesSearchForId = {};
+    this.dishesWithIngredients = {};
+    this.addedIngredientsId = [];
+    this.dataToShowAddedIngredients = {};
+    this.deletedIngredientsId = [];
+    this.dataToShowDeletedIngredients = [];
+  };
 }
-
-//формируем из массива айдишников string[]
-//объект вида { [key: string]: { name: string; id: string }[] }
-const generateListOfProducts = (
-  data: string[],
-  ingredientsData: ingredientsType
-): productsList => {
-  return data.reduce((acc, item) => {
-    const category = ingredientsData[item]?.category;
-    const name = ingredientsData[item]?.name;
-
-    if (!acc[category]) {
-      acc[category] = [{ name: name, id: item }];
-    } else {
-      acc[category]?.push({ name: name, id: item });
-    }
-
-    return acc;
-  }, {} as productsList);
-};
-
-//params: data: string[],
-//params: id: string
-//return { [key: string]: string[] }
-const createStringArrayObject = (
-  data: string[],
-  id: string
-): { [key: string]: string[] } => {
-  const result: { [key: string]: string[] } = {};
-  result[id] = data;
-  return result;
-};
 
 export default new StoreApp();

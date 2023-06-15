@@ -10,6 +10,7 @@ import { Button } from '../../../../Components/Button/Button';
 import Store from '../../../../store/store';
 //types
 import { dishType } from '../../../../store/storeTypes';
+import { helper } from '../../../../utils/helper';
 
 type categoriyType = {
   name: string;
@@ -18,14 +19,15 @@ type categoriyType = {
 
 export const Category = observer(
   ({ name, dishes }: categoriyType): ReactElement => {
-    const { addProductsToCartList } = Store;
+    //helper('dishes', dishes);
+    const { addIngredientsToCartList: _addProductsToCartList } = Store;
 
     const onClickAddButtonHandler = (
-      ingredients: string[],
+      ingredients: { name: string; category: string; id: string }[],
       id: string,
       dishName: string
     ): void => {
-      addProductsToCartList(ingredients, dishName, id);
+      _addProductsToCartList(ingredients, dishName, id);
 
       cogoToast.success(
         <div className={stl.ct_toast_product_added}>
@@ -49,9 +51,9 @@ export const Category = observer(
             <h3 className={stl.dishes_info_name}>{m.dishName}</h3>
             <div className={stl.ingredients}>
               {m.ingredients.map((n, i) => (
-                <div key={n}>
-                  {n}
-                  {i !== m.ingredients.length - 1 && ','}&nbsp;
+                <div key={i}>
+                  {n.name}
+                  {i !== Object.keys(m.ingredients).length - 1 && ','}&nbsp;
                 </div>
               ))}
             </div>
@@ -63,9 +65,9 @@ export const Category = observer(
             width={'100%'}
             height={'60px'}
             text={'Добавить в корзину'}
-            onClick={() =>
-              onClickAddButtonHandler(m.ingredients, m.id, m.dishName)
-            }
+            onClick={() => {
+              onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
+            }}
           />
         </div>
       </li>

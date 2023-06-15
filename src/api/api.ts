@@ -19,7 +19,7 @@ export const sendMessageToTelegramBot = (params: {
 };
 
 export const getDishesList = (): Promise<{
-  data: { dishes: categoriesType[] };
+  data: { dataDishes: categoriesType[] };
 }> => {
   return instance.get(`/menu-and-groceries/dishes`);
 };

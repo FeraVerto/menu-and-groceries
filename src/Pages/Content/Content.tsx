@@ -1,6 +1,6 @@
 //libraries
 import { Route, Routes } from 'react-router-dom';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 import { observer } from 'mobx-react-lite';
 //styles
 import stl from './Content.module.css';
@@ -8,11 +8,11 @@ import stl from './Content.module.css';
 import { Category } from './Categories/Category/Category';
 //store
 import Store from '../../store/store';
+import { helper } from '../../utils/helper';
 
 export const Content = observer((): ReactElement => {
-  const { categories } = Store;
-
-  const routes = categories?.map((n) => {
+  const { _menu: menu } = Store;
+  const routes = menu?.map((n) => {
     return (
       <Route
         key={n.name}

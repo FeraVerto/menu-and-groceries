@@ -4,7 +4,7 @@ export type dishType = {
   id: string;
   image: string;
   dishName: string;
-  ingredients: string[];
+  ingredients: { name: string; category: string; id: string }[];
   tags: string[];
 };
 

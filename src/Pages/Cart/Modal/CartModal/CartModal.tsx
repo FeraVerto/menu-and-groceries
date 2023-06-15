@@ -17,6 +17,7 @@ import Store from './../../../../store/store';
 import { sendMessage } from './../../../../model/Products.model';
 
 import remove from '../../../../assets/icon/remove_91021.svg';
+import { helper } from '../../../../utils/helper';
 
 type CartModal = {
   isOpen: boolean;
@@ -26,10 +27,10 @@ type CartModal = {
 export const CartModal = observer(
   ({ isOpen, closeModal }: CartModal): ReactElement => {
     let {
-      addedProductsList,
-      deleteProductFromList,
-      addProductsToCartList,
-      dishesListNameForSend,
+      _ingredients,
+      addIngredientsToCartList,
+      deleteIngredients,
+      addIngredientFromSelection,
       user,
       clearState,
     } = Store;
@@ -46,24 +47,22 @@ export const CartModal = observer(
         return [...acc, item.value];
       }, [] as string[]);
 
-      addProductsToCartList(ingredientsArrayId);
+      addIngredientFromSelection(ingredientsArrayId);
     };
 
     const removeProductFromList = (id: string): void => {
-      deleteProductFromList(id);
+      deleteIngredients([id]);
     };
 
     const addedProductFromList = (id: string): void => {
-      addProductsToCartList([id]);
+      const item = _ingredients[id];
+      addIngredientsToCartList([
+        { name: item.name, category: item.category, id },
+      ]);
     };
 
     const onClickSendButton = async (): Promise<void> => {
-      const result = await sendMessage(
-        user.botToken,
-        user.chatId,
-        addedProductsList,
-        dishesListNameForSend
-      );
+      const result = await sendMessage(user.botToken, user.chatId, {}, []);
 
       if (result.success) {
         closeModal();
@@ -141,7 +140,7 @@ export const CartModal = observer(
           </div>
           <div className={stl.modal_bottom_buttons_block}>
             <Button
-              disabled={Object.keys(addedProductsList).length === 0}
+              //disabled={Object.keys(addedProductsList).length === 0}
               width={'300px'}
               height={'60px'}
               text={'Отправить'}
