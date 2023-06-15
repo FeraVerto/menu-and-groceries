@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/menu-and-groceries/static/css/main.7c9b8a15.css",
-    "main.js": "/menu-and-groceries/static/js/main.45eead81.js",
+    "main.js": "/menu-and-groceries/static/js/main.decec94c.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/pngegg (1).png": "/menu-and-groceries/static/media/pngegg (1).e884c8e76b366e0f7f69.png",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
@@ -38,6 +38,7 @@
     "static/media/syrniki.jpg": "/menu-and-groceries/static/media/syrniki.45342c39bf54d942a100.jpg",
     "static/media/zero.jpg": "/menu-and-groceries/static/media/zero.e6db9422b63171a27bb8.jpg",
     "static/media/bulgur.jpg": "/menu-and-groceries/static/media/bulgur.828be874df0477dac62c.jpg",
+    "static/media/axios.cjs": "/menu-and-groceries/static/media/axios.e7d77f0967a69d31d7fc.cjs",
     "static/media/pure.jpg": "/menu-and-groceries/static/media/pure.feef3cd3c48a16f8ca0f.jpg",
     "static/media/spagetti.jpg": "/menu-and-groceries/static/media/spagetti.d1e621ad63bed0f6aeea.jpg",
     "static/media/крошка картошка.jpg": "/menu-and-groceries/static/media/крошка картошка.711744ee3e9c47c93465.jpg",
@@ -45,11 +46,11 @@
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
     "main.7c9b8a15.css.map": "/menu-and-groceries/static/css/main.7c9b8a15.css.map",
-    "main.45eead81.js.map": "/menu-and-groceries/static/js/main.45eead81.js.map",
+    "main.decec94c.js.map": "/menu-and-groceries/static/js/main.decec94c.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7c9b8a15.css",
-    "static/js/main.45eead81.js"
+    "static/js/main.decec94c.js"
   ]
 }
