@@ -11,8 +11,8 @@ import Store from '../../store/store';
 import { helper } from '../../utils/helper';
 
 export const Content = observer((): ReactElement => {
-  const { _menu: menu } = Store;
-  const routes = menu?.map((n) => {
+  const { _menu } = Store;
+  const routes = _menu?.map((n) => {
     return (
       <Route
         key={n.name}

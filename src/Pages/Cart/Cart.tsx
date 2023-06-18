@@ -1,6 +1,6 @@
 import cart from '../../assets/icon/shoppingcart_80945.svg';
 //libraries
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import Modal from 'react-modal';
 //store
@@ -14,16 +14,16 @@ import { helper } from '../../utils/helper';
 Modal.setAppElement('#root');
 
 export const Cart = observer(() => {
-  const { addedIngredientsId: addedIngredientsId } = Store;
+  const { addedIngredientsId } = Store;
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
 
-  function openModal() {
+  const openModal = useCallback((): void => {
     setModalIsOpen(true);
-  }
+  }, [setModalIsOpen]);
 
-  function closeModal() {
+  const closeModal = useCallback((): void => {
     setModalIsOpen(false);
-  }
+  }, [setModalIsOpen]);
 
   return (
     <div className={stl.cart} onClick={openModal}>

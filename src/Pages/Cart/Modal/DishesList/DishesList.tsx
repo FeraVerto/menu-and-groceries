@@ -1,6 +1,6 @@
 //libraries
 import { observer } from 'mobx-react-lite';
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 //styles
 import stl from './DishesList.module.css';
 //components
@@ -12,10 +12,13 @@ import { helper } from '../../../../utils/helper';
 export const DishesList = observer((): ReactElement => {
   const { deleteIngredients, dishesSearchForId, dishesWithIngredients } = Store;
 
-  const removeDishedFromList = (arrayId: string): void => {
-    const ingredientsArray = dishesWithIngredients[arrayId];
-    deleteIngredients(ingredientsArray, 'dish', arrayId);
-  };
+  const removeDishedFromList = useCallback(
+    (arrayId: string): void => {
+      const ingredientsArray = dishesWithIngredients[arrayId];
+      deleteIngredients(ingredientsArray, 'dish', arrayId);
+    },
+    [dishesWithIngredients, deleteIngredients]
+  );
 
   const dishesListForPreview: ReactElement[] = Object.entries(
     dishesSearchForId

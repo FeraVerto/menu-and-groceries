@@ -1,7 +1,7 @@
 //libraries
 import uuid4 from 'uuid4';
 import { observer } from 'mobx-react-lite';
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 //components
 import { Checkbox } from '../../../../Components/Checkbox';
 //styles
@@ -21,52 +21,55 @@ export const ProductsList = observer(
     addedProductFromList,
   }: productsListType): ReactElement => {
     const { dataToShowAddedIngredients, dataToShowDeletedIngredients } = Store;
-    const renderProducts = (
-      list: { [key: string]: { name: string; id: string }[] },
-      checked: boolean
-    ): ReactElement[] => {
-      return Object.keys(list)?.map((item) => (
-        <li key={uuid4()}>
-          <p className={stl.category_name}>{item}</p>
 
-          <ul className={stl.products_list}>
-            {list[item]?.map((n) => (
+    const renderProducts = useCallback(
+      (
+        list: { [key: string]: { name: string; id: string }[] },
+        checked: boolean
+      ): ReactElement[] => {
+        return Object.keys(list)?.map((item) => (
+          <li key={uuid4()}>
+            <p className={stl.category_name}>{item}</p>
+            <ul className={stl.products_list}>
+              {list[item]?.map((n) => (
+                <li className={stl.products_item} key={uuid4()}>
+                  <Checkbox
+                    checked={checked}
+                    label={n.name}
+                    productFromList={removeProductFromList}
+                    id={n.id}
+                  />
+                </li>
+              ))}
+            </ul>
+          </li>
+        ));
+      },
+      [removeProductFromList]
+    );
+
+    const renderDeletedProducts = useCallback(
+      (
+        list: { name: string; id: string }[],
+        checked: boolean
+      ): ReactElement[] => {
+        return list?.map((item) => (
+          <li key={uuid4()}>
+            <ul className={stl.products_list}>
               <li className={stl.products_item} key={uuid4()}>
                 <Checkbox
                   checked={checked}
-                  label={n.name}
-                  productFromList={removeProductFromList}
-                  id={n.id}
+                  label={item.name}
+                  productFromList={addedProductFromList}
+                  id={item.id}
                 />
               </li>
-            ))}
-          </ul>
-        </li>
-      ));
-    };
-
-    const renderDeletedProducts = (
-      list: { name: string; id: string }[],
-      checked: boolean
-    ): ReactElement[] => {
-      return list?.map((item) => (
-        <li key={uuid4()}>
-          {/* {filteredProducts === 'add' && (
-            <p className={stl.category_name}>{item}</p>
-          )} */}
-          <ul className={stl.products_list}>
-            <li className={stl.products_item} key={uuid4()}>
-              <Checkbox
-                checked={checked}
-                label={item.name}
-                productFromList={addedProductFromList}
-                id={item.id}
-              />
-            </li>
-          </ul>
-        </li>
-      ));
-    };
+            </ul>
+          </li>
+        ));
+      },
+      [addedProductFromList]
+    );
 
     const productsList = renderProducts(dataToShowAddedIngredients, true);
     const deletedProducts = renderDeletedProducts(

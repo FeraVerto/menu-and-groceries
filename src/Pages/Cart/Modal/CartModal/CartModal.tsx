@@ -1,7 +1,7 @@
 //libraries
 import Modal from 'react-modal';
 import { observer } from 'mobx-react-lite';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import cogoToast from 'cogo-toast';
 //styles
 import stl from './CartModal.module.css';
@@ -39,31 +39,38 @@ export const CartModal = observer(
 
     const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
 
-    const addIngredientToList = (
-      ing: { value: string; label: string }[] | null
-    ): null | void => {
-      if (ing === null) {
-        return null;
-      }
-      const ingredientsArrayId = ing.reduce((acc, item) => {
-        return [...acc, item.value];
-      }, [] as string[]);
+    const addIngredientToList = useCallback(
+      (ing: { value: string; label: string }[] | null): null | void => {
+        if (ing === null) {
+          return null;
+        }
+        const ingredientsArrayId = ing.reduce((acc, item) => {
+          return [...acc, item.value];
+        }, [] as string[]);
 
-      addIngredientFromSelection(ingredientsArrayId);
-    };
+        addIngredientFromSelection(ingredientsArrayId);
+      },
+      [addIngredientFromSelection]
+    );
 
-    const removeProductFromList = (id: string): void => {
-      deleteIngredients([id]);
-    };
+    const removeProductFromList = useCallback(
+      (id: string): void => {
+        deleteIngredients([id]);
+      },
+      [deleteIngredients]
+    );
 
-    const addedProductFromList = (id: string): void => {
-      const item = _ingredients[id];
-      addIngredientsToCartList([
-        { name: item.name, category: item.category, id },
-      ]);
-    };
+    const addedProductFromList = useCallback(
+      (id: string): void => {
+        const item = _ingredients[id];
+        addIngredientsToCartList([
+          { name: item.name, category: item.category, id },
+        ]);
+      },
+      [_ingredients, addIngredientsToCartList]
+    );
 
-    const onClickSendButton = async (): Promise<void> => {
+    const onClickSendButton = useCallback(async (): Promise<void> => {
       const arrayDishesName = Object.values(dishesSearchForId);
       user.chatId.forEach(async (item) => {
         const result = await sendMessage(
@@ -90,23 +97,33 @@ export const CartModal = observer(
           );
         }
       });
-    };
+    }, [
+      clearState,
+      closeModal,
+      dataToShowAddedIngredients,
+      dishesSearchForId,
+      user,
+    ]);
 
-    const onClickClearButton = (): void => {
+    const onClickClearButton = useCallback((): void => {
       clearState();
-    };
+    }, [clearState]);
 
-    const onClickCloseButton = (
-      e: React.MouseEvent<HTMLButtonElement>
-    ): void => {
-      e.stopPropagation();
-      closeModal();
-    };
+    const onClickCloseButton = useCallback(
+      (e: React.MouseEvent<HTMLButtonElement>): void => {
+        e.stopPropagation();
+        closeModal();
+      },
+      [closeModal]
+    );
 
-    const handleClosePopup = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
-      setPopupOpen(false);
-    };
+    const handleClosePopup = useCallback(
+      (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        setPopupOpen(false);
+      },
+      [setPopupOpen]
+    );
 
     return (
       <div>

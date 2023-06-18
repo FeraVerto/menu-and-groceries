@@ -1,5 +1,5 @@
 //libraries
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Select, { StylesConfig } from 'react-select';
 import { observer } from 'mobx-react-lite';
 //components
@@ -36,10 +36,10 @@ export const SelectProduct = observer(
     const [selectedOption, setSelectedOption] = useState(null);
     const options = convertObjectToArrayForSelect(_ingredients);
 
-    const handleButtonClick = (): void => {
+    const handleButtonClick = useCallback((): void => {
       addIngredientToList(selectedOption);
       setSelectedOption(null);
-    };
+    }, [addIngredientToList, setSelectedOption, selectedOption]);
 
     return (
       <div className={stl.modal_select_block}>

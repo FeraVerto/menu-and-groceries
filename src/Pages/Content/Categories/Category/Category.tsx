@@ -1,7 +1,7 @@
 //libraries
 import { observer } from 'mobx-react-lite';
 import cogoToast from 'cogo-toast';
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 //styles
 import stl from './Category.module.css';
 //components
@@ -20,26 +20,29 @@ type categoriyType = {
 export const Category = observer(
   ({ name, dishes }: categoriyType): ReactElement => {
     //helper('dishes', dishes);
-    const { addIngredientsToCartList: _addProductsToCartList } = Store;
+    const { addIngredientsToCartList } = Store;
 
-    const onClickAddButtonHandler = (
-      ingredients: { name: string; category: string; id: string }[],
-      id: string,
-      dishName: string
-    ): void => {
-      _addProductsToCartList(ingredients, dishName, id);
+    const onClickAddButtonHandler = useCallback(
+      (
+        ingredients: { name: string; category: string; id: string }[],
+        id: string,
+        dishName: string
+      ): void => {
+        addIngredientsToCartList(ingredients, dishName, id);
 
-      cogoToast.success(
-        <div className={stl.ct_toast_product_added}>
-          <h3>Успех!</h3>
-          <div>Блюдо "{dishName}" добавлено в корзину</div>
-        </div>,
-        {
-          position: 'bottom-left',
-          hideAfter: 5,
-        }
-      );
-    };
+        cogoToast.success(
+          <div className={stl.ct_toast_product_added}>
+            <h3>Успех!</h3>
+            <div>Блюдо "{dishName}" добавлено в корзину</div>
+          </div>,
+          {
+            position: 'bottom-left',
+            hideAfter: 5,
+          }
+        );
+      },
+      [addIngredientsToCartList]
+    );
 
     let dishesList = dishes.map((m) => (
       <li className={stl.dishes_item} key={m.id}>
