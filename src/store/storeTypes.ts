@@ -1,4 +1,4 @@
-export type userType = { id: string; botToken: string; chatId: number };
+export type userType = { id: string; botToken: string; chatId: number[] };
 
 export type dishType = {
   id: string;

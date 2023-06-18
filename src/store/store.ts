@@ -12,7 +12,7 @@ class StoreApp {
   user: userType = {
     id: '1',
     botToken: '6002031381:AAHS_7A3rUa1ahyNZL2VFd3mgaJRfmqkGLs',
-    chatId: 153016172,
+    chatId: [119818370, 153016172],
   };
 
   error: string = '';
@@ -102,7 +102,7 @@ class StoreApp {
   };
 
   deleteIngredients = (arrayId: string[], type?: 'dish', dishID?: string) => {
-    if (type && dishID) {
+    if (type === 'dish' && dishID) {
       delete this.dishesSearchForId[dishID];
 
       //если добавлено несколько блюд, а затем мы удаляем одно из них,

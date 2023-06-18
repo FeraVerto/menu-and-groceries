@@ -30,7 +30,6 @@ export const CartModal = observer(
       _ingredients,
       addIngredientsToCartList,
       dishesSearchForId,
-      dishesWithIngredients,
       deleteIngredients,
       addIngredientFromSelection,
       dataToShowAddedIngredients,
@@ -66,29 +65,31 @@ export const CartModal = observer(
 
     const onClickSendButton = async (): Promise<void> => {
       const arrayDishesName = Object.values(dishesSearchForId);
-      const result = await sendMessage(
-        user.botToken,
-        user.chatId,
-        dataToShowAddedIngredients,
-        arrayDishesName
-      );
-
-      if (result.success) {
-        closeModal();
-        clearState();
-        setPopupOpen(true);
-      } else {
-        cogoToast.error(
-          <div className={stl.ct_toast_error}>
-            <h3> Список не отправлен </h3>
-            <p>{result.error?.message}</p>
-          </div>,
-          {
-            position: 'bottom-left',
-            hideAfter: 5,
-          }
+      user.chatId.forEach(async (item) => {
+        const result = await sendMessage(
+          user.botToken,
+          item,
+          dataToShowAddedIngredients,
+          arrayDishesName
         );
-      }
+
+        if (result.success) {
+          closeModal();
+          clearState();
+          setPopupOpen(true);
+        } else {
+          cogoToast.error(
+            <div className={stl.ct_toast_error}>
+              <h3> Список не отправлен </h3>
+              <p>{result.error?.message}</p>
+            </div>,
+            {
+              position: 'bottom-left',
+              hideAfter: 5,
+            }
+          );
+        }
+      });
     };
 
     const onClickClearButton = (): void => {
