@@ -143,6 +143,7 @@ export const CartModal = observer(
             },
           }}
           isOpen={isOpen}
+          onRequestClose={closeModal}
           contentLabel="Корзина"
         >
           <div className={stl.modal_header_block}>
