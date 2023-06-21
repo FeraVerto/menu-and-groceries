@@ -25,8 +25,19 @@ export const Cart = observer(() => {
     setModalIsOpen(false);
   }, [setModalIsOpen]);
 
+  const onPressEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      openModal();
+    }
+  };
+
   return (
-    <div className={stl.cart} onClick={openModal}>
+    <div
+      onClick={openModal}
+      tabIndex={1}
+      className={stl.cart}
+      onKeyDown={onPressEnter}
+    >
       <img className={stl.cart_img} src={cart} alt="cart" width="60px" />
       {addedIngredientsId.length}
       <CartModal isOpen={modalIsOpen} closeModal={closeModal} />
