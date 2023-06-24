@@ -27,6 +27,7 @@ export const Cart = observer(() => {
 
   const onPressEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       openModal();
     }
   };

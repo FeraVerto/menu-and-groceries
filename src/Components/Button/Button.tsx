@@ -1,5 +1,5 @@
 //libraries
-import { ReactElement } from 'react';
+import { ReactElement, useCallback } from 'react';
 //styles
 import stl from './Button.module.css';
 
@@ -9,8 +9,19 @@ export const Button = ({ ...props }): ReactElement => {
     height: props.height,
   };
 
+  const onKeyDownButton = useCallback(
+    (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (e.key === 'Enter') {
+        e.stopPropagation();
+        props.onKeyDownFn();
+      }
+    },
+    [props]
+  );
+
   return (
     <button
+      onKeyDown={props.type === 'close' ? onKeyDownButton : undefined}
       disabled={props.disabled}
       style={styles}
       className={`${props.disabled ? stl.disabled_button : ''} ${

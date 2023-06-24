@@ -14,6 +14,7 @@ import { helper } from '../../../utils/helper';
 
 type SelectProduct = {
   addIngredientToList: (ing: { value: string; label: string }[] | null) => void;
+  tabIndex?: number;
 };
 
 interface SelectOption {
@@ -31,9 +32,10 @@ const customStyles: StylesConfig<SelectOption> = {
 };
 
 export const SelectProduct = observer(
-  ({ addIngredientToList }: SelectProduct) => {
+  ({ addIngredientToList, tabIndex }: SelectProduct) => {
     let { _ingredients } = Store;
     const [selectedOption, setSelectedOption] = useState(null);
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
     const options = convertObjectToArrayForSelect(_ingredients);
 
     const handleButtonClick = useCallback((): void => {
@@ -41,11 +43,20 @@ export const SelectProduct = observer(
       setSelectedOption(null);
     }, [addIngredientToList, setSelectedOption, selectedOption]);
 
+    const handleButtonOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === 'Enter') {
+        setMenuIsOpen(true);
+      }
+    };
+
     return (
       <div className={stl.modal_select_block}>
         <div className={stl.modal_select}>
           <Select
             isMulti
+            menuIsOpen={menuIsOpen}
+            closeMenuOnSelect={false}
+            onKeyDown={handleButtonOnKeyDown}
             styles={customStyles}
             className={stl.select}
             value={selectedOption}
