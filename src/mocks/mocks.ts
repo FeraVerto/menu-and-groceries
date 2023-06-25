@@ -51,6 +51,7 @@ export const createMock = () => {
           dishes: [
             {
               id: '1-1',
+              link: 'https://www.say7.info/cook/recipe/259-Borsch.html',
               image: borsh,
               dishName: 'Борщ',
               ingredients: [
@@ -104,6 +105,7 @@ export const createMock = () => {
             {
               id: '1-4',
               image: solanka,
+              link: 'https://www.say7.info/cook/recipe/258-Solyanka-myasnaya.html',
               dishName: 'Солянка',
               ingredients: [
                 { name: 'говядина', category: 'мясо', id: '13' },
@@ -125,6 +127,7 @@ export const createMock = () => {
             {
               id: '1-5',
               image: sup_guliash,
+              link: 'https://www.instagram.com/p/Banzdxtlai3/',
               dishName: 'Суп-гуляш',
               ingredients: [
                 { name: 'лук', category: 'овощи', id: '18' },
@@ -222,6 +225,7 @@ export const createMock = () => {
             {
               id: '2-3',
               image: seld_pod_shubij,
+              link: 'https://www.youtube.com/watch?v=c5qx9agyo1s',
               dishName: 'Сельдь под шубой',
               ingredients: [
                 { name: 'филе сельди', category: 'рыба', id: '75' },
@@ -252,6 +256,7 @@ export const createMock = () => {
             {
               id: '2-5',
               image: vinegret,
+              link: 'https://www.say7.info/cook/recipe/308-Vinegret.html',
               dishName: 'Винегрет',
               ingredients: [
                 { name: 'свекла', category: 'овощи', id: '16' },
@@ -272,6 +277,7 @@ export const createMock = () => {
             {
               id: '3-1',
               image: lazania,
+              link: 'https://www.say7.info/cook/recipe/127-Lazanya.html',
               dishName: 'Лазанья',
               ingredients: [
                 { name: 'листы лазаньи', category: 'бакалея', id: '9' },
@@ -316,6 +322,7 @@ export const createMock = () => {
               id: '3-4',
               image: plov,
               dishName: 'плов',
+              link: 'https://www.say7.info/cook/recipe/118-Plov.html',
               ingredients: [
                 { name: 'рис', category: 'бакалея', id: '7' },
                 { name: 'морковь', category: 'овощи', id: '17' },
@@ -349,6 +356,7 @@ export const createMock = () => {
             {
               id: '3-6',
               image: jul,
+              link: 'https://www.say7.info/cook/recipe/500-ZHjulen-kuricey.html',
               dishName: 'жульен',
               ingredients: [
                 { name: 'куринная грудка', category: 'мясо', id: '44' },
@@ -366,6 +374,7 @@ export const createMock = () => {
             {
               id: '3-7',
               image: kar_gar,
+              link: 'https://www.say7.info/cook/recipe/606-Kartoshka-garmoshka.html',
               dishName: 'картошка-гармошка',
               ingredients: [
                 { name: 'картофель', category: 'овощи', id: '14' },
@@ -461,6 +470,7 @@ export const createMock = () => {
             {
               id: '4-1',
               image: kurva,
+              link: 'https://1000.menu/cooking/7474-rublennje-kotletj-iz-kurinogo-file',
               dishName: 'Котлеты куриные рубленные',
               ingredients: [
                 { name: 'фарш куриный', category: 'мясо', id: '11' },
@@ -474,6 +484,7 @@ export const createMock = () => {
             {
               id: '4-2',
               image: kurva_sir,
+              link: 'https://www.say7.info/cook/recipe/1104-Kurinoe-file.html',
               dishName: 'куриное филе в сырной корочке',
               ingredients: [
                 { name: 'куринная грудка', category: 'мясо', id: '44' },
@@ -486,6 +497,7 @@ export const createMock = () => {
             {
               id: '4-3',
               image: guliash,
+              link: 'https://1000.menu/cooking/33240-gulyash-iz-govyadiny-s-podlivkoi-klassicheskii',
               dishName: 'Гуляш из говядины',
               ingredients: [
                 { name: 'говядина', category: 'мясо', id: '13' },
@@ -526,6 +538,7 @@ export const createMock = () => {
             {
               id: '4-6',
               image: burgund,
+              link: 'https://steaklovers.menu/food/41080',
               dishName: 'Говядина по-бургундски',
               ingredients: [
                 { name: 'оливковое масло', category: 'бакалея', id: '5' },
@@ -600,6 +613,7 @@ export const createMock = () => {
             {
               id: '6-4',
               image: syrniki,
+              link: 'https://www.youtube.com/watch?v=wObrMxOtDbs',
               dishName: 'Сырники',
               ingredients: [
                 { name: 'творог', category: 'молочка', id: '68' },

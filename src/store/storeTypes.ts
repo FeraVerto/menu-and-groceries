@@ -3,6 +3,7 @@ export type userType = { id: string; botToken: string; chatId: number[] };
 export type dishType = {
   id: string;
   image: string;
+  link?: string;
   dishName: string;
   ingredients: { name: string; category: string; id: string }[];
   tags: string[];

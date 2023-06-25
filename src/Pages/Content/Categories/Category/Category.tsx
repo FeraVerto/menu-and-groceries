@@ -52,6 +52,16 @@ export const Category = observer(
           </div>
           <div className={stl.dishes_info}>
             <h3 className={stl.dishes_info_name}>{m.dishName}</h3>
+            {m.link && (
+              <a
+                href={m.link}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="ссылка на рецепт борща"
+              >
+                Открыть рецепт
+              </a>
+            )}
             <div className={stl.ingredients}>
               {m.ingredients.map((n, i) => (
                 <div key={i}>
