@@ -47,6 +47,18 @@ export const createMock = () => {
     getMenu: mock.onGet('/menu-and-groceries/dishes').reply(200, {
       dataDishes: [
         {
+          name: 'Новые блюда',
+          dishes: [
+            {
+              id: '0-1',
+              link: '',
+              image: '',
+              dishName: '',
+              ingredients: [],
+            },
+          ],
+        },
+        {
           name: 'Супы',
           dishes: [
             {
