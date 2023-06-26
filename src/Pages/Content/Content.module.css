@@ -1,5 +1,6 @@
 .content {
-    max-height: calc(100vh - 2px);
+    margin-left: 30px;
+    margin-right: 30px;
     
     display: flex;
     flex-basis: 100%;
@@ -12,4 +13,10 @@
 
 .content::-webkit-scrollbar {
     display: none; /* Скрыть скроллер в Chrome */
+}
+
+@media only screen and (max-width: 768px) {
+    .content {
+        margin: 0;
+    }
 }
