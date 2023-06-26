@@ -11,6 +11,7 @@ import Store from '../../../../store/store';
 //types
 import { dishType } from '../../../../store/storeTypes';
 import { helper } from '../../../../utils/helper';
+import { Cart } from '../../../Cart/Cart';
 
 type categoriyType = {
   name: string;
@@ -87,10 +88,15 @@ export const Category = observer(
     ));
 
     return (
-      <div className={stl.categories}>
-        <h2 className={stl.category_name}>{name}</h2>
-        <ul className={stl.category_dishes_list}>{dishesList}</ul>
-      </div>
+      <>
+        <div className={stl.categories_cart_tablet}>
+          <Cart />
+        </div>
+        <div className={stl.categories}>
+          <h2 className={stl.category_name}>{name}</h2>
+          <ul className={stl.category_dishes_list}>{dishesList}</ul>
+        </div>
+      </>
     );
   }
 );

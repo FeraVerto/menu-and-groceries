@@ -1,5 +1,5 @@
 .tags {
-    width: 200px;
+    width: 100px;
 
     background-color: var(--light-green-main);
 }
@@ -7,4 +7,10 @@
 .tags_list {
     position: fixed;
     right: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+    .tags {
+        width: 100px;
+    }
 }

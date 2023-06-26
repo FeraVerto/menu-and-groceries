@@ -9,6 +9,7 @@ import { Navigation } from './Pages/Navigation/Navigation';
 import { Tags } from './Pages/Tags/Tags';
 //store
 import Store from './store/store';
+import { SidebarMenu } from './Components/SidebarMenu/SidebarMenu';
 
 const App = observer(() => {
   const { _menu: categories, _ingredients: ingredients } = Store;
@@ -22,7 +23,12 @@ const App = observer(() => {
 
   return (
     <div className={stl.App}>
-      <Navigation />
+      <div className={stl.nav_tablet}>
+        <SidebarMenu />
+      </div>
+      <div className={stl.nav}>
+        <Navigation />
+      </div>
       <Content />
       <Tags />
     </div>

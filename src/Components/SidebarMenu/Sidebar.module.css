@@ -1,0 +1,70 @@
+.sidebar_nav {
+    width: 400px;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: -410px; /* Панель начинается за пределами экрана */
+    
+    background-color: var(--light-green-main);
+    padding: 5px;
+    transition: left 0.3s ease-in-out; /* Анимация движения панели */
+    z-index: 1000; /* Панель поверх остальных элементов */
+}
+  
+.sidebar_nav.open {
+    left: 0; /* Панель полностью видима на экране */
+}
+
+.sidebar_nav > ul {
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+    left: 40px;
+    top: 30%;
+    
+    list-style: none;
+}
+
+.sidebar_nav_item {
+    margin-bottom: 20px;
+    
+    text-align: left;
+    font-size: 30px;
+}
+
+.sidebar_nav_item a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: bold;
+    white-space: nowrap;
+}
+  
+.toggle_button {
+    height: 40px;
+    width: 200px;
+
+    position: fixed;
+    top: 50%; /* Кнопка посередине экрана */
+    left: -80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #444;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: left 0.3s ease-in-out; /* Анимация движения кнопки */
+    z-index: 1001; /* Кнопка поверх панели и остальных элементов */
+    rotate: 270deg;
+    text-transform: uppercase;
+}
+  
+.toggle_button.open {
+    left: 330px; /* Кнопка смещается вправо на ширину панели */
+}
+  
