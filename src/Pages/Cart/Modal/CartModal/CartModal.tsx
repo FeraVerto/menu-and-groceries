@@ -1,5 +1,5 @@
 //libraries
-import Modal from 'react-modal';
+import ReactModal from 'react-modal';
 import { observer } from 'mobx-react-lite';
 import { ReactElement, useCallback, useState } from 'react';
 import cogoToast from 'cogo-toast';
@@ -127,22 +127,9 @@ export const CartModal = observer(
     );
 
     return (
-      <div>
-        <Modal
-          style={{
-            content: {
-              width: '1000px',
-              height: '800px',
-              top: '50%',
-              left: '50%',
-              right: 'auto',
-              bottom: 'auto',
-              marginRight: '-50%',
-              transform: 'translate(-50%, -50%)',
-              display: 'flex',
-              flexDirection: 'column',
-            },
-          }}
+      <div className={stl.modal}>
+        <ReactModal
+          className={stl.modal_content}
           isOpen={isOpen}
           onRequestClose={closeModal}
           contentLabel="Корзина"
@@ -183,7 +170,7 @@ export const CartModal = observer(
               onClick={onClickClearButton}
             />
           </div>
-        </Modal>
+        </ReactModal>
         <Popup isOpen={isPopupOpen} onClose={handleClosePopup} />
       </div>
     );
