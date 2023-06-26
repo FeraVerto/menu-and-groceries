@@ -46,6 +46,7 @@ export const SelectProduct = observer(
     const handleButtonOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'Enter') {
         setMenuIsOpen(true);
+        console.log('menuIsOpen', menuIsOpen);
       }
     };
 
@@ -55,7 +56,8 @@ export const SelectProduct = observer(
           <Select
             isMulti
             menuIsOpen={menuIsOpen}
-            closeMenuOnSelect={false}
+            onMenuOpen={() => setMenuIsOpen(true)}
+            onMenuClose={() => setMenuIsOpen(false)}
             onKeyDown={handleButtonOnKeyDown}
             styles={customStyles}
             className={stl.select}
