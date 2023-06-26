@@ -1,19 +1,22 @@
 {
   "files": {
     "main.css": "/menu-and-groceries/static/css/main.7321feb0.css",
-    "main.js": "/menu-and-groceries/static/js/main.91cd089e.js",
+    "main.js": "/menu-and-groceries/static/js/main.f81ef847.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/pngegg (1).png": "/menu-and-groceries/static/media/pngegg (1).e884c8e76b366e0f7f69.png",
+    "static/media/orange.jpg": "/menu-and-groceries/static/media/orange.0ab312b21ceb9c8363bc.jpg",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
     "static/media/losos.jpg": "/menu-and-groceries/static/media/losos.e807e77937184caab390.jpg",
     "static/media/cezar.jpg": "/menu-and-groceries/static/media/cezar.a8d7dc47bd765c082102.jpg",
     "static/media/kurva.jpg": "/menu-and-groceries/static/media/kurva.11aaf1bc87d6d293d6c2.jpg",
+    "static/media/shaurma.jpg": "/menu-and-groceries/static/media/shaurma.a0114cfa5f39123e5912.jpg",
     "static/media/плов.jpg": "/menu-and-groceries/static/media/плов.8938c69b541dcebd0b89.jpg",
     "static/media/olivie.jpg": "/menu-and-groceries/static/media/olivie.e3f6881c14c4f1fa6ecd.jpg",
     "static/media/wok.jpg": "/menu-and-groceries/static/media/wok.6896bba745c2901fdfd0.jpg",
     "static/media/sup_s_lap.jpg": "/menu-and-groceries/static/media/sup_s_lap.8af463d7ad54ea878333.jpg",
     "static/media/ogur_pomid.jpg": "/menu-and-groceries/static/media/ogur_pomid.8321511e140da8ee4858.jpg",
     "static/media/Okroshka_05.jpg": "/menu-and-groceries/static/media/Okroshka_05.4ef558e4d2188c16e0f3.jpg",
+    "static/media/uha.jpg": "/menu-and-groceries/static/media/uha.da995fc48e2ca206d20e.jpg",
     "static/media/jul.jpg": "/menu-and-groceries/static/media/jul.cdd797d838e8a05bcbcc.jpg",
     "static/media/solanka.jpg": "/menu-and-groceries/static/media/solanka.d01053ec83712c9d3f53.jpg",
     "static/media/лазанья.jpg": "/menu-and-groceries/static/media/лазанья.533c044a8164248d0749.jpg",
@@ -21,11 +24,13 @@
     "static/media/kurva_sir.jpg": "/menu-and-groceries/static/media/kurva_sir.1ffee1fc0a9b0480170f.jpg",
     "static/media/rice.jpg": "/menu-and-groceries/static/media/rice.732642d9fdbbe5590e71.jpg",
     "static/media/OpenSans-Regular.ttf": "/menu-and-groceries/static/media/OpenSans-Regular.a5fe783dd47c116806f9.ttf",
+    "static/media/kur_jab.jpg": "/menu-and-groceries/static/media/kur_jab.5453305b5a68e5d14759.jpg",
     "static/media/sup_guliash.jpg": "/menu-and-groceries/static/media/sup_guliash.c630f89c69f493cb726e.jpg",
     "static/media/борщ.jpg": "/menu-and-groceries/static/media/борщ.16f9e517a0149d4bd857.jpg",
     "static/media/vkusnosup.jpg": "/menu-and-groceries/static/media/vkusnosup.7dd1b1acb26424514aae.jpg",
     "static/media/bliny.jpg": "/menu-and-groceries/static/media/bliny.a453c1907a0f37b704d0.jpg",
     "static/media/burgund.jpg": "/menu-and-groceries/static/media/burgund.cc916248a9cb6bac2ea3.jpg",
+    "static/media/bebi.jpg": "/menu-and-groceries/static/media/bebi.21dfac4245f5a42b9630.jpg",
     "static/media/seld_pod_shubij.jpg": "/menu-and-groceries/static/media/seld_pod_shubij.d7253291ea86bdf57b4a.jpg",
     "static/media/guliash.jpg": "/menu-and-groceries/static/media/guliash.ba8c86508aaf2f0522a1.jpg",
     "static/media/pirog.jpg": "/menu-and-groceries/static/media/pirog.e106b4c57fb0ba626c1b.jpg",
@@ -46,11 +51,11 @@
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
     "main.7321feb0.css.map": "/menu-and-groceries/static/css/main.7321feb0.css.map",
-    "main.91cd089e.js.map": "/menu-and-groceries/static/js/main.91cd089e.js.map",
+    "main.f81ef847.js.map": "/menu-and-groceries/static/js/main.f81ef847.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7321feb0.css",
-    "static/js/main.91cd089e.js"
+    "static/js/main.f81ef847.js"
   ]
 }
