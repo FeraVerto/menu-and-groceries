@@ -35,8 +35,18 @@ import burgund from './../assets/images/burgund.jpg';
 import pizza from './../assets/images/pizza.jpg';
 import syrniki from './../assets/images/syrniki.jpg';
 import veg from './../assets/images/pngegg (1).png';
+import orange from './../assets/images/orange.jpg';
+import uha from './../assets/images/uha.jpg';
+import shaurma from './../assets/images/shaurma.jpg';
+import kur_jab from './../assets/images/kur_jab.jpg';
+import bebi from './../assets/images/bebi.jpg';
 
 export {
+  bebi,
+  kur_jab,
+  shaurma,
+  uha,
+  orange,
   veg,
   solanka,
   okroshka,
