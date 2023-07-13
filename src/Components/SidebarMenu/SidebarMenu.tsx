@@ -10,15 +10,15 @@ export const SidebarMenu = () => {
   const { _menu } = Store;
   const [isOpen, setOpen] = useState(false);
 
-  const menuLinks = _menu.map((m) => (
-    <li className={stl.sidebar_nav_item} key={m.name}>
-      <NavLink to={`/${m.name}`}>{m.name}</NavLink>
-    </li>
-  ));
-
   const toggleMenu = () => {
     setOpen(!isOpen);
   };
+
+  const menuLinks = _menu.map((m) => (
+    <li className={stl.sidebar_nav_item} key={m.name} onClick={toggleMenu}>
+      <NavLink to={`/${m.name}`}>{m.name}</NavLink>
+    </li>
+  ));
 
   return (
     <div className={`${stl.sidebar_nav} ${isOpen ? `${stl.open}` : ''}`}>

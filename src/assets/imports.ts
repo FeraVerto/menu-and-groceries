@@ -40,8 +40,14 @@ import uha from './../assets/images/uha.jpg';
 import shaurma from './../assets/images/shaurma.jpg';
 import kur_jab from './../assets/images/kur_jab.jpg';
 import bebi from './../assets/images/bebi.jpg';
+import ppkolbasa from './../assets/images/pp-kolbasa.jpg';
+import humus from './../assets/images/humus.jpg';
+import hleb from './../assets/images/hleb.jpg';
 
 export {
+  hleb,
+  humus,
+  ppkolbasa,
   bebi,
   kur_jab,
   shaurma,

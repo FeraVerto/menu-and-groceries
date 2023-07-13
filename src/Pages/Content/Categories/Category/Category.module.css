@@ -111,7 +111,7 @@
     }
 
     .category_dishes_list {    
-        grid-template-columns: repeat(auto-fill, 300px); /* или repeat(auto-fit, 100px); */
+        grid-template-columns: repeat(auto-fill, 300px);
     }
 
     .dishes_item {
@@ -129,4 +129,11 @@
     .category_dishes_list {
         padding-bottom: 100px;
     }
+
+    /* .ct_toast_product_added {
+        width: 400px;
+        bottom: 100px;
+        
+        font-size: 20px;
+    } */
 }

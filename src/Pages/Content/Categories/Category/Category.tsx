@@ -6,12 +6,12 @@ import { ReactElement, useCallback } from 'react';
 import stl from './Category.module.css';
 //components
 import { Button } from '../../../../Components/Button/Button';
+import { Cart } from '../../../Cart/Cart';
 //store
 import Store from '../../../../store/store';
 //types
 import { dishType } from '../../../../store/storeTypes';
 import { helper } from '../../../../utils/helper';
-import { Cart } from '../../../Cart/Cart';
 
 type categoriyType = {
   name: string;
