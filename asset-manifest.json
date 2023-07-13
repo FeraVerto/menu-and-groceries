@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.css": "/menu-and-groceries/static/css/main.7321feb0.css",
-    "main.js": "/menu-and-groceries/static/js/main.f81ef847.js",
+    "main.css": "/menu-and-groceries/static/css/main.9de20678.css",
+    "main.js": "/menu-and-groceries/static/js/main.97ffd073.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/pngegg (1).png": "/menu-and-groceries/static/media/pngegg (1).e884c8e76b366e0f7f69.png",
     "static/media/orange.jpg": "/menu-and-groceries/static/media/orange.0ab312b21ceb9c8363bc.jpg",
+    "static/media/humus.jpg": "/menu-and-groceries/static/media/humus.bc012e1e0966420b5c05.jpg",
     "static/media/жареная картошка.jpg": "/menu-and-groceries/static/media/жареная картошка.9bb68004c97efb06c50a.jpg",
     "static/media/losos.jpg": "/menu-and-groceries/static/media/losos.e807e77937184caab390.jpg",
     "static/media/cezar.jpg": "/menu-and-groceries/static/media/cezar.a8d7dc47bd765c082102.jpg",
@@ -28,6 +29,7 @@
     "static/media/sup_guliash.jpg": "/menu-and-groceries/static/media/sup_guliash.c630f89c69f493cb726e.jpg",
     "static/media/борщ.jpg": "/menu-and-groceries/static/media/борщ.16f9e517a0149d4bd857.jpg",
     "static/media/vkusnosup.jpg": "/menu-and-groceries/static/media/vkusnosup.7dd1b1acb26424514aae.jpg",
+    "static/media/pp-kolbasa.jpg": "/menu-and-groceries/static/media/pp-kolbasa.0033be094c856f8dc66a.jpg",
     "static/media/bliny.jpg": "/menu-and-groceries/static/media/bliny.a453c1907a0f37b704d0.jpg",
     "static/media/burgund.jpg": "/menu-and-groceries/static/media/burgund.cc916248a9cb6bac2ea3.jpg",
     "static/media/bebi.jpg": "/menu-and-groceries/static/media/bebi.21dfac4245f5a42b9630.jpg",
@@ -39,6 +41,7 @@
     "static/media/kur_grud.jpg": "/menu-and-groceries/static/media/kur_grud.85ca31f5d9e75e1de0ac.jpg",
     "static/media/чечевичный суп с беконом.jpg": "/menu-and-groceries/static/media/чечевичный суп с беконом.ad30b0357a50ba80c6d6.jpg",
     "static/media/овощное рагу.jpg": "/menu-and-groceries/static/media/овощное рагу.2c964aebb0016aa78806.jpg",
+    "static/media/hleb.jpg": "/menu-and-groceries/static/media/hleb.c75d2a9340fd4480dd15.jpg",
     "static/media/grecha.jpg": "/menu-and-groceries/static/media/grecha.2f9c3c2cac65da7b72e6.jpg",
     "static/media/syrniki.jpg": "/menu-and-groceries/static/media/syrniki.45342c39bf54d942a100.jpg",
     "static/media/zero.jpg": "/menu-and-groceries/static/media/zero.e6db9422b63171a27bb8.jpg",
@@ -50,12 +53,12 @@
     "static/media/remove_91021.svg": "/menu-and-groceries/static/media/remove_91021.37cc094f2e265b4f1eba5d0194f946a3.svg",
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
-    "main.7321feb0.css.map": "/menu-and-groceries/static/css/main.7321feb0.css.map",
-    "main.f81ef847.js.map": "/menu-and-groceries/static/js/main.f81ef847.js.map",
+    "main.9de20678.css.map": "/menu-and-groceries/static/css/main.9de20678.css.map",
+    "main.97ffd073.js.map": "/menu-and-groceries/static/js/main.97ffd073.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7321feb0.css",
-    "static/js/main.f81ef847.js"
+    "static/css/main.9de20678.css",
+    "static/js/main.97ffd073.js"
   ]
 }
