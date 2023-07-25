@@ -23,6 +23,18 @@ export const Category = observer(
     //helper('dishes', dishes);
     const { addIngredientsToCartList } = Store;
 
+    const notification = (dishName: string) =>
+      cogoToast.success(
+        <div className={stl.ct_toast_product_added}>
+          <h3>Успех!</h3>
+          <div>Блюдо "{dishName}" добавлено в корзину</div>
+        </div>,
+        {
+          position: 'bottom-left',
+          hideAfter: 5,
+        }
+      );
+
     const onClickAddButtonHandler = useCallback(
       (
         ingredients: { name: string; category: string; id: string }[],
@@ -31,16 +43,7 @@ export const Category = observer(
       ): void => {
         addIngredientsToCartList(ingredients, dishName, id);
 
-        cogoToast.success(
-          <div className={stl.ct_toast_product_added}>
-            <h3>Успех!</h3>
-            <div>Блюдо "{dishName}" добавлено в корзину</div>
-          </div>,
-          {
-            position: 'bottom-left',
-            hideAfter: 5,
-          }
-        );
+        notification(dishName);
       },
       [addIngredientsToCartList]
     );
