@@ -43,6 +43,10 @@ import bebi from './../assets/images/bebi.jpg';
 import ppkolbasa from './../assets/images/pp-kolbasa.jpg';
 import humus from './../assets/images/humus.jpg';
 import hleb from './../assets/images/hleb.jpg';
+import roll_los from './../assets/images/roll-losos.jpg';
+import zapechennye_rol from './../assets/images/zapechennye-rol.jpg';
+import fried_rolls from './../assets/images/fried-rolls.jpg';
+import pan_pizza from './../assets/images/pan-pizza.png';
 
 export {
   hleb,
@@ -90,4 +94,8 @@ export {
   ovoch,
   olivie,
   sup_guliash,
+  roll_los,
+  zapechennye_rol,
+  fried_rolls,
+  pan_pizza,
 };

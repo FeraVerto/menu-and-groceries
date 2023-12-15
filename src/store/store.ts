@@ -11,8 +11,8 @@ class StoreApp {
 
   user: userType = {
     id: '1',
-    botToken: '',
-    chatId: [],
+    botToken: '6002031381:AAHS_7A3rUa1ahyNZL2VFd3mgaJRfmqkGLs',
+    chatId: [153016172],
   };
 
   error: string = '';
