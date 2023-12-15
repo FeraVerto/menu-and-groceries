@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/menu-and-groceries/static/css/main.9de20678.css",
-    "main.js": "/menu-and-groceries/static/js/main.97ffd073.js",
+    "main.js": "/menu-and-groceries/static/js/main.6465504f.js",
     "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
     "static/media/pngegg (1).png": "/menu-and-groceries/static/media/pngegg (1).e884c8e76b366e0f7f69.png",
     "static/media/orange.jpg": "/menu-and-groceries/static/media/orange.0ab312b21ceb9c8363bc.jpg",
@@ -11,6 +11,9 @@
     "static/media/cezar.jpg": "/menu-and-groceries/static/media/cezar.a8d7dc47bd765c082102.jpg",
     "static/media/kurva.jpg": "/menu-and-groceries/static/media/kurva.11aaf1bc87d6d293d6c2.jpg",
     "static/media/shaurma.jpg": "/menu-and-groceries/static/media/shaurma.a0114cfa5f39123e5912.jpg",
+    "static/media/pan-pizza.png": "/menu-and-groceries/static/media/pan-pizza.f9bdf0c193adccc20ed5.png",
+    "static/media/fried-rolls.jpg": "/menu-and-groceries/static/media/fried-rolls.82464d251877413cc7d7.jpg",
+    "static/media/zapechennye-rol.jpg": "/menu-and-groceries/static/media/zapechennye-rol.595ef0a865c96c2e378e.jpg",
     "static/media/плов.jpg": "/menu-and-groceries/static/media/плов.8938c69b541dcebd0b89.jpg",
     "static/media/olivie.jpg": "/menu-and-groceries/static/media/olivie.e3f6881c14c4f1fa6ecd.jpg",
     "static/media/wok.jpg": "/menu-and-groceries/static/media/wok.6896bba745c2901fdfd0.jpg",
@@ -33,6 +36,7 @@
     "static/media/bliny.jpg": "/menu-and-groceries/static/media/bliny.a453c1907a0f37b704d0.jpg",
     "static/media/burgund.jpg": "/menu-and-groceries/static/media/burgund.cc916248a9cb6bac2ea3.jpg",
     "static/media/bebi.jpg": "/menu-and-groceries/static/media/bebi.21dfac4245f5a42b9630.jpg",
+    "static/media/roll-losos.jpg": "/menu-and-groceries/static/media/roll-losos.b5d387f58fc2e545bfec.jpg",
     "static/media/seld_pod_shubij.jpg": "/menu-and-groceries/static/media/seld_pod_shubij.d7253291ea86bdf57b4a.jpg",
     "static/media/guliash.jpg": "/menu-and-groceries/static/media/guliash.ba8c86508aaf2f0522a1.jpg",
     "static/media/pirog.jpg": "/menu-and-groceries/static/media/pirog.e106b4c57fb0ba626c1b.jpg",
@@ -54,11 +58,11 @@
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
     "main.9de20678.css.map": "/menu-and-groceries/static/css/main.9de20678.css.map",
-    "main.97ffd073.js.map": "/menu-and-groceries/static/js/main.97ffd073.js.map",
+    "main.6465504f.js.map": "/menu-and-groceries/static/js/main.6465504f.js.map",
     "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9de20678.css",
-    "static/js/main.97ffd073.js"
+    "static/js/main.6465504f.js"
   ]
 }
