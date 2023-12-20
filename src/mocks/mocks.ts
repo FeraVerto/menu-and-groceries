@@ -51,6 +51,7 @@ import {
   zapechennye_rol,
   fried_rolls,
   pan_pizza,
+  rulet_bekon,
 } from './../assets/imports';
 
 export const createMock = () => {
@@ -689,6 +690,20 @@ export const createMock = () => {
                 { name: 'хмели сунели', category: 'бакалея', id: '100' },
                 { name: 'паприка', category: 'бакалея', id: '71' },
                 { name: 'имбирь', category: 'овощи', id: '82' },
+              ],
+            },
+            {
+              id: '4-8',
+              image: rulet_bekon,
+              link: 'https://www.iamcook.ru/showrecipe/28265',
+              dishName: 'Рулетики из курицы, бекона и сыра',
+              ingredients: [
+                { name: 'куринная грудка', category: 'мясо', id: '44' },
+                { name: 'соль', category: 'бакалея', id: '23' },
+                { name: 'перец', category: 'бакалея', id: '24' },
+                { name: 'бекон', category: 'мясо', id: '29' },
+                { name: 'моцарелла', category: 'молочка', id: '56' },
+                { name: 'творожный сыр', category: 'молочка', id: '104' },
               ],
             },
           ],

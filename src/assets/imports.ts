@@ -47,6 +47,7 @@ import roll_los from './../assets/images/roll-losos.jpg';
 import zapechennye_rol from './../assets/images/zapechennye-rol.jpg';
 import fried_rolls from './../assets/images/fried-rolls.jpg';
 import pan_pizza from './../assets/images/pan-pizza.png';
+import rulet_bekon from './../assets/images/rulet_bekon.jpg';
 
 export {
   hleb,
@@ -98,4 +99,5 @@ export {
   zapechennye_rol,
   fried_rolls,
   pan_pizza,
+  rulet_bekon,
 };
