@@ -5,21 +5,21 @@ import { ReactElement, useCallback } from 'react';
 //components
 import { Checkbox } from '../../../../Components/Checkbox';
 //styles
-import stl from './ProductsList.module.css';
+import stl from './ShoppingList.module.css';
 //store
 import Store from '../../../../store/store';
 import { helper } from '../../../../utils/helper';
 
-type productsListType = {
+type shoppingListType = {
   removeProductFromList: (id: string) => void;
   addedProductFromList: (id: string) => void;
 };
 
-export const ProductsList = observer(
+export const ShoppingList = observer(
   ({
     removeProductFromList,
     addedProductFromList,
-  }: productsListType): ReactElement => {
+  }: shoppingListType): ReactElement => {
     const { shoppingList, dataToShowDeletedIngredients } = Store;
 
     const renderProducts = useCallback(

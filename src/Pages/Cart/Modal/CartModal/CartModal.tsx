@@ -7,7 +7,7 @@ import cogoToast from 'cogo-toast';
 import stl from './CartModal.module.css';
 //components
 import { SelectProduct } from '../../SelectProduct/SelectProduct';
-import { ProductsList } from '../ProductsList/ProductsList';
+import { ShoppingList } from '../ShoppingList/ShoppingList';
 import { DishesList } from '../DishesList/DishesList';
 import { Button } from '../../../../Components/Button/Button';
 import Popup from '../../../../Components/Popup/Popup';
@@ -142,7 +142,7 @@ export const CartModal = observer(
           <SelectProduct addIngredientToList={addIngredientToList} />
 
           <div className={stl.modal_visual_list_block}>
-            <ProductsList
+            <ShoppingList
               removeProductFromList={removeProductFromList}
               addedProductFromList={addedProductFromList}
             />
