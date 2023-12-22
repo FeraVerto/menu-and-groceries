@@ -10,9 +10,10 @@ import { Tags } from './Pages/Tags/Tags';
 //store
 import Store from './store/store';
 import { SidebarMenu } from './Components/SidebarMenu/SidebarMenu';
+import { AuthPage } from './Pages/Auth/Auth';
 
 const App = observer(() => {
-  const { _menu: categories, _ingredients: ingredients } = Store;
+  const { _menu: categories, _ingredients: ingredients, isAuth } = Store;
 
   useEffect(() => {
     if (categories.length === 0 || Object.keys(ingredients).length === 0) {
@@ -22,16 +23,22 @@ const App = observer(() => {
   }, [categories, ingredients]);
 
   return (
-    <div className={stl.App}>
-      <div className={stl.nav_tablet}>
-        <SidebarMenu />
-      </div>
-      <div className={stl.nav}>
-        <Navigation />
-      </div>
-      <Content />
-      <Tags />
-    </div>
+    <>
+      {isAuth ? (
+        <div className={stl.App}>
+          <div className={stl.nav_tablet}>
+            <SidebarMenu />
+          </div>
+          <div className={stl.nav}>
+            <Navigation />
+          </div>
+          <Content />
+          <Tags />
+        </div>
+      ) : (
+        <AuthPage />
+      )}
+    </>
   );
 });
 

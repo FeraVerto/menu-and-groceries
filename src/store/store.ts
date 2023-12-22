@@ -15,6 +15,8 @@ class StoreApp {
     chatId: [],
   };
 
+  isAuth: boolean = false;
+
   error: string = '';
   //всё меню
   _menu: categoriesType[] = [];

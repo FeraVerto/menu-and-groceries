@@ -17,6 +17,7 @@
     "@types/uuid": "^9.0.1",
     "@types/uuid4": "^2.0.0",
     "@types/uuidv4": "^5.0.0",
+    "antd": "^5.12.5",
     "axios": "^1.4.0",
     "axios-mock-adapter": "^1.21.4",
     "babel-jest": "^27.4.2",
