@@ -20,7 +20,7 @@ export const ProductsList = observer(
     removeProductFromList,
     addedProductFromList,
   }: productsListType): ReactElement => {
-    const { dataToShowAddedIngredients, dataToShowDeletedIngredients } = Store;
+    const { shoppingList, dataToShowDeletedIngredients } = Store;
 
     const renderProducts = useCallback(
       (
@@ -71,7 +71,7 @@ export const ProductsList = observer(
       [addedProductFromList]
     );
 
-    const productsList = renderProducts(dataToShowAddedIngredients, true);
+    const productsList = renderProducts(shoppingList, true);
     const deletedProducts = renderDeletedProducts(
       dataToShowDeletedIngredients,
       false

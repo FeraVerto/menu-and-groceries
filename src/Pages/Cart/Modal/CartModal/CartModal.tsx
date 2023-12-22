@@ -33,7 +33,7 @@ export const CartModal = observer(
       dishesSearchForId,
       deleteIngredients,
       addIngredientFromSelection,
-      dataToShowAddedIngredients,
+      shoppingList,
       user,
       clearState,
     } = Store;
@@ -77,7 +77,7 @@ export const CartModal = observer(
         const result = await sendMessage(
           user.botToken,
           item,
-          dataToShowAddedIngredients,
+          shoppingList,
           arrayDishesName
         );
 
@@ -98,13 +98,7 @@ export const CartModal = observer(
           );
         }
       });
-    }, [
-      clearState,
-      closeModal,
-      dataToShowAddedIngredients,
-      dishesSearchForId,
-      user,
-    ]);
+    }, [clearState, closeModal, shoppingList, dishesSearchForId, user]);
 
     const onClickClearButton = useCallback((): void => {
       clearState();

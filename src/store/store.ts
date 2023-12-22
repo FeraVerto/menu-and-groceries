@@ -36,7 +36,7 @@ class StoreApp {
   addedIngredientsId: string[] = [];
   //данные для отображения добавленных ингредиентов в модальном окне
   //в разбитом на категории виде. (key это category категория ингредиента: мясо, овощи)
-  dataToShowAddedIngredients: {
+  shoppingList: {
     [key: string]: { name: string; id: string }[];
   } = {};
 
@@ -87,14 +87,14 @@ class StoreApp {
       }
     }, {} as { [key: string]: [{ name: string; id: string }] });
 
-    //если _dataToShowAddedIngredients уже есть такая категория, то
+    //если _shoppingList уже есть такая категория, то
     //добавляем ингридиент к существующей категории, иначе создаем новую категорию
     //c новым ингредиентом
     for (let category in result) {
-      if (this.dataToShowAddedIngredients.hasOwnProperty(category)) {
-        this.dataToShowAddedIngredients[category].push(...result[category]);
+      if (this.shoppingList.hasOwnProperty(category)) {
+        this.shoppingList[category].push(...result[category]);
       } else {
-        this.dataToShowAddedIngredients[category] = result[category];
+        this.shoppingList[category] = result[category];
       }
     }
 
@@ -127,19 +127,19 @@ class StoreApp {
       const categoryIngredient = ingredient?.category;
 
       //удаляем элементы из списка добавленных продуктов
-      const filteredData = this.dataToShowAddedIngredients[
-        categoryIngredient
-      ]?.filter((ingredient) => {
-        return ingredient.id !== id;
-      });
-      this.dataToShowAddedIngredients[categoryIngredient] = filteredData;
+      const filteredData = this.shoppingList[categoryIngredient]?.filter(
+        (ingredient) => {
+          return ingredient.id !== id;
+        }
+      );
+      this.shoppingList[categoryIngredient] = filteredData;
 
       //если в категории нет продуктов, удаляем категорию
       if (
-        this.dataToShowAddedIngredients[categoryIngredient]?.length === 0 ||
-        !this.dataToShowAddedIngredients[categoryIngredient]
+        this.shoppingList[categoryIngredient]?.length === 0 ||
+        !this.shoppingList[categoryIngredient]
       ) {
-        delete this.dataToShowAddedIngredients[categoryIngredient];
+        delete this.shoppingList[categoryIngredient];
       }
 
       //удаляем id из добавленных продуктов
@@ -167,10 +167,10 @@ class StoreApp {
         const category = this._ingredients[id]?.category;
         const name = this._ingredients[id]?.name;
 
-        if (!this.dataToShowAddedIngredients[category]) {
-          this.dataToShowAddedIngredients[category] = [{ name, id }];
+        if (!this.shoppingList[category]) {
+          this.shoppingList[category] = [{ name, id }];
         } else {
-          this.dataToShowAddedIngredients[category]?.push({ name, id });
+          this.shoppingList[category]?.push({ name, id });
         }
         this.addedIngredientsId = [...this.addedIngredientsId, item];
         //добавим в список для поиска, чтобы в дальнейшем не обращаться к _ingredients
@@ -221,7 +221,7 @@ class StoreApp {
     this.dishesSearchForId = {};
     this.dishesWithIngredients = {};
     this.addedIngredientsId = [];
-    this.dataToShowAddedIngredients = {};
+    this.shoppingList = {};
     this.deletedIngredientsId = [];
     this.dataToShowDeletedIngredients = [];
   };

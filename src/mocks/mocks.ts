@@ -52,6 +52,7 @@ import {
   fried_rolls,
   pan_pizza,
   rulet_bekon,
+  kanelloni,
 } from './../assets/imports';
 
 export const createMock = () => {
@@ -161,6 +162,26 @@ export const createMock = () => {
                 { name: 'масло оливковое', category: 'бакалея', id: '5' },
                 { name: 'соль', category: 'бакалея', id: '23' },
                 { name: 'лимон', category: 'бакалея', id: '39' },
+              ],
+            },
+            {
+              id: '0-7',
+              link: 'http://elenademyanko.blogspot.com/2016/11/basic-hummus.html?m=1',
+              image: kanelloni,
+              dishName: 'Каннеллони с мясной начинкой',
+              ingredients: [
+                { name: 'каннеллони', category: 'бакалея', id: '117' },
+                { name: 'куринная грудка', category: 'мясо', id: '44' },
+                { name: 'помидоры', category: 'овощи', id: '12' },
+                { name: 'масло оливковое', category: 'бакалея', id: '5' },
+                { name: 'лук', category: 'овощи', id: '18' },
+                { name: 'чеснок', category: 'овощи', id: '21' },
+                { name: 'твердый сыр', category: 'молочка', id: '28' },
+                { name: 'соль', category: 'бакалея', id: '23' },
+                { name: 'перец', category: 'бакалея', id: '24' },
+                { name: 'сливочное масло', category: 'молочка', id: '3' },
+                { name: 'мука', category: 'бакалея', id: '10' },
+                { name: 'молоко', category: 'молочка', id: '4' },
               ],
             },
           ],
@@ -1044,6 +1065,7 @@ export const createMock = () => {
         114: { name: 'копченая куриная грудка', category: 'мясо' },
         115: { name: 'зеленый лук', category: 'овощи' },
         116: { name: 'луковый порошок', category: 'бакалея' },
+        117: { name: 'каннеллони', category: 'бакалея' },
       },
     }),
   };
