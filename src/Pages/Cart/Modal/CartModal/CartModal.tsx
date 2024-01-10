@@ -40,6 +40,7 @@ export const CartModal = observer(
 
     const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
 
+    //временное дублирование
     const addIngredientToList = useCallback(
       (ing: { value: string; label: string }[] | null): null | void => {
         if (ing === null) {
