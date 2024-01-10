@@ -15,7 +15,7 @@ class StoreApp {
     chatId: [],
   };
 
-  isAuth: boolean = false;
+  isAuth: boolean = true;
 
   error: string = '';
   //всё меню

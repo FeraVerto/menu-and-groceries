@@ -14,6 +14,7 @@ export const AuthPage = () => {
         className={s.login_form}
         initialValues={{ remember: true }}
         onFinish={onFinish}
+        size="large"
       >
         <Form.Item
           name="username"
