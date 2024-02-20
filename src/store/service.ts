@@ -1,5 +1,10 @@
-import { getDishesList, getIngredientsList } from '../api/api';
-import { categoriesType, ingredientsType } from './storeTypes';
+import { getDishesList, getIngredientsList, sendDishData } from '../api/api';
+import {
+  categoriesType,
+  ingredientsType,
+  dishDataType,
+  dishType,
+} from './storeTypes';
 
 export const fetchDishes = async (
   setDishes: (data: categoriesType[]) => void,
@@ -10,6 +15,7 @@ export const fetchDishes = async (
   try {
     const response = await getDishesList();
 
+    //временно, можно вынести в отдельную функцию(?)
     const dataToSearchIngredientsById: {
       [key: string]: { name: string; category: string };
     } = {};
@@ -36,5 +42,16 @@ export const fetchIngredients = async (
   try {
     const responseIngredients = await getIngredientsList();
     setIngredients(responseIngredients.data.ingredients);
+  } catch (error) {}
+};
+
+//Сделать отправку блюда на бэк
+export const sendDishItem = async (
+  setNewDishItem: (data: dishType) => void,
+  dishData: dishDataType
+) => {
+  try {
+    const response = await sendDishData(dishData);
+    setNewDishItem(response.data.dataDishes);
   } catch (error) {}
 };

@@ -54,6 +54,7 @@ import {
   rulet_bekon,
   kanelloni,
 } from './../assets/imports';
+import { dishDataType } from '../store/storeTypes';
 
 export const createMock = () => {
   let mock = new MockAdapter(instance);
@@ -1066,6 +1067,17 @@ export const createMock = () => {
         115: { name: 'зеленый лук', category: 'овощи' },
         116: { name: 'луковый порошок', category: 'бакалея' },
         117: { name: 'каннеллони', category: 'бакалея' },
+      },
+    }),
+    setDish: mock.onPost('/menu-and-groceries/addDish').reply(200, {
+      dataDishes: {
+        id: '1000',
+        image: '',
+        link: '123',
+        dishName: 'Новое блюдо',
+        category: 'Новые блюда',
+        ingredients: [{ name: 'name', category: '3', id: '100000' }],
+        tags: ['1', '2', '3'],
       },
     }),
   };

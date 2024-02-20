@@ -7,13 +7,13 @@
 .modal_select_block > button:hover {
     border: 2px solid var(--light-green-second);
     background-color: var(--light-green-second);
-    color: var(--white);
+    /* color: var(--white); */
 }
 
 .modal_select_block > button:active {
     border: 2px solid var(--light-green-active-button);
     background-color: var(--light-green-active-button);
-    color: var(--white);
+    /* color: var(--white); */
 }
 
 .modal_select {

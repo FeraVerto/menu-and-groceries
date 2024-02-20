@@ -3,7 +3,12 @@ import { instanceTelegram, instance } from '../api/axios';
 //models
 import { ResultType } from '../model/modelTypes';
 //types
-import { categoriesType, ingredientsType } from '../store/storeTypes';
+import {
+  categoriesType,
+  ingredientsType,
+  dishDataType,
+  dishType,
+} from '../store/storeTypes';
 
 export const sendMessageToTelegramBot = (params: {
   token: string;
@@ -28,4 +33,11 @@ export const getIngredientsList = (): Promise<{
   data: { ingredients: ingredientsType };
 }> => {
   return instance.get(`/menu-and-groceries/ingredients`);
+};
+
+export const sendDishData = (
+  data: dishDataType
+): Promise<{ data: { dataDishes: dishType } }> => {
+  //временно, придумать эндпоинт
+  return instance.post(`/menu-and-groceries/addDish`, data);
 };

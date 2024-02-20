@@ -1,8 +1,14 @@
 //libraries
 import { makeAutoObservable } from 'mobx';
 //types
-import { categoriesType, ingredientsType, userType } from './storeTypes';
-import { fetchDishes, fetchIngredients } from './service';
+import {
+  categoriesType,
+  dishDataType,
+  dishType,
+  ingredientsType,
+  userType,
+} from './storeTypes';
+import { fetchDishes, fetchIngredients, sendDishItem } from './service';
 
 class StoreApp {
   constructor() {
@@ -47,6 +53,14 @@ class StoreApp {
   //данные для отображения удалённых ингредиентов в модальном окне, без категории
   dataToShowDeletedIngredients: { name: string; id: string }[] = [];
 
+  // //временно
+  // newDishItemTemp: dishDataType | {} = {};
+
+  // //временно
+  // setNewDishItemTemp = (data: dishDataType) => {
+  //   this.newDishItemTemp = data;
+  // };
+
   addIngredientsToCartList = (
     data: { name: string; category: string; id: string }[],
     dishName?: string,
@@ -90,7 +104,7 @@ class StoreApp {
     }, {} as { [key: string]: [{ name: string; id: string }] });
 
     //если _shoppingList уже есть такая категория, то
-    //добавляем ингридиент к существующей категории, иначе создаем новую категорию
+    //добавляем ингредиент к существующей категории, иначе создаем новую категорию
     //c новым ингредиентом
     for (let category in result) {
       if (this.shoppingList.hasOwnProperty(category)) {
@@ -204,6 +218,21 @@ class StoreApp {
     this._ingredients = data;
   };
 
+  setNewDishItem = (data: dishType) => {
+    let category = this._menu.find((item) => {
+      return data.category === item.name;
+    });
+
+    if (!category) {
+      return this._menu.push({
+        name: data.category,
+        dishes: [data],
+      });
+    } else {
+      return category.dishes.push(data);
+    }
+  };
+
   setError = (error: string) => {
     this.error = error;
   };
@@ -217,6 +246,10 @@ class StoreApp {
 
   loadIngredients = () => {
     fetchIngredients(this.setIngredients.bind(this));
+  };
+
+  setNewDish = (dishData: dishDataType) => {
+    sendDishItem(this.setNewDishItem.bind(this), dishData);
   };
 
   clearState = () => {

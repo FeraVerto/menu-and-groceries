@@ -1,6 +1,6 @@
 //libraries
 import { useCallback, useState } from 'react';
-import Select, { StylesConfig } from 'react-select';
+import { Select } from 'antd';
 import { observer } from 'mobx-react-lite';
 //components
 import { Button } from '../../../Components/Button/Button';
@@ -22,15 +22,6 @@ interface SelectOption {
   label: string;
 }
 
-const customStyles: StylesConfig<SelectOption> = {
-  control: (provided, state) => ({
-    ...provided,
-    height: '60px',
-    borderRadius: '15px',
-    marginRight: '15px',
-  }),
-};
-
 export const SelectProduct = observer(
   ({ addIngredientToList, tabIndex }: SelectProduct) => {
     let { _ingredients } = Store;
@@ -50,21 +41,20 @@ export const SelectProduct = observer(
       }
     };
 
+    const onSelectChange = (_: any, option: any) => {
+      setSelectedOption(option);
+    };
+
     return (
       <div className={stl.modal_select_block}>
         <div className={stl.modal_select}>
           <Select
-            isMulti
-            menuIsOpen={menuIsOpen}
-            onMenuOpen={() => setMenuIsOpen(true)}
-            onMenuClose={() => setMenuIsOpen(false)}
-            onKeyDown={handleButtonOnKeyDown}
-            styles={customStyles}
-            className={stl.select}
-            value={selectedOption}
-            //@ts-ignore
-            onChange={setSelectedOption}
+            mode="multiple"
+            placeholder="Outlined"
+            style={{ flex: 1 }}
             options={options}
+            onChange={onSelectChange}
+            //onSelect={onSelectChange}
           />
         </div>
 

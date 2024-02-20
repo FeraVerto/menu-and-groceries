@@ -1,42 +1,33 @@
 //libraries
-import { Modal, Form, Input, Button, Upload } from 'antd';
+import { Modal, Form, Input, Button, Upload, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 //components
 import { SelectProduct } from '../../../Cart/SelectProduct/SelectProduct';
 //store
 import Store from '../../../../store/store';
-import { useCallback } from 'react';
+import { convertObjectToArrayForSelect } from '../../../../utils/convertObjectToArray';
+import { dishDataType } from '../../../../store/storeTypes';
 
 type addDishModal = {
   isOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
 };
 
+export let formData: dishDataType | null = null;
+
 export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
   const [form] = Form.useForm();
-  let { addIngredientFromSelection } = Store;
+  //временно
+  let { setNewDish } = Store;
+  let { _ingredients } = Store;
+  const options = convertObjectToArrayForSelect(_ingredients);
 
-  //временное дублирование
-  const addIngredientToList = useCallback(
-    (ing: { value: string; label: string }[] | null): null | void => {
-      if (ing === null) {
-        return null;
-      }
-      const ingredientsArrayId = ing.reduce((acc, item) => {
-        return [...acc, item.value];
-      }, [] as string[]);
-
-      addIngredientFromSelection(ingredientsArrayId);
-    },
-    [addIngredientFromSelection]
-  );
-
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const onFinish = (values: dishDataType) => {
+    setNewDish(values);
+    //addIngredientFromSelection(values.productsList);
   };
 
   const normFile = (e: any) => {
-    console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
@@ -45,92 +36,68 @@ export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
 
   return (
     <div>
-      <Modal
-        title="Добавьте новое блюдо"
-        open={isOpen}
-        //onOk={() => handleOk('123')}
-        // onCancel={handleCancel}
-      >
+      <Modal open={isOpen} footer={null}>
         <h1>Добавить новое блюдо</h1>
         <Form
           //{...formItemLayout}
           form={form}
-          name="register"
+          name="addNewDish"
           onFinish={onFinish}
-          initialValues={{
-            residence: ['zhejiang', 'hangzhou', 'xihu'],
-            prefix: '86',
-          }}
           style={{ maxWidth: 600 }}
           scrollToFirstError
         >
           <Form.Item
-            name="name"
+            name="dishName"
             label="Введите название блюда"
-            //   rules={[
-            //     {
-            //       type: 'name',
-            //       message: 'The input is not valid E-mail!',
-            //     },
-            //     {
-            //       required: true,
-            //       message: 'Please input your E-mail!',
-            //     },
-            //   ]}
+            rules={[
+              {
+                required: true,
+                message: 'Введите название блюда!',
+              },
+            ]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            name="productsList"
+            name="ingredients"
             label="Выберите ингредиенты"
-            //   rules={[
-            //     {
-            //       type: 'name',
-            //       message: 'The input is not valid E-mail!',
-            //     },
-            //     {
-            //       required: true,
-            //       message: 'Please input your E-mail!',
-            //     },
-            //   ]}
+            rules={[
+              {
+                required: true,
+                message: 'Выберите ингредиенты!',
+              },
+            ]}
           >
-            <SelectProduct addIngredientToList={addIngredientToList} />
+            <Select
+              mode="multiple"
+              placeholder="Outlined"
+              style={{ flex: 1 }}
+              options={options}
+              //onChange={onSelectChange}
+              //onSelect={onSelectChange}
+            />
           </Form.Item>
-          <Form.Item
-            name="link"
-            label="Добавьте ссылку на блюдо"
-            //   rules={[
-            //     {
-            //       type: 'name',
-            //       message: 'The input is not valid E-mail!',
-            //     },
-            //     {
-            //       required: true,
-            //       message: 'Please input your E-mail!',
-            //     },
-            //   ]}
-          >
+          <Form.Item name="link" label="Добавьте ссылку на блюдо">
             <Input />
           </Form.Item>
           <Form.Item
-            name="upload"
+            name="image"
             label="Загрузите фото"
             valuePropName="fileList"
             getValueFromEvent={normFile}
             extra="longgggggggggggggggggggggggggggggggggg"
           >
             <Upload name="logo" action="/upload.do" listType="picture">
-              <Button
-              //icon={<UploadOutlined />}
-              >
-                Click to upload
-              </Button>
+              <Button>Click to upload</Button>
             </Upload>
           </Form.Item>
-          <Button type="primary" htmlType="submit">
-            Register
+          <Button
+            type="primary"
+            htmlType="submit"
+            onClick={() => setIsModalOpen(false)}
+          >
+            Создать
           </Button>
-          <p>Some contents...</p>
         </Form>
       </Modal>
     </div>
