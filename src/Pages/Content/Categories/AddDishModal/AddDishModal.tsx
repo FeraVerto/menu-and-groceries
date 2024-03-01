@@ -59,6 +59,18 @@ export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
             <Input />
           </Form.Item>
           <Form.Item
+            name="menuSection"
+            label="Введите название раздела меню"
+            rules={[
+              {
+                required: true,
+                message: 'Поле должно быть заполнено!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
             name="ingredients"
             label="Выберите ингредиенты"
             rules={[

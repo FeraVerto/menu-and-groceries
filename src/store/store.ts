@@ -220,12 +220,12 @@ class StoreApp {
 
   setNewDishItem = (data: dishType) => {
     let category = this._menu.find((item) => {
-      return data.category === item.name;
+      return data.menuSection === item.name;
     });
 
     if (!category) {
       return this._menu.push({
-        name: data.category,
+        name: data.menuSection,
         dishes: [data],
       });
     } else {

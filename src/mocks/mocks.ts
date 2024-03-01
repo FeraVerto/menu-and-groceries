@@ -54,7 +54,6 @@ import {
   rulet_bekon,
   kanelloni,
 } from './../assets/imports';
-import { dishDataType } from '../store/storeTypes';
 
 export const createMock = () => {
   let mock = new MockAdapter(instance);
@@ -1075,7 +1074,7 @@ export const createMock = () => {
         image: '',
         link: '123',
         dishName: 'Новое блюдо',
-        category: 'Новые блюда',
+        menuSection: 'Новые блюда',
         ingredients: [{ name: 'name', category: '3', id: '100000' }],
         tags: ['1', '2', '3'],
       },

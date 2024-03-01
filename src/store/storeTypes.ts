@@ -5,7 +5,7 @@ export type dishType = {
   image: string;
   link?: string;
   dishName: string;
-  category: string;
+  menuSection: string;
   ingredients: { name: string; category: string; id: string }[];
   tags: string[];
 };
@@ -28,7 +28,7 @@ export type productsList = { [key: string]: { name: string; id: string }[] };
 
 export type dishDataType = {
   dishName: string;
-  category: string;
+  menuSection: string;
   //временно
   image: any;
   ingredients: number[];
