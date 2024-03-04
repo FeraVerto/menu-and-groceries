@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/menu-and-groceries/static/css/main.9de20678.css",
-    "main.js": "/menu-and-groceries/static/js/main.0153c167.js",
-    "static/js/787.28cb0dcd.chunk.js": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js",
+    "main.css": "/menu-and-groceries/static/css/main.ea59867e.css",
+    "main.js": "/menu-and-groceries/static/js/main.2f84520d.js",
+    "static/js/787.d4aba7ab.chunk.js": "/menu-and-groceries/static/js/787.d4aba7ab.chunk.js",
     "static/media/pngegg (1).png": "/menu-and-groceries/static/media/pngegg (1).e884c8e76b366e0f7f69.png",
     "static/media/rulet_bekon.jpg": "/menu-and-groceries/static/media/rulet_bekon.2b46ed5fc7aabf8bf139.jpg",
     "static/media/orange.jpg": "/menu-and-groceries/static/media/orange.0ab312b21ceb9c8363bc.jpg",
@@ -54,16 +54,17 @@
     "static/media/axios.cjs": "/menu-and-groceries/static/media/axios.e7d77f0967a69d31d7fc.cjs",
     "static/media/pure.jpg": "/menu-and-groceries/static/media/pure.feef3cd3c48a16f8ca0f.jpg",
     "static/media/spagetti.jpg": "/menu-and-groceries/static/media/spagetti.d1e621ad63bed0f6aeea.jpg",
+    "static/media/kanelloni.jpg": "/menu-and-groceries/static/media/kanelloni.934a605e152406e0735c.jpg",
     "static/media/крошка картошка.jpg": "/menu-and-groceries/static/media/крошка картошка.711744ee3e9c47c93465.jpg",
     "static/media/remove_91021.svg": "/menu-and-groceries/static/media/remove_91021.37cc094f2e265b4f1eba5d0194f946a3.svg",
     "static/media/shoppingcart_80945.svg": "/menu-and-groceries/static/media/shoppingcart_80945.85df1fb42d98d99bdbc0496b574f3dd0.svg",
     "index.html": "/menu-and-groceries/index.html",
-    "main.9de20678.css.map": "/menu-and-groceries/static/css/main.9de20678.css.map",
-    "main.0153c167.js.map": "/menu-and-groceries/static/js/main.0153c167.js.map",
-    "787.28cb0dcd.chunk.js.map": "/menu-and-groceries/static/js/787.28cb0dcd.chunk.js.map"
+    "main.ea59867e.css.map": "/menu-and-groceries/static/css/main.ea59867e.css.map",
+    "main.2f84520d.js.map": "/menu-and-groceries/static/js/main.2f84520d.js.map",
+    "787.d4aba7ab.chunk.js.map": "/menu-and-groceries/static/js/787.d4aba7ab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9de20678.css",
-    "static/js/main.0153c167.js"
+    "static/css/main.ea59867e.css",
+    "static/js/main.2f84520d.js"
   ]
 }
