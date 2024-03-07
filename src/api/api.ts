@@ -8,6 +8,7 @@ import {
   ingredientsType,
   dishDataType,
   dishType,
+  sectionListType,
 } from '../store/storeTypes';
 
 export const sendMessageToTelegramBot = (params: {
@@ -23,10 +24,17 @@ export const sendMessageToTelegramBot = (params: {
   });
 };
 
-export const getDishesList = (): Promise<{
+export const getMenuSections = (): Promise<{
+  data: { menuSections: sectionListType[] };
+}> => {
+  return instance.get(`/menu-and-groceries/menu/sections`);
+};
+
+//еще не задействован
+export const getMenuSectionList = (): Promise<{
   data: { dataDishes: categoriesType[] };
 }> => {
-  return instance.get(`/menu-and-groceries/dishes`);
+  return instance.get(`/menu-and-groceries/menu/dishes`);
 };
 
 export const getIngredientsList = (): Promise<{

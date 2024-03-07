@@ -10,8 +10,14 @@ export type dishType = {
   tags: string[];
 };
 
+export type sectionListType = {
+  id: string;
+  sectionName: string;
+};
+
 export type categoriesType = {
-  name: string;
+  id: string;
+  sectionName: string;
   dishes: dishType[];
 };
 

@@ -58,10 +58,23 @@ import {
 export const createMock = () => {
   let mock = new MockAdapter(instance);
   return {
+    getSections: mock.onGet('/menu-and-groceries/menu/sections').reply(200, {
+      menuSections: [
+        { id: 'sec1', sectionName: 'Новые блюда' },
+        { id: 'sec2', sectionName: 'Супы' },
+        { id: 'sec3', sectionName: 'Салаты' },
+        { id: 'sec4', sectionName: 'Вторые блюда' },
+        { id: 'sec5', sectionName: 'Гарнир' },
+        { id: 'sec6', sectionName: 'Мясо' },
+        { id: 'sec7', sectionName: 'Выпечка' },
+        { id: 'sec8', sectionName: 'Новый год' },
+      ],
+    }),
     getMenu: mock.onGet('/menu-and-groceries/dishes').reply(200, {
       dataDishes: [
         {
-          name: 'Новые блюда',
+          id: 'sec1',
+          sectionName: 'Новые блюда',
           dishes: [
             {
               id: '0-1',
@@ -187,7 +200,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Супы',
+          id: 'sec2',
+          sectionName: 'Супы',
           dishes: [
             {
               id: '1-1',
@@ -334,7 +348,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Салаты',
+          id: 'sec3',
+          sectionName: 'Салаты',
           dishes: [
             {
               id: '2-1',
@@ -412,7 +427,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Вторые блюда',
+          id: 'sec4',
+          sectionName: 'Вторые блюда',
           dishes: [
             {
               id: '3-1',
@@ -543,7 +559,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Гарнир',
+          id: 'sec5',
+          sectionName: 'Гарнир',
           dishes: [
             {
               id: '5-1',
@@ -605,7 +622,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Мясо',
+          id: 'sec6',
+          sectionName: 'Мясо',
           dishes: [
             {
               id: '4-1',
@@ -730,7 +748,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Выпечка',
+          id: 'sec7',
+          sectionName: 'Выпечка',
           dishes: [
             {
               id: '6-1',
@@ -810,7 +829,8 @@ export const createMock = () => {
           ],
         },
         {
-          name: 'Новый год',
+          id: 'sec8',
+          sectionName: 'Новый год',
           dishes: [
             {
               id: '7-1',

@@ -11,12 +11,14 @@ import Store from '../../store/store';
 import { AddDishModal } from '../Content/Categories/AddDishModal/AddDishModal';
 
 export const Navigation = (): ReactElement => {
-  const { _menu } = Store;
+  const { sectionMenuList } = Store;
   const [isOpen, isOpenSet] = useState(false);
 
-  const menuLinks = _menu.map((m) => (
-    <li className={stl.categories_nav_item} key={m.name}>
-      <NavLink to={`/${m.name}`}>{m.name}</NavLink>
+  const menuLinks = sectionMenuList.map((m) => (
+    <li className={stl.categories_nav_item} key={m.id}>
+      <NavLink to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}>
+        {m.sectionName}
+      </NavLink>
     </li>
   ));
 

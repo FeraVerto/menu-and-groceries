@@ -11,16 +11,21 @@ import { Tags } from './Pages/Tags/Tags';
 import Store from './store/store';
 import { SidebarMenu } from './Components/SidebarMenu/SidebarMenu';
 import { AuthPage } from './Pages/Auth/Auth';
+import { helper } from './utils/helper';
 
 const App = observer(() => {
-  const { _menu: categories, _ingredients: ingredients, isAuth } = Store;
+  const { _ingredients: ingredients, isAuth, sectionMenuList } = Store;
 
+  //временно, запускается дважды
   useEffect(() => {
-    if (categories.length === 0 || Object.keys(ingredients).length === 0) {
-      Store.loadDishes();
+    if (sectionMenuList.length === 0) {
+      Store.loadSectionMenu();
+    }
+
+    if (Object.keys(ingredients).length === 0) {
       Store.loadIngredients();
     }
-  }, [categories, ingredients]);
+  }, [sectionMenuList, ingredients]);
 
   return (
     <>

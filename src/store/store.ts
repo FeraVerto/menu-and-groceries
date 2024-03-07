@@ -6,9 +6,15 @@ import {
   dishDataType,
   dishType,
   ingredientsType,
+  sectionListType,
   userType,
 } from './storeTypes';
-import { fetchDishes, fetchIngredients, sendDishItem } from './service';
+import {
+  fetchSectionsMenu,
+  fetchIngredients,
+  sendDishItem,
+  fetchDishes,
+} from './service';
 
 class StoreApp {
   constructor() {
@@ -33,6 +39,9 @@ class StoreApp {
   _ingredientsListForSearchId: {
     [key: string]: { name: string; category: string };
   } = {};
+
+  //меню, левый сайдбар
+  sectionMenuList: sectionListType[] = [];
 
   //[id блюда]: name блюда
   dishesSearchForId: { [key: string]: string } = {};
@@ -210,6 +219,10 @@ class StoreApp {
     this._ingredientsListForSearchId = data;
   };
 
+  setSectionMenuList = (data: sectionListType[]) => {
+    this.sectionMenuList = data;
+  };
+
   setDishes = (data: categoriesType[]) => {
     this._menu = data;
   };
@@ -220,12 +233,13 @@ class StoreApp {
 
   setNewDishItem = (data: dishType) => {
     let category = this._menu.find((item) => {
-      return data.menuSection === item.name;
+      return data.menuSection === item.sectionName;
     });
 
     if (!category) {
       return this._menu.push({
-        name: data.menuSection,
+        id: data.id,
+        sectionName: data.menuSection,
         dishes: [data],
       });
     } else {
@@ -237,11 +251,15 @@ class StoreApp {
     this.error = error;
   };
 
+  loadSectionMenu = () => {
+    fetchSectionsMenu(this.setSectionMenuList.bind(this));
+  };
+
   loadDishes = () => {
-    fetchDishes(
-      this.setDishes.bind(this),
-      this.setIngredientsForRead.bind(this)
-    );
+    // fetchDishes(
+    //   this.setDishes.bind(this),
+    //   this.setIngredientsForRead.bind(this)
+    // );
   };
 
   loadIngredients = () => {

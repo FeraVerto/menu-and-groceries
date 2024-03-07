@@ -15,9 +15,14 @@ export const Content = observer((): ReactElement => {
   const routes = _menu?.map((n) => {
     return (
       <Route
-        key={n.name}
-        path={`/${n.name}`}
-        element={<Category name={n.name} dishes={n.dishes} />}
+        key={n.id}
+        path={`/${n.sectionName}`}
+        element={
+          <Category
+            name={`/${encodeURIComponent(n.sectionName.replace(/\s/g, ''))}`}
+            dishes={n.dishes}
+          />
+        }
       />
     );
   });
