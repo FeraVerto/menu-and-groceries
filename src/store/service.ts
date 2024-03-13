@@ -1,4 +1,9 @@
-import { getMenuSections, getIngredientsList, sendDishData } from '../api/api';
+import {
+  getMenuSections,
+  getIngredientsList,
+  sendDishData,
+  getMenuSectionList,
+} from '../api/api';
 import {
   categoriesType,
   ingredientsType,
@@ -16,30 +21,16 @@ export const fetchSectionsMenu = async (
   } catch {}
 };
 
-export const fetchDishes = async (
-  setDishes: (data: categoriesType[]) => void,
-  setIngredientsForRead: (data: {
-    [key: string]: { name: string; category: string };
-  }) => void
+//getMenuSectionList
+
+export const fetchMenuSectionList = async (
+  id: string,
+  setMenuSectionList: (data: categoriesType) => void
 ) => {
   try {
-    // const response = await getDishesList();
-    // //временно, можно вынести в отдельную функцию(?)
-    // const dataToSearchIngredientsById: {
-    //   [key: string]: { name: string; category: string };
-    // } = {};
-    // response.data.dataDishes.forEach((category) => {
-    //   category.dishes.forEach((dish) => {
-    //     dish.ingredients.forEach((ingredient) => {
-    //       dataToSearchIngredientsById[ingredient.id] = {
-    //         name: ingredient.name,
-    //         category: ingredient.category,
-    //       };
-    //     });
-    //   });
-    // });
-    // setIngredientsForRead(dataToSearchIngredientsById);
-    // setDishes(response.data.dataDishes);
+    const response = await getMenuSectionList(id);
+    //для моков
+    setMenuSectionList(response.data);
   } catch (error) {}
 };
 

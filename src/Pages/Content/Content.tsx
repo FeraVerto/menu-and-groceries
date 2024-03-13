@@ -11,18 +11,13 @@ import Store from '../../store/store';
 import { helper } from '../../utils/helper';
 
 export const Content = observer((): ReactElement => {
-  const { _menu } = Store;
-  const routes = _menu?.map((n) => {
+  const { menu } = Store;
+  const routes = menu?.map((n) => {
     return (
       <Route
         key={n.id}
-        path={`/${n.sectionName}`}
-        element={
-          <Category
-            name={`/${encodeURIComponent(n.sectionName.replace(/\s/g, ''))}`}
-            dishes={n.dishes}
-          />
-        }
+        path={`/${n.sectionName.replace(/\s/g, '')}`}
+        element={<Category name={n.sectionName} dishes={n.dishes} />}
       />
     );
   });

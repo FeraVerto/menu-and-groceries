@@ -30,11 +30,12 @@ export const getMenuSections = (): Promise<{
   return instance.get(`/menu-and-groceries/menu/sections`);
 };
 
-//еще не задействован
-export const getMenuSectionList = (): Promise<{
-  data: { dataDishes: categoriesType[] };
+export const getMenuSectionList = (
+  id: string
+): Promise<{
+  data: categoriesType;
 }> => {
-  return instance.get(`/menu-and-groceries/menu/dishes`);
+  return instance.get(`/menu-and-groceries/menu/dishes/${id}`);
 };
 
 export const getIngredientsList = (): Promise<{

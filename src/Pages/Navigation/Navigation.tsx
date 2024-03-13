@@ -9,14 +9,23 @@ import { Cart } from '../Cart/Cart';
 //store
 import Store from '../../store/store';
 import { AddDishModal } from '../Content/Categories/AddDishModal/AddDishModal';
+import { helper } from '../../utils/helper';
 
 export const Navigation = (): ReactElement => {
-  const { sectionMenuList } = Store;
+  const { sectionMenuList, loadMenuSectionList } = Store;
   const [isOpen, isOpenSet] = useState(false);
+
+  const onClickHandler = (id: string) => {
+    helper('onClick id', id);
+    loadMenuSectionList(id);
+  };
 
   const menuLinks = sectionMenuList.map((m) => (
     <li className={stl.categories_nav_item} key={m.id}>
-      <NavLink to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}>
+      <NavLink
+        to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}
+        onClick={() => onClickHandler(m.id)}
+      >
         {m.sectionName}
       </NavLink>
     </li>

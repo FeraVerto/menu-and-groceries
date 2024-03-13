@@ -13,8 +13,9 @@ import {
   fetchSectionsMenu,
   fetchIngredients,
   sendDishItem,
-  fetchDishes,
+  fetchMenuSectionList,
 } from './service';
+import { helper } from '../utils/helper';
 
 class StoreApp {
   constructor() {
@@ -31,7 +32,7 @@ class StoreApp {
 
   error: string = '';
   //всё меню
-  _menu: categoriesType[] = [];
+  menu: categoriesType[] = [];
   //список ингредиентов для select в модальном окне(пока загружаем всё, что есть)
   //нужно придумать как лениво подгружать с сервера
   _ingredients: ingredientsType = {};
@@ -219,12 +220,15 @@ class StoreApp {
     this._ingredientsListForSearchId = data;
   };
 
-  setSectionMenuList = (data: sectionListType[]) => {
+  setSectionsMenu = (data: sectionListType[]) => {
     this.sectionMenuList = data;
   };
 
-  setDishes = (data: categoriesType[]) => {
-    this._menu = data;
+  setMenuSectionList = (data: categoriesType) => {
+    let currentId = this.menu.find((n) => n.id === data.id);
+    if (!currentId) {
+      this.menu = [...this.menu, data];
+    }
   };
 
   setIngredients = (data: ingredientsType) => {
@@ -232,19 +236,18 @@ class StoreApp {
   };
 
   setNewDishItem = (data: dishType) => {
-    let category = this._menu.find((item) => {
-      return data.menuSection === item.sectionName;
-    });
-
-    if (!category) {
-      return this._menu.push({
-        id: data.id,
-        sectionName: data.menuSection,
-        dishes: [data],
-      });
-    } else {
-      return category.dishes.push(data);
-    }
+    // let category = this._menu.find((item) => {
+    //   return data.menuSection === item.sectionName;
+    // });
+    // if (!category) {
+    //   return this._menu.push({
+    //     id: data.id,
+    //     sectionName: data.menuSection,
+    //     dishes: [data],
+    //   });
+    // } else {
+    //   return category.dishes.push(data);
+    // }
   };
 
   setError = (error: string) => {
@@ -252,14 +255,16 @@ class StoreApp {
   };
 
   loadSectionMenu = () => {
-    fetchSectionsMenu(this.setSectionMenuList.bind(this));
+    fetchSectionsMenu(this.setSectionsMenu.bind(this));
+    this.setIngredientsForRead.bind(this);
   };
 
-  loadDishes = () => {
-    // fetchDishes(
-    //   this.setDishes.bind(this),
-    //   this.setIngredientsForRead.bind(this)
-    // );
+  loadMenuSectionList = (id: string) => {
+    let currentId = this.menu.find((n) => n.id === id);
+
+    if (!currentId) {
+      fetchMenuSectionList(id, this.setMenuSectionList.bind(this));
+    }
   };
 
   loadIngredients = () => {

@@ -1,5 +1,6 @@
 export type userType = { id: string; botToken: string; chatId: number[] };
 
+//переименовать
 export type dishType = {
   id: string;
   image: string;
@@ -32,11 +33,11 @@ export type ingredientsDishes = { [key: string]: string[] };
 
 export type productsList = { [key: string]: { name: string; id: string }[] };
 
+//переименовать
 export type dishDataType = {
   dishName: string;
   menuSection: string;
-  //временно
-  image: any;
+  image: {};
   ingredients: number[];
   link: string;
 };

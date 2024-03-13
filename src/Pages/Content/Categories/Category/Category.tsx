@@ -20,7 +20,6 @@ type categoriyType = {
 
 export const Category = observer(
   ({ name, dishes }: categoriyType): ReactElement => {
-    //helper('dishes', dishes);
     const { addIngredientsToCartList } = Store;
 
     const notification = (dishName: string) =>
@@ -48,47 +47,49 @@ export const Category = observer(
       [addIngredientsToCartList]
     );
 
-    let dishesList = dishes.map((m) => (
-      <li className={stl.dishes_item} key={m.id}>
-        <div>
-          <div className={stl.image_wrapper}>
-            <img src={m.image} alt="add to cart button" />
-          </div>
-          <div className={stl.dishes_info}>
-            <h3 className={stl.dishes_info_name}>{m.dishName}</h3>
-            {m.link && (
-              <a
-                href={m.link}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="ссылка на рецепт борща"
-              >
-                Открыть рецепт
-              </a>
-            )}
-            <div className={stl.ingredients}>
-              {m.ingredients.map((n, i) => (
-                <div key={i}>
-                  {n.name}
-                  {i !== Object.keys(m.ingredients).length - 1 && ','}&nbsp;
-                </div>
-              ))}
+    let dishesList = dishes.map((m) => {
+      return (
+        <li className={stl.dishes_item} key={m.id}>
+          <div>
+            <div className={stl.image_wrapper}>
+              <img src={m.image} alt="add to cart button" />
+            </div>
+            <div className={stl.dishes_info}>
+              <h3 className={stl.dishes_info_name}>{m.dishName}</h3>
+              {m.link && (
+                <a
+                  href={m.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="ссылка на рецепт борща"
+                >
+                  Открыть рецепт
+                </a>
+              )}
+              <div className={stl.ingredients}>
+                {m.ingredients.map((n, i) => (
+                  <div key={n.id}>
+                    {n.name}
+                    {i !== Object.keys(m.ingredients).length - 1 && ','}&nbsp;
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={stl.dishes_add_button}>
-          <Button
-            width={'100%'}
-            height={'60px'}
-            text={'Добавить в корзину'}
-            onClick={() => {
-              onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
-            }}
-          />
-        </div>
-      </li>
-    ));
+          <div className={stl.dishes_add_button}>
+            <Button
+              width={'100%'}
+              height={'60px'}
+              text={'Добавить в корзину'}
+              onClick={() => {
+                onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
+              }}
+            />
+          </div>
+        </li>
+      );
+    });
 
     return (
       <>
