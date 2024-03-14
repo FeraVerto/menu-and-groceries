@@ -2,8 +2,8 @@
 import { makeAutoObservable } from 'mobx';
 //types
 import {
+  dishDataPayload,
   categoriesType,
-  dishDataType,
   dishType,
   ingredientsType,
   sectionListType,
@@ -14,6 +14,7 @@ import {
   fetchIngredients,
   sendDishItem,
   fetchMenuSectionList,
+  sendSectionMenuItem,
 } from './service';
 import { helper } from '../utils/helper';
 
@@ -62,14 +63,6 @@ class StoreApp {
   deletedIngredientsId: string[] = [];
   //данные для отображения удалённых ингредиентов в модальном окне, без категории
   dataToShowDeletedIngredients: { name: string; id: string }[] = [];
-
-  // //временно
-  // newDishItemTemp: dishDataType | {} = {};
-
-  // //временно
-  // setNewDishItemTemp = (data: dishDataType) => {
-  //   this.newDishItemTemp = data;
-  // };
 
   addIngredientsToCartList = (
     data: { name: string; category: string; id: string }[],
@@ -225,10 +218,24 @@ class StoreApp {
   };
 
   setMenuSectionList = (data: categoriesType) => {
-    let currentId = this.menu.find((n) => n.id === data.id);
-    if (!currentId) {
-      this.menu = [...this.menu, data];
-    }
+    // let currentId = this.menu.find((n) => n.sectionId === data.sectionId);
+    // if (!currentId) {
+    //   this.menu = [...this.menu, data];
+    // }
+    this.menu = [...this.menu, data];
+  };
+
+  setNewSectionMenu = (data: categoriesType) => {
+    this.sectionMenuList = [
+      ...this.sectionMenuList,
+      { sectionId: data.sectionId, sectionName: data.sectionName },
+    ];
+
+    this.setMenuSectionList(data);
+  };
+
+  setSectionMenu = (data: string) => {
+    sendSectionMenuItem(this.setNewSectionMenu.bind(this), data);
   };
 
   setIngredients = (data: ingredientsType) => {
@@ -236,18 +243,18 @@ class StoreApp {
   };
 
   setNewDishItem = (data: dishType) => {
-    // let category = this._menu.find((item) => {
-    //   return data.menuSection === item.sectionName;
-    // });
-    // if (!category) {
-    //   return this._menu.push({
-    //     id: data.id,
-    //     sectionName: data.menuSection,
-    //     dishes: [data],
-    //   });
-    // } else {
-    //   return category.dishes.push(data);
-    // }
+    let category = this.menu.find((item) => {
+      return data.sectionId === item.sectionId;
+    });
+    if (!category) {
+      return this.menu.push({
+        sectionId: data.id,
+        sectionName: data.menuSection,
+        dishes: [data],
+      });
+    } else {
+      return category.dishes.push(data);
+    }
   };
 
   setError = (error: string) => {
@@ -260,7 +267,7 @@ class StoreApp {
   };
 
   loadMenuSectionList = (id: string) => {
-    let currentId = this.menu.find((n) => n.id === id);
+    let currentId = this.menu.find((n) => n.sectionId === id);
 
     if (!currentId) {
       fetchMenuSectionList(id, this.setMenuSectionList.bind(this));
@@ -271,7 +278,7 @@ class StoreApp {
     fetchIngredients(this.setIngredients.bind(this));
   };
 
-  setNewDish = (dishData: dishDataType) => {
+  setNewDish = (dishData: dishDataPayload) => {
     sendDishItem(this.setNewDishItem.bind(this), dishData);
   };
 

@@ -1,7 +1,7 @@
 .cart {
     width: 100px;
     margin-left: 40px;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .cart_img {

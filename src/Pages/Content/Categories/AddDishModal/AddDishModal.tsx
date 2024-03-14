@@ -5,24 +5,29 @@ import { UploadOutlined } from '@ant-design/icons';
 import { SelectProduct } from '../../../Cart/SelectProduct/SelectProduct';
 //store
 import Store from '../../../../store/store';
-import { convertObjectToArrayForSelect } from '../../../../utils/convertObjectToArray';
-import { dishDataType } from '../../../../store/storeTypes';
+import {
+  convertObjectToArrayForSelect,
+  convertArrayForSelectSection,
+} from '../../../../utils/convertObjectToArray';
+import { dishDataPayload } from '../../../../store/storeTypes';
+import { helper } from '../../../../utils/helper';
+import { useState } from 'react';
 
 type addDishModal = {
   isOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
 };
 
-export let formData: dishDataType | null = null;
+export let formData: dishDataPayload | null = null;
 
 export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
   const [form] = Form.useForm();
   //временно
-  let { setNewDish } = Store;
-  let { _ingredients } = Store;
+  let { setNewDish, _ingredients, sectionMenuList } = Store;
   const options = convertObjectToArrayForSelect(_ingredients);
+  const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
 
-  const onFinish = (values: dishDataType) => {
+  const onFinish = (values: dishDataPayload) => {
     setNewDish(values);
     //addIngredientFromSelection(values.productsList);
   };
@@ -68,7 +73,13 @@ export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
               },
             ]}
           >
-            <Input />
+            <Select
+              placeholder="Outlined"
+              style={{ flex: 1 }}
+              options={optionsForSelectSection}
+              //onChange={onSelectChange}
+              //onSelect={onSelectChange}
+            />
           </Form.Item>
           <Form.Item
             name="ingredients"

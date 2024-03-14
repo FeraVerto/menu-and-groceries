@@ -54,22 +54,35 @@ import {
   rulet_bekon,
   kanelloni,
 } from './../assets/imports';
+import { categoriesType, dishDataPayload, dishType } from '../store/storeTypes';
+import { helper } from '../utils/helper';
 
 export const createMock = () => {
   let mock = new MockAdapter(instance);
   return {
     getSections: mock.onGet('/menu-and-groceries/menu/sections').reply(200, {
       menuSections: [
-        { id: 'sec1', sectionName: 'Новые блюда' },
-        { id: 'sec2', sectionName: 'Супы' },
-        { id: 'sec3', sectionName: 'Салаты' },
-        { id: 'sec4', sectionName: 'Вторые блюда' },
-        { id: 'sec5', sectionName: 'Гарнир' },
-        { id: 'sec6', sectionName: 'Мясо' },
-        { id: 'sec7', sectionName: 'Выпечка' },
-        { id: 'sec8', sectionName: 'Новый год' },
+        { sectionId: 'sec1', sectionName: 'Новые блюда' },
+        { sectionId: 'sec2', sectionName: 'Супы' },
+        { sectionId: 'sec3', sectionName: 'Салаты' },
+        { sectionId: 'sec4', sectionName: 'Вторые блюда' },
+        { sectionId: 'sec5', sectionName: 'Гарнир' },
+        { sectionId: 'sec6', sectionName: 'Мясо' },
+        { sectionId: 'sec7', sectionName: 'Выпечка' },
+        { sectionId: 'sec8', sectionName: 'Новый год' },
       ],
     }),
+    setSectionMenu: mock
+      .onPost('/menu-and-groceries/menu/sections')
+      .reply((config) => {
+        const newSection: categoriesType = {
+          sectionId: Math.random().toString(36).substring(7),
+          sectionName: JSON.parse(config.data),
+          dishes: [],
+        };
+
+        return [200, newSection];
+      }),
     getSectionMenuList: mock
       .onGet(/\/menu-and-groceries\/menu\/dishes\/\w+/)
       .reply((config) => {
@@ -80,7 +93,7 @@ export const createMock = () => {
         switch (id) {
           case 'sec1':
             responseData = {
-              id: 'sec1',
+              sectionId: 'sec1',
               sectionName: 'Новые блюда',
               dishes: [
                 {
@@ -223,7 +236,7 @@ export const createMock = () => {
 
           case 'sec2':
             responseData = {
-              id: 'sec2',
+              sectionId: 'sec2',
               sectionName: 'Супы',
               dishes: [
                 {
@@ -387,7 +400,7 @@ export const createMock = () => {
 
           case 'sec3':
             responseData = {
-              id: 'sec3',
+              sectionId: 'sec3',
               sectionName: 'Салаты',
               dishes: [
                 {
@@ -473,7 +486,7 @@ export const createMock = () => {
 
           case 'sec4':
             responseData = {
-              id: 'sec4',
+              sectionId: 'sec4',
               sectionName: 'Вторые блюда',
               dishes: [
                 {
@@ -628,7 +641,7 @@ export const createMock = () => {
 
           case 'sec5':
             responseData = {
-              id: 'sec5',
+              sectionId: 'sec5',
               sectionName: 'Гарнир',
               dishes: [
                 {
@@ -694,7 +707,7 @@ export const createMock = () => {
 
           case 'sec6':
             responseData = {
-              id: 'sec6',
+              sectionId: 'sec6',
               sectionName: 'Мясо',
               dishes: [
                 {
@@ -835,7 +848,7 @@ export const createMock = () => {
 
           case 'sec7':
             responseData = {
-              id: 'sec7',
+              sectionId: 'sec7',
               sectionName: 'Выпечка',
               dishes: [
                 {
@@ -927,7 +940,7 @@ export const createMock = () => {
 
           case 'sec8':
             responseData = {
-              id: 'sec8',
+              sectionId: 'sec8',
               sectionName: 'Новый год',
               dishes: [
                 {
@@ -2105,16 +2118,154 @@ export const createMock = () => {
         117: { name: 'каннеллони', category: 'бакалея' },
       },
     }),
-    setDish: mock.onPost('/menu-and-groceries/addDish').reply(200, {
-      dishData: {
-        id: '1000',
+    setDish: mock.onPost('/menu-and-groceries/addDish').reply((config) => {
+      const data: dishDataPayload = JSON.parse(config.data);
+
+      const ingredientsData = {
+        1: { name: 'сметана', category: 'молочка' },
+        2: { name: 'сливки', category: 'молочка' },
+        3: { name: 'сливочное масло', category: 'молочка' },
+        4: { name: 'молоко', category: 'молочка' },
+        5: { name: 'оливковое масло', category: 'бакалея' },
+        6: { name: 'греча', category: 'бакалея' },
+        7: { name: 'рис', category: 'бакалея' },
+        8: { name: 'овсянка', category: 'бакалея' },
+        9: { name: 'листы лазаньи', category: 'бакалея' },
+        10: { name: 'мука', category: 'бакалея' },
+        11: { name: 'фарш куриный', category: 'мясо' },
+        12: { name: 'помидоры', category: 'овощи' },
+        13: { name: 'говядина', category: 'мясо' },
+        14: { name: 'картофель', category: 'овощи' },
+        15: { name: 'свежая капуста', category: 'овощи' },
+        16: { name: 'свекла', category: 'овощи' },
+        17: { name: 'морковь', category: 'овощи' },
+        18: { name: 'лук', category: 'овощи' },
+        19: { name: 'томатная паста', category: 'бакалея' },
+        20: { name: 'уксус 6%', category: 'бакалея' },
+        21: { name: 'чеснок', category: 'овощи' },
+        22: { name: 'лавровый лист', category: 'бакалея' },
+        23: { name: 'соль', category: 'бакалея' },
+        24: { name: 'перец', category: 'бакалея' },
+        25: { name: 'растительное масло', category: 'бакалея' },
+        26: { name: 'зелень', category: 'овощи' },
+        27: { name: 'чечевица красная', category: 'бакалея' },
+        28: { name: 'твердый сыр', category: 'молочка' },
+        29: { name: 'бекон', category: 'мясо' },
+        30: { name: 'яйца', category: 'молочка' },
+        31: { name: 'крахмал', category: 'бакалея' },
+        32: { name: 'майонез', category: 'молочка' },
+        33: { name: 'зеленый горошек', category: 'бакалея' },
+        34: { name: 'вареная колбаса', category: 'колбасы' },
+        35: { name: 'соленые огурцы', category: 'бакалея' },
+        36: { name: 'копченая колбаса', category: 'колбасы' },
+        37: { name: 'мелкие макароны', category: 'бакалея' },
+        38: { name: 'каперсы', category: 'бакалея' },
+        39: { name: 'лимон', category: 'овощи' },
+        40: { name: 'зира', category: 'бакалея' },
+        41: { name: 'барбарис', category: 'бакалея' },
+        42: { name: 'куркума', category: 'бакалея' },
+        43: { name: 'кабачок', category: 'овощи' },
+        44: { name: 'куринная грудка', category: 'мясо' },
+        45: { name: 'панировочные сухари', category: 'бакалея' },
+        46: { name: 'пармезан', category: 'молочка' },
+        47: { name: 'шампиньоны', category: 'грибы' },
+        48: { name: 'фольга', category: 'бытовая химия' },
+        49: { name: 'конфеты', category: 'сладости' },
+        50: { name: 'бумажные полотенца', category: 'бытовая химия' },
+        51: { name: 'прокладки', category: 'бытовая химия' },
+        52: { name: 'мусорные пакеты', category: 'бытовая химия' },
+        53: { name: 'шампунь', category: 'бытовая химия' },
+        54: { name: 'гель для душа', category: 'бытовая химия' },
+        55: { name: 'фольга для выпечки', category: 'бытовая химия' },
+        56: { name: 'моцарелла', category: 'молочка' },
+        57: { name: 'тесто', category: 'тесто' },
+        58: { name: 'кетчуп', category: 'бакалея' },
+        59: { name: 'минералка', category: 'напитки' },
+        60: { name: 'пельмени', category: 'заморозка' },
+        61: { name: 'средство для посуды', category: 'бытовая химия' },
+        62: { name: 'сгущенка', category: 'молочка' },
+        63: { name: 'фасоль', category: 'бакалея' },
+        64: { name: 'ватные диски', category: 'бытовая химия' },
+        65: { name: 'лепешки', category: 'хлеб' },
+        66: { name: 'терияки', category: 'бакалея' },
+        67: { name: 'чай', category: 'бакалея' },
+        68: { name: 'творог', category: 'молочка' },
+        69: { name: 'перец болгарский', category: 'овощи' },
+        70: { name: 'консервированная фасоль', category: 'бакалея' },
+        71: { name: 'паприка', category: 'бакалея' },
+        72: { name: 'кинза', category: 'овощи' },
+        73: { name: 'квас', category: 'напитки' },
+        74: { name: 'огурцы свежие', category: 'овощи' },
+        75: { name: 'филе сельди', category: 'рыба' },
+        76: { name: 'яблоки', category: 'овощи' },
+        77: { name: 'булгур', category: 'бакалея' },
+        78: { name: 'макароны', category: 'бакалея' },
+        79: { name: 'чесночный порошок', category: 'бакалея' },
+        80: { name: 'лосось', category: 'рыба' },
+        81: { name: 'лапша для вока', category: 'бакалея' },
+        82: { name: 'имбирь', category: 'овощи' },
+        83: { name: 'салат айсберг', category: 'овощи' },
+        84: { name: 'сухарики', category: 'бакалея' },
+        85: { name: 'помидоры черри', category: 'овощи' },
+        86: { name: 'ветчина', category: 'колбасы' },
+        87: { name: 'разрыхлитель', category: 'бакалея' },
+        88: { name: 'сахар', category: 'бакалея' },
+        89: { name: 'бульонный кубик', category: 'бакалея' },
+        90: { name: 'красное вино', category: 'алкоголь' },
+        91: { name: 'белое вино', category: 'алкоголь' },
+        92: { name: 'тимьян', category: 'овощи' },
+        93: { name: 'манка', category: 'бакалея' },
+        94: { name: 'соевый соус', category: 'бакалея' },
+        95: { name: 'кари', category: 'бакалея' },
+        96: { name: 'розмарин', category: 'бакалея' },
+        97: { name: 'апельсины', category: 'овощи' },
+        98: { name: 'кефир', category: 'молочка' },
+        99: { name: 'лаваш', category: 'бакалея' },
+        100: { name: 'хмели сунели', category: 'бакалея' },
+        101: { name: 'паста тахини', category: 'бакалея' },
+        102: { name: 'нут', category: 'бакалея' },
+        103: { name: 'льняная мука', category: 'бакалея' },
+        104: { name: 'творожный сыр', category: 'молочка' },
+        105: { name: 'рис круглозерный', category: 'бакалея' },
+        106: { name: 'рисовый уксус', category: 'бакалея' },
+        107: { name: 'нори', category: 'бакалея' },
+        108: { name: 'икра мойвы Санта Бремор', category: 'молочка' },
+        109: { name: 'снежный краб', category: 'рыба' },
+        110: { name: 'креветки', category: 'рыба' },
+        111: { name: 'сухари Панко', category: 'бакалея' },
+        112: { name: 'соус спайси', category: 'бакалея' },
+        113: { name: 'соус ореховый', category: 'бакалея' },
+        114: { name: 'копченая куриная грудка', category: 'мясо' },
+        115: { name: 'зеленый лук', category: 'овощи' },
+        116: { name: 'луковый порошок', category: 'бакалея' },
+        117: { name: 'каннеллони', category: 'бакалея' },
+      };
+
+      const newDish: dishType = {
+        id: Math.random().toString(36).substring(7),
         image: '',
-        link: '123',
-        dishName: 'Новое блюдо',
-        menuSection: 'Новые блюда',
-        ingredients: [{ name: 'name', category: '3', id: '100000' }],
-        tags: ['1', '2', '3'],
-      },
+        link: data.link,
+        dishName: data.dishName,
+        menuSection: data.menuSection,
+        sectionId: Math.random().toString(36).substring(7),
+        ingredients: data.ingredients.reduce((acc, item) => {
+          const itemId = item.toString() as string;
+          return [
+            ...acc,
+            {
+              //@ts-ignore
+              name: ingredientsData[itemId].name,
+              //@ts-ignore
+              category: ingredientsData[itemId].category,
+              id: itemId,
+            },
+          ];
+        }, [] as { name: string; category: string; id: string }[]),
+        //ingredients: [],
+        tags: ['Tag1', 'Tag2'], // Пример добавленных тегов
+      };
+
+      return [200, newDish];
     }),
   };
 };

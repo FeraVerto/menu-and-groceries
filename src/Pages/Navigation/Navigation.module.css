@@ -1,8 +1,12 @@
 .categories_nav {
     min-width: 350px;
     height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
-    position: sticky;
+    /* position: sticky; */
     top: 0;
 
     background-color: var(--light-green-main);
@@ -11,9 +15,9 @@
 .categories_nav_list {
     padding: 0;
 
-    position: fixed;
-    left: 40px;
-    top: 30%;
+    /* position: fixed; */
+    /* left: 40px; */
+    /* top: 30%; */
 
     list-style: none;
 }

@@ -15,8 +15,9 @@ export const Content = observer((): ReactElement => {
   const routes = menu?.map((n) => {
     return (
       <Route
-        key={n.id}
-        path={`/${n.sectionName.replace(/\s/g, '')}`}
+        key={n.sectionId}
+        path={`/${n.sectionName?.replace(/\s/g, '')}`}
+        //path={`/${n.sectionName}`}
         element={<Category name={n.sectionName} dishes={n.dishes} />}
       />
     );

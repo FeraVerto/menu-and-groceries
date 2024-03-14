@@ -3,11 +3,12 @@ import {
   getIngredientsList,
   sendDishData,
   getMenuSectionList,
+  sendSectionMenuData,
 } from '../api/api';
 import {
   categoriesType,
   ingredientsType,
-  dishDataType,
+  dishDataPayload,
   dishType,
   sectionListType,
 } from './storeTypes';
@@ -21,7 +22,15 @@ export const fetchSectionsMenu = async (
   } catch {}
 };
 
-//getMenuSectionList
+export const sendSectionMenuItem = async (
+  setNewSectionMenu: (data: categoriesType) => void,
+  data: string
+) => {
+  try {
+    const response = await sendSectionMenuData(data);
+    setNewSectionMenu(response.data);
+  } catch {}
+};
 
 export const fetchMenuSectionList = async (
   id: string,
@@ -46,10 +55,10 @@ export const fetchIngredients = async (
 //Сделать отправку блюда на бэк
 export const sendDishItem = async (
   setNewDishItem: (data: dishType) => void,
-  dishData: dishDataType
+  dishData: dishDataPayload
 ) => {
   try {
     const response = await sendDishData(dishData);
-    setNewDishItem(response.data.dataDishes);
+    setNewDishItem(response.data);
   } catch (error) {}
 };

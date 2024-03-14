@@ -8,23 +8,22 @@ import stl from './Navigation.module.css';
 import { Cart } from '../Cart/Cart';
 //store
 import Store from '../../store/store';
-import { AddDishModal } from '../Content/Categories/AddDishModal/AddDishModal';
 import { helper } from '../../utils/helper';
+import { AddCategory } from './AddCategory/AddCategory';
 
 export const Navigation = (): ReactElement => {
   const { sectionMenuList, loadMenuSectionList } = Store;
   const [isOpen, isOpenSet] = useState(false);
 
   const onClickHandler = (id: string) => {
-    helper('onClick id', id);
     loadMenuSectionList(id);
   };
 
   const menuLinks = sectionMenuList.map((m) => (
-    <li className={stl.categories_nav_item} key={m.id}>
+    <li className={stl.categories_nav_item} key={m.sectionId}>
       <NavLink
         to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}
-        onClick={() => onClickHandler(m.id)}
+        onClick={() => onClickHandler(m.sectionId)}
       >
         {m.sectionName}
       </NavLink>
@@ -39,11 +38,12 @@ export const Navigation = (): ReactElement => {
     <nav className={stl.categories_nav}>
       <div>
         <Cart />
-        <Button onClick={showModal}>+</Button>
+        {/* <Button onClick={showModal}>+</Button> */}
       </div>
 
-      <AddDishModal isOpen={isOpen} setIsModalOpen={isOpenSet} />
+      {/* <AddDishModal isOpen={isOpen} setIsModalOpen={isOpenSet} /> */}
       <ul className={stl.categories_nav_list}>{menuLinks}</ul>
+      <AddCategory />
     </nav>
   );
 };

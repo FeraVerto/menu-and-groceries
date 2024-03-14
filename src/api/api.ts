@@ -6,7 +6,7 @@ import { ResultType } from '../model/modelTypes';
 import {
   categoriesType,
   ingredientsType,
-  dishDataType,
+  dishDataPayload,
   dishType,
   sectionListType,
 } from '../store/storeTypes';
@@ -30,6 +30,14 @@ export const getMenuSections = (): Promise<{
   return instance.get(`/menu-and-groceries/menu/sections`);
 };
 
+export const sendSectionMenuData = (
+  data: string
+): Promise<{
+  data: categoriesType;
+}> => {
+  return instance.post(`/menu-and-groceries/menu/sections`, data);
+};
+
 export const getMenuSectionList = (
   id: string
 ): Promise<{
@@ -45,8 +53,8 @@ export const getIngredientsList = (): Promise<{
 };
 
 export const sendDishData = (
-  data: dishDataType
-): Promise<{ data: { dataDishes: dishType } }> => {
+  data: dishDataPayload
+): Promise<{ data: dishType }> => {
   //временно, придумать эндпоинт
   return instance.post(`/menu-and-groceries/addDish`, data);
 };
