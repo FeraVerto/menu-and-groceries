@@ -9,18 +9,23 @@ import {
   convertObjectToArrayForSelect,
   convertArrayForSelectSection,
 } from '../../../../utils/convertObjectToArray';
-import { dishDataPayload } from '../../../../store/storeTypes';
+import { dishDataPayload, sectionListType } from '../../../../store/storeTypes';
 import { helper } from '../../../../utils/helper';
 import { useState } from 'react';
 
 type addDishModal = {
   isOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
+  menuSection: sectionListType;
 };
 
 export let formData: dishDataPayload | null = null;
 
-export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
+export const AddDishModal = ({
+  isOpen,
+  setIsModalOpen,
+  menuSection,
+}: addDishModal) => {
   const [form] = Form.useForm();
   //временно
   let { setNewDish, _ingredients, sectionMenuList } = Store;
@@ -66,6 +71,7 @@ export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
           <Form.Item
             name="menuSection"
             label="Введите название раздела меню"
+            initialValue={menuSection.sectionName}
             rules={[
               {
                 required: true,
@@ -73,6 +79,9 @@ export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
               },
             ]}
           >
+            <Input disabled />
+          </Form.Item>
+          {/* <Form.Item>
             <Select
               placeholder="Outlined"
               style={{ flex: 1 }}
@@ -80,7 +89,7 @@ export const AddDishModal = ({ isOpen, setIsModalOpen }: addDishModal) => {
               //onChange={onSelectChange}
               //onSelect={onSelectChange}
             />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             name="ingredients"
             label="Выберите ингредиенты"

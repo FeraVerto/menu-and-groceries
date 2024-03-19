@@ -18,7 +18,13 @@ export const Content = observer((): ReactElement => {
         key={n.sectionId}
         path={`/${n.sectionName?.replace(/\s/g, '')}`}
         //path={`/${n.sectionName}`}
-        element={<Category name={n.sectionName} dishes={n.dishes} />}
+        element={
+          <Category
+            name={n.sectionName}
+            dishes={n.dishes}
+            menuSection={{ sectionId: n.sectionId, sectionName: n.sectionName }}
+          />
+        }
       />
     );
   });

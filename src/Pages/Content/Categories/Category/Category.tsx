@@ -1,26 +1,32 @@
 //libraries
 import { observer } from 'mobx-react-lite';
 import cogoToast from 'cogo-toast';
-import { ReactElement, useCallback } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
+import { Button } from 'antd';
 //styles
 import stl from './Category.module.css';
 //components
-import { Button } from '../../../../Components/Button/Button';
+// import { Button } from '../../../../Components/Button/Button';
 import { Cart } from '../../../Cart/Cart';
 //store
 import Store from '../../../../store/store';
 //types
-import { dishType } from '../../../../store/storeTypes';
+import { dishType, sectionListType } from '../../../../store/storeTypes';
 import { helper } from '../../../../utils/helper';
+import { AddDishModal } from '../AddDishModal/AddDishModal';
 
 type categoriyType = {
   name: string;
   dishes: dishType[];
+  menuSection: sectionListType;
 };
 
+//временно
+//нужен ли здесь обсервер
 export const Category = observer(
-  ({ name, dishes }: categoriyType): ReactElement => {
+  ({ name, dishes, menuSection }: categoriyType): ReactElement => {
     const { addIngredientsToCartList } = Store;
+    const [isOpen, isOpenSet] = useState(false);
 
     const notification = (dishName: string) =>
       cogoToast.success(
@@ -78,18 +84,22 @@ export const Category = observer(
           </div>
 
           <div className={stl.dishes_add_button}>
-            <Button
+            {/* <Button
               width={'100%'}
               height={'60px'}
               text={'Добавить в корзину'}
               onClick={() => {
                 onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
               }}
-            />
+            /> */}
           </div>
         </li>
       );
     });
+
+    const showModal = () => {
+      isOpenSet(true);
+    };
 
     return (
       <>
@@ -97,8 +107,23 @@ export const Category = observer(
           <Cart />
         </div>
         <div className={stl.categories}>
+          <div>
+            <Button
+              onClick={showModal}
+              type="primary"
+              shape="circle"
+              size="large"
+            >
+              +
+            </Button>
+          </div>
           <h2 className={stl.category_name}>{name}</h2>
           <ul className={stl.category_dishes_list}>{dishesList}</ul>
+          <AddDishModal
+            isOpen={isOpen}
+            setIsModalOpen={isOpenSet}
+            menuSection={menuSection}
+          />
         </div>
       </>
     );

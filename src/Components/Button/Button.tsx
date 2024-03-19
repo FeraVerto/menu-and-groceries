@@ -3,6 +3,7 @@ import { ReactElement, useCallback } from 'react';
 //styles
 import stl from './Button.module.css';
 
+//временно
 export const Button = ({ ...props }): ReactElement => {
   const styles = {
     width: props.width,
