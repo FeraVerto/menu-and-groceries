@@ -40,7 +40,7 @@ export type dishDataPayload = {
   dishName: string;
   menuSection: string;
   //либо новая секция (без id), либо секция из списка
-  sectionId?: string;
+  sectionId: string;
   image: {};
   ingredients: number[];
   link: string;

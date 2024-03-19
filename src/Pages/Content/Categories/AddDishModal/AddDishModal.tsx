@@ -33,7 +33,7 @@ export const AddDishModal = ({
   const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
 
   const onFinish = (values: dishDataPayload) => {
-    setNewDish(values);
+    setNewDish({ ...values, sectionId: menuSection.sectionId });
     //addIngredientFromSelection(values.productsList);
   };
 

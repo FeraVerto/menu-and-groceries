@@ -2247,7 +2247,7 @@ export const createMock = () => {
         link: data.link,
         dishName: data.dishName,
         menuSection: data.menuSection,
-        sectionId: Math.random().toString(36).substring(7),
+        sectionId: data.sectionId,
         ingredients: data.ingredients.reduce((acc, item) => {
           const itemId = item.toString() as string;
           return [

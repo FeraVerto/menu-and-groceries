@@ -92,6 +92,14 @@ export const Category = observer(
                 onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
               }}
             /> */}
+            <Button
+              className={stl.dishes_add_button}
+              onClick={() => {
+                onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
+              }}
+            >
+              Добавить в корзину
+            </Button>
           </div>
         </li>
       );

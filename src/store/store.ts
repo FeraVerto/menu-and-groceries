@@ -246,15 +246,8 @@ class StoreApp {
     let category = this.menu.find((item) => {
       return data.sectionId === item.sectionId;
     });
-    if (!category) {
-      return this.menu.push({
-        sectionId: data.id,
-        sectionName: data.menuSection,
-        dishes: [data],
-      });
-    } else {
-      return category.dishes.push(data);
-    }
+
+    return category?.dishes.push(data);
   };
 
   setError = (error: string) => {
