@@ -61,6 +61,7 @@ export const AddDishModal = ({
             label="Введите название блюда"
             rules={[
               {
+                max: 150,
                 required: true,
                 message: 'Введите название блюда!',
               },
