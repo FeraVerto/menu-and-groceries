@@ -11,28 +11,3 @@
 
     background-color: var(--light-green-main);
 }
-
-.categories_nav_list {
-    padding: 0;
-
-    /* position: fixed; */
-    /* left: 40px; */
-    /* top: 30%; */
-
-    list-style: none;
-}
-
-.categories_nav_item {
-    margin-bottom: 20px;
-    text-align: left;
-    font-size: 30px;
-}
-
-.categories_nav_item a {
-    text-decoration: none;
-    text-transform: uppercase;
-    color: var(--white);
-    font-weight: bold;
-    white-space: nowrap;
-}
-
