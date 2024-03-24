@@ -21,9 +21,8 @@ export const AuthPage = () => {
           rules={[{ required: true, message: 'Please input your Username!' }]}
         >
           <Input
-            prefix={
-              <UserOutlined className="site-form-item-icon" rev={undefined} />
-            }
+            //@ts-ignore
+            prefix={<UserOutlined className="site-form-item-icon" />}
             placeholder="Username"
           />
         </Form.Item>
@@ -32,9 +31,8 @@ export const AuthPage = () => {
           rules={[{ required: true, message: 'Please input your Password!' }]}
         >
           <Input
-            prefix={
-              <LockOutlined className="site-form-item-icon" rev={undefined} />
-            }
+            //@ts-ignore
+            prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
           />

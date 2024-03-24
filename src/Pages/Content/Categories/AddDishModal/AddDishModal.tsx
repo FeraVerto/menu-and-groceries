@@ -30,10 +30,12 @@ export const AddDishModal = ({
   //временно
   let { setNewDish, _ingredients, sectionMenuList } = Store;
   const options = convertObjectToArrayForSelect(_ingredients);
-  const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
+  //const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
 
   const onFinish = (values: dishDataPayload) => {
     setNewDish({ ...values, sectionId: menuSection.sectionId });
+    setIsModalOpen(false);
+    form.resetFields();
     //addIngredientFromSelection(values.productsList);
   };
 
@@ -46,7 +48,7 @@ export const AddDishModal = ({
 
   return (
     <div>
-      <Modal open={isOpen} footer={null}>
+      <Modal open={isOpen} footer={null} onCancel={() => setIsModalOpen(false)}>
         <h1>Добавить новое блюдо</h1>
         <Form
           //{...formItemLayout}
@@ -63,7 +65,7 @@ export const AddDishModal = ({
               {
                 max: 150,
                 required: true,
-                message: 'Введите название блюда!',
+                message: 'Введите название блюда',
               },
             ]}
           >
@@ -124,11 +126,7 @@ export const AddDishModal = ({
               <Button>Click to upload</Button>
             </Upload>
           </Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            onClick={() => setIsModalOpen(false)}
-          >
+          <Button type="primary" htmlType="submit">
             Создать
           </Button>
         </Form>

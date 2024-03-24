@@ -8,12 +8,13 @@ import stl from './Category.module.css';
 //components
 // import { Button } from '../../../../Components/Button/Button';
 import { Cart } from '../../../Cart/Cart';
+import { AddDishModal } from '../AddDishModal/AddDishModal';
 //store
 import Store from '../../../../store/store';
 //types
 import { dishType, sectionListType } from '../../../../store/storeTypes';
 import { helper } from '../../../../utils/helper';
-import { AddDishModal } from '../AddDishModal/AddDishModal';
+import { PlusOutlined } from '@ant-design/icons';
 
 type categoriyType = {
   name: string;
@@ -83,20 +84,14 @@ export const Category = observer(
             </div>
           </div>
 
+          {/* Разобраться с классами кнопок */}
           <div className={stl.dishes_add_button}>
-            {/* <Button
-              width={'100%'}
-              height={'60px'}
-              text={'Добавить в корзину'}
-              onClick={() => {
-                onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
-              }}
-            /> */}
             <Button
               className={stl.dishes_add_button}
               onClick={() => {
                 onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
               }}
+              block
             >
               Добавить в корзину
             </Button>
@@ -115,17 +110,20 @@ export const Category = observer(
           <Cart />
         </div>
         <div className={stl.categories}>
-          <div>
+          <div className={stl.category_header}>
+            <h2 className={stl.category_name}>{name}</h2>
             <Button
+              //временно , нагромождение классов
+              className={`${stl.dishes_add_button} ${stl.add_new_button}`}
               onClick={showModal}
               type="primary"
               shape="circle"
-              size="large"
-            >
-              +
-            </Button>
+              icon={
+                //@ts-ignore
+                <PlusOutlined style={{ fontSize: '40px' }} />
+              }
+            />
           </div>
-          <h2 className={stl.category_name}>{name}</h2>
           <ul className={stl.category_dishes_list}>{dishesList}</ul>
           <AddDishModal
             isOpen={isOpen}
