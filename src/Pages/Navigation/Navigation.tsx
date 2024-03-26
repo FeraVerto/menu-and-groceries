@@ -15,9 +15,7 @@ export const Navigation = (): ReactElement => {
 
   return (
     <nav className={stl.categories_nav}>
-      <div>
-        <Cart />
-      </div>
+      <Cart />
       <MenuList
         sectionMenuList={sectionMenuList}
         loadMenuSectionList={loadMenuSectionList}

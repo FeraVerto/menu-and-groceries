@@ -1,0 +1,47 @@
+.new_category_menu_form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.new_category_menu_form h3 {
+    margin-left: 10px;
+
+    align-self: flex-start;
+
+    text-transform: uppercase;
+}
+
+.new_category_menu_form input {
+    width: 100%;
+    height: 50px;
+
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+.new_category_menu_form button {
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    text-transform: uppercase;
+
+    /* padding: 15px 0; */
+    height: 50px;
+    
+    /* text-align: center; */
+    text-transform: uppercase;
+    color: var(--light-green-active-button);
+    font-weight: bold;
+    font-size: 20px;
+
+    border-color: var(--light-green-main);
+    border-radius: 15px;
+
+    background-color: var(--white);
+}
+
+.category_input {
+    margin: 0;
+}

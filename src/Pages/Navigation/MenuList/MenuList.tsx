@@ -5,7 +5,7 @@ import { sectionListType } from '../../../store/storeTypes';
 //styles
 import stl from '../MenuList/MenuList.module.css';
 
-export type MenuList = {
+export type MenuListType = {
   sectionMenuList: sectionListType[];
   loadMenuSectionList: (id: string) => void;
 };
@@ -13,7 +13,7 @@ export type MenuList = {
 export const MenuList = ({
   sectionMenuList,
   loadMenuSectionList,
-}: MenuList) => {
+}: MenuListType) => {
   const menuLinks = sectionMenuList.map((m) => (
     <li className={stl.categories_nav_item} key={m.sectionId}>
       <NavLink

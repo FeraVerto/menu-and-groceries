@@ -235,7 +235,15 @@ class StoreApp {
   };
 
   setSectionMenu = (data: string) => {
-    sendSectionMenuItem(this.setNewSectionMenu.bind(this), data);
+    const foundSection = this.sectionMenuList.find(
+      (item) => item.sectionName === data
+    );
+    if (!foundSection) {
+      sendSectionMenuItem(this.setNewSectionMenu.bind(this), data);
+    } else {
+      this.error = 'Уже существует!';
+      //вывести сообщение, что такая секция меню уже существует
+    }
   };
 
   setIngredients = (data: ingredientsType) => {

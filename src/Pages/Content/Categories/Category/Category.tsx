@@ -3,10 +3,10 @@ import { observer } from 'mobx-react-lite';
 import cogoToast from 'cogo-toast';
 import { ReactElement, useCallback, useState } from 'react';
 import { Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 //styles
 import stl from './Category.module.css';
 //components
-// import { Button } from '../../../../Components/Button/Button';
 import { Cart } from '../../../Cart/Cart';
 import { AddDishModal } from '../AddDishModal/AddDishModal';
 //store
@@ -14,7 +14,6 @@ import Store from '../../../../store/store';
 //types
 import { dishType, sectionListType } from '../../../../store/storeTypes';
 import { helper } from '../../../../utils/helper';
-import { PlusOutlined } from '@ant-design/icons';
 
 type categoriyType = {
   name: string;

@@ -1,4 +1,5 @@
 .categories_nav {
+    padding: 20px;
     min-width: 350px;
     height: 100vh;
 
@@ -8,6 +9,6 @@
     
     /* position: sticky; */
     top: 0;
-
+    box-sizing: border-box;
     background-color: var(--light-green-main);
 }

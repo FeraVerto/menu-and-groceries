@@ -1,33 +1,54 @@
 //libraries
 import Button from 'antd/es/button/button';
 import Input from 'antd/es/input/Input';
-import { ChangeEvent, useState } from 'react';
+import { Form } from 'antd';
+import { useNavigate } from 'react-router-dom';
+//styles
+import stl from './AddCategory.module.css';
 //store
 import Store from '../../../store/store';
-import { useNavigate } from 'react-router-dom';
 //helper
 import { helper } from '../../../utils/helper';
 
 export const AddCategory = () => {
   const { setSectionMenu } = Store;
-  const [newCategory, setNewCategory] = useState('');
+  const [form] = Form.useForm();
   const navigate = useNavigate();
 
-  const onChangedHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewCategory(e.currentTarget.value);
+  const onFinish = (value: { sectionName: string }) => {
+    setSectionMenu(value.sectionName);
+    navigate(`${value.sectionName}`);
+    form.resetFields();
   };
 
-  const onClickHandler = () => {
-    setSectionMenu(newCategory);
-    navigate(`${newCategory}`);
-  };
   return (
-    <div>
-      <h3>Создайте новую категорию меню</h3>
-      <Input onChange={(e) => onChangedHandler(e)} />
-      <Button type="primary" onClick={onClickHandler}>
-        Создать
-      </Button>
+    <div className={stl.new_category_menu_form}>
+      <h3>Добавить категорию</h3>
+      <Form
+        //{...formItemLayout}
+        form={form}
+        name="addNewCategory"
+        onFinish={onFinish}
+        scrollToFirstError
+      >
+        <Form.Item
+          name="sectionName"
+          rules={[
+            {
+              //подумать над максимальным ограничением
+              max: 18,
+              required: true,
+              message: 'Введите название блюда',
+            },
+          ]}
+          style={{ marginBottom: 10 }}
+        >
+          <Input />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          Создать
+        </Button>
+      </Form>
     </div>
   );
 };
