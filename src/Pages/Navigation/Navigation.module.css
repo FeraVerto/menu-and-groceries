@@ -12,3 +12,13 @@
     box-sizing: border-box;
     background-color: var(--light-green-main);
 }
+
+.categories_nav h1 {
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 0;
+
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 50px;
+}

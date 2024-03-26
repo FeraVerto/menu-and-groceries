@@ -12,6 +12,7 @@ import Store from './store/store';
 import { SidebarMenu } from './Components/SidebarMenu/SidebarMenu';
 import { AuthPage } from './Pages/Auth/Auth';
 import { helper } from './utils/helper';
+import { Cart } from './Pages/Cart/Cart';
 
 const App = observer(() => {
   const { _ingredients: ingredients, isAuth, sectionMenuList } = Store;
@@ -30,16 +31,19 @@ const App = observer(() => {
   return (
     <>
       {isAuth ? (
-        <div className={stl.App}>
-          <div className={stl.nav_tablet}>
-            <SidebarMenu />
+        <>
+          <Cart />
+          <div className={stl.App}>
+            <div className={stl.nav_tablet}>
+              <SidebarMenu />
+            </div>
+            <div className={stl.nav}>
+              <Navigation />
+            </div>
+            <Content />
+            <Tags />
           </div>
-          <div className={stl.nav}>
-            <Navigation />
-          </div>
-          <Content />
-          <Tags />
-        </div>
+        </>
       ) : (
         <AuthPage />
       )}

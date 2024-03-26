@@ -1,16 +1,32 @@
 .cart {
     width: 100px;
-    margin-left: 40px;
-    /* position: fixed; */
+    height: 100px;
+    margin-right: 20px;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+
+    border: 2px solid var(--light-green-main);
+    border-radius: 50%;
+    background-color: var(--light-green-main);
 }
 
-.cart_img {
-    margin-top: 27px;
+.cart_counter {
+    margin-left: 5px;
+    font-size: 30px;
+}
+
+.cart span {
+    font-size: 45px;
 }
 
 @media only screen and (max-width: 768px) {
     .cart {
         margin-left: 0;
-        background-color: #fff;
+        background-color: var(--white);
     }
 }

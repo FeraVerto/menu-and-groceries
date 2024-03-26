@@ -1,6 +1,7 @@
 .categories_nav_list {
     margin: 0;
     padding: 0;
+    height: 100%;
 
     /* position: fixed; */
     /* left: 40px; */
@@ -23,9 +24,14 @@
 }
 
 .categories_nav_item {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    
     text-align: left;
     font-size: 30px;
+}
+
+.categories_nav_item:last-child {
+  margin-bottom: 0;
 }
 
 .categories_nav_item a {

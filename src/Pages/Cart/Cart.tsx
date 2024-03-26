@@ -2,6 +2,7 @@ import cart from '../../assets/icon/shoppingcart_80945.svg';
 //libraries
 import { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 import Modal from 'react-modal';
 //store
 import Store from '../../store/store';
@@ -39,8 +40,10 @@ export const Cart = observer(() => {
       className={stl.cart}
       onKeyDown={onPressEnter}
     >
-      <img className={stl.cart_img} src={cart} alt="cart" width="60px" />
-      {addedIngredientsId.length}
+      {/* @ts-ignore */}
+      <ShoppingCartOutlined className={stl.cart_img} />
+      {/* <img className={stl.cart_img} src={cart} alt="cart" width="60px" /> */}
+      <div className={stl.cart_counter}>{addedIngredientsId.length}</div>
       <CartModal isOpen={modalIsOpen} closeModal={closeModal} />
     </div>
   );
