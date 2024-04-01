@@ -1,17 +1,20 @@
 //libraries
 import { Modal, Form, Input, Button, Upload, Select } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-//components
-import { SelectProduct } from '../../../Cart/SelectProduct/SelectProduct';
+import { useState } from 'react';
 //store
 import Store from '../../../../store/store';
+//utils
 import {
   convertObjectToArrayForSelect,
   convertArrayForSelectSection,
 } from '../../../../utils/convertObjectToArray';
+//types
 import { dishDataPayload, sectionListType } from '../../../../store/storeTypes';
+//styles
+import stl from './AddDishModal.module.css';
+//helper
 import { helper } from '../../../../utils/helper';
-import { useState } from 'react';
 
 type addDishModal = {
   isOpen: boolean;
@@ -28,12 +31,32 @@ export const AddDishModal = ({
 }: addDishModal) => {
   const [form] = Form.useForm();
   //временно
-  let { setNewDish, _ingredients, sectionMenuList } = Store;
+  let { setNewDish, _ingredients } = Store;
   const options = convertObjectToArrayForSelect(_ingredients);
   //const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const { Option } = Select;
+
+  const onSelect = (
+    value: string | number,
+    option: { value: string; label: string; id: string }
+  ) => {
+    setSelectedItems([...selectedItems, Number(option.id)]);
+  };
+
+  const onCancelForm = () => {
+    form.resetFields();
+    setIsModalOpen(false);
+  };
 
   const onFinish = (values: dishDataPayload) => {
-    setNewDish({ ...values, sectionId: menuSection.sectionId });
+    let data = {
+      ...values,
+      sectionId: menuSection.sectionId,
+      ingredients: selectedItems,
+    };
+
+    setNewDish(data);
     setIsModalOpen(false);
     form.resetFields();
     //addIngredientFromSelection(values.productsList);
@@ -48,19 +71,28 @@ export const AddDishModal = ({
 
   return (
     <div>
-      <Modal open={isOpen} footer={null} onCancel={() => setIsModalOpen(false)}>
+      <Modal
+        className={stl.add_dish_modal}
+        open={isOpen}
+        footer={null}
+        onCancel={onCancelForm}
+        width="500px"
+      >
         <h1>Добавить новое блюдо</h1>
         <Form
           //{...formItemLayout}
+          className={stl.add_dish_form}
           form={form}
           name="addNewDish"
           onFinish={onFinish}
           style={{ maxWidth: 600 }}
+          layout="vertical"
           scrollToFirstError
         >
           <Form.Item
+            className={stl.dish_form_item}
             name="dishName"
-            label="Введите название блюда"
+            label="Название блюда"
             rules={[
               {
                 max: 150,
@@ -69,33 +101,15 @@ export const AddDishModal = ({
               },
             ]}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="menuSection"
-            label="Введите название раздела меню"
-            initialValue={menuSection.sectionName}
-            rules={[
-              {
-                required: true,
-                message: 'Поле должно быть заполнено!',
-              },
-            ]}
-          >
-            <Input disabled />
-          </Form.Item>
-          {/* <Form.Item>
-            <Select
-              placeholder="Outlined"
-              style={{ flex: 1 }}
-              options={optionsForSelectSection}
-              //onChange={onSelectChange}
-              //onSelect={onSelectChange}
+            <Input
+              className={stl.dish_form_input}
+              placeholder="Введите название блюда"
             />
-          </Form.Item> */}
+          </Form.Item>
           <Form.Item
+            className={stl.dish_form_item}
             name="ingredients"
-            label="Выберите ингредиенты"
+            label="Ингредиенты"
             rules={[
               {
                 required: true,
@@ -104,30 +118,71 @@ export const AddDishModal = ({
             ]}
           >
             <Select
+              className={stl.dish_form_input}
               mode="multiple"
-              placeholder="Outlined"
-              style={{ flex: 1 }}
-              options={options}
-              //onChange={onSelectChange}
-              //onSelect={onSelectChange}
-            />
-          </Form.Item>
-          <Form.Item name="link" label="Добавьте ссылку на блюдо">
-            <Input />
+              placeholder="Выберите ингредиенты"
+              onSelect={onSelect}
+            >
+              {options.map((item) => {
+                return (
+                  <Option
+                    key={item.id}
+                    id={item.id}
+                    value={item.value}
+                    className={stl.ingredient_option}
+                  >
+                    {item.label}
+                  </Option>
+                );
+              })}
+            </Select>
           </Form.Item>
           <Form.Item
+            className={stl.dish_form_item}
+            name="menuSection"
+            label="Раздел меню"
+            initialValue={menuSection.sectionName}
+            rules={[
+              {
+                required: true,
+                message: 'Поле должно быть заполнено!',
+              },
+            ]}
+          >
+            <Input className={stl.dish_form_input} disabled />
+          </Form.Item>
+          <Form.Item
+            className={stl.dish_form_item}
+            name="link"
+            label="Ссылка на блюдо"
+          >
+            <Input
+              className={stl.dish_form_input}
+              placeholder="Добавьте ссылку"
+            />
+          </Form.Item>
+          <Form.Item
+            className={`${stl.dish_form_item} ${stl.dish_form_upload}`}
             name="image"
-            label="Загрузите фото"
             valuePropName="fileList"
             getValueFromEvent={normFile}
-            extra="longgggggggggggggggggggggggggggggggggg"
+            extra=""
           >
-            <Upload name="logo" action="/upload.do" listType="picture">
-              <Button>Click to upload</Button>
+            <Upload
+              name="logo"
+              action="/upload.do"
+              listType="picture"
+              maxCount={1}
+            >
+              <Button className={stl.add_photo_button}>Загрузите фото</Button>
             </Upload>
           </Form.Item>
-          <Button type="primary" htmlType="submit">
-            Создать
+          <Button
+            type="primary"
+            htmlType="submit"
+            className={stl.submit_button}
+          >
+            Создать карточку блюда
           </Button>
         </Form>
       </Modal>

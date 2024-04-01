@@ -3,7 +3,7 @@ import { ReactElement, useRef } from 'react';
 //styles
 import stl from './Navigation.module.css';
 //components
-import { AddCategory } from './AddCategory/AddCategory';
+import { AddCategory } from './AddCategoryForm/AddCategory';
 import { MenuList, MenuListRef } from './MenuList/MenuList';
 //store
 import Store from '../../store/store';

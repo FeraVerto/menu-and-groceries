@@ -83,18 +83,15 @@ export const Category = observer(
             </div>
           </div>
 
-          {/* Разобраться с классами кнопок */}
-          <div className={stl.dishes_add_button}>
-            <Button
-              className={stl.dishes_add_button}
-              onClick={() => {
-                onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
-              }}
-              block
-            >
-              Добавить в корзину
-            </Button>
-          </div>
+          <Button
+            className={stl.dishes_add_button}
+            onClick={() => {
+              onClickAddButtonHandler(m.ingredients, m.id, m.dishName);
+            }}
+            block
+          >
+            Добавить в корзину
+          </Button>
         </li>
       );
     });
