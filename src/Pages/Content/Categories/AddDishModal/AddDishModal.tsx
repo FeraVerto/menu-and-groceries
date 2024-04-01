@@ -41,7 +41,11 @@ export const AddDishModal = ({
     value: string | number,
     option: { value: string; label: string; id: string }
   ) => {
-    setSelectedItems([...selectedItems, Number(option.id)]);
+    let result = selectedItems.find((item) => item === Number(option.id));
+
+    if (!result) {
+      setSelectedItems([...selectedItems, Number(option.id)]);
+    }
   };
 
   const onCancelForm = () => {
