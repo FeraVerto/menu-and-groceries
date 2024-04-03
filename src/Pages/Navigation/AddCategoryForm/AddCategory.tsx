@@ -44,7 +44,7 @@ export const AddCategory = () => {
               message: 'Превышен лимит в 18 символов',
             },
           ]}
-          style={{ marginBottom: 25, textTransform: 'uppercase' }}
+          style={{ marginBottom: 25 }}
         >
           <Input />
         </Form.Item>

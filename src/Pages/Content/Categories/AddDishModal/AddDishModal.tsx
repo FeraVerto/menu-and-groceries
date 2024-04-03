@@ -9,6 +9,7 @@ import {
   convertObjectToArrayForSelect,
   convertArrayForSelectSection,
 } from '../../../../utils/convertObjectToArray';
+import { rules } from './rulesAddDishModalForm';
 import { getBase64 } from '../../../../utils/getBase64';
 //types
 import { dishDataPayload, sectionListType } from '../../../../store/storeTypes';
@@ -41,6 +42,16 @@ export const AddDishModal = ({
     useState<UploadChangeParam<UploadFile<any>>>();
   const { Option } = Select;
 
+  useEffect(() => {
+    const onChangeFile = async (value: any) => {
+      await getBase64(value.file).then((result) => {
+        setImageUrl(result);
+      });
+    };
+
+    onChangeFile(dataImage);
+  }, [dataImage]);
+
   const onSelect = (
     value: string | number,
     option: { value: string; label: string; id: string }
@@ -52,7 +63,7 @@ export const AddDishModal = ({
     }
   };
 
-  const onCancelForm = () => {
+  const onCancel = () => {
     form.resetFields();
     setIsModalOpen(false);
   };
@@ -75,23 +86,13 @@ export const AddDishModal = ({
     setDataImage(e);
   };
 
-  useEffect(() => {
-    const onChangeFile = async (value: any) => {
-      await getBase64(value.file).then((result) => {
-        setImageUrl(result);
-      });
-    };
-
-    onChangeFile(dataImage);
-  }, [dataImage]);
-
   return (
     <div>
       <Modal
         className={stl.add_dish_modal}
         open={isOpen}
         footer={null}
-        onCancel={onCancelForm}
+        onCancel={onCancel}
         width="500px"
       >
         <h1>Добавить новое блюдо</h1>
@@ -109,13 +110,7 @@ export const AddDishModal = ({
             className={stl.dish_form_item}
             name="dishName"
             label="Название блюда"
-            rules={[
-              {
-                max: 150,
-                required: true,
-                message: 'Введите название блюда',
-              },
-            ]}
+            rules={rules.dishName}
           >
             <Input
               className={stl.dish_form_input}
@@ -126,12 +121,7 @@ export const AddDishModal = ({
             className={stl.dish_form_item}
             name="ingredients"
             label="Ингредиенты"
-            rules={[
-              {
-                required: true,
-                message: 'Выберите ингредиенты!',
-              },
-            ]}
+            rules={rules.ingredients}
           >
             <Select
               className={stl.dish_form_input}
@@ -158,12 +148,7 @@ export const AddDishModal = ({
             name="menuSection"
             label="Раздел меню"
             initialValue={menuSection.sectionName}
-            rules={[
-              {
-                required: true,
-                message: 'Поле должно быть заполнено!',
-              },
-            ]}
+            rules={rules.menuSection}
           >
             <Input className={stl.dish_form_input} disabled />
           </Form.Item>
@@ -171,6 +156,8 @@ export const AddDishModal = ({
             className={stl.dish_form_item}
             name="link"
             label="Ссылка на блюдо"
+            validateDebounce={1000}
+            rules={rules.link}
           >
             <Input
               className={stl.dish_form_input}
@@ -178,6 +165,7 @@ export const AddDishModal = ({
             />
           </Form.Item>
           <Form.Item
+            // добавить валидацию для размера файла
             className={`${stl.dish_form_item} ${stl.dish_form_upload}`}
             name="image"
             valuePropName="fileList"
