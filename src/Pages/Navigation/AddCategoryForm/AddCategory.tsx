@@ -36,12 +36,15 @@ export const AddCategory = () => {
           rules={[
             {
               //подумать над максимальным ограничением
-              max: 18,
               required: true,
               message: 'Введите название блюда',
             },
+            {
+              max: 18,
+              message: 'Превышен лимит в 18 символов',
+            },
           ]}
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 25, textTransform: 'uppercase' }}
         >
           <Input />
         </Form.Item>
