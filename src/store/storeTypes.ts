@@ -41,7 +41,7 @@ export type dishDataPayload = {
   menuSection: string;
   //либо новая секция (без id), либо секция из списка
   sectionId: string;
-  image: {};
+  image: string;
   ingredients: number[];
   link: string;
 };

@@ -2243,7 +2243,7 @@ export const createMock = () => {
 
       const newDish: dishType = {
         id: Math.random().toString(36).substring(7),
-        image: '',
+        image: data.image,
         link: data.link,
         dishName: data.dishName,
         menuSection: data.menuSection,

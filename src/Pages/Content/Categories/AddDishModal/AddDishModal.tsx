@@ -1,7 +1,7 @@
 //libraries
-import { Modal, Form, Input, Button, Upload, Select } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { Modal, Form, Input, Button, Upload, Select, UploadFile } from 'antd';
+import { useEffect, useState } from 'react';
+import { UploadChangeParam } from 'antd/es/upload';
 //store
 import Store from '../../../../store/store';
 //utils
@@ -9,6 +9,7 @@ import {
   convertObjectToArrayForSelect,
   convertArrayForSelectSection,
 } from '../../../../utils/convertObjectToArray';
+import { getBase64 } from '../../../../utils/getBase64';
 //types
 import { dishDataPayload, sectionListType } from '../../../../store/storeTypes';
 //styles
@@ -35,6 +36,9 @@ export const AddDishModal = ({
   const options = convertObjectToArrayForSelect(_ingredients);
   //const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [imageUrl, setImageUrl] = useState('');
+  const [dataImage, setDataImage] =
+    useState<UploadChangeParam<UploadFile<any>>>();
   const { Option } = Select;
 
   const onSelect = (
@@ -58,6 +62,7 @@ export const AddDishModal = ({
       ...values,
       sectionId: menuSection.sectionId,
       ingredients: selectedItems,
+      image: imageUrl,
     };
 
     setNewDish(data);
@@ -67,11 +72,18 @@ export const AddDishModal = ({
   };
 
   const normFile = (e: any) => {
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e?.fileList;
+    setDataImage(e);
   };
+
+  useEffect(() => {
+    const onChangeFile = async (value: any) => {
+      await getBase64(value.file).then((result) => {
+        setImageUrl(result);
+      });
+    };
+
+    onChangeFile(dataImage);
+  }, [dataImage]);
 
   return (
     <div>
@@ -176,6 +188,7 @@ export const AddDishModal = ({
               name="logo"
               action="/upload.do"
               listType="picture"
+              beforeUpload={() => false}
               maxCount={1}
             >
               <Button className={stl.add_photo_button}>Загрузите фото</Button>
