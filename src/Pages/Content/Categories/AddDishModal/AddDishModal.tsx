@@ -1,6 +1,6 @@
 //libraries
 import { Modal, Form, Input, Button, Upload, Select, UploadFile } from 'antd';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { UploadChangeParam } from 'antd/es/upload';
 //store
 import Store from '../../../../store/store';
@@ -52,35 +52,48 @@ export const AddDishModal = ({
     onChangeFile(dataImage);
   }, [dataImage]);
 
-  const onSelect = (
-    value: string | number,
-    option: { value: string; label: string; id: string }
-  ) => {
-    let result = selectedItems.find((item) => item === Number(option.id));
+  const onSelect = useCallback(
+    (
+      value: string | number,
+      option: { value: string; label: string; id: string }
+    ) => {
+      let result = selectedItems.find((item) => item === Number(option.id));
 
-    if (!result) {
-      setSelectedItems([...selectedItems, Number(option.id)]);
-    }
-  };
+      if (!result) {
+        setSelectedItems([...selectedItems, Number(option.id)]);
+      }
+    },
+    [selectedItems, setSelectedItems]
+  );
 
-  const onCancel = () => {
+  const onCancel = useCallback(() => {
     form.resetFields();
     setIsModalOpen(false);
-  };
+  }, [form, setIsModalOpen]);
 
-  const onFinish = (values: dishDataPayload) => {
-    let data = {
-      ...values,
-      sectionId: menuSection.sectionId,
-      ingredients: selectedItems,
-      image: imageUrl,
-    };
+  const onFinish = useCallback(
+    (values: dishDataPayload) => {
+      let data = {
+        ...values,
+        sectionId: menuSection.sectionId,
+        ingredients: selectedItems,
+        image: imageUrl,
+      };
 
-    setNewDish(data);
-    setIsModalOpen(false);
-    form.resetFields();
-    //addIngredientFromSelection(values.productsList);
-  };
+      setNewDish(data);
+      setIsModalOpen(false);
+      form.resetFields();
+      //addIngredientFromSelection(values.productsList);
+    },
+    [
+      setNewDish,
+      selectedItems,
+      imageUrl,
+      setIsModalOpen,
+      menuSection.sectionId,
+      form,
+    ]
+  );
 
   const normFile = (e: any) => {
     setDataImage(e);
