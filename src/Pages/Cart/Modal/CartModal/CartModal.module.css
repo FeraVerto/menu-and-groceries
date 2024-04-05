@@ -1,20 +1,34 @@
 .modal_header_block {
-    margin-bottom: 20px;
-    
     display: flex;
     justify-content: space-between;
 }
 
+.ant-modal-body {
+    height: 100%;
+}
+
 .modal_visual_list_block {
-    margin-bottom: 20px;
     display: flex;
-    max-height: calc(100vh - 2px);
+    height: calc(50vh - 2px);;
 
     flex: 1 1 auto;
-    overflow-y: scroll;
+    overflow-y: auto;
     
     border: 2px solid var(--light-green-main);
     border-radius: 15px;
+}
+
+.modal_visual_list_block::-webkit-scrollbar {
+    width: 4px;
+}
+
+.modal_visual_list_block::-webkit-scrollbar-track {
+    background: var(--green--light-green-second);
+}
+
+.modal_visual_list_block::-webkit-scrollbar-thumb {
+    background-color: var(--light-green-active-button);
+    border-radius: 2px;
 }
 
 .modal_bottom_buttons_block {
@@ -67,11 +81,7 @@
     margin-bottom: 10px;
 }
 .modal_content {
-    margin-right: -50%;
-    padding: 30px;
-
-    width: 1000px;
-    height: 800px;
+    margin: 0;
 
     position: absolute;
     top: 50%;
@@ -83,7 +93,6 @@
     flex-direction: column;
 
     border: 2px solid var(--lightgray);
-    border-radius: 15px;
     background-color: var(--white);
     transform: translate(-50%, -50%);
 }

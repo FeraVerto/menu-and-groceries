@@ -1,9 +1,7 @@
 //libraries
 import { useCallback, useState } from 'react';
-import { Select } from 'antd';
+import { Button, Select } from 'antd';
 import { observer } from 'mobx-react-lite';
-//components
-import { Button } from '../../../Components/Button/Button';
 //styles
 import stl from './SelectProduct.module.css';
 //store
@@ -17,16 +15,12 @@ type SelectProduct = {
   tabIndex?: number;
 };
 
-interface SelectOption {
-  value: string;
-  label: string;
-}
-
 export const SelectProduct = observer(
   ({ addIngredientToList, tabIndex }: SelectProduct) => {
     let { _ingredients } = Store;
+    const { Option } = Select;
     const [selectedOption, setSelectedOption] = useState(null);
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
+    // const [menuIsOpen, setMenuIsOpen] = useState(false);
     const options = convertObjectToArrayForSelect(_ingredients);
 
     const handleButtonClick = useCallback((): void => {
@@ -34,12 +28,12 @@ export const SelectProduct = observer(
       setSelectedOption(null);
     }, [addIngredientToList, setSelectedOption, selectedOption]);
 
-    const handleButtonOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === 'Enter') {
-        setMenuIsOpen(true);
-        console.log('menuIsOpen', menuIsOpen);
-      }
-    };
+    // const handleButtonOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    //   if (e.key === 'Enter') {
+    //     setMenuIsOpen(true);
+    //     console.log('menuIsOpen', menuIsOpen);
+    //   }
+    // };
 
     const onSelectChange = (_: any, option: any) => {
       setSelectedOption(option);
@@ -52,18 +46,28 @@ export const SelectProduct = observer(
             mode="multiple"
             placeholder="Outlined"
             style={{ flex: 1 }}
-            options={options}
+            className={stl.select}
             onChange={onSelectChange}
-            //onSelect={onSelectChange}
-          />
+            maxTagCount="responsive"
+          >
+            {options.map((item) => {
+              return (
+                <Option
+                  key={item.id}
+                  id={item.id}
+                  value={item.value}
+                  className={stl.ingredient_option}
+                >
+                  {item.label}
+                </Option>
+              );
+            })}
+          </Select>
         </div>
 
-        <Button
-          width={'300px'}
-          height={'60px'}
-          text={'Добавить'}
-          onClick={handleButtonClick}
-        />
+        <Button className={stl.select_button} onClick={handleButtonClick}>
+          Искать
+        </Button>
       </div>
     );
   }

@@ -1,21 +1,59 @@
 .modal_select_block {
     margin-bottom: 20px;
+    height: 60px;
     
     display: flex;
+    align-items: stretch;
 }
 
 .modal_select_block > button:hover {
     border: 2px solid var(--light-green-second);
     background-color: var(--light-green-second);
-    /* color: var(--white); */
 }
 
 .modal_select_block > button:active {
     border: 2px solid var(--light-green-active-button);
     background-color: var(--light-green-active-button);
-    /* color: var(--white); */
 }
 
 .modal_select {
-    width: 700px;
+    height: 100%;
+    width: 80%;
+}
+
+.select {
+    height: 100%;
+    width: 100%;
+
+    font-size: 20px;
+    border: 2px solid var(--light-green-main);
+    border-radius: 15px;
+}
+
+.select > div {
+    border: none !important;
+    background: none !important;
+}
+
+.ingredient_option > div {
+    min-height: 40px;
+    
+    display: flex;
+    align-items: center;
+    
+    font-size: 18px;
+}
+
+.select_button {
+    margin-left: 15px;
+
+    width: 20%;
+    height: 100%;
+
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--light-green-main);
+    font-size: 20px;
+    border: 2px solid var(--light-green-main);
+    border-radius: 15px;
 }

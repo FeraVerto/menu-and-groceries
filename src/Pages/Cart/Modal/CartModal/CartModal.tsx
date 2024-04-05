@@ -1,22 +1,19 @@
 //libraries
-import ReactModal from 'react-modal';
 import { observer } from 'mobx-react-lite';
 import { ReactElement, useCallback, useState } from 'react';
 import cogoToast from 'cogo-toast';
+import { Modal } from 'antd';
 //styles
 import stl from './CartModal.module.css';
 //components
 import { SelectProduct } from '../../SelectProduct/SelectProduct';
 import { ShoppingList } from '../ShoppingList/ShoppingList';
 import { DishesList } from '../DishesList/DishesList';
-import { Button } from '../../../../Components/Button/Button';
 import Popup from '../../../../Components/Popup/Popup';
 //store
 import Store from './../../../../store/store';
 //models
 import { sendMessage } from './../../../../model/Products.model';
-
-import remove from '../../../../assets/icon/remove_91021.svg';
 import { helper } from '../../../../utils/helper';
 
 type CartModal = {
@@ -123,7 +120,43 @@ export const CartModal = observer(
 
     return (
       <div className={stl.modal}>
-        <ReactModal
+        <Modal className={stl.modal_content} open={true} width="1000px">
+          <h1>Список продуктов</h1>
+          {/* <div className={stl.modal_header_block}>
+            <Button
+              tabIndex={0}
+              // type="close"
+              // onKeyDownFn={closeModal}
+              onClick={onClickCloseButton}
+              // img={remove}
+            />
+          </div> */}
+          <SelectProduct addIngredientToList={addIngredientToList} />
+          <div className={stl.modal_visual_list_block}>
+            <ShoppingList
+              removeProductFromList={removeProductFromList}
+              addedProductFromList={addedProductFromList}
+            />
+            <DishesList />
+          </div>
+          {/* <div className={stl.modal_bottom_buttons_block}>
+            <Button
+              disabled={Object.keys(addedIngredientsId).length === 0}
+              // width={'300px'}
+              // height={'60px'}
+              // text={'Отправить'}
+              onClick={onClickSendButton}
+            />
+
+            <Button
+              // width={'300px'}
+              // height={'60px'}
+              // text={'Очистить'}
+              onClick={onClickClearButton}
+            />
+          </div> */}
+        </Modal>
+        {/* <ReactModal
           className={stl.modal_content}
           isOpen={isOpen}
           onRequestClose={closeModal}
@@ -165,7 +198,7 @@ export const CartModal = observer(
               onClick={onClickClearButton}
             />
           </div>
-        </ReactModal>
+        </ReactModal> */}
         <Popup isOpen={isPopupOpen} onClose={handleClosePopup} />
       </div>
     );
