@@ -61,7 +61,8 @@
 
     text-transform: uppercase;
     font-weight: bold;
-    color: var(--light-green-main);
+    background-color: var(--light-green-main);
+    color: var(--white);
     font-size: 20px;
     border: 2px solid var(--light-green-main);
     border-radius: 15px;

@@ -82,6 +82,7 @@
 }
 .modal_content {
     margin: 0;
+    padding-bottom: 0;
 
     position: absolute;
     top: 50%;
@@ -93,6 +94,7 @@
     flex-direction: column;
 
     border: 2px solid var(--lightgray);
+    border-radius: 15px;
     background-color: var(--white);
     transform: translate(-50%, -50%);
 }
