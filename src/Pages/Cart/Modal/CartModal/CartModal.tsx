@@ -6,7 +6,7 @@ import { Modal } from 'antd';
 //styles
 import stl from './CartModal.module.css';
 //components
-import { SelectProduct } from '../../SelectProduct/SelectProduct';
+import { SelectIngredient } from '../../SelectIngredient/SelectIngredient';
 import { ShoppingList } from '../ShoppingList/ShoppingList';
 import { DishesList } from '../DishesList/DishesList';
 import Popup from '../../../../Components/Popup/Popup';
@@ -39,15 +39,12 @@ export const CartModal = observer(
 
     //временное дублирование
     const addIngredientToList = useCallback(
-      (ing: { value: string; label: string }[] | null): null | void => {
+      (ing: { id: string; name: string; category: string }[]): null | void => {
         if (ing === null) {
           return null;
         }
-        const ingredientsArrayId = ing.reduce((acc, item) => {
-          return [...acc, item.value];
-        }, [] as string[]);
 
-        addIngredientFromSelection(ingredientsArrayId);
+        addIngredientFromSelection(ing);
       },
       [addIngredientFromSelection]
     );
@@ -69,46 +66,34 @@ export const CartModal = observer(
       [_ingredients, addIngredientsToCartList]
     );
 
-    const onClickSendButton = useCallback(async (): Promise<void> => {
-      const arrayDishesName = Object.values(dishesSearchForId);
-      user.chatId.forEach(async (item) => {
-        const result = await sendMessage(
-          user.botToken,
-          item,
-          shoppingList,
-          arrayDishesName
-        );
+    // const onClickSendButton = useCallback(async (): Promise<void> => {
+    //   const arrayDishesName = Object.values(dishesSearchForId);
+    //   user.chatId.forEach(async (item) => {
+    //     const result = await sendMessage(
+    //       user.botToken,
+    //       item,
+    //       shoppingList,
+    //       arrayDishesName
+    //     );
 
-        if (result.success) {
-          closeModal();
-          clearState();
-          setPopupOpen(true);
-        } else {
-          cogoToast.error(
-            <div className={stl.ct_toast_error}>
-              <h3> Список не отправлен </h3>
-              <p>{result.error?.message}</p>
-            </div>,
-            {
-              position: 'bottom-left',
-              hideAfter: 5,
-            }
-          );
-        }
-      });
-    }, [clearState, closeModal, shoppingList, dishesSearchForId, user]);
-
-    const onClickClearButton = useCallback((): void => {
-      clearState();
-    }, [clearState]);
-
-    const onClickCloseButton = useCallback(
-      (e: React.MouseEvent<HTMLButtonElement>): void => {
-        e.stopPropagation();
-        closeModal();
-      },
-      [closeModal]
-    );
+    //     if (result.success) {
+    //       closeModal();
+    //       clearState();
+    //       setPopupOpen(true);
+    //     } else {
+    //       cogoToast.error(
+    //         <div className={stl.ct_toast_error}>
+    //           <h3> Список не отправлен </h3>
+    //           <p>{result.error?.message}</p>
+    //         </div>,
+    //         {
+    //           position: 'bottom-left',
+    //           hideAfter: 5,
+    //         }
+    //       );
+    //     }
+    //   });
+    // }, [clearState, closeModal, shoppingList, dishesSearchForId, user]);
 
     const handleClosePopup = useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -122,16 +107,7 @@ export const CartModal = observer(
       <div className={stl.modal}>
         <Modal className={stl.modal_content} open={true} width="1000px">
           <h1>Список продуктов</h1>
-          {/* <div className={stl.modal_header_block}>
-            <Button
-              tabIndex={0}
-              // type="close"
-              // onKeyDownFn={closeModal}
-              onClick={onClickCloseButton}
-              // img={remove}
-            />
-          </div> */}
-          <SelectProduct addIngredientToList={addIngredientToList} />
+          <SelectIngredient addIngredientToList={addIngredientToList} />
           <div className={stl.modal_visual_list_block}>
             <ShoppingList
               removeProductFromList={removeProductFromList}
@@ -139,66 +115,7 @@ export const CartModal = observer(
             />
             <DishesList />
           </div>
-          {/* <div className={stl.modal_bottom_buttons_block}>
-            <Button
-              disabled={Object.keys(addedIngredientsId).length === 0}
-              // width={'300px'}
-              // height={'60px'}
-              // text={'Отправить'}
-              onClick={onClickSendButton}
-            />
-
-            <Button
-              // width={'300px'}
-              // height={'60px'}
-              // text={'Очистить'}
-              onClick={onClickClearButton}
-            />
-          </div> */}
         </Modal>
-        {/* <ReactModal
-          className={stl.modal_content}
-          isOpen={isOpen}
-          onRequestClose={closeModal}
-          contentLabel="Корзина"
-        >
-          <div className={stl.modal_header_block}>
-            <h1>Список продуктов</h1>
-            <Button
-              tabIndex={0}
-              type="close"
-              onKeyDownFn={closeModal}
-              onClick={onClickCloseButton}
-              img={remove}
-            />
-          </div>
-
-          <SelectProduct addIngredientToList={addIngredientToList} />
-
-          <div className={stl.modal_visual_list_block}>
-            <ShoppingList
-              removeProductFromList={removeProductFromList}
-              addedProductFromList={addedProductFromList}
-            />
-            <DishesList />
-          </div>
-          <div className={stl.modal_bottom_buttons_block}>
-            <Button
-              disabled={Object.keys(addedIngredientsId).length === 0}
-              width={'300px'}
-              height={'60px'}
-              text={'Отправить'}
-              onClick={onClickSendButton}
-            />
-
-            <Button
-              width={'300px'}
-              height={'60px'}
-              text={'Очистить'}
-              onClick={onClickClearButton}
-            />
-          </div>
-        </ReactModal> */}
         <Popup isOpen={isPopupOpen} onClose={handleClosePopup} />
       </div>
     );

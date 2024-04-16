@@ -177,32 +177,41 @@ class StoreApp {
 
   //добавление отдельных продуктов(!) из селекта в модальном окне
   //в актуальный список ингредиентов
-  addIngredientFromSelection = (data: string[]) => {
+  addIngredientFromSelection = (
+    data: { id: string; name: string; category: string }[]
+  ) => {
+    if (data.length === 0) {
+      return null;
+    }
+
     data.forEach((item) => {
       //проверяем есть ли уже ингредиент с таким id
-      if (!this.addedIngredientsId.includes(item.toString())) {
+      if (!this.addedIngredientsId.includes(item.id.toString())) {
         //можно добавить предупреждение, что такой продукт уже есть
-        const id = item.toString();
-        const category = this._ingredients[id]?.category;
-        const name = this._ingredients[id]?.name;
 
-        if (!this.shoppingList[category]) {
-          this.shoppingList[category] = [{ name, id }];
+        if (!this.shoppingList[item.category]) {
+          this.shoppingList[item.category] = [{ name: item.name, id: item.id }];
         } else {
-          this.shoppingList[category]?.push({ name, id });
+          this.shoppingList[item.category]?.push({
+            name: item.name,
+            id: item.id,
+          });
         }
-        this.addedIngredientsId = [...this.addedIngredientsId, item];
+        this.addedIngredientsId = [...this.addedIngredientsId, item.id];
         //добавим в список для поиска, чтобы в дальнейшем не обращаться к _ingredients
-        this._ingredientsListForSearchId[id] = { name, category };
+        this._ingredientsListForSearchId[item.id] = {
+          name: item.name,
+          category: item.category,
+        };
 
         //пока дублирование
         //удаляем id из массива удаленных ингредиентов
         this.deletedIngredientsId = this.deletedIngredientsId.filter(
-          (id) => id !== item
+          (id) => id !== item.id
         );
         //удаляем ингредиент из массива для отображения
         this.dataToShowDeletedIngredients =
-          this.dataToShowDeletedIngredients.filter((ing) => ing.id !== item);
+          this.dataToShowDeletedIngredients.filter((ing) => ing.id !== item.id);
       }
     });
   };

@@ -22,7 +22,7 @@ export const ShoppingList = observer(
   }: shoppingListType): ReactElement => {
     const { shoppingList, dataToShowDeletedIngredients } = Store;
 
-    const renderProducts = useCallback(
+    const renderAddedProducts = useCallback(
       (
         list: { [key: string]: { name: string; id: string }[] },
         checked: boolean
@@ -32,7 +32,7 @@ export const ShoppingList = observer(
             <p className={stl.category_name}>{item}</p>
             <ul className={stl.products_list}>
               {list[item]?.map((n) => (
-                <li className={stl.products_item} key={uuid4()}>
+                <li className={stl.products_item} key={n.id}>
                   <Checkbox
                     checked={checked}
                     label={n.name}
@@ -71,7 +71,7 @@ export const ShoppingList = observer(
       [addedProductFromList]
     );
 
-    const productsList = renderProducts(shoppingList, true);
+    const productsList = renderAddedProducts(shoppingList, true);
     const deletedProducts = renderDeletedProducts(
       dataToShowDeletedIngredients,
       false

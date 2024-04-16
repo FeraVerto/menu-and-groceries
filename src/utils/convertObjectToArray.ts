@@ -2,7 +2,7 @@ import { sectionListType } from '../store/storeTypes';
 import { helper } from './helper';
 
 export type optionsType = { value: string; label: string };
-
+//временно (проверить можно ли объединить эти две функции в одну универсальную)
 export const convertObjectToArrayForSelect = (obj: {
   [key: string]: {
     name: string;
@@ -10,9 +10,14 @@ export const convertObjectToArrayForSelect = (obj: {
   };
 }) => {
   return Object.keys(obj).reduce((acc, m) => {
-    acc.push({ value: obj[m].name, label: obj[m].name, id: m });
+    acc.push({
+      value: obj[m].name,
+      label: obj[m].name,
+      id: m,
+      category: obj[m].category,
+    });
     return acc;
-  }, [] as { value: string; label: string; id: string }[]);
+  }, [] as { value: string; label: string; id: string; category: string }[]);
 };
 
 export const convertArrayForSelectSection = (item: sectionListType[]) => {

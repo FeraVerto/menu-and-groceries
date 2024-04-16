@@ -1,5 +1,11 @@
 export type userType = { id: string; botToken: string; chatId: number[] };
 
+export type ingrediendsDataPayload = {
+  name: string;
+  category: string;
+  id: string;
+};
+
 export type dishType = {
   //присвоить на сервере
   id: string;
