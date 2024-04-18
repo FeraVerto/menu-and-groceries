@@ -2,9 +2,10 @@
 import { observer } from 'mobx-react-lite';
 import { ReactElement, useCallback, useState } from 'react';
 import cogoToast from 'cogo-toast';
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
 //styles
 import stl from './CartModal.module.css';
+import stl_button from '../../../../buttonStyles.module.css';
 //components
 import { SelectIngredient } from '../../SelectIngredient/SelectIngredient';
 import { ShoppingList } from '../ShoppingList/ShoppingList';
@@ -29,25 +30,12 @@ export const CartModal = observer(
       addIngredientsToCartList,
       dishesSearchForId,
       deleteIngredients,
-      addIngredientFromSelection,
       shoppingList,
       user,
       clearState,
     } = Store;
 
     const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
-
-    //временное дублирование
-    const addIngredientToList = useCallback(
-      (ing: { id: string; name: string; category: string }[]): null | void => {
-        if (ing === null) {
-          return null;
-        }
-
-        addIngredientFromSelection(ing);
-      },
-      [addIngredientFromSelection]
-    );
 
     const removeProductFromList = useCallback(
       (id: string): void => {
@@ -105,9 +93,15 @@ export const CartModal = observer(
 
     return (
       <div className={stl.modal}>
-        <Modal className={stl.modal_content} open={true} width="1000px">
+        <Modal
+          className={stl.modal_content}
+          open={true}
+          width="1000px"
+          footer={null}
+        >
           <h1>Список продуктов</h1>
-          <SelectIngredient addIngredientToList={addIngredientToList} />
+          {/* <SelectIngredient addIngredientToList={addIngredientToList} /> */}
+          <SelectIngredient />
           <div className={stl.modal_visual_list_block}>
             <ShoppingList
               removeProductFromList={removeProductFromList}
@@ -115,6 +109,9 @@ export const CartModal = observer(
             />
             <DishesList />
           </div>
+          <Button className={`${stl_button.button_green} ${stl.button_size}`}>
+            Отправить
+          </Button>
         </Modal>
         <Popup isOpen={isPopupOpen} onClose={handleClosePopup} />
       </div>

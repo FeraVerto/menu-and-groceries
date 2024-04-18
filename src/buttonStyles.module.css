@@ -1,0 +1,19 @@
+.button_green {
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: var(--light-green-main);
+    color: var(--white);
+    font-size: 20px;
+    border: 2px solid var(--light-green-main);
+    border-radius: 15px;
+}
+
+.button_white {
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: var(--white);
+    color: var(--light-green-main);
+    font-size: 20px;
+    border: 2px solid var(--light-green-main);
+    border-radius: 15px;
+}

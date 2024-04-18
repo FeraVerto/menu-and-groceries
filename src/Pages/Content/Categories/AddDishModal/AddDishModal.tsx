@@ -15,6 +15,7 @@ import { getBase64 } from '../../../../utils/getBase64';
 import { dishDataPayload, sectionListType } from '../../../../store/storeTypes';
 //styles
 import stl from './AddDishModal.module.css';
+import stl_button from '../../../../buttonStyles.module.css';
 //helper
 import { helper } from '../../../../utils/helper';
 
@@ -198,7 +199,7 @@ export const AddDishModal = ({
           <Button
             type="primary"
             htmlType="submit"
-            className={stl.submit_button}
+            className={`${stl.submit_button} ${stl_button.button}`}
           >
             Создать карточку блюда
           </Button>

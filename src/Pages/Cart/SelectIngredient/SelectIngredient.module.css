@@ -53,17 +53,8 @@
     font-size: 18px;
 }
 
-.select_button {
+.button_size {
     margin-left: 15px;
-
     width: 20%;
     height: 60px;
-
-    text-transform: uppercase;
-    font-weight: bold;
-    background-color: var(--light-green-main);
-    color: var(--white);
-    font-size: 20px;
-    border: 2px solid var(--light-green-main);
-    border-radius: 15px;
 }

@@ -5,6 +5,7 @@ import { Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 //styles
 import stl from './AddCategory.module.css';
+import stl_button from '../../../buttonStyles.module.css';
 //store
 import Store from '../../../store/store';
 //helper
@@ -48,7 +49,11 @@ export const AddCategory = () => {
         >
           <Input />
         </Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className={`${stl_button.button_white}`}
+        >
           Создать
         </Button>
       </Form>
