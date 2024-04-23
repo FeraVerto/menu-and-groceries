@@ -26,7 +26,8 @@ type categoriyType = {
 export const Category = observer(
   ({ name, dishes, menuSection }: categoriyType): ReactElement => {
     const { addIngredientsToCartList } = Store;
-    const [isOpen, isOpenSet] = useState(false);
+    // const [isOpen, isOpenSet] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const notification = (dishName: string) =>
       cogoToast.success(
@@ -97,7 +98,7 @@ export const Category = observer(
     });
 
     const showModal = () => {
-      isOpenSet(true);
+      setIsModalOpen(true);
     };
 
     return (
@@ -122,8 +123,8 @@ export const Category = observer(
           </div>
           <ul className={stl.category_dishes_list}>{dishesList}</ul>
           <AddDishModal
-            isOpen={isOpen}
-            setIsModalOpen={isOpenSet}
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
             menuSection={menuSection}
           />
         </div>

@@ -79,6 +79,7 @@ export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
             {options.map((item) => {
               return (
                 <Option
+                  key={item.id}
                   id={item.id}
                   value={item.value}
                   category={item.category}

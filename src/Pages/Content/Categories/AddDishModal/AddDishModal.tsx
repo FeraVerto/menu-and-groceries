@@ -20,15 +20,15 @@ import stl_button from '../../../../buttonStyles.module.css';
 import { helper } from '../../../../utils/helper';
 
 type addDishModal = {
-  isOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
+  isModalOpen: boolean;
+  setIsModalOpen: (isModalOpens: boolean) => void;
   menuSection: sectionListType;
 };
 
 export let formData: dishDataPayload | null = null;
 
 export const AddDishModal = ({
-  isOpen,
+  isModalOpen,
   setIsModalOpen,
   menuSection,
 }: addDishModal) => {
@@ -104,7 +104,7 @@ export const AddDishModal = ({
     <div>
       <Modal
         className={stl.add_dish_modal}
-        open={isOpen}
+        open={isModalOpen}
         footer={null}
         onCancel={onCancel}
         width="500px"
