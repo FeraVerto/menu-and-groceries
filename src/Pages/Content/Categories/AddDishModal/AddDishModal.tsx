@@ -34,8 +34,8 @@ export const AddDishModal = ({
 }: addDishModal) => {
   const [form] = Form.useForm();
   //временно
-  let { setNewDish, _ingredients } = Store;
-  const options = convertObjectToArrayForSelect(_ingredients);
+  let { setNewDish, ingredients } = Store;
+  const options = convertObjectToArrayForSelect(ingredients);
   //const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [imageUrl, setImageUrl] = useState('');

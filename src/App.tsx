@@ -15,7 +15,7 @@ import { helper } from './utils/helper';
 import { Cart } from './Pages/Cart/Cart';
 
 const App = observer(() => {
-  const { _ingredients: ingredients, isAuth, sectionMenuList } = Store;
+  const { ingredients, isAuth, sectionMenuList } = Store;
 
   //временно, запускается дважды
   useEffect(() => {

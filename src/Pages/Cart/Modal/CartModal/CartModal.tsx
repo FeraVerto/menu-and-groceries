@@ -27,7 +27,7 @@ export const CartModal = ({
   setIsModalOpen,
 }: CartModal): ReactElement => {
   let {
-    _ingredients,
+    ingredients,
     addedIngredientsId,
     addIngredientsToCartList,
     dishesSearchForId,
@@ -48,12 +48,12 @@ export const CartModal = ({
 
   const addedProductFromList = useCallback(
     (id: string): void => {
-      const item = _ingredients[id];
+      const item = ingredients[id];
       addIngredientsToCartList([
         { name: item.name, category: item.category, id },
       ]);
     },
-    [_ingredients, addIngredientsToCartList]
+    [ingredients, addIngredientsToCartList]
   );
 
   // const onClickSendButton = useCallback(async (): Promise<void> => {

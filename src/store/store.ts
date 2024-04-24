@@ -36,11 +36,7 @@ class StoreApp {
   menu: categoriesType[] = [];
   //список ингредиентов для select в модальном окне(пока загружаем всё, что есть)
   //нужно придумать как лениво подгружать с сервера
-  _ingredients: ingredientsType = {};
-  //быстрый поиск по id ингредиентов (ингредиенты из dataDishes)
-  _ingredientsListForSearchId: {
-    [key: string]: { name: string; category: string };
-  } = {};
+  ingredients: ingredientsType = {};
 
   //меню, левый сайдбар
   sectionMenuList: sectionListType[] = [];
@@ -142,7 +138,7 @@ class StoreApp {
 
     arrayId.forEach((id) => {
       //условие для продуктов, которые не входят в блюда (селект)
-      const ingredient = this._ingredientsListForSearchId[id]; //{name: 'говядина', category: 'мясо'}
+      const ingredient = this.ingredients[id]; //{name: 'говядина', category: 'мясо'}
       const categoryIngredient = ingredient?.category;
 
       //удаляем элементы из списка добавленных продуктов
@@ -198,11 +194,6 @@ class StoreApp {
           });
         }
         this.addedIngredientsId = [...this.addedIngredientsId, item.id];
-        //добавим в список для поиска, чтобы в дальнейшем не обращаться к _ingredients
-        this._ingredientsListForSearchId[item.id] = {
-          name: item.name,
-          category: item.category,
-        };
 
         //пока дублирование
         //удаляем id из массива удаленных ингредиентов
@@ -214,12 +205,6 @@ class StoreApp {
           this.dataToShowDeletedIngredients.filter((ing) => ing.id !== item.id);
       }
     });
-  };
-
-  setIngredientsForRead = (data: {
-    [key: string]: { name: string; category: string };
-  }) => {
-    this._ingredientsListForSearchId = data;
   };
 
   setSectionsMenu = (data: sectionListType[]) => {
@@ -256,7 +241,7 @@ class StoreApp {
   };
 
   setIngredients = (data: ingredientsType) => {
-    this._ingredients = data;
+    this.ingredients = data;
   };
 
   setNewDishItem = (data: dishType) => {
@@ -273,7 +258,6 @@ class StoreApp {
 
   loadSectionMenu = () => {
     fetchSectionsMenu(this.setSectionsMenu.bind(this));
-    this.setIngredientsForRead.bind(this);
   };
 
   loadMenuSectionList = (id: string) => {

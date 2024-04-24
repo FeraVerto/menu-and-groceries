@@ -26,12 +26,12 @@ type SelectOption = {
 };
 
 export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
-  let { _ingredients, addIngredientFromSelection } = Store;
+  let { ingredients, addIngredientFromSelection } = Store;
   const { Option } = Select;
   const { Item } = Form;
   const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState<SelectOption[]>([]);
-  const options = convertObjectToArrayForSelect(_ingredients);
+  const options = convertObjectToArrayForSelect(ingredients);
 
   const addIngredientToList = useCallback(
     (ing: { id: string; name: string; category: string }[]): null | void => {
