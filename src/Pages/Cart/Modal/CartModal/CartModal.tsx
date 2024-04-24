@@ -30,7 +30,6 @@ export const CartModal = ({
     ingredients,
     addedIngredientsId,
     addIngredientsToCartList,
-    dishesSearchForId,
     deleteIngredients,
     shoppingList,
     user,

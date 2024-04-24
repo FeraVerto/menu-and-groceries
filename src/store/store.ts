@@ -41,11 +41,9 @@ class StoreApp {
   //меню, левый сайдбар
   sectionMenuList: sectionListType[] = [];
 
-  //[id блюда]: name блюда
-  dishesSearchForId: { [key: string]: string } = {};
   //список блюд с ингредиентами, которые в него входят
-  //{[id блюда]: [id ингредиентов]
-  dishesWithIngredients: { [key: string]: string[] } = {};
+  //key = id
+  dishes: { [key: string]: { dishName: string; ingredients: string[] } } = {};
 
   //список id актуальных ингредиентов
   addedIngredientsId: string[] = [];
@@ -67,16 +65,16 @@ class StoreApp {
   ) => {
     //добавили название блюда и его айдишник в актуальное
     if (dishID && dishName) {
-      this.dishesSearchForId[dishID] = dishName;
-      this.dishesWithIngredients[dishID] = data.map((item) => {
+      const ingredients = data.map((item) => {
         return item.id;
       });
+      this.dishes[dishID] = { dishName, ingredients };
     }
 
     //формируем данные для отрисовки в модальном окне
     const result = data.reduce((acc, item) => {
-      if (dishName) {
-        this.dishesWithIngredients[dishName]?.push(item.id);
+      if (dishName && dishID) {
+        this.dishes[dishID].ingredients?.push(item.id);
       }
       //заполняем массив актуальных id
       if (!this.addedIngredientsId.includes(item.id)) {
@@ -118,19 +116,17 @@ class StoreApp {
 
   deleteIngredients = (arrayId: string[], type?: 'dish', dishID?: string) => {
     if (type === 'dish' && dishID) {
-      delete this.dishesSearchForId[dishID];
-
       //если добавлено несколько блюд, а затем мы удаляем одно из них,
       //то проверяем, чтобы не удалились ингредиенты, которые входят в другие блюда
-      for (let key in this.dishesWithIngredients) {
+      for (let key in this.dishes) {
         if (key !== dishID) {
-          arrayId = arrayId.filter(
-            (id) => !this.dishesWithIngredients[key].includes(id)
+          arrayId = this.dishes[dishID].ingredients.filter(
+            (id) => !this.dishes[key].ingredients.includes(id)
           );
         }
       }
 
-      delete this.dishesWithIngredients[dishID];
+      delete this.dishes[dishID];
     }
 
     //добавляем id в массив удалённых ингредиентов
@@ -277,8 +273,6 @@ class StoreApp {
   };
 
   clearState = () => {
-    this.dishesSearchForId = {};
-    this.dishesWithIngredients = {};
     this.addedIngredientsId = [];
     this.shoppingList = {};
     this.deletedIngredientsId = [];
