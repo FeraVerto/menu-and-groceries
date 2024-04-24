@@ -63,18 +63,14 @@ class StoreApp {
     dishName?: string,
     dishID?: string
   ) => {
-    //добавили название блюда и его айдишник в актуальное
     if (dishID && dishName) {
-      const ingredients = data.map((item) => {
-        return item.id;
-      });
-      this.dishes[dishID] = { dishName, ingredients };
+      this.dishes[dishID] = { dishName, ingredients: [] };
     }
 
     //формируем данные для отрисовки в модальном окне
     const result = data.reduce((acc, item) => {
       if (dishName && dishID) {
-        this.dishes[dishID].ingredients?.push(item.id);
+        this.dishes[dishID]?.ingredients?.push(item.id);
       }
       //заполняем массив актуальных id
       if (!this.addedIngredientsId.includes(item.id)) {
@@ -86,7 +82,7 @@ class StoreApp {
           acc[item.category]?.push({ name: item.name, id: item.id });
         }
 
-        //удаляем id из массива удаленных ингредиентов
+        //удаляем id из массива удаленных ингредиентовб если они там есть
         this.deletedIngredientsId = this.deletedIngredientsId.filter(
           (id) => id !== item.id
         );
