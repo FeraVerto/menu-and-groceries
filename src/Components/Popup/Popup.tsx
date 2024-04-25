@@ -1,7 +1,9 @@
-import React from 'react';
-import stl from './Popup.module.css'; // Подключаем файл стилей
-import { Button } from '../Button/Button';
+//libraries
+import { Button } from 'antd';
+//assets
 import { veg } from '../../assets/imports';
+//style
+import stl from './Popup.module.css'; // Подключаем файл стилей
 
 type popup = {
   isOpen: boolean;
@@ -23,12 +25,14 @@ const Popup = ({ isOpen, onClose }: popup) => {
         <h2>Список продуктов отправлен в телеграм-бот "Чё купить"</h2>
         <img src={veg} alt="pumpkin" />
         <Button
-          width={'300px'}
-          height={'60px'}
+          // width={'300px'}
+          // height={'60px'}
           className={stl.close_button}
           onClick={onClose}
-          text={'Закрыть'}
-        />
+          // text={'Закрыть'}
+        >
+          Закрыть
+        </Button>
       </div>
     </div>
   );

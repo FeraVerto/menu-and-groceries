@@ -24,7 +24,6 @@ export const AddCategory = () => {
 
   return (
     <div className={stl.new_category_menu_form}>
-      <h3>Добавить категорию</h3>
       <Form
         //{...formItemLayout}
         form={form}
@@ -47,14 +46,14 @@ export const AddCategory = () => {
           ]}
           style={{ marginBottom: 25 }}
         >
-          <Input />
+          <Input placeholder="Введите название категории" />
         </Form.Item>
         <Button
           type="primary"
           htmlType="submit"
           className={`${stl_button.button_white}`}
         >
-          Создать
+          Создать категорию
         </Button>
       </Form>
     </div>
