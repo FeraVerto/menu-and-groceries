@@ -13,12 +13,10 @@ export const DishesList = observer((): ReactElement => {
   const { deleteIngredients, dishes } = Store;
 
   const removeDishedFromList = useCallback(
-    (arrayId: string): void => {
-      //зачем здесь, если можно доставать это в сторе
-      const ingredientsArray = dishes[arrayId].ingredients;
-      deleteIngredients(ingredientsArray, 'dish', arrayId);
+    (dishID: string): void => {
+      deleteIngredients([], 'dish', dishID);
     },
-    [dishes, deleteIngredients]
+    [deleteIngredients]
   );
 
   const dishesListForPreview: ReactElement[] = Object.entries(dishes).map(

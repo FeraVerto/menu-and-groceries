@@ -110,13 +110,17 @@ class StoreApp {
     return;
   };
 
-  deleteIngredients = (arrayId: string[], type?: 'dish', dishID?: string) => {
+  deleteIngredients = (
+    ingredientsId: string[] | [],
+    type?: 'dish',
+    dishID?: string
+  ) => {
     if (type === 'dish' && dishID) {
       //если добавлено несколько блюд, а затем мы удаляем одно из них,
       //то проверяем, чтобы не удалились ингредиенты, которые входят в другие блюда
       for (let key in this.dishes) {
         if (key !== dishID) {
-          arrayId = this.dishes[dishID].ingredients.filter(
+          ingredientsId = this.dishes[dishID].ingredients.filter(
             (id) => !this.dishes[key].ingredients.includes(id)
           );
         }
@@ -126,9 +130,12 @@ class StoreApp {
     }
 
     //добавляем id в массив удалённых ингредиентов
-    this.deletedIngredientsId = [...this.deletedIngredientsId, ...arrayId];
+    this.deletedIngredientsId = [
+      ...this.deletedIngredientsId,
+      ...ingredientsId,
+    ];
 
-    arrayId.forEach((id) => {
+    ingredientsId.forEach((id) => {
       //условие для продуктов, которые не входят в блюда (селект)
       const ingredient = this.ingredients[id]; //{name: 'говядина', category: 'мясо'}
       const categoryIngredient = ingredient?.category;
