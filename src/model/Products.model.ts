@@ -23,7 +23,7 @@ export const sendMessage = async (
     if (error?.response.status === 404) {
       responseData.error = new Error('Ошибка 404, неверный адрес');
     } else {
-      responseData.error = new Error('Я хуй знает что за ошибка');
+      responseData.error = new Error('Неизвестная ошибка');
     }
   }
 

@@ -4,6 +4,7 @@ import {
   sendDishData,
   getMenuSectionList,
   sendSectionMenuData,
+  login,
 } from '../api/api';
 import {
   categoriesType,
@@ -12,6 +13,21 @@ import {
   dishType,
   sectionListType,
 } from './storeTypes';
+
+export const userLogin = async (
+  toggleIsAuth: (data: boolean) => void,
+  params: {
+    nickname: string;
+    password: string;
+  }
+) => {
+  try {
+    const response = await login(params);
+    if (response.data.token) {
+      toggleIsAuth(true);
+    }
+  } catch {}
+};
 
 export const fetchSectionsMenu = async (
   setSectionMenuList: (data: sectionListType[]) => void
@@ -33,8 +49,8 @@ export const sendSectionMenuItem = async (
 };
 
 export const fetchMenuSectionList = async (
-  id: string,
-  setMenuSectionList: (data: categoriesType) => void
+  setMenuSectionList: (data: categoriesType) => void,
+  id: string
 ) => {
   try {
     const response = await getMenuSectionList(id);

@@ -3,10 +3,12 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import s from './Auth.module.css';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { Register } from '../Register/Register';
+//store
+import Store from '../../store/store';
 
 export const AuthPage = () => {
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    Store.sendUserlogin(values);
   };
 
   return (

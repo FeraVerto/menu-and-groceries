@@ -15,6 +15,7 @@ import {
   sendDishItem,
   fetchMenuSectionList,
   sendSectionMenuItem,
+  userLogin,
 } from './service';
 import { helper } from '../utils/helper';
 
@@ -206,6 +207,10 @@ class StoreApp {
     });
   };
 
+  toggleIsAuth = (data: boolean) => {
+    this.isAuth = true;
+  };
+
   setSectionsMenu = (data: sectionListType[]) => {
     this.sectionMenuList = data;
   };
@@ -255,6 +260,10 @@ class StoreApp {
     this.error = error;
   };
 
+  sendUserlogin = (data: { nickname: string; password: string }) => {
+    userLogin(this.toggleIsAuth.bind(this), data);
+  };
+
   loadSectionMenu = () => {
     fetchSectionsMenu(this.setSectionsMenu.bind(this));
   };
@@ -263,7 +272,7 @@ class StoreApp {
     let currentId = this.menu.find((n) => n.sectionId === id);
 
     if (!currentId) {
-      fetchMenuSectionList(id, this.setMenuSectionList.bind(this));
+      fetchMenuSectionList(this.setMenuSectionList.bind(this), id);
     }
   };
 

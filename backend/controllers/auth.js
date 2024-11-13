@@ -24,6 +24,7 @@ export const login = async (req, res) => {
       );
 
       res.status(200).json({
+        nickname: existingUser.nickname,
         token: `Bearer ${token}`,
       });
     } else {
