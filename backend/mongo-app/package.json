@@ -1,0 +1,13 @@
+{
+  "name": "mongo-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node.exe app.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.9.0"
+  }
+}

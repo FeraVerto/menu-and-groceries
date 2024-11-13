@@ -13,6 +13,8 @@ import { SidebarMenu } from './Components/SidebarMenu/SidebarMenu';
 import { AuthPage } from './Pages/Auth/Auth';
 import { helper } from './utils/helper';
 import { Cart } from './Pages/Cart/Cart';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import { Register } from './Pages/Register/Register';
 
 const App = observer(() => {
   const { ingredients, isAuth, sectionMenuList } = Store;
@@ -45,7 +47,14 @@ const App = observer(() => {
           </div>
         </>
       ) : (
-        <AuthPage />
+        <div>
+          Hello
+          {/* <AuthPage /> */}
+          <Routes>
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
       )}
     </>
   );

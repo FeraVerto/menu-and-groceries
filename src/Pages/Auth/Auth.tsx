@@ -1,6 +1,8 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import s from './Auth.module.css';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import { Register } from '../Register/Register';
 
 export const AuthPage = () => {
   const onFinish = (values: any) => {
@@ -55,7 +57,8 @@ export const AuthPage = () => {
           >
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          Or
+          <NavLink to={`/register`}>register now!</NavLink>
         </Form.Item>
       </Form>
     </div>
