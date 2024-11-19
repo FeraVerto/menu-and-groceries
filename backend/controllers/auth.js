@@ -8,7 +8,7 @@ export const login = async (req, res) => {
 
   //не работает с compareSync
   if (existingUser) {
-    const passwordResult = bcrypt.compare(
+    const passwordResult = await bcrypt.compare(
       req.body.password,
       existingUser.password
     );
@@ -16,17 +16,22 @@ export const login = async (req, res) => {
     if (passwordResult) {
       const token = jwt.sign(
         {
-          nickname: existingUser.nickname,
+          username: existingUser.username,
           userId: existingUser._id,
         },
         keys.jwt,
         { expiresIn: 60 * 60 }
       );
 
-      res.status(200).json({
-        nickname: existingUser.nickname,
-        token: `Bearer ${token}`,
-      });
+      res
+        .status(200)
+        .cookie('access_token', token, {
+          httpOnly: true,
+          // secure: true,
+          maxAge: 360000,
+          sameSite: 'Lax',
+        })
+        .json({ username: req.body.username, userId: existingUser._id });
     } else {
       res.status(401).json({
         message: 'Неверный пароль',
@@ -40,7 +45,6 @@ export const login = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-  //name password
   const salt = bcrypt.genSaltSync(10);
   const password = req.body.password;
   const existingUser = await User.findOne({ username: req.body.username });
@@ -55,18 +59,32 @@ export const register = async (req, res) => {
 
     try {
       await user.save();
-      res.status(201).json(user);
+      res.status(201).json({ isUserCreated: true });
     } catch (e) {
       //обработать ошибку
     }
   }
-
-  // user
-  //   .save()
-  //   .then(() => {
-  //     res.status(201).json({ message: 'User created successfully' });
-  //   })
   //   .catch((error) => {
   //     res.status(500).json({ error: 'Failed to create user' });
   //   });
+};
+
+export const checkAuth = async (req, res) => {
+  const token = req.cookies?.access_token;
+  console.log('token', token);
+
+  if (!token) {
+    return res.status(401).json({
+      message: 'Не авторизован',
+    });
+  }
+
+  try {
+    const decoded = await jwt.verify(token, keys.jwt);
+
+    return res.status(200).json({
+      username: decoded.username,
+      userId: decoded.userId,
+    });
+  } catch (e) {}
 };

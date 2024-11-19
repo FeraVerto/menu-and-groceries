@@ -8,6 +8,7 @@ import {
   ingredientsType,
   sectionListType,
   userType,
+  userDataResponse,
 } from './storeTypes';
 import {
   fetchSectionsMenu,
@@ -16,21 +17,42 @@ import {
   fetchMenuSectionList,
   sendSectionMenuItem,
   userLogin,
+  userRegister,
 } from './service';
 import { helper } from '../utils/helper';
+import { instance } from '../api/axios';
 
 class StoreApp {
   constructor() {
     makeAutoObservable(this);
+    this.checkAuthStore();
+  }
+
+  checkAuthStore = async () => {
+    try {
+      const response = await this.checkAuth();
+      if (response.status === 200) {
+        this.user.username = response.data.username;
+        this.user.id = response.data.userId;
+        this.isAuth = false;
+      }
+    } catch (e) {}
+  };
+
+  async checkAuth() {
+    return instance.post(`/auth/check`);
   }
 
   user: userType = {
-    id: '1',
+    id: '',
+    username: '',
     botToken: '',
     chatId: [],
+    isAuth: false,
   };
 
   isAuth: boolean = false;
+  isRegister: boolean = false;
 
   error: string = '';
   //всё меню
@@ -207,8 +229,14 @@ class StoreApp {
     });
   };
 
-  toggleIsAuth = (data: boolean) => {
-    this.isAuth = true;
+  userData = (data: userDataResponse) => {
+    this.user.isAuth = true;
+    this.user.id = data.userId;
+    this.user.username = data.username;
+  };
+
+  toggleIsRegister = (data: boolean) => {
+    this.isRegister = true;
   };
 
   setSectionsMenu = (data: sectionListType[]) => {
@@ -260,8 +288,12 @@ class StoreApp {
     this.error = error;
   };
 
-  sendUserlogin = (data: { nickname: string; password: string }) => {
-    userLogin(this.toggleIsAuth.bind(this), data);
+  setlogin = (data: { username: string; password: string }) => {
+    userLogin(this.userData.bind(this), data);
+  };
+
+  setRegisterData = (data: { username: string; password: string }) => {
+    userRegister(this.toggleIsRegister.bind(this), data);
   };
 
   loadSectionMenu = () => {

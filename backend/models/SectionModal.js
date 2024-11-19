@@ -3,8 +3,8 @@ const { Schema } = mongoose;
 
 const SectionSchema = new Schema({
   name: {
-    type: String,
-    ref: 'dishes',
+    ref: 'sections',
+    type: Schema.Types.ObjectId,
   },
   user: {
     ref: 'users',

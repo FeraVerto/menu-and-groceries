@@ -11,6 +11,7 @@ export const instanceTelegram = axios.create({
 
 export const instance = axios.create({
   // baseURL: 'https://menu-and-groceries.com/',
+  withCredentials: true,
   baseURL: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',

@@ -1,4 +1,12 @@
-export type userType = { id: string; botToken: string; chatId: number[] };
+export type userType = {
+  username: string;
+  id: string;
+  botToken: string;
+  chatId: number[];
+  isAuth: boolean;
+};
+
+export type userDataResponse = { username: string; userId: string };
 
 export type ingrediendsDataPayload = {
   name: string;
@@ -27,6 +35,7 @@ export type sectionListType = {
 export type categoriesType = {
   sectionId: string;
   sectionName: string;
+  //скорее всего не надо
   dishes: dishType[];
 };
 

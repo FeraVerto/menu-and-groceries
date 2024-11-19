@@ -3,10 +3,15 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 //styles
 import s from '../Auth/Auth.module.css';
+//store
+import Store from '../../store/store';
 
 export const Register = () => {
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+    Store.setRegisterData({
+      username: values.username,
+      password: values.password,
+    });
   };
 
   return (

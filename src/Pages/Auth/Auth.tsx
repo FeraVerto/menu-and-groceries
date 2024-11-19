@@ -8,7 +8,7 @@ import Store from '../../store/store';
 
 export const AuthPage = () => {
   const onFinish = (values: any) => {
-    Store.sendUserlogin(values);
+    Store.setlogin(values);
   };
 
   return (

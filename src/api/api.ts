@@ -11,8 +11,12 @@ import {
   sectionListType,
 } from '../store/storeTypes';
 
-export const login = (params: { nickname: string; password: string }) => {
+export const login = (params: { username: string; password: string }) => {
   return instance.post(`/menu-and-groceries/auth/login`, params);
+};
+
+export const register = (params: { username: string; password: string }) => {
+  return instance.post(`/menu-and-groceries/auth/register`, params);
 };
 
 export const sendMessageToTelegramBot = (params: {

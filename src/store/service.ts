@@ -5,6 +5,7 @@ import {
   getMenuSectionList,
   sendSectionMenuData,
   login,
+  register,
 } from '../api/api';
 import {
   categoriesType,
@@ -12,19 +13,35 @@ import {
   dishDataPayload,
   dishType,
   sectionListType,
+  userDataResponse,
 } from './storeTypes';
 
 export const userLogin = async (
-  toggleIsAuth: (data: boolean) => void,
+  userData: (data: userDataResponse) => void,
   params: {
-    nickname: string;
+    username: string;
     password: string;
   }
 ) => {
   try {
     const response = await login(params);
-    if (response.data.token) {
-      toggleIsAuth(true);
+    if (response.status === 200) {
+      userData(response.data);
+    }
+  } catch {}
+};
+
+export const userRegister = async (
+  toggleIsRegister: (data: boolean) => void,
+  params: {
+    username: string;
+    password: string;
+  }
+) => {
+  try {
+    const response = await register(params);
+    if (response.data.isUserCreated) {
+      toggleIsRegister(true);
     }
   } catch {}
 };

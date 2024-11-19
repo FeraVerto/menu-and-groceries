@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 
 //const
 import { keys } from './config/keys.js';
@@ -32,9 +33,15 @@ app.use(passport.initialize());
 configurePassport(passport);
 
 app.use(morgan('dev'));
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(
+  cors({
+    origin: 'http://localhost:3001', // URL фронта
+    credentials: true,
+  })
+);
 
 app.use(authRoutes);
 app.use(dishRoutes);
