@@ -18,6 +18,7 @@ import {
   sendSectionMenuItem,
   userLogin,
   userRegister,
+  checkAuthService,
 } from './service';
 import { helper } from '../utils/helper';
 import { instance } from '../api/axios';
@@ -25,22 +26,7 @@ import { instance } from '../api/axios';
 class StoreApp {
   constructor() {
     makeAutoObservable(this);
-    this.checkAuthStore();
-  }
-
-  checkAuthStore = async () => {
-    try {
-      const response = await this.checkAuth();
-      if (response.status === 200) {
-        this.user.username = response.data.username;
-        this.user.id = response.data.userId;
-        this.isAuth = false;
-      }
-    } catch (e) {}
-  };
-
-  async checkAuth() {
-    return instance.post(`/auth/check`);
+    this.checkAuth();
   }
 
   user: userType = {
@@ -286,6 +272,10 @@ class StoreApp {
 
   setError = (error: string) => {
     this.error = error;
+  };
+
+  checkAuth = () => {
+    checkAuthService(this.userData.bind(this));
   };
 
   setlogin = (data: { username: string; password: string }) => {

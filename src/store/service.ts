@@ -6,6 +6,7 @@ import {
   sendSectionMenuData,
   login,
   register,
+  checkAuth,
 } from '../api/api';
 import {
   categoriesType,
@@ -15,6 +16,17 @@ import {
   sectionListType,
   userDataResponse,
 } from './storeTypes';
+
+export const checkAuthService = async (
+  checkAuthStore: (authData: userDataResponse) => void
+) => {
+  try {
+    const response = await checkAuth();
+    if (response.status === 200) {
+      checkAuthStore(response.data);
+    }
+  } catch (e) {}
+};
 
 export const userLogin = async (
   userData: (data: userDataResponse) => void,

@@ -23,7 +23,7 @@ const App = observer(() => {
     // if (Object.keys(ingredients).length === 0) {
     //   // Store.loadIngredients();
     // }
-  }, [sectionMenuList, ingredients]);
+  }, []);
 
   if (user.isAuth) {
     navigate(`/lk`);

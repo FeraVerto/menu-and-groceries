@@ -11,6 +11,10 @@ import {
   sectionListType,
 } from '../store/storeTypes';
 
+export const checkAuth = () => {
+  return instance.post(`/auth/check`);
+};
+
 export const login = (params: { username: string; password: string }) => {
   return instance.post(`/menu-and-groceries/auth/login`, params);
 };

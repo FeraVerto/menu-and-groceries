@@ -1,17 +1,20 @@
-import { Button, Checkbox, Form, Input } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
+import { Button, Form, Input } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { NavLink, useNavigate } from 'react-router-dom';
 //styles
 import s from '../Auth/Auth.module.css';
 //store
 import Store from '../../store/store';
 
 export const Register = () => {
+  const navigate = useNavigate();
   const onFinish = (values: any) => {
     Store.setRegisterData({
       username: values.username,
       password: values.password,
     });
+
+    navigate(`/auth`);
   };
 
   return (
