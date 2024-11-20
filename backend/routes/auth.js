@@ -1,5 +1,10 @@
 import { Router } from 'express';
-import { login, register, checkAuth } from '../controllers/auth.js';
+import {
+  login,
+  register,
+  checkAuth,
+  refreshAccessToken,
+} from '../controllers/auth.js';
 
 const router = Router();
 
@@ -11,5 +16,8 @@ router.post('/menu-and-groceries/auth/register', register);
 
 //http://localhost:3000/menu-and-groceries/auth/check
 router.post('/auth/check', checkAuth);
+
+//http://localhost:3000/menu-and-groceries/auth/refresh
+router.post('/auth/refresh', refreshAccessToken);
 
 export default router;

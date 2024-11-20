@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 
 //const
 import { keys } from './config/keys.js';
@@ -19,6 +20,7 @@ import configurePassport from './middleware/passport.js';
 
 const PORT = process.env.PORT ?? 3000;
 const app = express();
+dotenv.config();
 
 mongoose
   .connect(keys.mongoURI)

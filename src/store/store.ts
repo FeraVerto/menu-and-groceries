@@ -21,7 +21,6 @@ import {
   checkAuthService,
 } from './service';
 import { helper } from '../utils/helper';
-import { instance } from '../api/axios';
 
 class StoreApp {
   constructor() {
