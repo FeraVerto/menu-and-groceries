@@ -18,6 +18,6 @@ router.post('/menu-and-groceries/auth/register', register);
 router.post('/auth/check', checkAuth);
 
 //http://localhost:3000/menu-and-groceries/auth/refresh
-router.post('/auth/refresh', refreshAccessToken);
+router.get('/auth/refresh', refreshAccessToken);
 
 export default router;

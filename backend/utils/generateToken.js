@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 export const generateTokens = (user) => {
   if (!process.env.ACCESS_TOKEN_SECRET || !process.env.REFRESH_TOKEN_SECRET) {
-    throw new Error('Token secrets are not defined in .env file');
+    throw new Error('Отсутствуют ключи');
   }
 
   const access_token = jwt.sign(

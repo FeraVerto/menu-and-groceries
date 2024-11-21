@@ -1,7 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import { keys } from '../config/keys.js';
 import { generateTokens } from '../utils/generateToken.js';
 
 export const login = async (req, res) => {
@@ -66,12 +65,9 @@ export const register = async (req, res) => {
       await user.save();
       res.status(201).json({ isUserCreated: true });
     } catch (e) {
-      //обработать ошибку
+      res.status(500).json({ error: 'Ошибка сервера, юзер не был создан' });
     }
   }
-  //   .catch((error) => {
-  //     res.status(500).json({ error: 'Failed to create user' });
-  //   });
 };
 
 export const checkAuth = async (req, res) => {
@@ -90,14 +86,16 @@ export const checkAuth = async (req, res) => {
       username: decoded.username,
       userId: decoded.userId,
     });
-  } catch (e) {}
+  } catch (e) {
+    res.status(403).json({ error: 'Ошибка сервера, токен не был создан' });
+  }
 };
 
 export const refreshAccessToken = async (req, res) => {
   const refreshToken = req.cookies?.refresh_token;
 
   if (!refreshToken) {
-    //отправить ошибку
+    return res.status(401).json({ message: 'Refresh token не найден' });
   }
 
   try {
@@ -116,5 +114,7 @@ export const refreshAccessToken = async (req, res) => {
     });
 
     res.status(204).end();
-  } catch (e) {}
+  } catch (e) {
+    res.status(403).json({ error: 'Ошибка сервера, токен не был обновлен' });
+  }
 };

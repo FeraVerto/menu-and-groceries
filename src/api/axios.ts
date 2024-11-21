@@ -19,3 +19,18 @@ export const instance = axios.create({
 });
 
 // createMock();
+
+instance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response && error.response.status === 401) {
+      try {
+        await instance.get('/auth/refresh', { withCredentials: true });
+        return instance(error.config);
+      } catch (refreshError) {
+        //ошибка: токен не обновлен
+      }
+    }
+    return Promise.reject(error);
+  }
+);
