@@ -17,6 +17,7 @@ import {
   fetchMenuSectionList,
   sendSectionMenuItem,
   userLogin,
+  userLogout,
   userRegister,
   checkAuthService,
 } from './service';
@@ -220,6 +221,10 @@ class StoreApp {
     this.user.username = data.username;
   };
 
+  userLogoutData = () => {
+    this.user.isAuth = false;
+  };
+
   toggleIsRegister = (data: boolean) => {
     this.isRegister = true;
   };
@@ -279,6 +284,10 @@ class StoreApp {
 
   setlogin = (data: { username: string; password: string }) => {
     userLogin(this.userData.bind(this), data);
+  };
+
+  setLogout = () => {
+    userLogout(this.userLogoutData.bind(this));
   };
 
   setRegisterData = (data: { username: string; password: string }) => {

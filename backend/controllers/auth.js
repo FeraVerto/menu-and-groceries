@@ -23,14 +23,14 @@ export const login = async (req, res) => {
         httpOnly: true,
         secure: true,
         maxAge: 15 * 60 * 1000,
-        sameSite: 'Lax',
+        sameSite: 'Strict',
       });
 
       res.cookie('refresh_token', tokens.refresh_token, {
         httpOnly: true,
         secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: 'Lax',
+        sameSite: 'Strict',
       });
 
       res
@@ -95,7 +95,7 @@ export const refreshAccessToken = async (req, res) => {
   const refreshToken = req.cookies?.refresh_token;
 
   if (!refreshToken) {
-    return res.status(401).json({ message: 'Refresh token не найден' });
+    return res.status(403).json({ message: 'Refresh token не найден' });
   }
 
   try {
@@ -110,11 +110,28 @@ export const refreshAccessToken = async (req, res) => {
       httpOnly: true,
       secure: true,
       maxAge: 15 * 60 * 1000,
-      sameSite: 'Lax',
+      sameSite: 'Strict',
     });
 
     res.status(204).end();
   } catch (e) {
     res.status(403).json({ error: 'Ошибка сервера, токен не был обновлен' });
   }
+};
+
+export const logout = async (req, res) => {
+  const refreshToken = req.cookies?.refresh_token;
+  const accesshToken = req.cookies?.access_token;
+
+  res.clearCookie('access_token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'Strict',
+  });
+  res.clearCookie('refresh_token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'Strict',
+  });
+  return res.status(200).json({ message: 'Вы вышли' });
 };

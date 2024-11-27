@@ -1,0 +1,18 @@
+.drop_down_menu {
+    position: absolute;
+    left: 335px;
+
+    width: 200px;
+
+    background-color: #fff;
+    border: 2px solid var(--light-green-second);
+    border-radius: 15px;
+}
+
+.drop_down_menu div {
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

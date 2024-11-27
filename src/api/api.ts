@@ -19,6 +19,10 @@ export const login = (params: { username: string; password: string }) => {
   return instance.post(`/menu-and-groceries/auth/login`, params);
 };
 
+export const logout = () => {
+  return instance.post('/menu-and-groceries/auth/logout');
+};
+
 export const register = (params: { username: string; password: string }) => {
   return instance.post(`/menu-and-groceries/auth/register`, params);
 };

@@ -7,6 +7,7 @@ import {
   login,
   register,
   checkAuth,
+  logout,
 } from '../api/api';
 import {
   categoriesType,
@@ -41,6 +42,17 @@ export const userLogin = async (
       userData(response.data);
     }
   } catch {}
+};
+
+export const userLogout = async (userLogoutData: () => void) => {
+  try {
+    const response = await logout();
+    if (response.status === 200) {
+      userLogoutData();
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const userRegister = async (
