@@ -2,12 +2,12 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 //store
-import Store from './../../store/store';
+import Store from '../../stores/store';
 //styles
 import stl from './Sidebar.module.css';
 
 export const SidebarMenu = () => {
-  const { sectionMenuList } = Store;
+  const { sectionMenuList } = Store.data;
   const [isOpen, setOpen] = useState(false);
 
   const toggleMenu = () => {

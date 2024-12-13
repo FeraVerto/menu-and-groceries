@@ -1,85 +1,37 @@
-//libraries
 import { makeAutoObservable } from 'mobx';
-//types
-import {
-  dishDataPayload,
-  categoriesType,
-  dishType,
-  ingredientsType,
-  sectionListType,
-  userType,
-  userDataResponse,
-} from './storeTypes';
-import {
-  fetchSectionsMenu,
-  fetchIngredients,
-  sendDishItem,
-  fetchMenuSectionList,
-  sendSectionMenuItem,
-  userLogin,
-  userLogout,
-  userRegister,
-  checkAuthService,
-} from './service';
-import { helper } from '../utils/helper';
+import { ingredientsType } from './storeTypes';
+import { fetchIngredients } from './service';
+import { DishStore } from './dishStore';
 
-class StoreApp {
-  constructor() {
-    makeAutoObservable(this);
-    this.checkAuth();
-  }
-
-  user: userType = {
-    id: '',
-    username: '',
-    botToken: '',
-    chatId: [],
-    isAuth: false,
-  };
-
-  isAuth: boolean = false;
-  isRegister: boolean = false;
-
-  error: string = '';
-  //всё меню
-  menu: categoriesType[] = [];
-  //список ингредиентов для select в модальном окне(пока загружаем всё, что есть)
-  //нужно придумать как лениво подгружать с сервера
+export class ShoppingListStore {
+  dishStore: DishStore;
   ingredients: ingredientsType = {};
-
-  //меню, левый сайдбар
-  sectionMenuList: sectionListType[] = [];
-
-  //список блюд с ингредиентами, которые в него входят
-  //key = id
-  dishes: { [key: string]: { dishName: string; ingredients: string[] } } = {};
-
-  //список id актуальных ингредиентов
   addedIngredientsId: string[] = [];
-  //данные для отображения добавленных ингредиентов в модальном окне
-  //в разбитом на категории виде. (key это category категория ингредиента: мясо, овощи)
+  deletedIngredientsId: string[] = [];
+  dataToShowDeletedIngredients: { name: string; id: string }[] = [];
   shoppingList: {
     [key: string]: { name: string; id: string }[];
   } = {};
 
-  //список id удалённых ингредиентов
-  deletedIngredientsId: string[] = [];
-  //данные для отображения удалённых ингредиентов в модальном окне, без категории
-  dataToShowDeletedIngredients: { name: string; id: string }[] = [];
+  constructor(dishStore: DishStore) {
+    makeAutoObservable(this);
+    this.dishStore = dishStore;
+  }
 
   addIngredientsToCartList = (
     data: { name: string; category: string; id: string }[],
     dishName?: string,
     dishID?: string
   ) => {
+    const dishes = this.dishStore.dishes;
     if (dishID && dishName) {
-      this.dishes[dishID] = { dishName, ingredients: [] };
+      dishes[dishID] = { dishName, ingredients: [] };
     }
 
     //формируем данные для отрисовки в модальном окне
     const result = data.reduce((acc, item) => {
       if (dishName && dishID) {
-        this.dishes[dishID]?.ingredients?.push(item.id);
+        dishes[dishID]?.ingredients?.push(item.id);
       }
       //заполняем массив актуальных id
       if (!this.addedIngredientsId.includes(item.id)) {
@@ -124,18 +76,19 @@ class StoreApp {
     type?: 'dish',
     dishID?: string
   ) => {
+    const dishes = this.dishStore.dishes;
     if (type === 'dish' && dishID) {
       //если добавлено несколько блюд, а затем мы удаляем одно из них,
       //то проверяем, чтобы не удалились ингредиенты, которые входят в другие блюда
-      for (let key in this.dishes) {
+      for (let key in dishes) {
         if (key !== dishID) {
-          ingredientsId = this.dishes[dishID].ingredients.filter(
-            (id) => !this.dishes[key].ingredients.includes(id)
+          ingredientsId = dishes[dishID].ingredients.filter(
+            (id) => !dishes[key].ingredients.includes(id)
           );
         }
       }
 
-      delete this.dishes[dishID];
+      delete dishes[dishID];
     }
 
     //добавляем id в массив удалённых ингредиентов
@@ -215,111 +168,11 @@ class StoreApp {
     });
   };
 
-  userData = (data: userDataResponse) => {
-    this.user.isAuth = true;
-    this.user.id = data.userId;
-    this.user.username = data.username;
-  };
-
-  userLogoutData = () => {
-    this.user.isAuth = false;
-  };
-
-  toggleIsRegister = (data: boolean) => {
-    this.isRegister = true;
-  };
-
-  setSectionsMenu = (data: sectionListType[]) => {
-    this.sectionMenuList = data;
-  };
-
-  setMenuSectionList = (data: categoriesType) => {
-    // let currentId = this.menu.find((n) => n.sectionId === data.sectionId);
-    // if (!currentId) {
-    //   this.menu = [...this.menu, data];
-    // }
-    this.menu = [...this.menu, data];
-  };
-
-  setNewSectionMenu = (data: categoriesType) => {
-    this.sectionMenuList = [
-      ...this.sectionMenuList,
-      { sectionId: data.sectionId, sectionName: data.sectionName },
-    ];
-
-    this.setMenuSectionList(data);
-  };
-
-  setSectionMenu = (data: string) => {
-    const foundSection = this.sectionMenuList.find(
-      (item) => item.sectionName === data
-    );
-    if (!foundSection) {
-      sendSectionMenuItem(this.setNewSectionMenu.bind(this), data);
-    } else {
-      this.error = 'Уже существует!';
-      //вывести сообщение, что такая секция меню уже существует
-    }
-  };
-
   setIngredients = (data: ingredientsType) => {
     this.ingredients = data;
-  };
-
-  setNewDishItem = (data: dishType) => {
-    let category = this.menu.find((item) => {
-      return data.sectionId === item.sectionId;
-    });
-
-    return category?.dishes.push(data);
-  };
-
-  setError = (error: string) => {
-    this.error = error;
-  };
-
-  checkAuth = () => {
-    checkAuthService(this.userData.bind(this));
-  };
-
-  setlogin = (data: { username: string; password: string }) => {
-    userLogin(this.userData.bind(this), data);
-  };
-
-  setLogout = () => {
-    userLogout(this.userLogoutData.bind(this));
-  };
-
-  setRegisterData = (data: { username: string; password: string }) => {
-    userRegister(this.toggleIsRegister.bind(this), data);
-  };
-
-  loadSectionMenu = () => {
-    fetchSectionsMenu(this.setSectionsMenu.bind(this));
-  };
-
-  loadMenuSectionList = (id: string) => {
-    let currentId = this.menu.find((n) => n.sectionId === id);
-
-    if (!currentId) {
-      fetchMenuSectionList(this.setMenuSectionList.bind(this), id);
-    }
   };
 
   loadIngredients = () => {
     fetchIngredients(this.setIngredients.bind(this));
   };
-
-  setNewDish = (dishData: dishDataPayload) => {
-    sendDishItem(this.setNewDishItem.bind(this), dishData);
-  };
-
-  clearState = () => {
-    this.addedIngredientsId = [];
-    this.shoppingList = {};
-    this.deletedIngredientsId = [];
-    this.dataToShowDeletedIngredients = [];
-  };
 }
-
-export default new StoreApp();

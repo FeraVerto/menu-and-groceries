@@ -37,7 +37,7 @@ import {
   ovoch,
   olivie,
   sup_guliash,
-} from './../assets/imports';
+} from '../assets/imports';
 
 export const categoriesData = [
   {

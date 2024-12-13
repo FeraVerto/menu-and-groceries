@@ -9,7 +9,7 @@ import {
   dishDataPayload,
   dishType,
   sectionListType,
-} from '../store/storeTypes';
+} from '../stores/storeTypes';
 
 export const checkAuth = () => {
   return instance.post(`/auth/check`);

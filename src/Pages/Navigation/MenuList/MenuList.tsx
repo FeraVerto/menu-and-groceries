@@ -1,8 +1,8 @@
 //libraries
 import { NavLink } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { forwardRef, useCallback, useEffect, useRef } from 'react';
 //types
-import { sectionListType } from '../../../store/storeTypes';
+import { sectionListType } from '../../../stores/storeTypes';
 //styles
 import stl from '../MenuList/MenuList.module.css';
 
@@ -13,43 +13,44 @@ export interface MenuListRef {
 export type MenuListType = {
   sectionMenuList: sectionListType[];
   loadMenuSectionList: (id: string) => void;
-  ref: any;
 };
 
-export const MenuList = ({
-  sectionMenuList,
-  loadMenuSectionList,
-}: MenuListType) => {
-  const containerRef = useRef<HTMLUListElement>(null);
+export const MenuList = forwardRef<HTMLUListElement, MenuListType>(
+  ({ sectionMenuList, loadMenuSectionList }: MenuListType, ref) => {
+    const containerRef = useRef<HTMLUListElement>(null);
 
-  useEffect(() => {
-    const scrollToBottom = () => {
-      if (containerRef.current) {
-        containerRef.current.scrollTop = containerRef.current.scrollHeight;
-      }
-    };
+    useEffect(() => {
+      const scrollToBottom = () => {
+        if (containerRef.current) {
+          containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+      };
 
-    scrollToBottom();
-  }, [sectionMenuList]);
+      scrollToBottom();
+    }, [sectionMenuList]);
 
-  const menuLinks = sectionMenuList.map((m) => (
-    <li className={stl.categories_nav_item} key={m.sectionId}>
-      <NavLink
-        to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}
-        onClick={() => onClickHandler(m.sectionId)}
-      >
-        {m.sectionName}
-      </NavLink>
-    </li>
-  ));
+    const menuLinks = sectionMenuList.map((m) => (
+      <li className={stl.categories_nav_item} key={m.sectionId}>
+        <NavLink
+          to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}
+          onClick={() => onClickHandler(m.sectionId)}
+        >
+          {m.sectionName}
+        </NavLink>
+      </li>
+    ));
 
-  const onClickHandler = (id: string) => {
-    loadMenuSectionList(id);
-  };
+    const onClickHandler = useCallback(
+      (id: string) => {
+        loadMenuSectionList(id);
+      },
+      [loadMenuSectionList]
+    );
 
-  return (
-    <ul className={stl.categories_nav_list} ref={containerRef}>
-      {menuLinks}
-    </ul>
-  );
-};
+    return (
+      <ul className={stl.categories_nav_list} ref={containerRef}>
+        {menuLinks}
+      </ul>
+    );
+  }
+);

@@ -1,10 +1,10 @@
 import stl from './DropDownMenu.module.css';
 //store
-import Store from '../../store/store';
+import Store from '../../stores/store';
 
 export const DropDownMenu = () => {
   const onClickLogout = () => {
-    Store.setLogout();
+    Store.userStore.setLogout();
   };
 
   return (

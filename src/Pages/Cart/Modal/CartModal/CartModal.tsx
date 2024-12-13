@@ -12,7 +12,7 @@ import { ShoppingList } from '../ShoppingList/ShoppingList';
 import { DishesList } from '../DishesList/DishesList';
 import Popup from '../../../../Components/Popup/Popup';
 //store
-import Store from './../../../../store/store';
+import Store from '../../../../stores/store';
 //models
 import { sendMessage } from './../../../../model/Products.model';
 import { helper } from '../../../../utils/helper';
@@ -32,9 +32,10 @@ export const CartModal = ({
     addIngredientsToCartList,
     deleteIngredients,
     shoppingList,
-    user,
-    clearState,
-  } = Store;
+    // clearState,
+  } = Store.data;
+
+  const { user } = Store.userStore;
 
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
 

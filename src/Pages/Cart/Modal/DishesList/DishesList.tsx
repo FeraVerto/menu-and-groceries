@@ -6,11 +6,11 @@ import stl from './DishesList.module.css';
 //components
 import { Checkbox } from '../../../../Components/Checkbox';
 //store
-import Store from '../../../../store/store';
+import Store from '../../../../stores/store';
 import { helper } from '../../../../utils/helper';
 
 export const DishesList = observer((): ReactElement => {
-  const { deleteIngredients, dishes } = Store;
+  const { deleteIngredients, dishes } = Store.data;
 
   const removeDishedFromList = useCallback(
     (dishID: string): void => {

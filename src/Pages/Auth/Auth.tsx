@@ -1,14 +1,15 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import s from './Auth.module.css';
-import { NavLink, Route, Routes } from 'react-router-dom';
-import { Register } from '../Register/Register';
+import { NavLink } from 'react-router-dom';
 //store
-import Store from '../../store/store';
+import Store from '../../stores/store';
+
+import { AuthConsumer } from '../../hooks/useAuth';
 
 export const AuthPage = () => {
   const onFinish = (values: any) => {
-    Store.setlogin(values);
+    Store.userStore.setlogin(values);
   };
 
   return (

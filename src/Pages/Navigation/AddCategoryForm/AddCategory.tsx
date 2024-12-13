@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import stl from './AddCategory.module.css';
 import stl_button from '../../../buttonStyles.module.css';
 //store
-import Store from '../../../store/store';
+import Store from '../../../stores/store';
 //helper
 import { helper } from '../../../utils/helper';
 
 export const AddCategory = () => {
-  const { setSectionMenu } = Store;
+  const { setSectionMenu } = Store.data;
   const [form] = Form.useForm();
   const navigate = useNavigate();
 

@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import Modal from 'react-modal';
 //store
-import Store from '../../store/store';
+import Store from '../../stores/store';
 //components
 import { CartModal } from './Modal/CartModal/CartModal';
 //styles
@@ -15,7 +15,7 @@ import { helper } from '../../utils/helper';
 Modal.setAppElement('#root');
 
 export const Cart = observer(() => {
-  const { addedIngredientsId } = Store;
+  const { addedIngredientsId } = Store.data;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (): void => {

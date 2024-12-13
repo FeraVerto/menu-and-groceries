@@ -7,7 +7,7 @@ import { Checkbox } from '../../../../Components/Checkbox';
 //styles
 import stl from './ShoppingList.module.css';
 //store
-import Store from '../../../../store/store';
+import Store from '../../../../stores/store';
 import { helper } from '../../../../utils/helper';
 
 type shoppingListType = {
@@ -20,7 +20,7 @@ export const ShoppingList = observer(
     removeProductFromList,
     addedProductFromList,
   }: shoppingListType): ReactElement => {
-    const { shoppingList, dataToShowDeletedIngredients } = Store;
+    const { shoppingList, dataToShowDeletedIngredients } = Store.data;
 
     const renderAddedProducts = useCallback(
       (

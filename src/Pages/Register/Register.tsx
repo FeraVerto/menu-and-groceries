@@ -4,12 +4,12 @@ import { NavLink, useNavigate } from 'react-router-dom';
 //styles
 import s from '../Auth/Auth.module.css';
 //store
-import Store from '../../store/store';
+import Store from '../../stores/store';
 
 export const Register = () => {
   const navigate = useNavigate();
   const onFinish = (values: any) => {
-    Store.setRegisterData({
+    Store.userStore.setRegisterData({
       username: values.username,
       password: values.password,
     });

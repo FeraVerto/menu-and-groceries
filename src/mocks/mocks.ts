@@ -54,7 +54,7 @@ import {
   rulet_bekon,
   kanelloni,
 } from './../assets/imports';
-import { categoriesType, dishDataPayload, dishType } from '../store/storeTypes';
+import { categoriesType, dishDataPayload, dishType } from '../stores/storeTypes';
 import { helper } from '../utils/helper';
 
 export const createMock = () => {

@@ -7,11 +7,11 @@ import stl from './Content.module.css';
 //components
 import { Category } from './Categories/Category/Category';
 //store
-import Store from '../../store/store';
+import Store from '../../stores/store';
 import { helper } from '../../utils/helper';
 
 export const Content = observer((): ReactElement => {
-  const { menu } = Store;
+  const { menu } = Store.data;
   const routes = menu?.map((n) => {
     return (
       <Route

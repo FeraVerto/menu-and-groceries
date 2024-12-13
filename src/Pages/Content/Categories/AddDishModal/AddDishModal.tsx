@@ -3,7 +3,7 @@ import { Modal, Form, Input, Button, Upload, Select, UploadFile } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import { UploadChangeParam } from 'antd/es/upload';
 //store
-import Store from '../../../../store/store';
+import Store from '../../../../stores/store';
 //utils
 import {
   convertObjectToArrayForSelect,
@@ -12,7 +12,10 @@ import {
 import { rules } from './rulesAddDishModalForm';
 import { getBase64 } from '../../../../utils/getBase64';
 //types
-import { dishDataPayload, sectionListType } from '../../../../store/storeTypes';
+import {
+  dishDataPayload,
+  sectionListType,
+} from '../../../../stores/storeTypes';
 //styles
 import stl from './AddDishModal.module.css';
 import stl_button from '../../../../buttonStyles.module.css';
@@ -34,7 +37,7 @@ export const AddDishModal = ({
 }: addDishModal) => {
   const [form] = Form.useForm();
   //временно
-  let { setNewDish, ingredients } = Store;
+  let { setNewDish, ingredients } = Store.data;
   const options = convertObjectToArrayForSelect(ingredients);
   //const optionsForSelectSection = convertArrayForSelectSection(sectionMenuList);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);

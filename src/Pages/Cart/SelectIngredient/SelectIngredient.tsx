@@ -6,12 +6,12 @@ import { observer } from 'mobx-react-lite';
 import stl_button from './../../../buttonStyles.module.css';
 import stl from './SelectIngredient.module.css';
 //store
-import Store from '../../../store/store';
+import Store from '../../../stores/store';
 //utils
 import { convertObjectToArrayForSelect } from '../../../utils/convertObjectToArray';
 import { rules } from '../../Content/Categories/AddDishModal/rulesAddDishModalForm';
 //types
-import { ingrediendsDataPayload } from '../../../store/storeTypes';
+import { ingrediendsDataPayload } from '../../../stores/storeTypes';
 import { helper } from '../../../utils/helper';
 
 type SelectIngredient = {
@@ -26,7 +26,7 @@ type SelectOption = {
 };
 
 export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
-  let { ingredients, addIngredientFromSelection } = Store;
+  let { ingredients, addIngredientFromSelection } = Store.data;
   const { Option } = Select;
   const { Item } = Form;
   const [form] = Form.useForm();

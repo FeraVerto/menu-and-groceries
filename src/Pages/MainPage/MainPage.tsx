@@ -9,11 +9,11 @@ import { Tags } from '../Tags/Tags';
 //styles
 import stl from '../../App.module.css';
 //Store
-import Store from '../../store/store';
+import Store from '../../stores/store';
 import { useNavigate } from 'react-router-dom';
 
 export const MainPage = () => {
-  const { user } = Store;
+  const { user } = Store.data;
   const navigate = useNavigate();
 
   if (!user.isAuth) {

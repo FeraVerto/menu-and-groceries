@@ -4,41 +4,44 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 //styles
 import { useEffect } from 'react';
 //store
-import Store from './store/store';
+import Store from './stores/store';
 //components
 import { AuthPage } from './Pages/Auth/Auth';
 import { helper } from './utils/helper';
 import { Register } from './Pages/Register/Register';
 import { MainPage } from './Pages/MainPage/MainPage';
+//hooks
+import { AuthConsumer, AuthProvider, RequireAuth } from './hooks/useAuth';
 
 const App = observer(() => {
-  const { ingredients, sectionMenuList, user } = Store;
+  // const { ingredients } = Store.shoppingListStore;
+  const { user } = Store.userStore;
   const navigate = useNavigate();
 
-  //временно, запускается дважды
   useEffect(() => {
-    // if (sectionMenuList.length === 0) {
-    //   // Store.loadSectionMenu();
-    // }
-    // if (Object.keys(ingredients).length === 0) {
-    //   // Store.loadIngredients();
-    // }
-  }, []);
-
-  if (user.isAuth) {
-    navigate(`/lk`);
-  }
+    if (user.isAuth) {
+      navigate('/lk');
+    }
+  }, [user.isAuth, navigate]);
 
   return (
     <>
-      <div>
-        <Routes>
-          <Route path="/lk" element={<MainPage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </div>
-      {/* )} */}
+      <AuthProvider>
+        <div>
+          <Routes>
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/lk/*"
+              element={
+                <RequireAuth>
+                  <MainPage />
+                </RequireAuth>
+              }
+            />
+          </Routes>
+        </div>
+      </AuthProvider>
     </>
   );
 });

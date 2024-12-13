@@ -10,9 +10,9 @@ import stl from './Category.module.css';
 import { Cart } from '../../../Cart/Cart';
 import { AddDishModal } from '../AddDishModal/AddDishModal';
 //store
-import Store from '../../../../store/store';
+import Store from '../../../../stores/store';
 //types
-import { dishType, sectionListType } from '../../../../store/storeTypes';
+import { dishType, sectionListType } from '../../../../stores/storeTypes';
 import { helper } from '../../../../utils/helper';
 
 type categoriyType = {
@@ -25,7 +25,7 @@ type categoriyType = {
 //нужен ли здесь обсервер
 export const Category = observer(
   ({ name, dishes, menuSection }: categoriyType): ReactElement => {
-    const { addIngredientsToCartList } = Store;
+    const { addIngredientsToCartList } = Store.data;
     // const [isOpen, isOpenSet] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
