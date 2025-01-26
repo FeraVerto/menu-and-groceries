@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <HashRouter>
+    <BrowserRouter basename="/menu-and-groceries">
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

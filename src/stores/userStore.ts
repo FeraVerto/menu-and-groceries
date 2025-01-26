@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { userDataResponse, userType } from './storeTypes';
+import { userDataResponse, userType, userDataError } from './storeTypes';
 import {
   checkAuthService,
   userLogin,
@@ -25,7 +25,14 @@ class UserStore {
     this.checkAuth();
   }
 
+  // userData = (data: userDataResponse | userDataError) => {
   userData = (data: userDataResponse) => {
+    // if (!error) {
+    //   this.user.isAuth = true;
+    //   this.user.id = data.userId;
+    //   this.user.username = data.username;
+    // }
+
     this.user.isAuth = true;
     this.user.id = data.userId;
     this.user.username = data.username;

@@ -1,6 +1,6 @@
 //libraries
 import { observer } from 'mobx-react-lite';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router';
 //styles
 import { useEffect } from 'react';
 //store
@@ -12,6 +12,7 @@ import { Register } from './Pages/Register/Register';
 import { MainPage } from './Pages/MainPage/MainPage';
 //hooks
 import { AuthConsumer, AuthProvider, RequireAuth } from './hooks/useAuth';
+import { Divider } from 'antd';
 
 const App = observer(() => {
   // const { ingredients } = Store.shoppingListStore;
@@ -27,20 +28,18 @@ const App = observer(() => {
   return (
     <>
       <AuthProvider>
-        <div>
-          <Routes>
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/lk/*"
-              element={
-                <RequireAuth>
-                  <MainPage />
-                </RequireAuth>
-              }
-            />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/lk/*"
+            element={
+              <RequireAuth>
+                <MainPage />
+              </RequireAuth>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </>
   );

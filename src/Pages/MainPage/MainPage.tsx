@@ -16,9 +16,9 @@ export const MainPage = () => {
   const { user } = Store.data;
   const navigate = useNavigate();
 
-  if (!user.isAuth) {
-    navigate(`/auth`);
-  }
+  // if (!user.isAuth) {
+  //   navigate(`/auth`);
+  // }
   return (
     <div>
       <Cart />

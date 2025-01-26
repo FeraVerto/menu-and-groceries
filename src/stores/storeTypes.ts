@@ -8,6 +8,10 @@ export type userType = {
 
 export type userDataResponse = { username: string; userId: string };
 
+export type userDataError = {
+  error: string | undefined;
+};
+
 export type ingrediendsDataPayload = {
   name: string;
   category: string;
