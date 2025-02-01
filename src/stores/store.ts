@@ -320,7 +320,7 @@ class StoreApp {
       setSectionsMenu: this.menuStore.setSectionsMenu,
       //dish
       dishes: this.dishStore.dishes,
-      setNewDish: this.dishStore.setNewDish,
+      setNewDish: this.dishStore.sendDishItem,
       //shoppingList
       ingredients: this.shoppingListStore.ingredients,
       addedIngredientsId: this.shoppingListStore.addedIngredientsId,

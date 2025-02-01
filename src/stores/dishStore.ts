@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { MenuStore } from './menuStore';
 import { dishDataPayload, dishType } from './storeTypes';
-import { sendDishItem } from './service';
+import { dishService } from '../api/api';
 
 export class DishStore {
   menuStore: MenuStore;
@@ -24,8 +24,11 @@ export class DishStore {
     return category?.dishes.push(data);
   };
 
-  setNewDish = (dishData: dishDataPayload) => {
-    sendDishItem(this.setNewDishItem.bind(this), dishData);
+  sendDishItem = async (dishData: dishDataPayload) => {
+    try {
+      const response = await dishService.sendDishData(dishData);
+      this.setNewDishItem(response.data);
+    } catch (error) {}
   };
 
   setError = (error: string) => {

@@ -56,7 +56,6 @@ export class MenuStore {
   };
 
   sendSectionMenuItem = async (data: string) => {
-    console.log('response', data);
     try {
       const response = await menuService.sendSectionMenu(data);
       this.setNewSectionMenu(response.data);

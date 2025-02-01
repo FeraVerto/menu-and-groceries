@@ -69,9 +69,9 @@ export const ingredientsService = {
   },
 };
 
-export const sendDishData = (
-  data: dishDataPayload
-): Promise<{ data: dishType }> => {
-  //временно, придумать эндпоинт
-  return instance.post(`/menu-and-groceries/addDish`, data);
+export const dishService = {
+  sendDishData: (data: dishDataPayload): Promise<{ data: dishType }> => {
+    //временно, придумать эндпоинт
+    return instance.post(`/menu-and-groceries/addDish`, data);
+  },
 };
