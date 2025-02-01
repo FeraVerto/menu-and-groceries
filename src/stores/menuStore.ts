@@ -1,10 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { categoriesType, sectionListType } from './storeTypes';
-import {
-  fetchMenuSectionList,
-  fetchSectionsMenu,
-  sendSectionMenuItem,
-} from './service';
+import { menuService } from '../api/api';
 
 export class MenuStore {
   error: string = '';
@@ -29,6 +25,18 @@ export class MenuStore {
     this.sectionMenuList = data;
   };
 
+  setSectionMenu = (data: string) => {
+    const foundSection = this.sectionMenuList.find(
+      (item) => item.sectionName === data
+    );
+    if (!foundSection) {
+      this.sendSectionMenuItem(data);
+    } else {
+      this.error = 'Уже существует!';
+      //вывести сообщение, что такая секция меню уже существует
+    }
+  };
+
   setNewSectionMenu = (data: categoriesType) => {
     this.sectionMenuList = [
       ...this.sectionMenuList,
@@ -38,27 +46,36 @@ export class MenuStore {
     this.setMenuSectionList(data);
   };
 
-  setSectionMenu = (data: string) => {
-    const foundSection = this.sectionMenuList.find(
-      (item) => item.sectionName === data
-    );
-    if (!foundSection) {
-      sendSectionMenuItem(this.setNewSectionMenu.bind(this), data);
-    } else {
-      this.error = 'Уже существует!';
-      //вывести сообщение, что такая секция меню уже существует
-    }
+  fetchSectionsMenu = async (
+    setSectionMenuList: (data: sectionListType[]) => void
+  ) => {
+    try {
+      const response = await menuService.getMenuSections();
+      setSectionMenuList(response.data.menuSections);
+    } catch {}
   };
 
-  loadSectionMenu = () => {
-    fetchSectionsMenu(this.setSectionsMenu.bind(this));
+  sendSectionMenuItem = async (data: string) => {
+    console.log('response', data);
+    try {
+      const response = await menuService.sendSectionMenu(data);
+      this.setNewSectionMenu(response.data);
+    } catch {}
+  };
+
+  fetchMenuSectionList = async (id: string) => {
+    try {
+      const response = await menuService.getMenuSectionList(id);
+      //для моков
+      this.setMenuSectionList(response.data);
+    } catch (error) {}
   };
 
   loadMenuSectionList = (id: string) => {
     let currentId = this.menu.find((n) => n.sectionId === id);
 
     if (!currentId) {
-      fetchMenuSectionList(this.setMenuSectionList.bind(this), id);
+      this.fetchMenuSectionList(id);
     }
   };
 

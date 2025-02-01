@@ -1,10 +1,4 @@
-import {
-  getMenuSections,
-  getIngredientsList,
-  sendDishData,
-  getMenuSectionList,
-  sendSectionMenuData,
-} from '../api/api';
+import { getIngredientsList, sendDishData } from '../api/api';
 import {
   categoriesType,
   ingredientsType,
@@ -15,35 +9,35 @@ import {
   ErrorResponse,
 } from './storeTypes';
 
-export const fetchSectionsMenu = async (
-  setSectionMenuList: (data: sectionListType[]) => void
-) => {
-  try {
-    const response = await getMenuSections();
-    setSectionMenuList(response.data.menuSections);
-  } catch {}
-};
+// export const fetchSectionsMenu = async (
+//   setSectionMenuList: (data: sectionListType[]) => void
+// ) => {
+//   try {
+//     const response = await getMenuSections();
+//     setSectionMenuList(response.data.menuSections);
+//   } catch {}
+// };
 
-export const sendSectionMenuItem = async (
-  setNewSectionMenu: (data: categoriesType) => void,
-  data: string
-) => {
-  try {
-    const response = await sendSectionMenuData(data);
-    setNewSectionMenu(response.data);
-  } catch {}
-};
+// export const sendSectionMenuItem = async (
+//   setNewSectionMenu: (data: categoriesType) => void,
+//   data: string
+// ) => {
+//   try {
+//     const response = await sendSectionMenuData(data);
+//     setNewSectionMenu(response.data);
+//   } catch {}
+// };
 
-export const fetchMenuSectionList = async (
-  setMenuSectionList: (data: categoriesType) => void,
-  id: string
-) => {
-  try {
-    const response = await getMenuSectionList(id);
-    //для моков
-    setMenuSectionList(response.data);
-  } catch (error) {}
-};
+// export const fetchMenuSectionList = async (
+//   setMenuSectionList: (data: categoriesType) => void,
+//   id: string
+// ) => {
+//   try {
+//     const response = await getMenuSectionList(id);
+//     //для моков
+//     setMenuSectionList(response.data);
+//   } catch (error) {}
+// };
 
 export const fetchIngredients = async (
   setIngredients: (responseIngredients: ingredientsType) => void

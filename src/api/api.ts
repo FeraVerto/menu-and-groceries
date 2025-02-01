@@ -26,21 +26,27 @@ export const authService = {
   },
 };
 
-// export const checkAuth = () => {
-//   return instance.post(`/auth/check`);
-// };
-
-// export const login = (params: { username: string; password: string }) => {
-//   return instance.post(`/menu-and-groceries/auth/login`, params);
-// };
-
-// export const logout = () => {
-//   return instance.post('/menu-and-groceries/auth/logout');
-// };
-
-// export const register = (params: { username: string; password: string }) => {
-//   return instance.post(`/menu-and-groceries/auth/register`, params);
-// };
+export const menuService = {
+  getMenuSections: (): Promise<{
+    data: { menuSections: sectionListType[] };
+  }> => {
+    return instance.get(`/menu-and-groceries/menu/sections`);
+  },
+  sendSectionMenu: (
+    data: string
+  ): Promise<{
+    data: categoriesType;
+  }> => {
+    return instance.post(`/menu-and-groceries/menu/sections`, data);
+  },
+  getMenuSectionList: (
+    id: string
+  ): Promise<{
+    data: categoriesType;
+  }> => {
+    return instance.get(`/menu-and-groceries/menu/dishes/${id}`);
+  },
+};
 
 export const sendMessageToTelegramBot = (params: {
   token: string;
@@ -53,28 +59,6 @@ export const sendMessageToTelegramBot = (params: {
       text: params.text,
     },
   });
-};
-
-export const getMenuSections = (): Promise<{
-  data: { menuSections: sectionListType[] };
-}> => {
-  return instance.get(`/menu-and-groceries/menu/sections`);
-};
-
-export const sendSectionMenuData = (
-  data: string
-): Promise<{
-  data: categoriesType;
-}> => {
-  return instance.post(`/menu-and-groceries/menu/sections`, data);
-};
-
-export const getMenuSectionList = (
-  id: string
-): Promise<{
-  data: categoriesType;
-}> => {
-  return instance.get(`/menu-and-groceries/menu/dishes/${id}`);
 };
 
 export const getIngredientsList = (): Promise<{
