@@ -61,10 +61,12 @@ export const sendMessageToTelegramBot = (params: {
   });
 };
 
-export const getIngredientsList = (): Promise<{
-  data: { ingredients: ingredientsType };
-}> => {
-  return instance.get(`/menu-and-groceries/ingredients`);
+export const ingredientsService = {
+  getIngredientsList: (): Promise<{
+    data: { ingredients: ingredientsType };
+  }> => {
+    return instance.get(`/menu-and-groceries/ingredients`);
+  },
 };
 
 export const sendDishData = (

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { ingredientsType } from './storeTypes';
-import { fetchIngredients } from './service';
 import { DishStore } from './dishStore';
+import { ingredientsService } from '../api/api';
 
 export class ShoppingListStore {
   dishStore: DishStore;
@@ -172,7 +172,14 @@ export class ShoppingListStore {
     this.ingredients = data;
   };
 
-  loadIngredients = () => {
-    fetchIngredients(this.setIngredients.bind(this));
+  // loadIngredients = () => {
+  //   fetchIngredients(this.setIngredients.bind(this));
+  // };
+
+  fetchIngredients = async () => {
+    try {
+      const responseIngredients = await ingredientsService.getIngredientsList();
+      this.setIngredients(responseIngredients.data.ingredients);
+    } catch (error) {}
   };
 }

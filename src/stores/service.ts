@@ -1,4 +1,4 @@
-import { getIngredientsList, sendDishData } from '../api/api';
+import { sendDishData } from '../api/api';
 import {
   categoriesType,
   ingredientsType,
@@ -39,14 +39,14 @@ import {
 //   } catch (error) {}
 // };
 
-export const fetchIngredients = async (
-  setIngredients: (responseIngredients: ingredientsType) => void
-) => {
-  try {
-    const responseIngredients = await getIngredientsList();
-    setIngredients(responseIngredients.data.ingredients);
-  } catch (error) {}
-};
+// export const fetchIngredients = async (
+//   setIngredients: (responseIngredients: ingredientsType) => void
+// ) => {
+//   try {
+//     const responseIngredients = await getIngredientsList();
+//     setIngredients(responseIngredients.data.ingredients);
+//   } catch (error) {}
+// };
 
 //Сделать отправку блюда на бэк
 export const sendDishItem = async (

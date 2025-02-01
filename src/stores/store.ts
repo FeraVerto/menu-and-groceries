@@ -10,7 +10,6 @@ import {
   userType,
   userDataResponse,
 } from './storeTypes';
-import { fetchIngredients, sendDishItem } from './service';
 import { helper } from '../utils/helper';
 import UserStore from './userStore';
 import { MenuStore } from './menuStore';
