@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import {
   getMenuSections,
   getIngredientsList,
@@ -16,7 +17,9 @@ import {
   dishType,
   sectionListType,
   userDataResponse,
+  ErrorResponse,
 } from './storeTypes';
+// import { ErrorResponse } from 'react-router-dom';
 
 export const checkAuthService = async (
   checkAuthStore: (authData: userDataResponse) => void
@@ -31,6 +34,7 @@ export const checkAuthService = async (
 
 export const userLogin = async (
   userData: (data: userDataResponse) => void,
+  setError: (data: ErrorResponse) => void,
   params: {
     username: string;
     password: string;
@@ -41,7 +45,13 @@ export const userLogin = async (
     if (response.status === 200) {
       userData(response.data);
     }
-  } catch {}
+  } catch (error) {
+    const axiosError = error as AxiosError<ErrorResponse>;
+
+    if (axiosError.response) {
+      setError(axiosError.response.data);
+    }
+  }
 };
 
 export const userLogout = async (userLogoutData: () => void) => {

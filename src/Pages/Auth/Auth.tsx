@@ -1,19 +1,23 @@
+//libraries
 import { Button, Checkbox, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import s from './Auth.module.css';
 import { NavLink } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+//styles
+import s from './Auth.module.css';
 //store
 import Store from '../../stores/store';
 
-import { AuthConsumer } from '../../hooks/useAuth';
+export const AuthPage = observer(() => {
+  const { error } = Store.userStore;
 
-export const AuthPage = () => {
   const onFinish = (values: any) => {
     Store.userStore.setlogin(values);
   };
 
   return (
     <div className={s.centered_container}>
+      {error?.message}
       <Form
         name="normal_login"
         className={s.login_form}
@@ -66,4 +70,4 @@ export const AuthPage = () => {
       </Form>
     </div>
   );
-};
+});

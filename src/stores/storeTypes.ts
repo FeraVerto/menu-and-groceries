@@ -8,6 +8,11 @@ export type userType = {
 
 export type userDataResponse = { username: string; userId: string };
 
+export interface ErrorResponse {
+  status: number;
+  message: string;
+}
+
 export type userDataError = {
   error: string | undefined;
 };

@@ -38,11 +38,13 @@ export const login = async (req, res) => {
         .json({ username: req.body.username, userId: existingUser._id });
     } else {
       res.status(401).json({
+        status: 401,
         message: 'Неверный логин или пароль',
       });
     }
   } else {
     res.status(404).json({
+      status: 404,
       message: 'Пользователь с таким username не найден',
     });
   }
@@ -54,7 +56,9 @@ export const register = async (req, res) => {
   const existingUser = await User.findOne({ username: req.body.username });
 
   if (existingUser) {
-    return res.status(409).json({ error: 'Username already exists' });
+    return res
+      .status(409)
+      .json({ status: 409, error: 'Такой username уже существует' });
   } else {
     const user = new User({
       username: req.body.username,
@@ -65,7 +69,9 @@ export const register = async (req, res) => {
       await user.save();
       res.status(201).json({ isUserCreated: true });
     } catch (e) {
-      res.status(500).json({ error: 'Ошибка сервера, юзер не был создан' });
+      res
+        .status(500)
+        .json({ status: 500, error: 'Ошибка сервера, юзер не был создан' });
     }
   }
 };
@@ -75,6 +81,7 @@ export const checkAuth = async (req, res) => {
 
   if (!token) {
     return res.status(401).json({
+      status: 401,
       message: 'Не авторизован',
     });
   }
@@ -87,7 +94,9 @@ export const checkAuth = async (req, res) => {
       userId: decoded.userId,
     });
   } catch (e) {
-    res.status(403).json({ error: 'Ошибка сервера, токен не был создан' });
+    res
+      .status(403)
+      .json({ status: 403, error: 'Ошибка сервера, токен не был создан' });
   }
 };
 
@@ -95,7 +104,9 @@ export const refreshAccessToken = async (req, res) => {
   const refreshToken = req.cookies?.refresh_token;
 
   if (!refreshToken) {
-    return res.status(403).json({ message: 'Refresh token не найден' });
+    return res
+      .status(403)
+      .json({ status: 403, message: 'Refresh token не найден' });
   }
 
   try {
@@ -115,7 +126,9 @@ export const refreshAccessToken = async (req, res) => {
 
     res.status(204).end();
   } catch (e) {
-    res.status(403).json({ error: 'Ошибка сервера, токен не был обновлен' });
+    res
+      .status(403)
+      .json({ status: 403, error: 'Ошибка сервера, токен не был обновлен' });
   }
 };
 
@@ -133,5 +146,5 @@ export const logout = async (req, res) => {
     secure: true,
     sameSite: 'Strict',
   });
-  return res.status(200).json({ message: 'Вы вышли' });
+  return res.status(200).json({ status: 200, message: 'Вы вышли' });
 };

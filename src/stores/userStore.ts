@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { userDataResponse, userType, userDataError } from './storeTypes';
+import { userDataResponse, userType, ErrorResponse } from './storeTypes';
 import {
   checkAuthService,
   userLogin,
@@ -8,6 +8,7 @@ import {
 } from './service';
 
 class UserStore {
+  error: ErrorResponse | null = null;
   user: userType = {
     id: '',
     username: '',
@@ -25,14 +26,12 @@ class UserStore {
     this.checkAuth();
   }
 
-  // userData = (data: userDataResponse | userDataError) => {
-  userData = (data: userDataResponse) => {
-    // if (!error) {
-    //   this.user.isAuth = true;
-    //   this.user.id = data.userId;
-    //   this.user.username = data.username;
-    // }
+  setError = (error: ErrorResponse) => {
+    this.error = error;
+    console.log('this.error', this.error.message);
+  };
 
+  userData = (data: userDataResponse) => {
     this.user.isAuth = true;
     this.user.id = data.userId;
     this.user.username = data.username;
@@ -53,7 +52,7 @@ class UserStore {
   };
 
   setlogin = (data: { username: string; password: string }) => {
-    userLogin(this.userData.bind(this), data);
+    userLogin(this.userData.bind(this), this.setError.bind(this), data);
   };
 
   setLogout = () => {

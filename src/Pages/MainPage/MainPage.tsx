@@ -10,15 +10,8 @@ import { Tags } from '../Tags/Tags';
 import stl from '../../App.module.css';
 //Store
 import Store from '../../stores/store';
-import { useNavigate } from 'react-router-dom';
 
 export const MainPage = () => {
-  const { user } = Store.data;
-  const navigate = useNavigate();
-
-  // if (!user.isAuth) {
-  //   navigate(`/auth`);
-  // }
   return (
     <div>
       <Cart />
