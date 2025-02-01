@@ -9,7 +9,7 @@ import Store from '../../stores/store';
 export const Register = () => {
   const navigate = useNavigate();
   const onFinish = (values: any) => {
-    Store.userStore.setRegisterData({
+    Store.userStore.userRegister({
       username: values.username,
       password: values.password,
     });

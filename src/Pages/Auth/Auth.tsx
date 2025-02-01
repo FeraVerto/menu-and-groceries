@@ -12,7 +12,7 @@ export const AuthPage = observer(() => {
   const { error } = Store.userStore;
 
   const onFinish = (values: any) => {
-    Store.userStore.setlogin(values);
+    Store.userStore.userLogin(values);
   };
 
   return (

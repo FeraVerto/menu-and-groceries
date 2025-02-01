@@ -4,7 +4,7 @@ import Store from '../../stores/store';
 
 export const DropDownMenu = () => {
   const onClickLogout = () => {
-    Store.userStore.setLogout();
+    Store.userStore.userLogout();
   };
 
   return (

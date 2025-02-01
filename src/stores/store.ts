@@ -16,10 +16,6 @@ import {
   sendDishItem,
   fetchMenuSectionList,
   sendSectionMenuItem,
-  userLogin,
-  userLogout,
-  userRegister,
-  checkAuthService,
 } from './service';
 import { helper } from '../utils/helper';
 import UserStore from './userStore';

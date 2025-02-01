@@ -1,11 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { userDataResponse, userType, ErrorResponse } from './storeTypes';
-import {
-  checkAuthService,
-  userLogin,
-  userLogout,
-  userRegister,
-} from './service';
+import { AxiosError } from 'axios';
+import { authService } from '../api/api';
 
 class UserStore {
   error: ErrorResponse | null = null;
@@ -23,12 +19,11 @@ class UserStore {
 
   constructor() {
     makeAutoObservable(this);
-    this.checkAuth();
+    this.checkAuthService();
   }
 
   setError = (error: ErrorResponse) => {
     this.error = error;
-    console.log('this.error', this.error.message);
   };
 
   userData = (data: userDataResponse) => {
@@ -47,20 +42,58 @@ class UserStore {
     this.isRegister = true;
   };
 
-  checkAuth = () => {
-    checkAuthService(this.userData.bind(this));
+  checkAuthService = async () => {
+    try {
+      const response = await authService.checkAuth();
+      if (response.status === 200) {
+        this.userData(response.data);
+      }
+    } catch (e) {}
   };
 
-  setlogin = (data: { username: string; password: string }) => {
-    userLogin(this.userData.bind(this), this.setError.bind(this), data);
+  userLogin = async (params: { username: string; password: string }) => {
+    try {
+      const response = await authService.login(params);
+      if (response.status === 200) {
+        this.userData(response.data);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 
-  setLogout = () => {
-    userLogout(this.userLogoutData.bind(this));
+  userLogout = async () => {
+    try {
+      const response = await authService.logout();
+      if (response.status === 200) {
+        this.userLogoutData();
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 
-  setRegisterData = (data: { username: string; password: string }) => {
-    userRegister(this.toggleIsRegister.bind(this), data);
+  userRegister = async (params: { username: string; password: string }) => {
+    try {
+      const response = await authService.register(params);
+      if (response.data.isUserCreated) {
+        this.toggleIsRegister(true);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 }
 

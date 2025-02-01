@@ -11,21 +11,36 @@ import {
   sectionListType,
 } from '../stores/storeTypes';
 
-export const checkAuth = () => {
-  return instance.post(`/auth/check`);
+export const authService = {
+  checkAuth: () => {
+    return instance.post(`/auth/check`);
+  },
+  login: (params: { username: string; password: string }) => {
+    return instance.post(`/menu-and-groceries/auth/login`, params);
+  },
+  logout: () => {
+    return instance.post('/menu-and-groceries/auth/logout');
+  },
+  register: (params: { username: string; password: string }) => {
+    return instance.post(`/menu-and-groceries/auth/register`, params);
+  },
 };
 
-export const login = (params: { username: string; password: string }) => {
-  return instance.post(`/menu-and-groceries/auth/login`, params);
-};
+// export const checkAuth = () => {
+//   return instance.post(`/auth/check`);
+// };
 
-export const logout = () => {
-  return instance.post('/menu-and-groceries/auth/logout');
-};
+// export const login = (params: { username: string; password: string }) => {
+//   return instance.post(`/menu-and-groceries/auth/login`, params);
+// };
 
-export const register = (params: { username: string; password: string }) => {
-  return instance.post(`/menu-and-groceries/auth/register`, params);
-};
+// export const logout = () => {
+//   return instance.post('/menu-and-groceries/auth/logout');
+// };
+
+// export const register = (params: { username: string; password: string }) => {
+//   return instance.post(`/menu-and-groceries/auth/register`, params);
+// };
 
 export const sendMessageToTelegramBot = (params: {
   token: string;
