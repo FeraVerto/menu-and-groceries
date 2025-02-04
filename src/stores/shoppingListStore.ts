@@ -1,7 +1,8 @@
 import { makeAutoObservable } from 'mobx';
-import { ingredientsType } from './storeTypes';
+import { ErrorResponse, ingredientsType } from './storeTypes';
 import { DishStore } from './dishStore';
 import { ingredientsService } from '../api/api';
+import { AxiosError } from 'axios';
 
 export class ShoppingListStore {
   dishStore: DishStore;
@@ -12,11 +13,16 @@ export class ShoppingListStore {
   shoppingList: {
     [key: string]: { name: string; id: string }[];
   } = {};
+  error: ErrorResponse | null = null;
 
   constructor(dishStore: DishStore) {
     makeAutoObservable(this);
     this.dishStore = dishStore;
   }
+
+  setError = (error: ErrorResponse) => {
+    this.error = error;
+  };
 
   addIngredientsToCartList = (
     data: { name: string; category: string; id: string }[],
@@ -180,6 +186,12 @@ export class ShoppingListStore {
     try {
       const responseIngredients = await ingredientsService.getIngredientsList();
       this.setIngredients(responseIngredients.data.ingredients);
-    } catch (error) {}
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 }

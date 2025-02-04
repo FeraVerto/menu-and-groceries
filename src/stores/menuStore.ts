@@ -1,9 +1,10 @@
 import { makeAutoObservable } from 'mobx';
-import { categoriesType, sectionListType } from './storeTypes';
+import { categoriesType, ErrorResponse, sectionListType } from './storeTypes';
 import { menuService } from '../api/api';
+import { AxiosError } from 'axios';
 
 export class MenuStore {
-  error: string = '';
+  error: ErrorResponse | null = null;
   //всё меню
   menu: categoriesType[] = [];
   //меню, левый сайдбар
@@ -32,8 +33,7 @@ export class MenuStore {
     if (!foundSection) {
       this.sendSectionMenuItem(data);
     } else {
-      this.error = 'Уже существует!';
-      //вывести сообщение, что такая секция меню уже существует
+      this.error = { message: 'Уже существует!' };
     }
   };
 
@@ -46,20 +46,36 @@ export class MenuStore {
     this.setMenuSectionList(data);
   };
 
+  setError = (error: ErrorResponse) => {
+    this.error = error;
+  };
+
   fetchSectionsMenu = async (
     setSectionMenuList: (data: sectionListType[]) => void
   ) => {
     try {
       const response = await menuService.getMenuSections();
       setSectionMenuList(response.data.menuSections);
-    } catch {}
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 
   sendSectionMenuItem = async (data: string) => {
     try {
       const response = await menuService.sendSectionMenu(data);
       this.setNewSectionMenu(response.data);
-    } catch {}
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 
   fetchMenuSectionList = async (id: string) => {
@@ -67,7 +83,13 @@ export class MenuStore {
       const response = await menuService.getMenuSectionList(id);
       //для моков
       this.setMenuSectionList(response.data);
-    } catch (error) {}
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 
   loadMenuSectionList = (id: string) => {
@@ -76,9 +98,5 @@ export class MenuStore {
     if (!currentId) {
       this.fetchMenuSectionList(id);
     }
-  };
-
-  setError = (error: string) => {
-    this.error = error;
   };
 }

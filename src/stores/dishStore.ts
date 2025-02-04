@@ -1,11 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 import { MenuStore } from './menuStore';
-import { dishDataPayload, dishType } from './storeTypes';
+import { dishDataPayload, dishType, ErrorResponse } from './storeTypes';
 import { dishService } from '../api/api';
+import { AxiosError } from 'axios';
 
 export class DishStore {
   menuStore: MenuStore;
-  error: string = '';
+  error: ErrorResponse | null = null;
 
   //список блюд с ингредиентами, которые в него входят
   //key = id
@@ -14,6 +15,10 @@ export class DishStore {
     makeAutoObservable(this);
     this.menuStore = menuStore;
   }
+
+  setError = (error: ErrorResponse) => {
+    this.error = error;
+  };
 
   setNewDishItem = (data: dishType) => {
     const menu = this.menuStore.menu;
@@ -28,10 +33,12 @@ export class DishStore {
     try {
       const response = await dishService.sendDishData(dishData);
       this.setNewDishItem(response.data);
-    } catch (error) {}
-  };
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
 
-  setError = (error: string) => {
-    this.error = error;
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 }

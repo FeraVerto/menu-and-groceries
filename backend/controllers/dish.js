@@ -1,6 +1,6 @@
 export const addDish = async (req, res) => {
   try {
   } catch (e) {
-    //errorHandler
+    res.status(500).json({ status: 500, error: 'Ошибка сервера' });
   }
 };

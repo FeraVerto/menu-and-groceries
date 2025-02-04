@@ -9,7 +9,7 @@ export type userType = {
 export type userDataResponse = { username: string; userId: string };
 
 export interface ErrorResponse {
-  status: number;
+  status?: number;
   message: string;
 }
 

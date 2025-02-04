@@ -48,7 +48,13 @@ class UserStore {
       if (response.status === 200) {
         this.userData(response.data);
       }
-    } catch (e) {}
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+
+      if (axiosError.response) {
+        this.setError(axiosError.response.data);
+      }
+    }
   };
 
   userLogin = async (params: { username: string; password: string }) => {
