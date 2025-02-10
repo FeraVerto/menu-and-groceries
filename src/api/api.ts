@@ -32,9 +32,9 @@ export const menuService = {
   }> => {
     return instance.get(`/menu-and-groceries/menu/sections`);
   },
-  sendSectionMenu: (
-    data: string
-  ): Promise<{
+  sendSectionMenu: (data: {
+    sectionName: string;
+  }): Promise<{
     data: categoriesType;
   }> => {
     return instance.post(`/menu-and-groceries/menu/sections`, data);

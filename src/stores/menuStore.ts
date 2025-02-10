@@ -67,7 +67,8 @@ export class MenuStore {
 
   sendSectionMenuItem = async (data: string) => {
     try {
-      const response = await menuService.sendSectionMenu(data);
+      const response = await menuService.sendSectionMenu({ sectionName: data });
+      console.log('sendSectionMenuItem store', data);
       this.setNewSectionMenu(response.data);
     } catch (error) {
       const axiosError = error as AxiosError<ErrorResponse>;

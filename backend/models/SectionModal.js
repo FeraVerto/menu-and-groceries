@@ -2,14 +2,18 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const SectionSchema = new Schema({
+  sectionName: {
+    type: String,
+  },
   name: {
     ref: 'sections',
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
   },
   user: {
-    ref: 'users',
-    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId,
   },
 });
 
-export default mongoose.model('section', SectionSchema);
+export default mongoose.model('Section', SectionSchema);

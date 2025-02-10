@@ -11,6 +11,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Section',
+    },
+  ],
 });
 
 export default mongoose.model('User', userSchema);
