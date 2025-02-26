@@ -4,11 +4,10 @@ import { instanceTelegram, instance } from '../api/axios';
 import { ResultType } from '../model/modelTypes';
 //types
 import {
-  categoriesType,
+  sectionsType,
   ingredientsType,
   dishDataPayload,
   dishType,
-  sectionListType,
 } from '../stores/storeTypes';
 
 export const authService = {
@@ -28,21 +27,21 @@ export const authService = {
 
 export const menuService = {
   getMenuSections: (): Promise<{
-    data: { menuSections: sectionListType[] };
+    data: sectionsType[];
   }> => {
     return instance.get(`/menu-and-groceries/menu/sections`);
   },
   sendSectionMenu: (data: {
     sectionName: string;
   }): Promise<{
-    data: categoriesType;
+    data: sectionsType;
   }> => {
     return instance.post(`/menu-and-groceries/menu/sections`, data);
   },
   getMenuSectionList: (
     id: string
   ): Promise<{
-    data: categoriesType;
+    data: sectionsType;
   }> => {
     return instance.get(`/menu-and-groceries/menu/dishes/${id}`);
   },

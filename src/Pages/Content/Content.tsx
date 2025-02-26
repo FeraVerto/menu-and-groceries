@@ -20,9 +20,13 @@ export const Content = observer((): ReactElement => {
         //path={`/${n.sectionName}`}
         element={
           <Category
-            name={n.sectionName}
-            dishes={n.dishes}
-            menuSection={{ sectionId: n.sectionId, sectionName: n.sectionName }}
+            // name={n.sectionName}
+            // dishes={n.dishes}
+            menuSection={{
+              sectionId: n.sectionId,
+              sectionName: n.sectionName,
+              dishes: n.dishes,
+            }}
           />
         }
       />

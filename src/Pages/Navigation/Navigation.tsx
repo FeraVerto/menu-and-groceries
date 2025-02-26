@@ -10,9 +10,10 @@ import { DropDownMenu } from '../../Components/DropDownMenu/DropDownMenu';
 //store
 import Store from '../../stores/store';
 import { helper } from '../../utils/helper';
+import { observer } from 'mobx-react-lite';
 
-export const Navigation = (): ReactElement => {
-  const { sectionMenuList, loadMenuSectionList } = Store.menuStore;
+export const Navigation = observer((): ReactElement => {
+  const { menu, loadMenuSectionList } = Store.menuStore;
   const { user } = Store.userStore;
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -28,11 +29,8 @@ export const Navigation = (): ReactElement => {
       </div>
       {toggleMenu ? <DropDownMenu /> : false}
       <h1>Меню</h1>
-      <MenuList
-        sectionMenuList={sectionMenuList}
-        loadMenuSectionList={loadMenuSectionList}
-      />
+      <MenuList menu={menu} loadMenuSectionList={loadMenuSectionList} />
       <AddCategory />
     </nav>
   );
-};
+});

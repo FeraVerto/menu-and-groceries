@@ -1,4 +1,4 @@
-import { sectionListType } from '../stores/storeTypes';
+import { sectionsType } from '../stores/storeTypes';
 import { helper } from './helper';
 
 export type optionsType = { value: string; label: string };
@@ -20,7 +20,7 @@ export const convertObjectToArrayForSelect = (obj: {
   }, [] as { value: string; label: string; id: string; category: string }[]);
 };
 
-export const convertArrayForSelectSection = (item: sectionListType[]) => {
+export const convertArrayForSelectSection = (item: sectionsType[]) => {
   return item.reduce(
     (acc, item) => {
       acc.push({ value: item.sectionId, label: item.sectionName });

@@ -36,12 +36,12 @@ export type dishType = {
   tags: string[];
 };
 
-export type sectionListType = {
-  sectionId: string;
-  sectionName: string;
-};
+// export type sectionPayload = {
+//   // sectionId: string;
+//   sectionName: string;
+// };
 
-export type categoriesType = {
+export type sectionsType = {
   sectionId: string;
   sectionName: string;
   //скорее всего не надо

@@ -12,19 +12,19 @@ import { AddDishModal } from '../AddDishModal/AddDishModal';
 //store
 import Store from '../../../../stores/store';
 //types
-import { dishType, sectionListType } from '../../../../stores/storeTypes';
+import { dishType, sectionsType } from '../../../../stores/storeTypes';
 import { helper } from '../../../../utils/helper';
 
 type categoriyType = {
-  name: string;
-  dishes: dishType[];
-  menuSection: sectionListType;
+  // name: string;
+  // dishes: dishType[];
+  menuSection: sectionsType;
 };
 
 //временно
 //нужен ли здесь обсервер
 export const Category = observer(
-  ({ name, dishes, menuSection }: categoriyType): ReactElement => {
+  ({ menuSection }: categoriyType): ReactElement => {
     const { addIngredientsToCartList } = Store.data;
     // const [isOpen, isOpenSet] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,7 +54,7 @@ export const Category = observer(
       [addIngredientsToCartList]
     );
 
-    let dishesList = dishes.map((m) => {
+    let dishesList = menuSection.dishes.map((m) => {
       return (
         <li className={stl.dishes_item} key={m.id}>
           <div>
@@ -108,7 +108,7 @@ export const Category = observer(
         </div>
         <div className={stl.categories}>
           <div className={stl.category_header}>
-            <h2 className={stl.category_name}>{name}</h2>
+            <h2 className={stl.category_name}>{menuSection.sectionName}</h2>
             <Button
               //временно , нагромождение классов
               className={`${stl.dishes_add_button} ${stl.add_new_button}`}

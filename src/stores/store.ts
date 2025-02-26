@@ -28,9 +28,9 @@ class StoreApp {
       isRegister: this.userStore.isRegister,
       //menu
       menu: this.menuStore.menu,
-      sectionMenuList: this.menuStore.sectionMenuList,
-      setSectionMenu: this.menuStore.setSectionMenu,
-      setSectionsMenu: this.menuStore.setSectionsMenu,
+      // sectionMenuList: this.menuStore.sectionMenuList,
+      // setSectionMenu: this.menuStore.setSectionMenu,
+      sendSectionMenuItem: this.menuStore.sendSectionMenuItem,
       //dish
       dishes: this.dishStore.dishes,
       setNewDish: this.dishStore.sendDishItem,

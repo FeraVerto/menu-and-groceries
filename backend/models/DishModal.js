@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const dishSchema = new Schema({
   dishName: {
     type: String,
-    require: true,
+    required: true,
   },
   link: {
     type: String,
@@ -16,21 +16,22 @@ const dishSchema = new Schema({
     {
       ref: 'ingredient',
       type: Schema.Types.ObjectId,
-      require: true,
+      required: true,
     },
   ],
   section: {
     type: Schema.Types.ObjectId,
     ref: 'section',
-    require: true,
+    required: true,
   },
   user: {
+    required: true,
     ref: 'users',
     type: Schema.Types.ObjectId,
   },
 });
 
-export default mongoose.model('dish', dishSchema);
+export default mongoose.model('dishes', dishSchema);
 
 // {
 //   id: '181',

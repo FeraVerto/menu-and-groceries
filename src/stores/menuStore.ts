@@ -1,61 +1,45 @@
 import { makeAutoObservable } from 'mobx';
-import { categoriesType, ErrorResponse, sectionListType } from './storeTypes';
+import { sectionsType, ErrorResponse } from './storeTypes';
 import { menuService } from '../api/api';
 import { AxiosError } from 'axios';
+import { helper } from '../utils/helper';
 
 export class MenuStore {
   error: ErrorResponse | null = null;
   //всё меню
-  menu: categoriesType[] = [];
+  menu: sectionsType[] = [];
   //меню, левый сайдбар
-  sectionMenuList: sectionListType[] = [];
+  // sectionMenuList: sectionsType[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setMenuSectionList = (data: categoriesType) => {
-    // let currentId = this.menu.find((n) => n.sectionId === data.sectionId);
-    // if (!currentId) {
-    //   this.menu = [...this.menu, data];
-    // }
+  setMenuSectionList = (data: sectionsType) => {
+    let currentId = this.menu.find((n) => n.sectionId === data.sectionId);
+    if (!currentId) {
+      this.menu = [...this.menu, data];
+    }
     this.menu = [...this.menu, data];
   };
 
-  setSectionsMenu = (data: sectionListType[]) => {
-    this.sectionMenuList = data;
+  setSectionsMenu = (data: sectionsType[]) => {
+    this.menu = data;
   };
 
-  setSectionMenu = (data: string) => {
-    const foundSection = this.sectionMenuList.find(
-      (item) => item.sectionName === data
-    );
-    if (!foundSection) {
-      this.sendSectionMenuItem(data);
-    } else {
-      this.error = { message: 'Уже существует!' };
-    }
-  };
-
-  setNewSectionMenu = (data: categoriesType) => {
-    this.sectionMenuList = [
-      ...this.sectionMenuList,
-      { sectionId: data.sectionId, sectionName: data.sectionName },
-    ];
-
-    this.setMenuSectionList(data);
+  setNewSectionMenu = (data: sectionsType) => {
+    this.menu = [...this.menu, data];
   };
 
   setError = (error: ErrorResponse) => {
     this.error = error;
   };
 
-  fetchSectionsMenu = async (
-    setSectionMenuList: (data: sectionListType[]) => void
-  ) => {
+  //на получение меню
+  fetchSectionsMenu = async () => {
     try {
       const response = await menuService.getMenuSections();
-      setSectionMenuList(response.data.menuSections);
+      this.setSectionsMenu(response.data);
     } catch (error) {
       const axiosError = error as AxiosError<ErrorResponse>;
 
@@ -65,10 +49,12 @@ export class MenuStore {
     }
   };
 
+  //отправляем новое
   sendSectionMenuItem = async (data: string) => {
     try {
-      const response = await menuService.sendSectionMenu({ sectionName: data });
-      console.log('sendSectionMenuItem store', data);
+      const response = await menuService.sendSectionMenu({
+        sectionName: data,
+      });
       this.setNewSectionMenu(response.data);
     } catch (error) {
       const axiosError = error as AxiosError<ErrorResponse>;
@@ -79,6 +65,8 @@ export class MenuStore {
     }
   };
 
+  //две эти функции работают на то, чтобы получить блюда только от конкретной секции
+  //получаем весь список - заменить на menu
   fetchMenuSectionList = async (id: string) => {
     try {
       const response = await menuService.getMenuSectionList(id);
@@ -93,6 +81,7 @@ export class MenuStore {
     }
   };
 
+  //загружаем только одну секцию
   loadMenuSectionList = (id: string) => {
     let currentId = this.menu.find((n) => n.sectionId === id);
 

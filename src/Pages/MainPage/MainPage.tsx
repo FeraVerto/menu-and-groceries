@@ -10,8 +10,15 @@ import { Tags } from '../Tags/Tags';
 import stl from '../../App.module.css';
 //Store
 import Store from '../../stores/store';
+import { useEffect } from 'react';
 
 export const MainPage = () => {
+  const { fetchSectionsMenu } = Store.menuStore;
+
+  useEffect(() => {
+    fetchSectionsMenu();
+  }, [fetchSectionsMenu]);
+
   return (
     <div>
       <Cart />

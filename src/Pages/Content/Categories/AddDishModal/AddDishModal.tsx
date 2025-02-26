@@ -12,10 +12,7 @@ import {
 import { rules } from './rulesAddDishModalForm';
 import { getBase64 } from '../../../../utils/getBase64';
 //types
-import {
-  dishDataPayload,
-  sectionListType,
-} from '../../../../stores/storeTypes';
+import { dishDataPayload, sectionsType } from '../../../../stores/storeTypes';
 //styles
 import stl from './AddDishModal.module.css';
 import stl_button from '../../../../buttonStyles.module.css';
@@ -25,7 +22,7 @@ import { helper } from '../../../../utils/helper';
 type addDishModal = {
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpens: boolean) => void;
-  menuSection: sectionListType;
+  menuSection: sectionsType;
 };
 
 export let formData: dishDataPayload | null = null;

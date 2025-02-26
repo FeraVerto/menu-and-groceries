@@ -54,7 +54,7 @@ import {
   rulet_bekon,
   kanelloni,
 } from './../assets/imports';
-import { categoriesType, dishDataPayload, dishType } from '../stores/storeTypes';
+import { sectionsType, dishDataPayload, dishType } from '../stores/storeTypes';
 import { helper } from '../utils/helper';
 
 export const createMock = () => {
@@ -75,7 +75,7 @@ export const createMock = () => {
     setSectionMenu: mock
       .onPost('/menu-and-groceries/menu/sections')
       .reply((config) => {
-        const newSection: categoriesType = {
+        const newSection: sectionsType = {
           sectionId: Math.random().toString(36).substring(7),
           sectionName: JSON.parse(config.data),
           dishes: [],

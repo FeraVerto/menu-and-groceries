@@ -2,21 +2,23 @@
 import { NavLink } from 'react-router-dom';
 import { forwardRef, useCallback, useEffect, useRef } from 'react';
 //types
-import { sectionListType } from '../../../stores/storeTypes';
+import { sectionsType } from '../../../stores/storeTypes';
 //styles
 import stl from '../MenuList/MenuList.module.css';
+import { observer } from 'mobx-react-lite';
 
 export interface MenuListRef {
   scrollTopToBottom: () => void;
 }
 
 export type MenuListType = {
-  sectionMenuList: sectionListType[];
+  menu: sectionsType[];
   loadMenuSectionList: (id: string) => void;
 };
 
 export const MenuList = forwardRef<HTMLUListElement, MenuListType>(
-  ({ sectionMenuList, loadMenuSectionList }: MenuListType, ref) => {
+  ({ menu, loadMenuSectionList }: MenuListType, ref) => {
+    console.log('menu', menu);
     const containerRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
@@ -27,9 +29,9 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListType>(
       };
 
       scrollToBottom();
-    }, [sectionMenuList]);
+    }, [menu]);
 
-    const menuLinks = sectionMenuList.map((m) => (
+    const menuLinks = menu?.map((m) => (
       <li className={stl.categories_nav_item} key={m.sectionId}>
         <NavLink
           to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}
