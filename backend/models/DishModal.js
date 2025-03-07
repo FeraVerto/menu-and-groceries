@@ -19,12 +19,12 @@ const dishSchema = new Schema({
       required: true,
     },
   ],
-  section: {
+  sectionId: {
     type: Schema.Types.ObjectId,
     ref: 'section',
     required: true,
   },
-  user: {
+  userId: {
     required: true,
     ref: 'users',
     type: Schema.Types.ObjectId,

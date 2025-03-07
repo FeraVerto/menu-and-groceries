@@ -8,22 +8,32 @@ import { Navigation } from '../Navigation/Navigation';
 import { Tags } from '../Tags/Tags';
 //styles
 import stl from '../../App.module.css';
+import stl2 from './../Content/Content.module.css';
+
 //Store
 import Store from '../../stores/store';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { DishesList } from '../Content/Categories/Category/DishesList';
+import { helper } from '../../utils/helper';
 
 export const MainPage = () => {
   const { fetchSectionsMenu } = Store.menuStore;
+  const didRun = useRef(false);
+  const { menu } = Store.data;
 
   useEffect(() => {
-    fetchSectionsMenu();
+    if (!didRun.current) {
+      didRun.current = true;
+      fetchSectionsMenu();
+    }
   }, [fetchSectionsMenu]);
 
   return (
-    <div>
+    <main>
       <Cart />
       <div className={stl.App}>
         <div className={stl.nav_tablet}>
+          {/* для планшета */}
           <SidebarMenu />
         </div>
         <div className={stl.nav}>
@@ -32,6 +42,6 @@ export const MainPage = () => {
         <Content />
         <Tags />
       </div>
-    </div>
+    </main>
   );
 };

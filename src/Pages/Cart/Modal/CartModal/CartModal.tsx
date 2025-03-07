@@ -9,7 +9,7 @@ import stl_button from '../../../../buttonStyles.module.css';
 //components
 import { SelectIngredient } from '../../SelectIngredient/SelectIngredient';
 import { ShoppingList } from '../ShoppingList/ShoppingList';
-import { DishesList } from '../DishesList/DishesList';
+import { CartDishesList } from '../CartDishesList/CartDishesList';
 import Popup from '../../../../Components/Popup/Popup';
 //store
 import Store from '../../../../stores/store';
@@ -120,7 +120,7 @@ export const CartModal = ({
             removeProductFromList={removeProductFromList}
             addedProductFromList={addedProductFromList}
           />
-          <DishesList />
+          <CartDishesList />
         </div>
         <Button className={`${stl_button.button_green} ${stl.button_size}`}>
           Отправить

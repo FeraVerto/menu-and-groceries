@@ -1,11 +1,12 @@
 //libraries
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { forwardRef, useCallback, useEffect, useRef } from 'react';
 //types
 import { sectionsType } from '../../../stores/storeTypes';
 //styles
 import stl from '../MenuList/MenuList.module.css';
 import { observer } from 'mobx-react-lite';
+import { helper } from '../../../utils/helper';
 
 export interface MenuListRef {
   scrollTopToBottom: () => void;
@@ -18,8 +19,8 @@ export type MenuListType = {
 
 export const MenuList = forwardRef<HTMLUListElement, MenuListType>(
   ({ menu, loadMenuSectionList }: MenuListType, ref) => {
-    console.log('menu', menu);
     const containerRef = useRef<HTMLUListElement>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const scrollToBottom = () => {
@@ -31,22 +32,29 @@ export const MenuList = forwardRef<HTMLUListElement, MenuListType>(
       scrollToBottom();
     }, [menu]);
 
-    const menuLinks = menu?.map((m) => (
-      <li className={stl.categories_nav_item} key={m.sectionId}>
-        <NavLink
-          to={`/${encodeURIComponent(m.sectionName.replace(/\s/g, ''))}`}
-          onClick={() => onClickHandler(m.sectionId)}
+    const menuLinks = menu?.map((m) => {
+      return (
+        <li
+          key={m.id}
+          className={stl.categories_nav_item}
+          onClick={() => onClickHandler(m.sectionName)}
         >
+          {/* <NavLink
+            to={`/${m.sectionName?.replace(/\s/g, '')}`}
+            //to={`/${m.sectionName}`}
+            onClick={() => onClickHandler(m.sectionName)}
+          > */}
           {m.sectionName}
-        </NavLink>
-      </li>
-    ));
+          {/* </NavLink> */}
+        </li>
+      );
+    });
 
     const onClickHandler = useCallback(
-      (id: string) => {
-        loadMenuSectionList(id);
+      (sectionName: string) => {
+        navigate(`/lk/${sectionName.replace(/\s/g, '')}`);
       },
-      [loadMenuSectionList]
+      [navigate]
     );
 
     return (

@@ -2,14 +2,14 @@
 import { observer } from 'mobx-react-lite';
 import { ReactElement, useCallback } from 'react';
 //styles
-import stl from './DishesList.module.css';
+import stl from './CartDishesList.module.css';
 //components
 import { Checkbox } from '../../../../Components/Checkbox';
 //store
 import Store from '../../../../stores/store';
 import { helper } from '../../../../utils/helper';
 
-export const DishesList = observer((): ReactElement => {
+export const CartDishesList = observer((): ReactElement => {
   const { deleteIngredients, dishes } = Store.data;
 
   const removeDishedFromList = useCallback(

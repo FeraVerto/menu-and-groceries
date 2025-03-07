@@ -23,7 +23,7 @@ export class DishStore {
   setNewDishItem = (data: dishType) => {
     const menu = this.menuStore.menu;
     let category = menu.find((item) => {
-      return data.sectionId === item.sectionId;
+      return data.sectionId === item.id;
     });
 
     return category?.dishes.push(data);

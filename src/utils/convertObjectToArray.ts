@@ -23,7 +23,7 @@ export const convertObjectToArrayForSelect = (obj: {
 export const convertArrayForSelectSection = (item: sectionsType[]) => {
   return item.reduce(
     (acc, item) => {
-      acc.push({ value: item.sectionId, label: item.sectionName });
+      acc.push({ value: item.id, label: item.sectionName });
       return acc;
     },
     [{}] as {

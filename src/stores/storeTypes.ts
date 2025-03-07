@@ -42,7 +42,7 @@ export type dishType = {
 // };
 
 export type sectionsType = {
-  sectionId: string;
+  id: string;
   sectionName: string;
   //скорее всего не надо
   dishes: dishType[];

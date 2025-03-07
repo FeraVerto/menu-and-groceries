@@ -16,7 +16,7 @@ export class MenuStore {
   }
 
   setMenuSectionList = (data: sectionsType) => {
-    let currentId = this.menu.find((n) => n.sectionId === data.sectionId);
+    let currentId = this.menu.find((n) => n.id === data.id);
     if (!currentId) {
       this.menu = [...this.menu, data];
     }
@@ -24,7 +24,7 @@ export class MenuStore {
   };
 
   setSectionsMenu = (data: sectionsType[]) => {
-    this.menu = data;
+    this.menu = [...this.menu, ...data];
   };
 
   setNewSectionMenu = (data: sectionsType) => {
@@ -67,6 +67,7 @@ export class MenuStore {
 
   //две эти функции работают на то, чтобы получить блюда только от конкретной секции
   //получаем весь список - заменить на menu
+  //пока оставляем как есть
   fetchMenuSectionList = async (id: string) => {
     try {
       const response = await menuService.getMenuSectionList(id);
@@ -83,7 +84,7 @@ export class MenuStore {
 
   //загружаем только одну секцию
   loadMenuSectionList = (id: string) => {
-    let currentId = this.menu.find((n) => n.sectionId === id);
+    let currentId = this.menu.find((n) => n.id === id);
 
     if (!currentId) {
       this.fetchMenuSectionList(id);

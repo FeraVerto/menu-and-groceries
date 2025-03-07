@@ -17,7 +17,7 @@ export const SidebarMenu = observer(() => {
   };
 
   const menuLinks = menu?.map((m) => (
-    <li className={stl.sidebar_nav_item} key={m.sectionId} onClick={toggleMenu}>
+    <li className={stl.sidebar_nav_item} key={m.id} onClick={toggleMenu}>
       <NavLink to={`/${encodeURIComponent(m.sectionName?.replace(/\s/g, ''))}`}>
         {m.sectionName}
       </NavLink>

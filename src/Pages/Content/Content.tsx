@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 //styles
 import stl from './Content.module.css';
 //components
-import { Category } from './Categories/Category/Category';
+import { DishesList } from './Categories/Category/DishesList';
 //store
 import Store from '../../stores/store';
 import { helper } from '../../utils/helper';
@@ -13,17 +13,15 @@ import { helper } from '../../utils/helper';
 export const Content = observer((): ReactElement => {
   const { menu } = Store.data;
   const routes = menu?.map((n) => {
+    const sectionName = n.sectionName.replace(/\s/g, '');
     return (
       <Route
-        key={n.sectionId}
-        path={`/${n.sectionName?.replace(/\s/g, '')}`}
-        //path={`/${n.sectionName}`}
+        key={n.id}
+        path={`/${sectionName}`}
         element={
-          <Category
-            // name={n.sectionName}
-            // dishes={n.dishes}
+          <DishesList
             menuSection={{
-              sectionId: n.sectionId,
+              id: n.id,
               sectionName: n.sectionName,
               dishes: n.dishes,
             }}

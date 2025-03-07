@@ -76,7 +76,7 @@ export const createMock = () => {
       .onPost('/menu-and-groceries/menu/sections')
       .reply((config) => {
         const newSection: sectionsType = {
-          sectionId: Math.random().toString(36).substring(7),
+          id: Math.random().toString(36).substring(7),
           sectionName: JSON.parse(config.data),
           dishes: [],
         };

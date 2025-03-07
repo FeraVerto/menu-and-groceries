@@ -13,6 +13,7 @@ import { MainPage } from './Pages/MainPage/MainPage';
 //hooks
 import { AuthConsumer, AuthProvider, RequireAuth } from './hooks/useAuth';
 import { Divider } from 'antd';
+import { DishesList } from './Pages/Content/Categories/Category/DishesList';
 
 const App = observer(() => {
   // const { ingredients } = Store.shoppingListStore;
@@ -20,9 +21,9 @@ const App = observer(() => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user.isAuth) {
-      navigate('/lk');
-    }
+    // if (user.isAuth) {
+    //   navigate('/lk/');
+    // }
   }, [user.isAuth, navigate]);
 
   return (

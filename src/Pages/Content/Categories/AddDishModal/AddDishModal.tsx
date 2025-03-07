@@ -5,10 +5,7 @@ import { UploadChangeParam } from 'antd/es/upload';
 //store
 import Store from '../../../../stores/store';
 //utils
-import {
-  convertObjectToArrayForSelect,
-  convertArrayForSelectSection,
-} from '../../../../utils/convertObjectToArray';
+import { convertObjectToArrayForSelect } from '../../../../utils/convertObjectToArray';
 import { rules } from './rulesAddDishModalForm';
 import { getBase64 } from '../../../../utils/getBase64';
 //types
@@ -45,7 +42,7 @@ export const AddDishModal = ({
 
   useEffect(() => {
     const onChangeFile = async (value: any) => {
-      await getBase64(value.file).then((result) => {
+      await getBase64(value?.file).then((result) => {
         setImageUrl(result);
       });
     };
@@ -76,7 +73,7 @@ export const AddDishModal = ({
     (values: dishDataPayload) => {
       let data = {
         ...values,
-        sectionId: menuSection.sectionId,
+        sectionId: menuSection.id,
         ingredients: selectedItems,
         image: imageUrl,
       };
@@ -86,14 +83,7 @@ export const AddDishModal = ({
       form.resetFields();
       //addIngredientFromSelection(values.productsList);
     },
-    [
-      setNewDish,
-      selectedItems,
-      imageUrl,
-      setIsModalOpen,
-      menuSection.sectionId,
-      form,
-    ]
+    [setNewDish, selectedItems, imageUrl, setIsModalOpen, menuSection.id, form]
   );
 
   const normFile = (e: any) => {
