@@ -29,8 +29,8 @@ export const CartModal = ({
   let {
     ingredients,
     addedIngredientsId,
-    addIngredientsToCartList,
-    deleteIngredients,
+    // addIngredientsToCartList,
+    // deleteIngredients,
     shoppingList,
     // clearState,
   } = Store.data;
@@ -39,21 +39,18 @@ export const CartModal = ({
 
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
 
-  const removeProductFromList = useCallback(
-    (id: string): void => {
-      deleteIngredients([id]);
-    },
-    [deleteIngredients]
-  );
+  const removeProductFromList = useCallback((id: string): void => {
+    // deleteIngredients([id]);
+  }, []);
 
   const addedProductFromList = useCallback(
     (id: string): void => {
-      const item = ingredients[id];
-      addIngredientsToCartList([
-        { name: item.name, category: item.category, id },
-      ]);
+      // const item = ingredients[id];
+      // addIngredientsToCartList([
+      //   { name: item.name, category: item.category, id },
+      // ]);
     },
-    [ingredients, addIngredientsToCartList]
+    [ingredients]
   );
 
   // const onClickSendButton = useCallback(async (): Promise<void> => {

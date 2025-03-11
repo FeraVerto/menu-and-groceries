@@ -8,10 +8,12 @@ import stl from './SelectIngredient.module.css';
 //store
 import Store from '../../../stores/store';
 //utils
-import { convertObjectToArrayForSelect } from '../../../utils/convertObjectToArray';
 import { rules } from '../../Content/Categories/AddDishModal/rulesAddDishModalForm';
 //types
-import { ingrediendsDataPayload } from '../../../stores/storeTypes';
+import {
+  ingrediendsDataPayload,
+  ingredientsType,
+} from '../../../stores/storeTypes';
 import { helper } from '../../../utils/helper';
 
 type SelectIngredient = {
@@ -26,12 +28,11 @@ type SelectOption = {
 };
 
 export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
-  let { ingredients, addIngredientFromSelection } = Store.data;
+  let { ingredients } = Store.data;
   const { Option } = Select;
   const { Item } = Form;
   const [form] = Form.useForm();
   const [selectedOption, setSelectedOption] = useState<SelectOption[]>([]);
-  const options = convertObjectToArrayForSelect(ingredients);
 
   const addIngredientToList = useCallback(
     (ing: { id: string; name: string; category: string }[]): null | void => {
@@ -39,9 +40,9 @@ export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
         return null;
       }
 
-      addIngredientFromSelection(ing);
+      // addIngredientFromSelection(ing);
     },
-    [addIngredientFromSelection]
+    []
   );
 
   const onFinish = useCallback((): void => {
@@ -76,16 +77,16 @@ export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
             onChange={onSelectChange}
             maxTagCount="responsive"
           >
-            {options.map((item) => {
+            {ingredients.map((item) => {
               return (
                 <Option
                   key={item.id}
                   id={item.id}
-                  value={item.value}
+                  value={item.name}
                   category={item.category}
                   className={stl.option}
                 >
-                  {item.label}
+                  {item.name}
                 </Option>
               );
             })}

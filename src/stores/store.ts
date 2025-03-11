@@ -38,13 +38,13 @@ class StoreApp {
       ingredients: this.shoppingListStore.ingredients,
       addedIngredientsId: this.shoppingListStore.addedIngredientsId,
       deletedIngredientsId: this.shoppingListStore.deletedIngredientsId,
-      addIngredientsToCartList: this.shoppingListStore.addIngredientsToCartList,
+      //addIngredientsToCartList: this.shoppingListStore.addIngredientsToCartList,
       dataToShowDeletedIngredients:
         this.shoppingListStore.dataToShowDeletedIngredients,
       shoppingList: this.shoppingListStore.shoppingList,
-      addIngredientFromSelection:
-        this.shoppingListStore.addIngredientFromSelection,
-      deleteIngredients: this.shoppingListStore.deleteIngredients,
+      // addIngredientFromSelection:
+      //   this.shoppingListStore.addIngredientFromSelection,
+      //deleteIngredients: this.shoppingListStore.deleteIngredients,
     };
   }
 }

@@ -10,14 +10,11 @@ import Store from '../../../../stores/store';
 import { helper } from '../../../../utils/helper';
 
 export const CartDishesList = observer((): ReactElement => {
-  const { deleteIngredients, dishes } = Store.data;
+  const { dishes } = Store.data;
 
-  const removeDishedFromList = useCallback(
-    (dishID: string): void => {
-      deleteIngredients([], 'dish', dishID);
-    },
-    [deleteIngredients]
-  );
+  const removeDishedFromList = useCallback((dishID: string): void => {
+    // deleteIngredients([], 'dish', dishID);
+  }, []);
 
   const dishesListForPreview: ReactElement[] = Object.entries(dishes).map(
     (item) => {

@@ -49,11 +49,10 @@ export type sectionsType = {
 };
 
 export type ingredientsType = {
-  [id: string]: {
-    name: string;
-    category: string;
-  };
-};
+  id: string;
+  name: string;
+  category: string;
+}[];
 
 export type ingredientsDishes = { [key: string]: string[] };
 

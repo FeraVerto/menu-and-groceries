@@ -20,7 +20,7 @@ type categoriyType = {
 };
 
 export const DishesList = ({ menuSection }: categoriyType): ReactElement => {
-  const { addIngredientsToCartList } = Store.data;
+  // const { addIngredientsToCartList } = Store.data;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const notification = (dishName: string) =>
@@ -41,11 +41,11 @@ export const DishesList = ({ menuSection }: categoriyType): ReactElement => {
       id: string,
       dishName: string
     ): void => {
-      addIngredientsToCartList(ingredients, dishName, id);
+      // addIngredientsToCartList(ingredients, dishName, id);
 
       notification(dishName);
     },
-    [addIngredientsToCartList]
+    []
   );
 
   let dishesList = menuSection.dishes.map((m) => {
