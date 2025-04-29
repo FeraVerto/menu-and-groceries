@@ -13,25 +13,25 @@ const dishSchema = new Schema({
     //type: String,
   },
   ingredients: [
-    {
-      ref: 'ingredient',
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
+    // {
+    //   ref: 'ingredient',
+    //   type: Schema.Types.ObjectId,
+    //   required: true,
+    // },
   ],
   sectionId: {
     type: Schema.Types.ObjectId,
-    ref: 'section',
+    ref: 'Section',
     required: true,
   },
   userId: {
     required: true,
-    ref: 'users',
-    type: Schema.Types.ObjectId,
+    ref: 'User',
+    type: mongoose.Schema.Types.ObjectId,
   },
 });
 
-export default mongoose.model('dishes', dishSchema);
+export default mongoose.model('Dishes', dishSchema);
 
 // {
 //   id: '181',

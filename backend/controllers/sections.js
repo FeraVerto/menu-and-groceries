@@ -6,6 +6,7 @@ export const getSections = async (req, res) => {
   try {
     const sections = await Section.find({ userId: req.user._id }).populate({
       path: 'dishes',
+      model: 'Dishes',
     });
 
     const data = sections.map((item) => {

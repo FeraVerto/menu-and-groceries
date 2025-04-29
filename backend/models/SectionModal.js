@@ -11,7 +11,7 @@ const SectionSchema = new Schema({
   // },
   dishes: [
     {
-      ref: 'dishes',
+      ref: 'Dishes',
       type: mongoose.Schema.Types.ObjectId,
     },
   ],

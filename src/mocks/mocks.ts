@@ -2241,8 +2241,8 @@ export const createMock = () => {
         117: { name: 'каннеллони', category: 'бакалея' },
       };
 
-      const newDish: dishType = {
-        id: Math.random().toString(36).substring(7),
+      const newDish = {
+        _id: Math.random().toString(36).substring(7),
         image: data.image,
         link: data.link,
         dishName: data.dishName,

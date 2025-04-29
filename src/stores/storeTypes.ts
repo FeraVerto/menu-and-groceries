@@ -24,16 +24,13 @@ export type ingrediendsDataPayload = {
 };
 
 export type dishType = {
-  //присвоить на сервере
-  id: string;
-  image: string;
+  _id: string;
+  image?: string;
   link?: string;
   dishName: string;
-  menuSection: string;
-  //присвоить на сервере
   sectionId: string;
   ingredients: { name: string; category: string; id: string }[];
-  tags: string[];
+  //tags: string[];
 };
 
 // export type sectionPayload = {

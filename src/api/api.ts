@@ -71,6 +71,6 @@ export const ingredientsService = {
 export const dishService = {
   sendDishData: (data: dishDataPayload): Promise<{ data: dishType }> => {
     //временно, придумать эндпоинт
-    return instance.post(`/menu-and-groceries/addDish`, data);
+    return instance.post(`/menu-and-groceries/dishes`, data);
   },
 };

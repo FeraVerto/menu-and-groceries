@@ -1,4 +1,4 @@
-import { ingredientsType, sectionsType } from '../stores/storeTypes';
+import { sectionsType } from '../stores/storeTypes';
 import { helper } from './helper';
 
 export type optionsType = { value: string; label: string };
