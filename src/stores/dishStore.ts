@@ -1,6 +1,11 @@
 import { makeAutoObservable } from 'mobx';
 import { MenuStore } from './menuStore';
-import { dishDataPayload, dishType, ErrorResponse } from './storeTypes';
+import {
+  dishDataPayload,
+  dishType,
+  ErrorResponse,
+  ingredientsType,
+} from './storeTypes';
 import { dishService } from '../api/api';
 import { AxiosError } from 'axios';
 import { helper } from '../utils/helper';
@@ -11,7 +16,9 @@ export class DishStore {
 
   //список блюд с ингредиентами, которые в него входят
   //key = id
-  dishes: { [key: string]: { dishName: string; ingredients: string[] } } = {};
+  dishes: {
+    [key: string]: { dishName: string; ingredients: ingredientsType[] };
+  } = {};
   constructor(menuStore: MenuStore) {
     makeAutoObservable(this);
     this.menuStore = menuStore;

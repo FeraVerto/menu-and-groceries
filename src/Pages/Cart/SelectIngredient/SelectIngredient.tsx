@@ -80,8 +80,8 @@ export const SelectIngredient = observer(({ tabIndex }: SelectIngredient) => {
             {ingredients.map((item) => {
               return (
                 <Option
-                  key={item.id}
-                  id={item.id}
+                  key={item._id}
+                  id={item._id}
                   value={item.name}
                   category={item.category}
                   className={stl.option}

@@ -8,7 +8,11 @@ import Store from '../../../../stores/store';
 import { rules } from './rulesAddDishModalForm';
 import { getBase64 } from '../../../../utils/getBase64';
 //types
-import { dishDataPayload, sectionsType } from '../../../../stores/storeTypes';
+import {
+  dishDataPayload,
+  ingredientsType,
+  sectionsType,
+} from '../../../../stores/storeTypes';
 //styles
 import stl from './AddDishModal.module.css';
 import stl_button from '../../../../buttonStyles.module.css';
@@ -29,7 +33,7 @@ export const AddDishModal = observer(
     const [form] = Form.useForm();
     //временно
     let { setNewDish, ingredients } = Store.data;
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const [selectedItems, setSelectedItems] = useState<ingredientsType[]>([]);
     const [imageUrl, setImageUrl] = useState('');
     const [dataImage, setDataImage] =
       useState<UploadChangeParam<UploadFile<any>>>();
@@ -48,12 +52,15 @@ export const AddDishModal = observer(
     const onSelect = useCallback(
       (
         value: string | number,
-        option: { value: string; label: string; id: string }
+        option: { value: string; label: string; _id: string; category: string }
       ) => {
-        let result = selectedItems.find((item) => item === Number(option.id));
+        let result = selectedItems.find((item) => item._id === option._id);
 
         if (!result) {
-          setSelectedItems([...selectedItems, Number(option.id)]);
+          setSelectedItems([
+            ...selectedItems,
+            { _id: option._id, name: option.value, category: option.category },
+          ]);
         }
       },
       [selectedItems, setSelectedItems]
@@ -143,8 +150,9 @@ export const AddDishModal = observer(
                 {ingredients?.map((item) => {
                   return (
                     <Option
-                      key={item.id}
-                      id={item.id}
+                      key={item._id}
+                      _id={item._id}
+                      category={item.category}
                       value={item.name}
                       className={stl.ingredient_option}
                     >

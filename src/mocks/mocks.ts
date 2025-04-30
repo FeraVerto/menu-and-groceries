@@ -2248,19 +2248,19 @@ export const createMock = () => {
         dishName: data.dishName,
         menuSection: data.menuSection,
         sectionId: data.sectionId,
-        ingredients: data.ingredients.reduce((acc, item) => {
-          const itemId = item.toString() as string;
-          return [
-            ...acc,
-            {
-              //@ts-ignore
-              name: ingredientsData[itemId].name,
-              //@ts-ignore
-              category: ingredientsData[itemId].category,
-              id: itemId,
-            },
-          ];
-        }, [] as { name: string; category: string; id: string }[]),
+        // ingredients: data.ingredients.reduce((acc, item) => {
+        //   const itemId = item.toString() as string;
+        //   return [
+        //     ...acc,
+        //     {
+        //       //@ts-ignore
+        //       name: ingredientsData[itemId].name,
+        //       //@ts-ignore
+        //       category: ingredientsData[itemId].category,
+        //       id: itemId,
+        //     },
+        //   ];
+        // }, [] as { name: string; category: string; id: string }[]),
         //ingredients: [],
         tags: ['Tag1', 'Tag2'], // Пример добавленных тегов
       };

@@ -62,7 +62,7 @@ export const sendMessageToTelegramBot = (params: {
 
 export const ingredientsService = {
   getIngredientsList: (): Promise<{
-    data: ingredientsType;
+    data: ingredientsType[];
   }> => {
     return instance.get(`/menu-and-groceries/ingredients`);
   },

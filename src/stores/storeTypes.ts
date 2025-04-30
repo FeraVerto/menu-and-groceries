@@ -46,10 +46,10 @@ export type sectionsType = {
 };
 
 export type ingredientsType = {
-  id: string;
+  _id: string;
   name: string;
   category: string;
-}[];
+};
 
 export type ingredientsDishes = { [key: string]: string[] };
 
@@ -62,6 +62,6 @@ export type dishDataPayload = {
   //либо новая секция (без id), либо секция из списка
   sectionId: string;
   image: string;
-  ingredients: number[];
+  ingredients: ingredientsType[];
   link: string;
 };

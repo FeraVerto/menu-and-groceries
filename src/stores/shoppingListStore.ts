@@ -7,7 +7,7 @@ import { helper } from '../utils/helper';
 
 export class ShoppingListStore {
   dishStore: DishStore;
-  ingredients: ingredientsType = [];
+  ingredients: ingredientsType[] = [];
   addedIngredientsId: string[] = [];
   deletedIngredientsId: string[] = [];
   dataToShowDeletedIngredients: { name: string; id: string }[] = [];
@@ -175,7 +175,7 @@ export class ShoppingListStore {
   //   });
   // };
 
-  setIngredients = (data: ingredientsType) => {
+  setIngredients = (data: ingredientsType[]) => {
     this.ingredients = data;
   };
 
